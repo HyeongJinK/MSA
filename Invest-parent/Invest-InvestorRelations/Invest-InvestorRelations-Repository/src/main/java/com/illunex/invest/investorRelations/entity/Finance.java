@@ -16,7 +16,7 @@ public class Finance {
     String inventory;                   // 재고자산
     String totalLiabilities;            // 부채총계
     String non_currentAssets;           // 비유동자산
-    String contributedCapital ;         // 자본금
+    String contributedCapital;          // 자본금
     String investments;                 // 투자자산
     String additional_paid_in_capital;  // 자본잉여금
     String property;                    // 유형자산

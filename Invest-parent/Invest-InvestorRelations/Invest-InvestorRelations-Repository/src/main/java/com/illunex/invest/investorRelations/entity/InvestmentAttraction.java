@@ -8,5 +8,5 @@ public class InvestmentAttraction {  // 기존 투자 유치
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
     String name;                    // title
-    String value;                   // 금액
+    String price;                   // 금액
 }
