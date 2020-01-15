@@ -1,14 +1,13 @@
 package com.illunex.invest.company.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Company {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long companyIdx;
     Long userIdx;
     String logo;                // 로고
