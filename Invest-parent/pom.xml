@@ -7,7 +7,7 @@
         <module>Invest-User</module>
         <module>Invest-InvestorRelations</module>
         <module>Invest-Invest</module>
-        <module>Invest-License</module>
+        <module>Invest-Shop</module>
         <module>Invest-Company</module>
     </modules>
     <parent>
