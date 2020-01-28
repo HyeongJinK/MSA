@@ -1,9 +1,0 @@
-com/illunex/invest/company/entity/CompanyMember.class
-com/illunex/invest/company/repository/CompanyMemberRepository.class
-com/illunex/invest/company/entity/Company.class
-com/illunex/invest/company/entity/CompanyProduct.class
-com/illunex/invest/company/entity/Keyword.class
-com/illunex/invest/company/service/CompanyService.class
-com/illunex/invest/company/repository/KeywordRepository.class
-com/illunex/invest/company/repository/CompanyProductRepository.class
-com/illunex/invest/company/repository/CompanyRepository.class
