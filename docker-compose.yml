@@ -1,0 +1,75 @@
+version: '2.1'
+
+services:
+  eureka:
+    build: cloud/eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - my-network
+    #command: ["bash", "./wait-for-it.sh", "-t", "0", "config-server:8888", "--", "java", "-jar", "eureka-server.jar"]
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+#  gateway:
+#    build: cloud/gateway
+#    ports:
+#      - "8765:8765"
+#    networks:
+#      - my-network
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    command: ["bash", "./wait-for-it.sh", "-t", "0", "config-server:8888", "--", "java", "-jar", "gateway.jar"]
+
+  config-server:
+    build: cloud/config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker,native
+    volumes:
+      - ./config:/config
+
+
+  mysql:
+    image: mysql:5.7
+    networks:
+      - my-network
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=test1234
+      - MYSQL_DATABASE=invest
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pwd
+#
+#  rabbitmq:
+#    image: rabbitmq:3.7.8-management
+#    networks:
+#      - my-network
+#    ports:
+#      - 5672:5672
+#      - 15672:15672
+#    healthcheck:
+#      test: ["CMD", "rabbitmqctl", "status"]
+#      interval: 20s
+#      timeout: 5s
+#      retries: 10
+#
+#  zipkin:
+#    image: openzipkin/zipkin:2.12.9
+#    networks:
+#      - my-network
+#    environment:
+#      - STORAGE_TYPE=mem
+#      - RABBIT_ADDRESSES=rabbitmq
+#    ports:
+#      - 9411:9411
+#    depends_on:
+#      rabbitmq:
+#        condition: service_healthy
+networks:
+  my-network:
+    name: my-network
