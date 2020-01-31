@@ -8,7 +8,8 @@
         <module>cloud/eureka-server</module>
         <module>cloud/gateway</module>
         <module>microservices/company</module>
-        <module>api/api-consumer</module>
+        <module>microservices/api-consumer</module>
+        <module>api/api</module>
     </modules>
     <groupId>com.illunex</groupId>
     <artifactId>Invest-parent</artifactId>
