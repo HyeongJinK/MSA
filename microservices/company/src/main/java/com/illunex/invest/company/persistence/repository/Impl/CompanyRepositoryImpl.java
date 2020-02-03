@@ -3,13 +3,13 @@ package com.illunex.invest.company.persistence.repository.Impl;
 import com.illunex.invest.company.persistence.entity.QCompany;
 import com.illunex.invest.company.persistence.repository.custom.CompanyCustomRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 사용자 정의 리파지토리 클래
  * */
+@RequiredArgsConstructor
 public class CompanyRepositoryImpl implements CompanyCustomRepository {
-    @Autowired
     private JPAQueryFactory queryFactory;
 
     @Override
