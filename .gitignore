@@ -30,12 +30,7 @@ build/
 
 ### VS Code ###
 .vscode/
-api/api/.gitignore
 api/api/.mvn/
-api/api/mvnw
-api/api/mvnw.cmd
-api/api/pom.xml
-api/api/src/
 backup/Invest-Company/Invest-Company-Api/src/
 backup/Invest-Company/Invest-Company-Repository/src/main/java/com/illunex/invest/company/entity/enumable/
 backup/Invest-Company/Invest-Company-Repository/src/main/resources/
