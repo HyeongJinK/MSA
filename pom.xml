@@ -8,7 +8,7 @@
         <module>cloud/eureka-server</module>
         <module>cloud/gateway</module>
         <module>microservices/company</module>
-        <module>microservices/api-consumer</module>
+        <module>microservices/company-composite</module>
         <module>api/api</module>
     </modules>
     <groupId>com.illunex</groupId>

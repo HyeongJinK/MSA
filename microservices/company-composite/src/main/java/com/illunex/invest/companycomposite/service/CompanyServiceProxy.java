@@ -1,4 +1,4 @@
-package com.illunex.invest.apiconsumer.service;
+package com.illunex.invest.companycomposite.service;
 
 
 import org.springframework.cloud.netflix.ribbon.RibbonClient;

@@ -1,6 +1,5 @@
-package com.illunex.invest.apiconsumer;
+package com.illunex.invest.companycomposite;
 
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;

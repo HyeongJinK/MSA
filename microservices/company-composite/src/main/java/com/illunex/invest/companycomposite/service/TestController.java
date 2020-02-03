@@ -1,4 +1,4 @@
-package com.illunex.invest.apiconsumer.service;
+package com.illunex.invest.companycomposite.service;
 
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.logging.Log;
