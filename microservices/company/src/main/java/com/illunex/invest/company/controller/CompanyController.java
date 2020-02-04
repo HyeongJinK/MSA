@@ -1,12 +1,13 @@
 package com.illunex.invest.company.controller;
 
+import com.illunex.invest.common.exception.exceptions.TemplateException;
 import com.illunex.invest.company.exception.TestException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.illunex.invest.common.exception.exceptions.TemplateException;
+
 
 @RestController
 public class CompanyController {
