@@ -48,5 +48,3 @@ backup/Invest-User/Invest-User-Repository/src/main/java/com/illunex/invest/user/
 backup/Invest-User/Invest-User-Repository/src/main/java/com/illunex/invest/user/service/
 backup/Invest-User/Invest-User-Repository/src/main/resources/
 backup/Invest-User/Invest-User-Repository/src/test/
-microservices/company-composite/src/main/java/com/illunex/invest/companycomposite/config/
-util/
