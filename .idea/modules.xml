@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/cloud/config-server/config-server.iml" filepath="$PROJECT_DIR$/cloud/config-server/config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/cloud/eureka-server/eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud/gateway/gateway.iml" filepath="$PROJECT_DIR$/cloud/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservices/notice/notice.iml" filepath="$PROJECT_DIR$/microservices/notice/notice.iml" />
     </modules>
   </component>
 </project>
