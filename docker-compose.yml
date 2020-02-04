@@ -1,15 +1,26 @@
 version: '2.1'
 
 services:
-  eureka:
-    build: cloud/eureka-server
-    ports:
-      - "8761:8761"
-    networks:
-      - my-network
-    #command: ["bash", "./wait-for-it.sh", "-t", "0", "config-server:8888", "--", "java", "-jar", "eureka-server.jar"]
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
+#  config-server:
+#    build: cloud/config-server
+#    ports:
+#      - "8888:8888"
+#    networks:
+#      - my-network
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker,native
+#    volumes:
+#      - ./config:/config
+#
+#  eureka:
+#    build: cloud/eureka-server
+#    ports:
+#      - "8761:8761"
+#    networks:
+#      - my-network
+#    #command: ["bash", "./wait-for-it.sh", "-t", "0", "config-server:8888", "--", "java", "-jar", "eureka-server.jar"]
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
 
 #  gateway:
 #    build: cloud/gateway
@@ -21,17 +32,19 @@ services:
 #      - SPRING_PROFILES_ACTIVE=docker
 #    command: ["bash", "./wait-for-it.sh", "-t", "0", "config-server:8888", "--", "java", "-jar", "gateway.jar"]
 
-  config-server:
-    build: cloud/config-server
-    ports:
-      - "8888:8888"
-    networks:
-      - my-network
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker,native
+  jhipster-registry:
+    image: jhipster/jhipster-registry:v6.0.2
     volumes:
       - ./config:/config
-
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=dev,swagger
+      - SPRING_SECURITY_USER_PASSWORD=admin
+      - JHIPSTER_REGISTRY_PASSWORD=admin
+      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE=native
+      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_LOCATIONS=./config/
+    ports:
+      - 8761:8761
 
 #  mysql:
 #    image: mysql:5.7

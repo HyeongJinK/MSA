@@ -4,8 +4,10 @@ jhipster:
   registry:
     password: admin
 
+
+
 spring:
-  application.name: company
+  application.name: api-consumer
   cloud.config:
     failFast: true
     retry:

@@ -9,7 +9,8 @@
         <module>cloud/gateway</module>
         <module>microservices/company</module>
         <module>microservices/notice</module>
-        <module>api/api-consumer</module>
+        <module>microservices/company-composite</module>
+        <module>api/api</module>
     </modules>
     <groupId>com.illunex</groupId>
     <artifactId>Invest-parent</artifactId>

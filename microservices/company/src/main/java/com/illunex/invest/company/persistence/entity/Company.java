@@ -1,9 +1,12 @@
 package com.illunex.invest.company.persistence.entity;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Getter
 @Entity
 public class Company {
     @Id

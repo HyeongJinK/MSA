@@ -1,0 +1,52 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+/.idea/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+api/api/.mvn/
+backup/Invest-Company/Invest-Company-Api/src/
+backup/Invest-Company/Invest-Company-Repository/src/main/java/com/illunex/invest/company/entity/enumable/
+backup/Invest-Company/Invest-Company-Repository/src/main/resources/
+backup/Invest-Company/Invest-Company-Repository/src/test/
+backup/Invest-Company/src/
+backup/Invest-Invest/Invest-Invest-Repository/src/main/java/com/illunex/invest/invest/service/
+backup/Invest-Invest/Invest-Invest-Repository/src/main/resources/
+backup/Invest-Invest/Invest-Invest-Repository/src/test/
+backup/Invest-InvestorRelations/Invest-InvestorRelations-Repository/src/main/resources/
+backup/Invest-InvestorRelations/Invest-InvestorRelations-Repository/src/test/
+backup/Invest-Shop/Invest-Shop-Repository/src/main/java/com/illunex/invest/license/service/
+backup/Invest-Shop/Invest-Shop-Repository/src/main/resources/
+backup/Invest-Shop/Invest-Shop-Repository/src/test/
+backup/Invest-User/Invest-User-Repository/src/main/java/com/illunex/invest/user/repository/
+backup/Invest-User/Invest-User-Repository/src/main/java/com/illunex/invest/user/service/
+backup/Invest-User/Invest-User-Repository/src/main/resources/
+backup/Invest-User/Invest-User-Repository/src/test/
+microservices/company-composite/src/main/java/com/illunex/invest/companycomposite/config/
+util/
