@@ -1,6 +1,5 @@
 package com.illunex.invest.companycomposite.service;
 
-
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;

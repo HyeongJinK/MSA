@@ -4,8 +4,6 @@ jhipster:
   registry:
     password: admin
 
-
-
 spring:
   application.name: api-consumer
   cloud.config:
