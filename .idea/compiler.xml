@@ -8,15 +8,18 @@
         <outputRelativeToContentRoot value="true" />
         <module name="gateway" />
         <module name="eureka-server" />
+        <module name="api" />
         <module name="config-server" />
-        <module name="api-consumer" />
+        <module name="company-composite" />
         <module name="notice" />
         <module name="company" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="api" target="11" />
       <module name="api-consumer" target="11" />
       <module name="company" target="11" />
+      <module name="company-composite" target="11" />
       <module name="config-server" target="11" />
       <module name="eureka-server" target="11" />
       <module name="gateway" target="11" />
@@ -26,8 +29,10 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api" options="-parameters" />
       <module name="api-consumer" options="-parameters" />
       <module name="company" options="-parameters" />
+      <module name="company-composite" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="gateway" options="-parameters" />
