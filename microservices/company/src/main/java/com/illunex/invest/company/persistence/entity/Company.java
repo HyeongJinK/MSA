@@ -1,6 +1,7 @@
 package com.illunex.invest.company.persistence.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -34,4 +35,6 @@ public class Company {
 
     @OneToMany
     List<CompanyMember> companyMembers;
+
+
 }

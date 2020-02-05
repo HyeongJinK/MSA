@@ -1,8 +1,7 @@
-package com.illunex.invest.company.configuration;
+package com.illunex.invest.notice.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Component
 @ConfigurationProperties("application")

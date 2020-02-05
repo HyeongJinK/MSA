@@ -8,6 +8,7 @@
         <module>cloud/eureka-server</module>
         <module>cloud/gateway</module>
         <module>microservices/company</module>
+        <module>microservices/notice</module>
         <module>microservices/company-composite</module>
         <module>api/api</module>
         <module>util/common</module>
