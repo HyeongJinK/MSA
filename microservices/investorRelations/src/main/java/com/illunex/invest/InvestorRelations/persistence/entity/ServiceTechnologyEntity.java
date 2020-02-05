@@ -1,10 +1,11 @@
-package com.illunex.invest.investorRelations.entity;
+package com.illunex.invest.InvestorRelations.persistence.entity;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class ServiceTechnology {
+@Table(name = "service_technology")
+public class ServiceTechnologyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long stIdx;
@@ -16,9 +17,9 @@ public class ServiceTechnology {
     String description;
 
     @OneToMany(cascade = CascadeType.ALL)
-    List<TargetMarketAndScale> targetMarketAndScales;   // 주요 목표 시장 및 규모
+    List<TargetMarketAndScaleEntity> targetMarketAndScaleEntities;   // 주요 목표 시장 및 규모
     @OneToMany(cascade = CascadeType.ALL)
-    List<Competitors> competitors;                      // 주요 경쟁사
+    List<CompetitorsEntity> competitors;                      // 주요 경쟁사
     @OneToMany(cascade = CascadeType.ALL)
-    List<IntellectualProperty> intellectualProperties;  // 지식재산권 현황
+    List<IntellectualPropertyEntity> intellectualProperties;  // 지식재산권 현황
 }

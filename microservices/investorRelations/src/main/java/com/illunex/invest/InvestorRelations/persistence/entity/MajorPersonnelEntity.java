@@ -1,9 +1,10 @@
-package com.illunex.invest.investorRelations.entity;
+package com.illunex.invest.InvestorRelations.persistence.entity;
 
 import javax.persistence.*;
 
 @Entity
-public class MajorPersonnel {// 주요인력
+@Table(name = "major_personnel")
+public class MajorPersonnelEntity {// 주요인력
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;

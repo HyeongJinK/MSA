@@ -1,9 +1,10 @@
-package com.illunex.invest.investorRelations.entity;
+package com.illunex.invest.InvestorRelations.persistence.entity;
 
 import javax.persistence.*;
 
 @Entity
-public class ShareHolderStatus {
+@Table(name = "shareholder_status")
+public class ShareHolderStatusEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;

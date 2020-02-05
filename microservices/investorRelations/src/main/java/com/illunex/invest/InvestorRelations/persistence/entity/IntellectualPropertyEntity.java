@@ -1,9 +1,10 @@
-package com.illunex.invest.investorRelations.entity;
+package com.illunex.invest.InvestorRelations.persistence.entity;
 
 import javax.persistence.*;
 
 @Entity
-public class IntellectualProperty {
+@Table(name = "intellectual_property")
+public class IntellectualPropertyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
