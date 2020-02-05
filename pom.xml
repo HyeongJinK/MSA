@@ -7,8 +7,12 @@
         <module>cloud/config-server</module>
         <module>cloud/eureka-server</module>
         <module>cloud/gateway</module>
+        <module>microservices/investorRelations</module>
         <module>microservices/company</module>
         <module>microservices/notice</module>
+        <module>microservices/invest</module>
+        <module>microservices/shop</module>
+        <module>microservices/user</module>
         <module>microservices/company-composite</module>
         <module>api/api</module>
         <module>util/common</module>
