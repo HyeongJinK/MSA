@@ -1,11 +1,12 @@
-package com.illunex.invest.investorRelations.entity;
+package com.illunex.invest.InvestorRelations.persistence.entity;
 
-import com.illunex.invest.investorRelations.entity.enumable.NationType;
+import com.illunex.invest.InvestorRelations.persistence.entity.enumable.NationType;
 
 import javax.persistence.*;
 
 @Entity
-public class Competitors {
+@Table(name = "competitors")
+public class CompetitorsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long competitorsIdx;

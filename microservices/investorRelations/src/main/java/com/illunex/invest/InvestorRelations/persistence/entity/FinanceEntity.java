@@ -1,10 +1,11 @@
-package com.illunex.invest.investorRelations.entity;
+package com.illunex.invest.InvestorRelations.persistence.entity;
 
 
 import javax.persistence.*;
 
 @Entity
-public class Finance {
+@Table(name = "finance")
+public class FinanceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long financeIdx;

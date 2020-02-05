@@ -2,8 +2,10 @@ package com.illunex.invest.InvestorRelations.persistence.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
+@Table(name = "investor_relations")
 public class InvestorRelationsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,20 +19,20 @@ public class InvestorRelationsEntity {
     Date updateDate;        // 마지막 수정일
     Integer readCount;      // 조회수
 
-//    @OneToOne
-//    CompanyInfo companyInfo;                        // 기본정보상
-//    @OneToMany
-//    List<History> histories;                        // 주요연혁
-//    @OneToMany
-//    List<MajorPersonnel> majorPersonnels;           // 주요인력
-//    @OneToMany
-//    List<ShareHolderStatus> shareHolderStatuses;    // 주주현황
-//    @OneToOne
-//    Finance finance;                                // 재무정보
-//    @OneToOne
-//    ServiceTechnology serviceTechnology;            // 서비스 및 기술
-//    @OneToOne
-//    InvestmentAttraction investmentAttraction;      // 발표자료
-//    @OneToOne
-//    VideoData videoData;                            // 동영상
+    @OneToOne
+    CompanyInfoEntity companyInfoEntity;                        // 기본정보상
+    @OneToMany
+    List<HistoryEntity> histories;                        // 주요연혁
+    @OneToMany
+    List<MajorPersonnelEntity> majorPersonnelEntities;           // 주요인력
+    @OneToMany
+    List<ShareHolderStatusEntity> shareHolderStatusEntities;    // 주주현황
+    @OneToOne
+    FinanceEntity financeEntity;                                // 재무정보
+    @OneToOne
+    ServiceTechnologyEntity serviceTechnologyEntity;            // 서비스 및 기술
+    @OneToOne
+    InvestmentAttractionEntity investmentAttractionEntity;      // 발표자료
+    @OneToOne
+    VideoDataEntity videoDataEntity;                            // 동영상
 }

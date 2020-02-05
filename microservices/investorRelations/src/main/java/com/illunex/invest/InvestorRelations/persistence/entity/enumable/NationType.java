@@ -1,4 +1,4 @@
-package com.illunex.invest.investorRelations.entity.enumable;
+package com.illunex.invest.InvestorRelations.persistence.entity.enumable;
 
 public enum NationType {
     Domestic("국내"),
