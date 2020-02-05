@@ -5,11 +5,15 @@ import com.illunex.invest.notice.service.NoticeService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 public class NoticeController {
     private Log log = LogFactory.getLog(NoticeController.class);
@@ -17,21 +21,32 @@ public class NoticeController {
     @Autowired
     NoticeService noticeService;
 
-    @CrossOrigin("*")
-    @RequestMapping("/test")
-    public List<Notice> test() {
-
-        List<Notice> data = noticeService.test();
-
-        return data;
+    @RequestMapping("/notice/list")
+    public ResponseEntity<List<Notice>> getAllNotice() {
+        return new ResponseEntity(noticeService.getAllNotice(), HttpStatus.OK);
     }
 
-    @CrossOrigin("*")
-    @RequestMapping("/testOne")
-    public Notice testOne() {
+    @RequestMapping("/notice/{id}")
+    public ResponseEntity<Notice> getOneNotice(@PathVariable("id") Long id) {
+        return new ResponseEntity(noticeService.getOneNotice(id), HttpStatus.OK);
+    }
 
-        Notice data = noticeService.testOne();
+    @RequestMapping("/notice/add")
+    public ResponseEntity<Notice> addNotice(@RequestParam String subject, @RequestParam String content) {
+        Notice notice = new Notice();
+        notice.setSubject(subject);
+        notice.setContent(content);
+        notice.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
+        return new ResponseEntity(noticeService.addNotice(notice), HttpStatus.OK);
+    }
 
-        return data;
+    @RequestMapping("/notice/update")
+    public ResponseEntity<Notice> updateNotice(@RequestParam Long id, @RequestParam String subject, @RequestParam String content) {
+        Notice notice = new Notice();
+        notice.setNoticeIdx(id);
+        notice.setSubject(subject);
+        notice.setContent(content);
+        notice.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
+        return new ResponseEntity(noticeService.addNotice(notice), HttpStatus.OK);
     }
 }

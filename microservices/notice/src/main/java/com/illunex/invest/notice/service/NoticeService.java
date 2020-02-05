@@ -13,11 +13,11 @@ public class NoticeService {
     @Autowired
     NoticeRepository noticeRepository;
 
-    public Notice testOne() {
-        return this.noticeRepository.findByNoticeIdx(1L);
+    public Notice getOneNotice(Long id) {
+        return this.noticeRepository.findByNoticeIdx(id);
     }
 
-    public List<Notice> test() {
-        return this.noticeRepository.findAll();
-    }
+    public Notice addNotice(Notice notice) { return noticeRepository.save(notice); }
+
+    public List<Notice> getAllNotice() { return this.noticeRepository.findAll(); }
 }

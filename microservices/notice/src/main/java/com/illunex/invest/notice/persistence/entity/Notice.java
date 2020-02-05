@@ -2,10 +2,8 @@ package com.illunex.invest.notice.persistence.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -13,8 +11,8 @@ import java.util.List;
 public class Notice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long noticeIdx;
-    String subject;         // 제목
-    Date regDate;           // 등록일
-
+    Long noticeIdx;              // ID
+    String subject;              // 제목
+    Timestamp regDate;           // 등록일
+    String content;              // 내용
 }
