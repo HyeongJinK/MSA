@@ -11,7 +11,7 @@ import java.util.List;
 
 @Api(produces = "produces Value")
 public interface InvestorRelationsController {
-    @ApiOperation(value = "a"
+    @ApiOperation(value = "a1"
             , notes = "Notes Test"
             , response = InvestorRelationsController.class
             , responseContainer = "ResponseContainer Test"
