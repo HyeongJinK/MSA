@@ -1,13 +1,12 @@
-package com.illunex.invest.investorRelations.entity;
-
-import com.illunex.invest.investorRelations.entity.enumable.NationType;
+package com.illunex.invest.InvestorRelations.persistence.entity;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class CompanyInfo {
+@Table(name = "company_info")
+public class CompanyInfoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long ciIdx;
@@ -31,8 +30,8 @@ public class CompanyInfo {
     String useInvestment;       // 투자금 사용용도
     String exitPlan;            // EXIT 계획
     @OneToMany
-    List<InvestmentAttraction> investmentAttractions;  // 기존투자유치
+    List<InvestmentAttractionEntity> investmentAttractionEntities;  // 기존투자유치
     @OneToMany
-    List<Subsidy> subsidies;
+    List<SubsidyEntity> subsidies;
     // 지원금
 }

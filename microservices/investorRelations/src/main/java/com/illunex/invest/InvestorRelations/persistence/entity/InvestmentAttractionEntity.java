@@ -1,9 +1,10 @@
-package com.illunex.invest.investorRelations.entity;
+package com.illunex.invest.InvestorRelations.persistence.entity;
 
 import javax.persistence.*;
 
 @Entity
-public class InvestmentAttraction {  // 기존 투자 유치
+@Table(name = "investment_attractsion")
+public class InvestmentAttractionEntity {  // 기존 투자 유치
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
