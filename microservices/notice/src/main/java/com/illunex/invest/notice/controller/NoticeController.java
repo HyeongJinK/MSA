@@ -21,17 +21,17 @@ public class NoticeController {
     @Autowired
     NoticeService noticeService;
 
-    @RequestMapping("/notice/list")
+    @GetMapping("/notice/list")
     public ResponseEntity<List<Notice>> getAllNotice() {
         return new ResponseEntity(noticeService.getAllNotice(), HttpStatus.OK);
     }
 
-    @RequestMapping("/notice/{id}")
+    @GetMapping("/notice/{id}")
     public ResponseEntity<Notice> getOneNotice(@PathVariable("id") Long id) {
         return new ResponseEntity(noticeService.getOneNotice(id), HttpStatus.OK);
     }
 
-    @RequestMapping("/notice/add")
+    @PostMapping("/notice/add")
     public ResponseEntity<Notice> addNotice(@RequestParam String subject, @RequestParam String content) {
         Notice notice = new Notice();
         notice.setSubject(subject);
@@ -40,7 +40,7 @@ public class NoticeController {
         return new ResponseEntity(noticeService.addNotice(notice), HttpStatus.OK);
     }
 
-    @RequestMapping("/notice/update")
+    @PostMapping("/notice/update")
     public ResponseEntity<Notice> updateNotice(@RequestParam Long id, @RequestParam String subject, @RequestParam String content) {
         Notice notice = new Notice();
         notice.setNoticeIdx(id);
