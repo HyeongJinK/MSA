@@ -5,7 +5,7 @@ jhipster:
     password: admin
 
 spring:
-  application.name: company-composite
+  application.name: invest
   cloud.config:
     failFast: true
     retry:
