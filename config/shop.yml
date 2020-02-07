@@ -1,4 +1,4 @@
-server.port: 7101
+server.port: 7301
 
 spring.jpa.hibernate.ddl-auto: update
 
@@ -8,6 +8,6 @@ spring:
       enabled: true
 
 spring.datasource:
-  url: jdbc:mariadb://15.164.171.107:3306/invest_investorrelations
+  url: jdbc:mariadb://15.164.171.107:3306/invest_shop
   username: effectmall
   password: effectmall@123
