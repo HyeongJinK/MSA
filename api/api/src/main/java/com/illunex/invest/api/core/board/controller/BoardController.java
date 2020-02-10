@@ -5,12 +5,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Api(produces = "produces Value")
@@ -26,7 +26,7 @@ public interface BoardController {
     })
 
 
-    public ResponseEntity<List<BoardDto>> getAllPost();
+    public ResponseEntity<Page<BoardDto>> getAllPost(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable);
 
     public ResponseEntity<BoardDto> getOnePost(@RequestBody BoardDto boardDto);
 
