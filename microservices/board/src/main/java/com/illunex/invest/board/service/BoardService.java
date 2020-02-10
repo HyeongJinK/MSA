@@ -1,7 +1,7 @@
 package com.illunex.invest.board.service;
 
 import com.illunex.invest.api.core.board.dto.BoardDto;
-import com.illunex.invest.board.mapper.BoardMapper;
+import com.illunex.invest.board.service.mapper.BoardMapper;
 import com.illunex.invest.board.persistence.entity.Board;
 import com.illunex.invest.board.persistence.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;

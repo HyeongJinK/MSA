@@ -1,4 +1,4 @@
-package com.illunex.invest.board.mapper;
+package com.illunex.invest.board.service.mapper;
 
 import com.illunex.invest.api.core.board.dto.BoardDto;
 import com.illunex.invest.board.persistence.entity.Board;

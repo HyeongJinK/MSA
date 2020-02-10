@@ -18,11 +18,6 @@ public class BoardRepositoryImpl implements BoardCustomRepository {
     @Override
     public Page<Board> findAllByBoardIdxAndSubjectContaining(Long boardIdx, String subject, Pageable pageable) {
 
-        System.out.println("----custom function---");
-        System.out.println(boardIdx);
-        System.out.println(subject);
-        System.out.println(pageable);
-
         QBoard board = QBoard.board;
         int offset = 0;
         if (pageable.getPageNumber() > 1) {
@@ -35,8 +30,6 @@ public class BoardRepositoryImpl implements BoardCustomRepository {
                 .limit(pageable.getPageSize())
                 .offset(offset)
                 .fetchResults();
-
-        System.out.println(results);
 
         return new PageImpl<>(results.getResults(), pageable, results.getTotal());
     }

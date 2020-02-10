@@ -23,37 +23,39 @@ public class BoardControllerImpl implements BoardController {
     @GetMapping("/notice/list")
     @Override
     public ResponseEntity<Page<BoardDto>> getAllPost(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable) {
-        return new ResponseEntity(boardService.getAllPost(boardIdx, subject, pageable), HttpStatus.OK);
+        Page<BoardDto> allPost = boardService.getAllPost(boardIdx, subject, pageable);
+
+        if (allPost.getNumberOfElements() == 0){
+            return new ResponseEntity("Post does not exist", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            return new ResponseEntity(allPost, HttpStatus.OK);
+        }
     }
 
     @CrossOrigin("*")
     @PostMapping("/notice/detail")
     @Override
     public ResponseEntity<BoardDto> getOnePost(@RequestBody BoardDto boardDto) {
-        return new ResponseEntity(boardService.getOnePost(boardDto), HttpStatus.OK);
+        BoardDto post = boardService.getOnePost(boardDto);
+
+        if (post == null) {
+            return new ResponseEntity("Post does not exist", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            return new ResponseEntity(boardService.getOnePost(boardDto), HttpStatus.OK);
+        }
     }
 
     @CrossOrigin("*")
     @PostMapping("/notice/add")
     @Override
     public ResponseEntity<BoardDto> addPost(@RequestBody BoardDto boardDto) {
-        BoardDto newBoard = boardService.addPost(boardDto);
-        if (newBoard != null) {
-            return new ResponseEntity(newBoard, HttpStatus.OK);
-        } else {
-            return new ResponseEntity("post add failed",HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity(boardService.addPost(boardDto), HttpStatus.OK);
     }
 
     @CrossOrigin("*")
     @PostMapping("/notice/update")
     @Override
     public ResponseEntity<BoardDto> updatePost(@RequestBody BoardDto boardDto) {
-        BoardDto updateBoard = boardService.addPost(boardDto);
-        if (updateBoard != null) {
-            return new ResponseEntity(updateBoard, HttpStatus.OK);
-        } else {
-            return new ResponseEntity("post update failed",HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity(boardService.addPost(boardDto), HttpStatus.OK);
     }
 }

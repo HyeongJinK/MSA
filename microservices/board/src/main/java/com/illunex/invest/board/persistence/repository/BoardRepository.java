@@ -11,4 +11,5 @@ import org.springframework.data.domain.Pageable;
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long>, BoardCustomRepository {
     Board findByPostIdxAndBoardIdx(Long postIdx, Long boardIdx);
+    Board findByPostIdx(Long postIdx);
 }
