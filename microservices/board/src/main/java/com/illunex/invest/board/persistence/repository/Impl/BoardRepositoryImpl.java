@@ -1,24 +1,19 @@
 package com.illunex.invest.board.persistence.repository.Impl;
 
-import com.illunex.invest.api.core.board.dto.BoardDto;
 import com.illunex.invest.board.persistence.entity.Board;
 import com.illunex.invest.board.persistence.entity.QBoard;
 import com.illunex.invest.board.persistence.repository.custom.BoardCustomRepository;
 import com.querydsl.core.QueryResults;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
+@RequiredArgsConstructor
 public class BoardRepositoryImpl implements BoardCustomRepository {
-    JPAQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
 
     @Override
     public Page<Board> findAllByBoardIdxAndSubjectContaining(Long boardIdx, String subject, Pageable pageable) {
