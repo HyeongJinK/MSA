@@ -7,6 +7,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface BoardCustomRepository {
 
-    Page<Board> findAllByBoardIdxAndSubjectContaining(Long boardIdx, String subject, Pageable pageable);
+    //Page<Board> findAllByBoardIdxAndSubjectContaining(Long boardIdx, String subject, Pageable pageable);
 
 }

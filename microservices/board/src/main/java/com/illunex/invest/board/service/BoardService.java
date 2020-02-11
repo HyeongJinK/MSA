@@ -22,6 +22,7 @@ public class BoardService {
 
     public Page<BoardDto> getAllPost(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable) {
         Page<Board> allPost = boardRepository.findAllByBoardIdxAndSubjectContaining(boardIdx, subject, pageable);
+
         Page<BoardDto> allPostDto = new PageImpl<BoardDto>(BoardMapper.MAPPER.entityListToDtoList(allPost.getContent()), allPost.getPageable(), allPost.getTotalElements());
         return allPostDto;
     }
