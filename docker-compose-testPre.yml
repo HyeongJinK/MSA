@@ -1,0 +1,33 @@
+version: '2.1'
+
+services:
+  jhipster-registry:
+    image: jhipster/jhipster-registry:v6.0.2
+    networks:
+      - my-network
+    volumes:
+      - ./config:/config
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=dev,swagger
+      - SPRING_SECURITY_USER_PASSWORD=admin
+      - JHIPSTER_REGISTRY_PASSWORD=admin
+      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE=native
+      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_LOCATIONS=./config/
+    ports:
+      - 8761:8761
+
+  mariadb:
+    image: mariadb
+    networks:
+      - my-network
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=Illunex123!
+      - MYSQL_DATABASE=invest
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pwd
+networks:
+  my-network:
+    name: my-network

@@ -2,13 +2,19 @@ package com.illunex.invest.company.persistence.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.Date;
 import java.util.List;
 
-@Getter
 @Entity
+@Getter @Setter
+@ToString(of = {"companyIdx", "userIdx", "logo", "name", "businessNumber"
+, "companyType", "establishmentDate", "employeeCount", "business", "nation"
+, "stocksList", "zipCode", "address", "addressDetail", "mainProductLine"
+, "description", "homePage"})
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
