@@ -1,4 +1,4 @@
-server.port: 7001
+server.port: 7101
 
 spring:
   datasource:

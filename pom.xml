@@ -4,16 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <modules>
-        <module>cloud/config-server</module>
-        <module>cloud/eureka-server</module>
+<!--        <module>cloud/config-server</module>-->
+<!--        <module>cloud/eureka-server</module>-->
         <module>cloud/gateway</module>
-        <module>microservices/investorRelations</module>
+<!--        <module>microservices/investorRelations</module>-->
         <module>microservices/company</module>
         <module>microservices/board</module>
-        <module>microservices/invest</module>
-        <module>microservices/shop</module>
-        <module>microservices/user</module>
-        <module>microservices/company-composite</module>
+<!--        <module>microservices/invest</module>-->
+<!--        <module>microservices/shop</module>-->
+<!--        <module>microservices/user</module>-->
+<!--        <module>microservices/company-composite</module>-->
         <module>api/api</module>
         <module>util/common</module>
     </modules>
