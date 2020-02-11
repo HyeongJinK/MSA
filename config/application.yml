@@ -31,5 +31,5 @@ management:
 spring.profiles: docker
 
 app:
-  eureka-server: eureka
+  eureka-server: localhost
 ---
