@@ -18,4 +18,4 @@ spring:
 ---
 spring.profiles: test
 
-app.config-server: localhost
+app.config-server: jhipster-registry

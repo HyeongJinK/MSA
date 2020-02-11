@@ -3,6 +3,8 @@ version: '2.1'
 services:
   jhipster-registry:
     image: jhipster/jhipster-registry:v6.0.2
+    networks:
+      - my-network
     volumes:
       - ./config:/config
     environment:
@@ -15,8 +17,10 @@ services:
     ports:
       - 8761:8761
 
-  mysql:
-    image: mysql:5.7
+  mariadb:
+    image: mariadb
+    networks:
+      - my-network
     ports:
       - "3306:3306"
     environment:
@@ -24,3 +28,6 @@ services:
       - MYSQL_DATABASE=invest
       - MYSQL_USER=user
       - MYSQL_PASSWORD=pwd
+networks:
+  my-network:
+    name: my-network
