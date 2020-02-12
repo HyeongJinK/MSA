@@ -1,3 +1,6 @@
+spring.profiles: local
+spring.profiles.active: '@activatedProperties@'
+
 app.config-server: localhost
 
 jhipster:
@@ -14,8 +17,7 @@ spring:
       maxInterval: 10000
       maxAttempts: 20
     uri: http://admin:${jhipster.registry.password}@${app.config-server}:8761/config
-
 ---
 spring.profiles: test
-
 app.config-server: jhipster-registry
+

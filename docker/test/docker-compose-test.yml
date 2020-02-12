@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+  gateway:
+    build: ../../cloud/gateway
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+
+  company:
+    build: ../../microservices/company
+    mem_limit: 300m
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+networks:
+  my-network:
+    name: my-network
