@@ -25,13 +25,11 @@ public class BoardControllerImpl implements BoardController {
     public ResponseEntity<Page<BoardDto>> getAllPost(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable) {
         Page<BoardDto> allPost = boardService.getAllPost(boardIdx, subject, pageable);
 
-        return new ResponseEntity(allPost, HttpStatus.OK);
-//
-//        if (allPost.getNumberOfElements() == 0){
-//            return new ResponseEntity("Post does not exist", HttpStatus.INTERNAL_SERVER_ERROR);
-//        } else {
-//            return new ResponseEntity(allPost, HttpStatus.OK);
-//        }
+        if (allPost.getNumberOfElements() == 0){
+            return new ResponseEntity("Post does not exist", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            return new ResponseEntity(allPost, HttpStatus.OK);
+        }
     }
 
     @CrossOrigin("*")

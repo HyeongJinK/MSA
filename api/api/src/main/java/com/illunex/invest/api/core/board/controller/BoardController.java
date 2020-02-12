@@ -15,15 +15,15 @@ import java.util.List;
 
 @Api(produces = "produces Value")
 public interface BoardController {
-    @ApiOperation(value = "a1331"
-            , notes = "Notes Test"
-            , response = BoardController.class
-            , responseContainer = "ResponseContainer Test"
-            , produces = "Produces Test")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 400, message = "Bad Request")
-    })
+//    @ApiOperation(value = "a1331"
+//            , notes = "Notes Test"
+//            , response = BoardController.class
+//            , responseContainer = "ResponseContainer Test"
+//            , produces = "Produces Test")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Success"),
+//            @ApiResponse(code = 400, message = "Bad Request")
+//    })
 
 
     public ResponseEntity<Page<BoardDto>> getAllPost(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable);

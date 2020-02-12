@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,7 +23,7 @@ public class BoardService {
     BoardRepository boardRepository;
 
     public Page<BoardDto> getAllPost(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable) {
-        Page<Board> allPost = boardRepository.findAllByBoardIdxAndSubjectContaining(boardIdx, subject, pageable);
+        Page<Board> allPost = boardRepository.findAllByBoardIdxAndSubjectContainingOrderByPostIdxDesc(boardIdx, subject, pageable);
 
         Page<BoardDto> allPostDto = new PageImpl<BoardDto>(BoardMapper.MAPPER.entityListToDtoList(allPost.getContent()), allPost.getPageable(), allPost.getTotalElements());
         return allPostDto;

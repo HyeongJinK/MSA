@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long>, BoardCustomRepository {
     Board findByPostIdxAndBoardIdx(Long postIdx, Long boardIdx);
-    Page<Board> findAllByBoardIdxAndSubjectContaining(Long boardIdx, String subject, Pageable pageable);
+    Page<Board> findAllByBoardIdxAndSubjectContainingOrderByPostIdxDesc(Long boardIdx, String subject, Pageable pageable);
 }
