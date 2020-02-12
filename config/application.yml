@@ -1,3 +1,5 @@
+spring.profiles: local
+
 configserver:
   name: Docker JHipster Registry
   status: Connected to the JHipster Registry running in Docker
