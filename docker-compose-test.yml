@@ -17,6 +17,15 @@ services:
       - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
+
+  board:
+    build: microservices/board
+    mem_limit: 300m
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+
 networks:
   my-network:
     name: my-network
