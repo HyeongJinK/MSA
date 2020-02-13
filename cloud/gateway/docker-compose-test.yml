@@ -1,7 +1,7 @@
 version: '2.1'
 
 services:
-  company:
+  gateway:
     build: ./
     mem_limit: 300m
     networks:
