@@ -11,20 +11,20 @@ import java.sql.Timestamp;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long postIdx;              // ID
-    Long boardIdx;
-    String subject;              // 제목
-    Timestamp regDate;           // 등록일
-
-    @Column(name="content", columnDefinition = "text COMMENT '내용'")
-    String content;              // 내용
+    Long postIdx;           // ID
+    Long boardIdx;          // 게시판 구분
+    String subject;         // 제목
+    String content;         // 내용
+    Timestamp regDate;      // 등록일
+    boolean deleted;        // 삭제여부
 
     @Builder
-    public Board(Long postIdx, Long boardIdx, String subject, Timestamp regDate, String content){
+    public Board(Long postIdx, Long boardIdx, String subject, String content, Timestamp regDate, boolean deleted){
         this.postIdx = postIdx;
         this.boardIdx = boardIdx;
         this.subject = subject;
-        this.regDate = regDate;
         this.content = content;
+        this.regDate = regDate;
+        this.deleted = deleted;
     }
 }

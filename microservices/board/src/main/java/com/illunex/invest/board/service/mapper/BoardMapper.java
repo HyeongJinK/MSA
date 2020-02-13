@@ -1,11 +1,9 @@
-package com.illunex.invest.board.mapper;
-
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+package com.illunex.invest.board.service.mapper;
 
 import com.illunex.invest.api.core.board.dto.BoardDto;
 import com.illunex.invest.board.persistence.entity.Board;
-import org.springframework.data.domain.Page;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
@@ -19,6 +17,4 @@ public interface BoardMapper {
 
     List<BoardDto> entityListToDtoList(List<Board> boards);
     List<Board> dtoListToEntityList(List<BoardDto> BoardDto);
-
-    //Page<BoardDto> entityListToDtoList(Page<Board> boards);
 }
