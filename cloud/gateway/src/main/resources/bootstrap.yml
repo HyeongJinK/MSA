@@ -1,6 +1,3 @@
-spring.profiles: local
-spring.profiles.active: '@activatedProperties@'
-
 app.config-server: localhost
 
 jhipster:
