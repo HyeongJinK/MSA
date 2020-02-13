@@ -1,4 +1,4 @@
-app.config-server: test
+app.config-server: localhost
 
 jhipster:
   registry:
