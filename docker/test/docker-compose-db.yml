@@ -1,0 +1,17 @@
+version: '2.1'
+
+services:
+  mariadb:
+    image: mariadb
+    networks:
+      - my-network
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=Illunex123!
+      - MYSQL_DATABASE=invest
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pwd
+networks:
+  my-network:
+    name: my-network
