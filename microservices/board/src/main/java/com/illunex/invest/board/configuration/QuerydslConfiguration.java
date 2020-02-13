@@ -1,4 +1,4 @@
-package com.illunex.invest.board;
+package com.illunex.invest.board.configuration;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long>, BoardCustomRepository {
-    Board findByPostIdxAndBoardIdx(Long postIdx, Long boardIdx);
-    Page<Board> findAllByBoardIdxAndSubjectContainingOrderByPostIdxDesc(Long boardIdx, String subject, Pageable pageable);
+    Board findByBoardIdxAndPostIdx(Long boardIdx, Long postIdx);
+    Board findByBoardIdxAndPostIdxAndDeleted(Long boardIdx, Long postIdx, Boolean deleted);
+    Page<Board> findAllByBoardIdxAndDeletedAndSubjectContainingOrderByPostIdxDesc(Long boardIdx, Boolean deleted, String subject, Pageable pageable);
 }

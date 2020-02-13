@@ -25,13 +25,14 @@ public interface BoardController {
 //            @ApiResponse(code = 400, message = "Bad Request")
 //    })
 
+    public ResponseEntity<BoardDto> getPost(@RequestParam Long boardIdx, @RequestParam Long postIdx);
 
-    public ResponseEntity<Page<BoardDto>> getAllPost(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable);
-
-    public ResponseEntity<BoardDto> getOnePost(@RequestBody BoardDto boardDto);
+    public ResponseEntity<Page<BoardDto>> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable);
 
     public ResponseEntity<BoardDto> addPost(@RequestBody BoardDto boardDto);
 
     public ResponseEntity<BoardDto> updatePost(@RequestBody BoardDto boardDto);
+
+    public ResponseEntity<String> deletePost(@RequestParam Long boardIdx, @RequestParam Long postIdx);
 
 }
