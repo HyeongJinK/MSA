@@ -8,6 +8,8 @@ services:
       - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
+    ports:
+      - 8080:8080
 networks:
   my-network:
     name: my-network
