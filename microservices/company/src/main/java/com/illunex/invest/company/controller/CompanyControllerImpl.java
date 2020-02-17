@@ -23,5 +23,10 @@ public class CompanyControllerImpl implements CompanyController {
         return null;
     }
 
+    @Override
+    public void insertCompany(CompanyDTO companyDTO) {
+
+    }
+
 
 }

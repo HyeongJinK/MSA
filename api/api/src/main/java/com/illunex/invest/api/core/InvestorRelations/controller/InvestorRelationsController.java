@@ -1,6 +1,6 @@
 package com.illunex.invest.api.core.InvestorRelations.controller;
 
-import com.illunex.invest.api.core.InvestorRelations.dto.InvestorRelations;
+import com.illunex.invest.api.core.InvestorRelations.dto.InvestorRelationsDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -21,5 +21,5 @@ public interface InvestorRelationsController {
             @ApiResponse(code = 400, message = "Bad Request")
     })
     @GetMapping("")
-    public List<InvestorRelations> getInvestorRelationsList();
+    public List<InvestorRelationsDTO> getInvestorRelationsList();
 }
