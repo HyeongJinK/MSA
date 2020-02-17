@@ -34,3 +34,5 @@ api/api/.mvn/
 util/common/.mvn/
 microservices/company/.mvn
 microservices/company-composite/.mvn
+
+.mvn
