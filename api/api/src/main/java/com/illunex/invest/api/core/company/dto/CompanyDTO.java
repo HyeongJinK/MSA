@@ -1,12 +1,18 @@
 package com.illunex.invest.api.core.company.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
 
-@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter @Setter
+@ToString(of = {"companyIdx", "userIdx", "logo", "name", "businessNumber"
+        , "companyType", "establishmentDate", "employeeCount", "business", "nation"
+        , "stocksList", "zipCode", "address", "addressDetail", "mainProductLine"
+        , "description", "homePage"})
 public class CompanyDTO {
     Long companyIdx;
     @ApiModelProperty(value="유저 번호", name="userIdx", required=true)
@@ -42,7 +48,7 @@ public class CompanyDTO {
     @ApiModelProperty(value="홈페이지", name="homePage", required=false)
     String homePage;
 
-    //List<CompanyProduct> companyProducts;
+    List<CompanyProductDTO> companyProducts;
 
-    //List<CompanyMember> companyMembers;
+    List<CompanyMemberDTO> companyMembers;
 }

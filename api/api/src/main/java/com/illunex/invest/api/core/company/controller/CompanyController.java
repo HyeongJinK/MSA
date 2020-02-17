@@ -3,6 +3,7 @@ package com.illunex.invest.api.core.company.controller;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Api(value = "회사 API")
 @RequestMapping("/company")
 public interface CompanyController {
-    @ApiOperation(value = "회사 리스트 조회")
+    @ApiOperation(value = "회사 전체 리스트 조회")
     @GetMapping({"", "/list"})
     List<CompanyDTO> getList();
 
@@ -31,4 +32,7 @@ public interface CompanyController {
     })
     @GetMapping("/{userIdx}")
     CompanyController getCompany(@PathVariable Long userIdx);
+
+    @ApiOperation(value = "회사 신규 등록")
+    void insertCompany(@ModelAttribute CompanyDTO companyDTO);
 }

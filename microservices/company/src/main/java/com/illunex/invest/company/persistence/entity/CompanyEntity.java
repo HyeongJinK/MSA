@@ -1,21 +1,20 @@
 package com.illunex.invest.company.persistence.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(of = {"companyIdx", "userIdx", "logo", "name", "businessNumber"
 , "companyType", "establishmentDate", "employeeCount", "business", "nation"
 , "stocksList", "zipCode", "address", "addressDetail", "mainProductLine"
 , "description", "homePage"})
-public class Company {
+public class CompanyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long companyIdx;
@@ -37,10 +36,10 @@ public class Company {
     String homePage;            // 홈페이지
 
     @OneToMany
-    List<CompanyProduct> companyProducts;
+    List<CompanyProductEntity> companyProductEntities;
 
     @OneToMany
-    List<CompanyMember> companyMembers;
+    List<CompanyMemberEntity> companyMemberEntities;
 
 
 }
