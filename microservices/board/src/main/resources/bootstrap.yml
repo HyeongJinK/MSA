@@ -16,6 +16,5 @@ spring:
     uri: http://admin:${jhipster.registry.password}@${app.config-server}:8761/config
 
 ---
-spring.profiles: docker
-
-app.config-server: localhost
+spring.profiles: test
+app.config-server: jhipster-registry
