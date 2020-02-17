@@ -23,10 +23,13 @@ public class BoardControllerImpl implements BoardController {
     @GetMapping("/notices")
     @Override
     public ResponseEntity<Page<BoardDto>> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable) {
+        System.out.println("------serach word------");
+        System.out.println(subject);
+
         Page<BoardDto> postList = boardService.getPostList(boardIdx, subject, pageable);
 
         if (postList.getNumberOfElements() == 0){
-            return new ResponseEntity("Post does not exist", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Post does not exist", HttpStatus.OK);
         } else {
             return new ResponseEntity(postList, HttpStatus.OK);
         }
