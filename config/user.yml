@@ -1,13 +1,30 @@
 server.port: 7401
 
-spring.jpa.hibernate.ddl-auto: update
-
 spring:
-  devtools:
+  datasource:
+    url: jdbc:mariadb://15.164.212.141:3306/invest_user
+    username: root
+    password: Illunex123!
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  deevtools:
     livereload:
       enabled: true
 
-spring.datasource:
-  url: jdbc:mariadb://15.164.171.107:3306/invest_user
-  username: effectmall
-  password: effectmall@123
+logging.level:
+  org.hibernate.SQL: debug
+---
+spring.profiles: test
+
+spring:
+  datasource:
+    url: jdbc:mariadb://mariadb/invest_user
+    username: root
+    password: Illunex123!
+  jpa:
+    hibernate:
+      ddl-auto: update
