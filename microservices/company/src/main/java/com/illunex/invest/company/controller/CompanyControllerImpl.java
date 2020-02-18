@@ -23,7 +23,11 @@ import java.util.List;
 public class CompanyControllerImpl implements CompanyController {
     private Log log = LogFactory.getLog(CompanyControllerImpl.class);
 
-    @Autowired CompanyService companyService;
+    final CompanyService companyService;
+
+    public CompanyControllerImpl(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
     @Override
     public ResponseEntity<List<CompanyDTO>> getAllList() {

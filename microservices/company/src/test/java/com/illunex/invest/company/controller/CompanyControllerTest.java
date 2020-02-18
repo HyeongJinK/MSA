@@ -27,6 +27,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
         "spring.cloud.config.enabled=false",
         "spring.datasource.url=jdbc:h2:mem:company"})
 public class CompanyControllerTest {
+    WebTestClient webTestClient;
+
     @MockBean
     CompanyService companyService;
 
@@ -40,6 +42,11 @@ public class CompanyControllerTest {
                         .name("test")
                         .dtoBuild()
                 );
+
+        webTestClient = WebTestClient.bindToController(new CompanyControllerImpl(companyService))
+                .configureClient()
+                .baseUrl("")
+                .build();
     }
 
     @Test
@@ -50,5 +57,18 @@ public class CompanyControllerTest {
 
         Assert.assertEquals(company.getCompanyIdx().longValue(), 1l);
         Assert.assertEquals(company.getName(), "test");
+    }
+
+    @Test
+    public void getCompanyHttpTest() {
+        webTestClient.get()
+                .uri("/company/user/1")
+                .accept(APPLICATION_JSON_UTF8)
+                .exchange()
+                .expectStatus().isEqualTo(HttpStatus.OK)
+                .expectHeader().contentType(APPLICATION_JSON_UTF8)
+                .expectBody()
+                .jsonPath("companyIdx").isEqualTo("1")
+                .jsonPath("name").isEqualTo("test");
     }
 }
