@@ -3,8 +3,8 @@ server.port: 7101
 spring:
   datasource:
     url: jdbc:mariadb://15.164.212.141:3306/invest_company
-    username: effectmall
-    password: effectmall@123
+    username: root
+    password: Illunex123!
   jpa:
     hibernate:
       ddl-auto: update
@@ -27,4 +27,4 @@ spring:
     password: Illunex123!
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update

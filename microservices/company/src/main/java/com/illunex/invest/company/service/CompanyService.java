@@ -1,4 +1,7 @@
 package com.illunex.invest.company.service;
 
-public class CompanyService {
+import com.illunex.invest.api.core.company.dto.CompanyDTO;
+
+public interface CompanyService {
+    CompanyDTO getCompanyByUserIdx(final Long userIdx);
 }

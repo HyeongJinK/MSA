@@ -1,4 +1,5 @@
 app.config-server: localhost
+server.port: 7101
 
 jhipster:
   registry:

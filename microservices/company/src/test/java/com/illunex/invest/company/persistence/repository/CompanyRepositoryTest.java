@@ -33,7 +33,7 @@ public class CompanyRepositoryTest {
 
     @Test
     public void findByUserIdx() {
-        CompanyEntity companyEntity = repository.findByUserIdx(1l);
+        CompanyEntity companyEntity = repository.findByUserIdx(1l).get();
 
         Assert.assertEquals(companyEntity.getName(), "Test");
     }
