@@ -34,4 +34,5 @@ build/
 api/api/.mvn/
 util/common/.mvn/
 microservices/company/.mvn
+cloud/config-server
 microservices/company-composite/.mvn
