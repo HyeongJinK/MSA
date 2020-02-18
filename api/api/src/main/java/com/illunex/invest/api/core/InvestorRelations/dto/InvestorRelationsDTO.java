@@ -2,7 +2,7 @@ package com.illunex.invest.api.core.InvestorRelations.dto;
 
 import java.util.Date;
 
-public class InvestorRelations {
+public class InvestorRelationsDTO {
     Long irIdx;
     String year;            // 년도
     Long companyIdx;        // 회사 기본키

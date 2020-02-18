@@ -8,9 +8,9 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface InvestorRelationsMapper {
-    InvestorRelations entityToDto(InvestorRelationsEntity investorRelationsEntity);
-    InvestorRelationsEntity dtoToEntity(InvestorRelations investorRelations);
+    InvestorRelationsDTO entityToDto(InvestorRelationsEntity investorRelationsEntity);
+    InvestorRelationsEntity dtoToEntity(InvestorRelationsDTO investorRelationsDTO);
 
-    List<InvestorRelations> entityListToDtoList(List<InvestorRelationsEntity> investorRelationsEntities);
-    List<InvestorRelationsEntity> dtoListToEntityList(List<InvestorRelations> investorRelations);
+    List<InvestorRelationsDTO> entityListToDtoList(List<InvestorRelationsEntity> investorRelationsEntities);
+    List<InvestorRelationsEntity> dtoListToEntityList(List<InvestorRelationsDTO> investorRelations);
 }
