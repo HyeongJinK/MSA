@@ -5,7 +5,9 @@ import com.illunex.invest.company.persistence.repository.custom.CompanyCustomRep
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface CompanyRepository extends JpaRepository<CompanyEntity, Long>, CompanyCustomRepository  {
-    CompanyEntity findByUserIdx(Long userIdx);
+    Optional<CompanyEntity> findByUserIdx(Long userIdx);
 }
