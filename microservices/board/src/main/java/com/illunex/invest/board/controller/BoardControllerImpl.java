@@ -23,9 +23,6 @@ public class BoardControllerImpl implements BoardController {
     @GetMapping("/notices")
     @Override
     public ResponseEntity<Page<BoardDto>> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable) {
-        System.out.println("------serach word------");
-        System.out.println(subject);
-
         Page<BoardDto> postList = boardService.getPostList(boardIdx, subject, pageable);
 
         if (postList.getNumberOfElements() == 0){
