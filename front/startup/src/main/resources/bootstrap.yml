@@ -5,7 +5,7 @@ jhipster:
     password: admin
 
 spring:
-  application.name: gateway
+  application.name: startup
   cloud.config:
     failFast: true
     retry:
