@@ -1,7 +1,7 @@
 package com.illunex.invest.InvestorRelations.service.mapper;
-
+;
 import com.illunex.invest.InvestorRelations.persistence.entity.InvestorRelationsEntity;
-import com.illunex.invest.api.core.InvestorRelations.dto.InvestorRelations;
+import com.illunex.invest.api.core.InvestorRelations.dto.InvestorRelationsDTO;
 import org.mapstruct.Mapper;
 
 import java.util.List;

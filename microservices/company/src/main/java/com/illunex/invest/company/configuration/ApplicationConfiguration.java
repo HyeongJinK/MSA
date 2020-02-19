@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Component
 @ConfigurationProperties("application")
-
 public class ApplicationConfiguration {
     private String test;
 

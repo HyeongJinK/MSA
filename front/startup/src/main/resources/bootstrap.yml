@@ -5,7 +5,7 @@ jhipster:
     password: admin
 
 spring:
-  application.name: company
+  application.name: startup
   cloud.config:
     failFast: true
     retry:
@@ -14,6 +14,8 @@ spring:
       maxInterval: 10000
       maxAttempts: 20
     uri: http://admin:${jhipster.registry.password}@${app.config-server}:8761/config
+
 ---
 spring.profiles: test
 app.config-server: jhipster-registry
+
