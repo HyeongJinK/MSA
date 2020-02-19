@@ -22,7 +22,7 @@ public interface CompanyController {
             @ApiImplicitParam(name = "userIdx"
                     , value = "유저번호"
                     , required = true
-                    , dataType = "String"
+                    , dataType = "CompanyDTO"
                     , paramType = "path"
                     , defaultValue = ""
             )

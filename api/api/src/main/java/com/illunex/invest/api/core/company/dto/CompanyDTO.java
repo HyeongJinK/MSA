@@ -47,8 +47,8 @@ public class CompanyDTO {
     String description;
     @ApiModelProperty(value="홈페이지", name="homePage", required=false)
     String homePage;
-
+    @ApiModelProperty(value="상품 리스트", name="companyProducts", required=false)
     List<CompanyProductDTO> companyProducts;
-
+    @ApiModelProperty(value="팀원 리스트", name="companyMembers", required=false)
     List<CompanyMemberDTO> companyMembers;
 }
