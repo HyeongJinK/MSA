@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +27,5 @@ public class Board {
         this.regDate = regDate;
         this.deleted = deleted;
     }
+
 }
