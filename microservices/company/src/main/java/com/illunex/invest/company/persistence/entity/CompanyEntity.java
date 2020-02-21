@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "company")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
