@@ -28,9 +28,7 @@ public class BoardEntityMapperTest {
     public void dtoToEntityTest() {
         assertNotNull(mapper);
 
-        BoardDto boardDto = new BoardDto();
-        boardDto.setPostIdx(1L);
-        boardDto.setBoardIdx(1L);
+        BoardDto boardDto = BoardDto.builder().boardIdx(1L).postIdx(1L).build();
 
         Board board = mapper.dtoToEntity(boardDto);
 

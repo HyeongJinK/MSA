@@ -39,11 +39,7 @@ public class BoardControllerImpl implements BoardController {
     @GetMapping("/notice")
     @Override
     public ResponseEntity<BoardDto> getPost(@RequestParam Long boardIdx, @RequestParam Long postIdx) {
-        BoardDto boardDto = new BoardDto();
-        boardDto.setBoardIdx(boardIdx);
-        boardDto.setPostIdx(postIdx);
-
-        BoardDto post = boardService.getPost(boardDto);
+        BoardDto post = boardService.getPost(BoardDto.builder().boardIdx(boardIdx).postIdx(postIdx).build());
 
         if (post == null) {
             return new ResponseEntity("Post does not exist", HttpStatus.INTERNAL_SERVER_ERROR);

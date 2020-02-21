@@ -85,9 +85,7 @@ public class BoardServiceTest {
 
     @Test
     public void getPostTest() {
-        BoardDto post = new BoardDto();
-        post.setBoardIdx(1L);
-        post.setPostIdx(1L);
+        BoardDto post = BoardDto.builder().boardIdx(1L).postIdx(1L).build();
         BoardDto boardDto = boardService.getPost(post);
         Assert.assertEquals(boardDto.getSubject(), "test");
         Assert.assertEquals(boardDto.getContent(), "test");
@@ -95,28 +93,21 @@ public class BoardServiceTest {
 
     @Test
     public void getPostNullTest() {
-        BoardDto post = new BoardDto();
-        post.setBoardIdx(1L);
-        post.setPostIdx(11L);
+        BoardDto post = BoardDto.builder().boardIdx(1L).postIdx(11L).build();
         BoardDto boardDto = boardService.getPost(post);
         Assert.assertNull(boardDto.getContent());
     }
 
     @Test
     public void addPostTest() {
-        BoardDto post = new BoardDto();
-        post.setBoardIdx(1L);
-        post.setContent("test");
+        BoardDto post = BoardDto.builder().boardIdx(1L).content("test").build();
         BoardDto boardDto = boardService.editPost(post);
         Assert.assertEquals(boardDto.getContent(), "test");
     }
 
     @Test
     public void updatePostTest() {
-        BoardDto post = new BoardDto();
-        post.setBoardIdx(1L);
-        post.setPostIdx(1L);
-        post.setContent("updated post");
+        BoardDto post = BoardDto.builder().boardIdx(1L).postIdx(1L).content("updated post").build();
         BoardDto boardDto = boardService.editPost(post);
         Assert.assertEquals(boardDto.getContent(), "updated post");
     }

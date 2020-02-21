@@ -34,14 +34,10 @@ public class BoardService {
     public BoardDto editPost(BoardDto boardDto) {
         if (boardDto.getPostIdx() != null) {
             if(boardRepository.findById(boardDto.getPostIdx()).isEmpty()){
-                BoardDto emptyPostDto = new BoardDto();
-                emptyPostDto.setContent("unavailable");
-                return emptyPostDto;
+                return BoardDto.builder().content("unavailable").build();
             } else {
                 if (boardRepository.findByBoardIdxAndPostIdx(boardDto.getBoardIdx(), boardDto.getPostIdx()).isDeleted()) {
-                    BoardDto emptyPostDto = new BoardDto();
-                    emptyPostDto.setContent("deleted");
-                    return emptyPostDto;
+                    return BoardDto.builder().content("deleted").build();
                 } else {
                     Board post = BoardMapper.MAPPER.dtoToEntity(boardDto);
                     post.setRegDate(Timestamp.valueOf(LocalDateTime.now()));

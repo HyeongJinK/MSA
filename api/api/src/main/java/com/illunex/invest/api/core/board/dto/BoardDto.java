@@ -1,10 +1,11 @@
 package com.illunex.invest.api.core.board.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.sql.Timestamp;
 
-
+@Builder
 @Data
 public class BoardDto {
     private Long postIdx;
