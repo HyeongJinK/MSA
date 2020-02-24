@@ -7,51 +7,33 @@ import com.illunex.invest.InvestorRelations.persistence.repository.InvestorRelat
 import com.illunex.invest.InvestorRelations.service.mapper.CompanyInfoMapper;
 import com.illunex.invest.api.core.InvestorRelations.dto.CompanyInfoDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.IRBasicInfoDTO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class InvestorRelationsService {
-    Logger logger = LoggerFactory.getLogger(InvestorRelationsService.class);
+    private Log log = LogFactory.getLog(InvestorRelationsService.class);
+    private CompanyInfoMapper companyInfoMapper = Mappers.getMapper(CompanyInfoMapper.class);
+
     @Autowired InvestorRelationsRepository investorRelationsRepository;
     @Autowired CompanyInfoRepository companyInfoRepository;
 
     public CompanyInfoDTO editIRBasicInfo(IRBasicInfoDTO irBasicInfoDTO){
-        System.out.println("----investorRelations dto"+irBasicInfoDTO.getInvestorRelationsDTO());
-        System.out.println("----companyInfo dto"+irBasicInfoDTO.getCompanyInfoDTO().getAddress());
-        System.out.println("----companyInfo dto subsidy"+irBasicInfoDTO.getCompanyInfoDTO().getSubsidy());
-        System.out.println("----companyInfo dto investmentAttraction"+irBasicInfoDTO.getCompanyInfoDTO().getInvestmentAttraction());
 
-        System.out.println("---ir save---");
-        InvestorRelationsEntity investorRelationsEntity = CompanyInfoMapper.MAPPER.dtoToEntity(irBasicInfoDTO.getInvestorRelationsDTO());
+        InvestorRelationsEntity investorRelationsEntity = companyInfoMapper.dtoToEntity(irBasicInfoDTO.getInvestorRelationsDTO());
         investorRelationsEntity.setCompanyIdx(2L);
         investorRelationsEntity.setYear("2020");
+
         Long irIdx = investorRelationsRepository.save(investorRelationsEntity).getIrIdx();
-        System.out.println("---new ir idx---"+irIdx);
 
-        System.out.println("---company_info save---");
-        CompanyInfoEntity companyInfoEntity = CompanyInfoMapper.MAPPER.dtoToEntity(irBasicInfoDTO.getCompanyInfoDTO());
-        System.out.println("---ia---"+companyInfoEntity.getInvestmentAttraction());
-        System.out.println(companyInfoEntity.getInvestmentAttraction().get(0));
-        System.out.println(companyInfoEntity.getInvestmentAttraction().get(1));
-        System.out.println("---subsidy---"+companyInfoEntity.getSubsidy());
-        System.out.println(companyInfoEntity.getSubsidy().get(0));
-        System.out.println(companyInfoEntity.getSubsidy().get(1));
-
-        logger.debug(companyInfoEntity.getSubsidy().get(1).toString());
-
+        CompanyInfoEntity companyInfoEntity = companyInfoMapper.dtoToEntity(irBasicInfoDTO.getCompanyInfoDTO());
         companyInfoEntity.setIrIdx(irIdx);
+        CompanyInfoEntity result = companyInfoRepository.save(companyInfoEntity);
 
-        companyInfoRepository.save(companyInfoEntity);
-
-        System.out.println("---new company_info idx---"+companyInfoEntity.getCiIdx());
-
-
-
-        return irBasicInfoDTO.getCompanyInfoDTO();
+        return companyInfoMapper.entityToDto(result);
     }
-
 }

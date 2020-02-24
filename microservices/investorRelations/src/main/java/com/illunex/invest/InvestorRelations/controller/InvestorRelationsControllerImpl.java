@@ -27,7 +27,6 @@ public class InvestorRelationsControllerImpl implements InvestorRelationsControl
     @Override
     public ResponseEntity<CompanyInfoDTO> addIRBasicInfo(IRBasicInfoDTO irBasicInfoDTO) {
         CompanyInfoDTO basicInfo = investorRelationsService.editIRBasicInfo(irBasicInfoDTO);
-
         return new ResponseEntity<>(basicInfo, HttpStatus.OK);
     }
 }
