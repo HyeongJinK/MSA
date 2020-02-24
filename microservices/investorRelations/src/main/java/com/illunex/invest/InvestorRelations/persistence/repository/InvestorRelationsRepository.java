@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InvestorRelationsRepository extends JpaRepository<InvestorRelationsEntity, Long> {
-    InvestorRelationsEntity findByAndCompanyIdxAndYear(Long companyIdx, String year);
+    InvestorRelationsEntity findByCompanyIdxAndYear(Long companyIdx, String year);
 }

@@ -1,15 +1,13 @@
 package com.illunex.invest.api.core.InvestorRelations.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class IRBasicInfoDTO { // IR 기본작성 페이지
+public class BasicInfoDTO { // IR 기본작성 페이지
     InvestorRelationsDTO investorRelationsDTO;
     CompanyInfoDTO companyInfoDTO;
 }

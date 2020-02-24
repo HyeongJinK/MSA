@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CompanyInfoRepository extends JpaRepository<CompanyInfoEntity, Long> {
+    CompanyInfoEntity findByIrIdx(Long irIdx);
 }
