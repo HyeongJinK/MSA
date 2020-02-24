@@ -1,7 +1,7 @@
 package com.illunex.invest.board.controller;
 
 import com.illunex.invest.api.core.board.controller.BoardController;
-import com.illunex.invest.api.core.board.dto.BoardDto;
+import com.illunex.invest.api.core.board.dto.BoardDTO;
 import com.illunex.invest.board.service.BoardService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,12 +21,11 @@ public class BoardControllerImpl implements BoardController {
         this.boardService = boardService;
     }
 
-
     @CrossOrigin("*")
     @GetMapping("/notices")
     @Override
-    public ResponseEntity<Page<BoardDto>> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable) {
-        Page<BoardDto> postList = boardService.getPostList(boardIdx, subject, pageable);
+    public ResponseEntity<Page<BoardDTO>> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable) {
+        Page<BoardDTO> postList = boardService.getPostList(boardIdx, subject, pageable);
 
         if (postList.getNumberOfElements() == 0){
             return new ResponseEntity("Post does not exist", HttpStatus.OK);
@@ -38,8 +37,8 @@ public class BoardControllerImpl implements BoardController {
     @CrossOrigin("*")
     @GetMapping("/notice")
     @Override
-    public ResponseEntity<BoardDto> getPost(@RequestParam Long boardIdx, @RequestParam Long postIdx) {
-        BoardDto post = boardService.getPost(BoardDto.builder().boardIdx(boardIdx).postIdx(postIdx).build());
+    public ResponseEntity<BoardDTO> getPost(@RequestParam Long boardIdx, @RequestParam Long postIdx) {
+        BoardDTO post = boardService.getPost(BoardDTO.builder().boardIdx(boardIdx).postIdx(postIdx).build());
 
         if (post == null) {
             return new ResponseEntity("Post does not exist", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -51,8 +50,8 @@ public class BoardControllerImpl implements BoardController {
     @CrossOrigin("*")
     @PostMapping("/notice")
     @Override
-    public ResponseEntity<BoardDto> addPost(@RequestBody BoardDto boardDto) {
-        BoardDto post = boardService.editPost(boardDto);
+    public ResponseEntity<BoardDTO> addPost(@RequestBody BoardDTO boardDto) {
+        BoardDTO post = boardService.editPost(boardDto);
 
         if (post.getContent().equals("unavailable")) {
             return new ResponseEntity("Cannot add Post. Invalid PostIndex.", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -64,8 +63,8 @@ public class BoardControllerImpl implements BoardController {
     @CrossOrigin("*")
     @PutMapping("/notice")
     @Override
-    public ResponseEntity<BoardDto> updatePost(@RequestBody BoardDto boardDto) {
-        BoardDto post = boardService.editPost(boardDto);
+    public ResponseEntity<BoardDTO> updatePost(@RequestBody BoardDTO boardDto) {
+        BoardDTO post = boardService.editPost(boardDto);
 
         if (post.getContent().equals("unavailable")) {
             return new ResponseEntity("Cannot update Post. Invalid PostIndex.", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -80,7 +79,7 @@ public class BoardControllerImpl implements BoardController {
     @DeleteMapping("/notice")
     @Override
     public ResponseEntity<String> deletePost(@RequestParam Long boardIdx, @RequestParam Long postIdx) {
-        BoardDto post = boardService.deletePost(boardIdx, postIdx);
+        BoardDTO post = boardService.deletePost(boardIdx, postIdx);
 
         if (post == null) {
             return new ResponseEntity("Cannot delete Post", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,6 +1,6 @@
 package com.illunex.invest.board.service;
 
-import com.illunex.invest.api.core.board.dto.BoardDto;
+import com.illunex.invest.api.core.board.dto.BoardDTO;
 import com.illunex.invest.board.persistence.entity.Board;
 import com.illunex.invest.board.persistence.repository.BoardRepository;
 import com.illunex.invest.board.service.mapper.BoardMapper;
@@ -19,30 +19,30 @@ public class BoardService {
     @Autowired
     BoardRepository boardRepository;
 
-    public Page<BoardDto> getPostList(Long boardIdx, String subject, Pageable pageable) {
+    public Page<BoardDTO> getPostList(Long boardIdx, String subject, Pageable pageable) {
         Page<Board> postList = boardRepository.findAllByBoardIdxAndDeletedAndSubjectContainingOrderByPostIdxDesc(boardIdx, false, subject, pageable);
-        Page<BoardDto> postListDto = new PageImpl<>(BoardMapper.MAPPER.entityListToDtoList(postList.getContent()), postList.getPageable(), postList.getTotalElements());
+        Page<BoardDTO> postListDto = new PageImpl<>(BoardMapper.MAPPER.entityListToDtoList(postList.getContent()), postList.getPageable(), postList.getTotalElements());
         return postListDto;
     }
 
-    public BoardDto getPost(BoardDto boardDto) {
+    public BoardDTO getPost(BoardDTO boardDto) {
         Board post = boardRepository.findByBoardIdxAndPostIdxAndDeleted(boardDto.getBoardIdx(), boardDto.getPostIdx(),false);
-        BoardDto postDto = BoardMapper.MAPPER.entityToDto(post);
+        BoardDTO postDto = BoardMapper.MAPPER.entityToDto(post);
         return postDto;
     }
 
-    public BoardDto editPost(BoardDto boardDto) {
+    public BoardDTO editPost(BoardDTO boardDto) {
         if (boardDto.getPostIdx() != null) {
             if(boardRepository.findById(boardDto.getPostIdx()).isEmpty()){
-                return BoardDto.builder().content("unavailable").build();
+                return BoardDTO.builder().content("unavailable").build();
             } else {
                 if (boardRepository.findByBoardIdxAndPostIdx(boardDto.getBoardIdx(), boardDto.getPostIdx()).isDeleted()) {
-                    return BoardDto.builder().content("deleted").build();
+                    return BoardDTO.builder().content("deleted").build();
                 } else {
                     Board post = BoardMapper.MAPPER.dtoToEntity(boardDto);
                     post.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
                     boardRepository.save(post);
-                    BoardDto postDto = BoardMapper.MAPPER.entityToDto(post);
+                    BoardDTO postDto = BoardMapper.MAPPER.entityToDto(post);
                     return postDto;
                 }
             }
@@ -50,16 +50,16 @@ public class BoardService {
             Board post = BoardMapper.MAPPER.dtoToEntity(boardDto);
             post.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
             boardRepository.save(post);
-            BoardDto postDto = BoardMapper.MAPPER.entityToDto(post);
+            BoardDTO postDto = BoardMapper.MAPPER.entityToDto(post);
             return postDto;
         }
     }
 
-    public BoardDto deletePost(Long boardIdx, Long postIdx) {
+    public BoardDTO deletePost(Long boardIdx, Long postIdx) {
         Board post = boardRepository.findByBoardIdxAndPostIdx(boardIdx, postIdx);
         post.setDeleted(true);
         boardRepository.save(post);
-        BoardDto postDto = BoardMapper.MAPPER.entityToDto(post);
+        BoardDTO postDto = BoardMapper.MAPPER.entityToDto(post);
         return postDto;
     }
 

@@ -1,7 +1,7 @@
 package com.illunex.invest.board.service.mapper;
 
 
-import com.illunex.invest.api.core.board.dto.BoardDto;
+import com.illunex.invest.api.core.board.dto.BoardDTO;
 import com.illunex.invest.board.persistence.entity.Board;
 import org.junit.Test;
 import org.mapstruct.factory.Mappers;
@@ -18,7 +18,7 @@ public class BoardEntityMapperTest {
 
         Board board = Board.builder().boardIdx(1L).postIdx(1L).build();
 
-        BoardDto boardDto = mapper.entityToDto(board);
+        BoardDTO boardDto = mapper.entityToDto(board);
 
         assertEquals(board.getBoardIdx(), boardDto.getBoardIdx());
         assertEquals(board.getPostIdx(), boardDto.getPostIdx());
@@ -28,7 +28,7 @@ public class BoardEntityMapperTest {
     public void dtoToEntityTest() {
         assertNotNull(mapper);
 
-        BoardDto boardDto = BoardDto.builder().boardIdx(1L).postIdx(1L).build();
+        BoardDTO boardDto = BoardDTO.builder().boardIdx(1L).postIdx(1L).build();
 
         Board board = mapper.dtoToEntity(boardDto);
 

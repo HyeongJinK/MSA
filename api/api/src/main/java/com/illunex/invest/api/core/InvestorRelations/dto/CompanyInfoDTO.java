@@ -1,21 +1,18 @@
-package com.illunex.invest.InvestorRelations.persistence.entity;
+package com.illunex.invest.api.core.InvestorRelations.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity
 @Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@Table(name = "company_info")
-public class CompanyInfoEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CompanyInfoDTO {
     Long ciIdx;
     Long irIdx;
     String name;                // 기업명
@@ -37,11 +34,6 @@ public class CompanyInfoEntity {
     String useInvestment;       // 투자금 사용용도
     String exitPlan;            // EXIT 계획
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="company_info_ciIdx")
-    List<InvestmentAttractionEntity> investmentAttraction;  // 기존투자유치
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="company_info_ciIdx")
-    List<SubsidyEntity> subsidy;                                  // 지원금
+    List<InvestmentAttractionDTO> investmentAttraction; // 기존투자유치
+    List<SubsidyDTO> subsidy; // 지원금
 }

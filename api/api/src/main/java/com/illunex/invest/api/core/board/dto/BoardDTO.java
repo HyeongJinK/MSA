@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 @Builder
 @Data
-public class BoardDto {
+public class BoardDTO {
     private Long postIdx;
     private Long boardIdx;
     private String subject;

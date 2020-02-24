@@ -1,6 +1,6 @@
 package com.illunex.invest.board.service;
 
-import com.illunex.invest.api.core.board.dto.BoardDto;
+import com.illunex.invest.api.core.board.dto.BoardDTO;
 import com.illunex.invest.board.persistence.entity.Board;
 import com.illunex.invest.board.persistence.repository.BoardRepository;
 import org.junit.Assert;
@@ -64,7 +64,7 @@ public class BoardServiceTest {
     public void getPostListTest() {
         Pageable pageable = PageRequest.of(0, 10);
 
-        Page<BoardDto> boardDto = boardService.getPostList(1L, "test", pageable);
+        Page<BoardDTO> boardDto = boardService.getPostList(1L, "test", pageable);
 
         Assert.assertEquals(boardDto.getTotalElements(), 10);
         Assert.assertEquals(boardDto.getTotalPages(), 1);
@@ -76,7 +76,7 @@ public class BoardServiceTest {
     public void getPostListNullTest() {
         Pageable pageable = PageRequest.of(0, 10);
 
-        Page<BoardDto> boardDto = boardService.getPostList(1L, "null", pageable);
+        Page<BoardDTO> boardDto = boardService.getPostList(1L, "null", pageable);
 
         Assert.assertEquals(boardDto.getTotalElements(), 0);
         Assert.assertEquals(boardDto.getTotalPages(), 0);
@@ -85,30 +85,30 @@ public class BoardServiceTest {
 
     @Test
     public void getPostTest() {
-        BoardDto post = BoardDto.builder().boardIdx(1L).postIdx(1L).build();
-        BoardDto boardDto = boardService.getPost(post);
+        BoardDTO post = BoardDTO.builder().boardIdx(1L).postIdx(1L).build();
+        BoardDTO boardDto = boardService.getPost(post);
         Assert.assertEquals(boardDto.getSubject(), "test");
         Assert.assertEquals(boardDto.getContent(), "test");
     }
 
     @Test
     public void getPostNullTest() {
-        BoardDto post = BoardDto.builder().boardIdx(1L).postIdx(11L).build();
-        BoardDto boardDto = boardService.getPost(post);
+        BoardDTO post = BoardDTO.builder().boardIdx(1L).postIdx(11L).build();
+        BoardDTO boardDto = boardService.getPost(post);
         Assert.assertNull(boardDto.getContent());
     }
 
     @Test
     public void addPostTest() {
-        BoardDto post = BoardDto.builder().boardIdx(1L).content("test").build();
-        BoardDto boardDto = boardService.editPost(post);
+        BoardDTO post = BoardDTO.builder().boardIdx(1L).content("test").build();
+        BoardDTO boardDto = boardService.editPost(post);
         Assert.assertEquals(boardDto.getContent(), "test");
     }
 
     @Test
     public void updatePostTest() {
-        BoardDto post = BoardDto.builder().boardIdx(1L).postIdx(1L).content("updated post").build();
-        BoardDto boardDto = boardService.editPost(post);
+        BoardDTO post = BoardDTO.builder().boardIdx(1L).postIdx(1L).content("updated post").build();
+        BoardDTO boardDto = boardService.editPost(post);
         Assert.assertEquals(boardDto.getContent(), "updated post");
     }
 

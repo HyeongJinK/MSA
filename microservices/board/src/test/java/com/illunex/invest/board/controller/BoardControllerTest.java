@@ -1,7 +1,7 @@
 package com.illunex.invest.board.controller;
 
 import com.illunex.invest.api.core.board.controller.BoardController;
-import com.illunex.invest.api.core.board.dto.BoardDto;
+import com.illunex.invest.api.core.board.dto.BoardDTO;
 import com.illunex.invest.board.persistence.entity.Board;
 import com.illunex.invest.board.service.BoardService;
 import org.junit.Assert;
@@ -43,8 +43,8 @@ public class BoardControllerTest {
 
     @Before
     public void setup() {
-        BoardDto request = BoardDto.builder().boardIdx(1L).postIdx(1L).build();
-        BoardDto response = BoardDto.builder().boardIdx(1L).postIdx(1L).subject("test").content("test").build();
+        BoardDTO request = BoardDTO.builder().boardIdx(1L).postIdx(1L).build();
+        BoardDTO response = BoardDTO.builder().boardIdx(1L).postIdx(1L).subject("test").content("test").build();
 
         List<Board> boardList = new ArrayList<Board>();
         for(int i = 0; i < 10; i++) {
@@ -52,7 +52,7 @@ public class BoardControllerTest {
         }
 
         Pageable pageable = PageRequest.of(0, 10);
-        Page<BoardDto> boardDto = new PageImpl(boardList,pageable,10);
+        Page<BoardDTO> boardDto = new PageImpl(boardList,pageable,10);
 
         when(boardService.getPost(request))
                 .thenReturn(response);
@@ -68,7 +68,7 @@ public class BoardControllerTest {
     @Test
     public void getPostListTest() {
         Pageable pageable = PageRequest.of(0, 10);
-        ResponseEntity<Page<BoardDto>> result = boardController.getPostList(1L, "test", pageable);
+        ResponseEntity<Page<BoardDTO>> result = boardController.getPostList(1L, "test", pageable);
 
         Assert.assertEquals(result.getBody().getTotalElements(), 10);
         Assert.assertEquals(result.getBody().getTotalPages(), 1);
@@ -92,7 +92,7 @@ public class BoardControllerTest {
 
     @Test
     public void getPostTest() {
-        ResponseEntity<BoardDto> result = boardController.getPost(1L,1L);
+        ResponseEntity<BoardDTO> result = boardController.getPost(1L,1L);
 
         Assert.assertEquals(result.getBody().getPostIdx().longValue(), 1L);
         Assert.assertEquals(result.getBody().getBoardIdx().longValue(), 1L);

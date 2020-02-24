@@ -1,9 +1,13 @@
 package com.illunex.invest.InvestorRelations.persistence.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "investment_attractsion")
+@Getter @Setter
+@Table(name = "investment_attraction")
 public class InvestmentAttractionEntity {  // 기존 투자 유치
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
