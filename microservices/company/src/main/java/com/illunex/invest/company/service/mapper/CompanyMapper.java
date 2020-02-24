@@ -12,7 +12,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CompanyMapper {
-    CompanyDTO entryToDto(CompanyEntity companyEntity);
+    CompanyDTO entityToDto(CompanyEntity companyEntity);
     CompanyEntity dtoToEntity(CompanyDTO companyDTO);
 
     List<CompanyProductDTO> productEntityListToDtoList(List<CompanyProductEntity> companyProductEntities);

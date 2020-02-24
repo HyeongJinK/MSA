@@ -15,6 +15,15 @@ public class UserDetailServiceimpl implements UserDetailsService {
     @Autowired
     private UserRepository repository;
 
+    public void signUp(String username, String password, String name) {
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setName(name);
+        user.setRole("ROLE_USER");
+        repository.save(user);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity currentUser = repository.findByUsername(username);
@@ -23,4 +32,6 @@ public class UserDetailServiceimpl implements UserDetailsService {
                 , AuthorityUtils.createAuthorityList(currentUser.getRole()));
         return user;
     }
+
+
 }

@@ -21,7 +21,7 @@ public class CompanyEntityMapperTest {
                 .name("Test")
                 .entityBuild();
 
-        CompanyDTO dto = mapper.entryToDto(entity);
+        CompanyDTO dto = mapper.entityToDto(entity);
 
         assertEquals(entity.getCompanyIdx(), dto.getCompanyIdx());
         assertEquals(entity.getName(), dto.getName());

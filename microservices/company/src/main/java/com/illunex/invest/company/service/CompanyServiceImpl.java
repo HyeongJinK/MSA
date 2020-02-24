@@ -23,6 +23,6 @@ public class CompanyServiceImpl implements CompanyService {
         CompanyEntity companyEntity = companyRepository.findByUserIdx(userIdx).orElseGet(() -> {
             throw new NoneCompanyException(userIdx.toString());
         });
-        return mapper.entryToDto(companyEntity);
+        return mapper.entityToDto(companyEntity);
     }
 }
