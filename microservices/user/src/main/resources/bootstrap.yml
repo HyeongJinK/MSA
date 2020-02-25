@@ -1,5 +1,7 @@
 app.config-server: localhost
 
+jwt.secret: illunex
+
 jhipster:
   registry:
     password: admin

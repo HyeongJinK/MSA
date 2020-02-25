@@ -1,5 +1,6 @@
 package com.illunex.invest.api.core.user.controller;
 
+import com.illunex.invest.api.core.user.dto.JwtResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -9,10 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Api(value = "회원가입")
-@RequestMapping("/signUp")
-public interface SignUpController {
-    @ApiOperation(value = "회원가입")
+@Api(value = "로그인")
+@RequestMapping("/signIn")
+public interface SingInController {
+    @ApiOperation(value = "로그인")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username"
                     , value = "아이디"
@@ -30,6 +31,6 @@ public interface SignUpController {
             )
     })
     @PostMapping({"", "/"})
-    ResponseEntity<String> signUp(@RequestParam String username
-            , @RequestParam String password);
+    ResponseEntity<JwtResponse> signIn(@RequestParam String username
+            , @RequestParam String password) throws Exception;
 }

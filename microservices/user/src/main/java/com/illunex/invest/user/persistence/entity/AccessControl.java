@@ -11,10 +11,11 @@ import javax.persistence.*;
 @Table(name = "access_control")
 @NoArgsConstructor
 @Getter @Setter
-public class AccessControlEntity {
+public class AccessControl {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
     @Enumerated(value = EnumType.STRING)
     AccessType accessType;
-    int accessLevel;            // 1 Read, 2 Write 4 Modify 8 Delete 16 Admin
+
+    int accessLevel;
 }
