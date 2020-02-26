@@ -1,7 +1,6 @@
 package com.illunex.invest.board.persistence.repository.Impl;
 
 import com.illunex.invest.board.persistence.entity.Board;
-import com.illunex.invest.board.persistence.entity.QBoard;
 import com.illunex.invest.board.persistence.repository.custom.BoardCustomRepository;
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;

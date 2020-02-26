@@ -11,8 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BasicInfoDTO {
-    Long ciIdx;
-    Long irIdx;
+    Long idx;
     String name;                // 기업명
     String address;             // 주소
     Date establishmentDate;     // 설립일
@@ -32,6 +31,6 @@ public class BasicInfoDTO {
     String useInvestment;       // 투자금 사용용도
     String exitPlan;            // EXIT 계획
 
-    List<AttractionDTO> investmentAttraction; // 기존투자유치
+    List<AttractionDTO> attraction; // 기존투자유치
     List<SubsidyDTO> subsidy; // 지원금
 }

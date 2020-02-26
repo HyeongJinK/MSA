@@ -1,12 +1,14 @@
 package com.illunex.invest.InvestorRelations.persistence.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "attraction")
 public class AttractionEntity {  // 기존 투자 유치
     @Id

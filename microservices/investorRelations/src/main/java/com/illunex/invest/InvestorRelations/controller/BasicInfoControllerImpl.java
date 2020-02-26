@@ -1,6 +1,6 @@
 package com.illunex.invest.InvestorRelations.controller;
 
-import com.illunex.invest.InvestorRelations.service.BasicInfoInfoServiceImpl;
+import com.illunex.invest.InvestorRelations.service.BasicInfoServiceImpl;
 import com.illunex.invest.api.core.InvestorRelations.controller.BasicInfoController;
 import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
 import org.apache.commons.logging.Log;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 public class BasicInfoControllerImpl implements BasicInfoController {
     private Log log = LogFactory.getLog(BasicInfoControllerImpl.class);
 
-    final BasicInfoInfoServiceImpl basicInfoServiceImpl;
+    final BasicInfoServiceImpl basicInfoServiceImpl;
 
-    public BasicInfoControllerImpl(BasicInfoInfoServiceImpl basicInfoServiceImpl) {
+    public BasicInfoControllerImpl(BasicInfoServiceImpl basicInfoServiceImpl) {
         this.basicInfoServiceImpl = basicInfoServiceImpl;
     }
 

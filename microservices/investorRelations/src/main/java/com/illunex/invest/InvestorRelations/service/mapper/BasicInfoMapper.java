@@ -2,7 +2,6 @@ package com.illunex.invest.InvestorRelations.service.mapper;
 
 import com.illunex.invest.InvestorRelations.persistence.entity.AttractionEntity;
 import com.illunex.invest.InvestorRelations.persistence.entity.BasicInfoEntity;
-import com.illunex.invest.InvestorRelations.persistence.entity.IREntity;
 import com.illunex.invest.InvestorRelations.persistence.entity.SubsidyEntity;
 import com.illunex.invest.api.core.InvestorRelations.dto.AttractionDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
@@ -19,11 +18,8 @@ public interface BasicInfoMapper {
     BasicInfoDTO entityToDto(BasicInfoEntity basicInfoEntity);
     BasicInfoEntity dtoToEntity(BasicInfoDTO basicInfoDTO);
 
-    //IRDTO entityToDto(IREntity irEntity);
-
-
-    List<AttractionEntity> InvestmentAttractionDtoListToEntity(List<AttractionDTO> attractionDtoLists);
-    List<AttractionDTO> InvestmentAttractionEntityListToDto(List<IREntity> investorRelationsEntities);
+    List<AttractionEntity> attractionDtoListToEntity(List<AttractionDTO> attractionDtoLists);
+    List<AttractionDTO> attractionEntityListToDto(List<AttractionEntity> attractionEntities);
 
     List<SubsidyEntity> SubsidyDtoListToEntity(List<SubsidyDTO> subsidyDTOS);
     List<SubsidyDTO> SubsidyEntityListToDto(List<SubsidyEntity> subsidyEntities);

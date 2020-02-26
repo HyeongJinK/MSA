@@ -25,9 +25,9 @@ public class IREntity {
     Date updateDate;        // 마지막 수정일
     Integer readCount;      // 조회수
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="ir_idx")
-    BasicInfoEntity basicInfo;                        // 기본정보
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="irIdx")
+    BasicInfoEntity basicInfoEntity;                        // 기본정보
 
 //    @OneToMany
 //    @JoinColumn(name="history_idx")

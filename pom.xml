@@ -5,7 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>cloud/gateway</module>
-        <module>front/startup</module>
+        <module>cloud/authorization</module>
+<!--        <module>front/startup</module>-->
         <module>microservices/investorRelations</module>
         <module>microservices/company</module>
         <module>microservices/board</module>
