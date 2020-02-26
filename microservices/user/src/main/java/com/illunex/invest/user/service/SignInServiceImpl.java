@@ -7,7 +7,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class SignInServiceImpl {
-    private final UserRepository userRepository;
-    private final LoginLogRepository loginLogRepository;
+public class SignInServiceImpl implements  SignInService{
 }
