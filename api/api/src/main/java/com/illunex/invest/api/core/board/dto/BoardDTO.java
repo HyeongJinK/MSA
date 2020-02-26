@@ -1,12 +1,13 @@
 package com.illunex.invest.api.core.board.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.sql.Timestamp;
 
-
-@Data
-public class BoardDto {
+@Builder
+@Getter
+@Setter
+public class BoardDTO {
     private Long postIdx;
     private Long boardIdx;
     private String subject;

@@ -1,17 +1,13 @@
 package com.illunex.invest.api.core.board.controller;
 
-import com.illunex.invest.api.core.board.dto.BoardDto;
+import com.illunex.invest.api.core.board.dto.BoardDTO;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.data.domain.Pageable;
-import java.util.List;
 
 @Api(produces = "produces Value")
 public interface BoardController {
@@ -25,14 +21,14 @@ public interface BoardController {
 //            @ApiResponse(code = 400, message = "Bad Request")
 //    })
 
-    public ResponseEntity<BoardDto> getPost(@RequestParam Long boardIdx, @RequestParam Long postIdx);
+    ResponseEntity<BoardDTO> getPost(@RequestParam Long boardIdx, @RequestParam Long postIdx);
 
-    public ResponseEntity<Page<BoardDto>> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable);
+    ResponseEntity<Page<BoardDTO>> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable);
 
-    public ResponseEntity<BoardDto> addPost(@RequestBody BoardDto boardDto);
+    ResponseEntity<BoardDTO> addPost(@RequestBody BoardDTO boardDto);
 
-    public ResponseEntity<BoardDto> updatePost(@RequestBody BoardDto boardDto);
+    ResponseEntity<BoardDTO> updatePost(@RequestBody BoardDTO boardDto);
 
-    public ResponseEntity<String> deletePost(@RequestParam Long boardIdx, @RequestParam Long postIdx);
+    ResponseEntity<String> deletePost(@RequestParam Long boardIdx, @RequestParam Long postIdx);
 
 }
