@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Getter @Setter
 @Table(name = "investment_attraction")
-public class InvestmentAttractionEntity {  // 기존 투자 유치
+public class AttractionEntity {  // 기존 투자 유치
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;

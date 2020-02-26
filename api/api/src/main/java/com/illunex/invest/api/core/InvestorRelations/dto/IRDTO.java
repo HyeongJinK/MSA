@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class InvestorRelationsDTO {
+public class IRDTO {
     Long irIdx;
     String year;            // 년도
     Long companyIdx;        // 회사 기본키

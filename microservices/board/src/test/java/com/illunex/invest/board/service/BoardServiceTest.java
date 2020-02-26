@@ -48,7 +48,7 @@ public class BoardServiceTest {
 
         when(boardRepository.findByBoardIdxAndPostIdxAndDeleted(1L,1L, false))
                 .thenReturn(boardList.get(0));
-        when(boardRepository.findByBoardIdxAndPostIdxAndDeleted(1L,11L, false))
+        when(boardRepository.findByBoardIdxAndPostIdxAndDeleted(2L,1L, false))
                 .thenReturn(new Board());
         when(boardRepository.findAllByBoardIdxAndDeletedAndSubjectContainingOrderByPostIdxDesc(1L, false, "test", pageable))
                 .thenReturn(board);
@@ -85,16 +85,14 @@ public class BoardServiceTest {
 
     @Test
     public void getPostTest() {
-        BoardDTO post = BoardDTO.builder().boardIdx(1L).postIdx(1L).build();
-        BoardDTO boardDto = boardService.getPost(post);
+        BoardDTO boardDto = boardService.getPost(1L, 1L);
         Assert.assertEquals(boardDto.getSubject(), "test");
         Assert.assertEquals(boardDto.getContent(), "test");
     }
 
     @Test
     public void getPostNullTest() {
-        BoardDTO post = BoardDTO.builder().boardIdx(1L).postIdx(11L).build();
-        BoardDTO boardDto = boardService.getPost(post);
+        BoardDTO boardDto = boardService.getPost(2L,1L);
         Assert.assertNull(boardDto.getContent());
     }
 

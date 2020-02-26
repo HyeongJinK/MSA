@@ -21,14 +21,12 @@ public class BoardService {
 
     public Page<BoardDTO> getPostList(Long boardIdx, String subject, Pageable pageable) {
         Page<Board> postList = boardRepository.findAllByBoardIdxAndDeletedAndSubjectContainingOrderByPostIdxDesc(boardIdx, false, subject, pageable);
-        Page<BoardDTO> postListDto = new PageImpl<>(BoardMapper.MAPPER.entityListToDtoList(postList.getContent()), postList.getPageable(), postList.getTotalElements());
-        return postListDto;
+        return new PageImpl<>(BoardMapper.MAPPER.entityListToDtoList(postList.getContent()), postList.getPageable(), postList.getTotalElements());
     }
 
-    public BoardDTO getPost(BoardDTO boardDto) {
-        Board post = boardRepository.findByBoardIdxAndPostIdxAndDeleted(boardDto.getBoardIdx(), boardDto.getPostIdx(),false);
-        BoardDTO postDto = BoardMapper.MAPPER.entityToDto(post);
-        return postDto;
+    public BoardDTO getPost(Long boardIdx, Long postIdx) {
+        Board post = boardRepository.findByBoardIdxAndPostIdxAndDeleted(boardIdx, postIdx,false);
+        return BoardMapper.MAPPER.entityToDto(post);
     }
 
     public BoardDTO editPost(BoardDTO boardDto) {
@@ -42,16 +40,14 @@ public class BoardService {
                     Board post = BoardMapper.MAPPER.dtoToEntity(boardDto);
                     post.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
                     boardRepository.save(post);
-                    BoardDTO postDto = BoardMapper.MAPPER.entityToDto(post);
-                    return postDto;
+                    return BoardMapper.MAPPER.entityToDto(post);
                 }
             }
         } else {
             Board post = BoardMapper.MAPPER.dtoToEntity(boardDto);
             post.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
             boardRepository.save(post);
-            BoardDTO postDto = BoardMapper.MAPPER.entityToDto(post);
-            return postDto;
+            return BoardMapper.MAPPER.entityToDto(post);
         }
     }
 
@@ -59,8 +55,7 @@ public class BoardService {
         Board post = boardRepository.findByBoardIdxAndPostIdx(boardIdx, postIdx);
         post.setDeleted(true);
         boardRepository.save(post);
-        BoardDTO postDto = BoardMapper.MAPPER.entityToDto(post);
-        return postDto;
+        return BoardMapper.MAPPER.entityToDto(post);
     }
 
 }

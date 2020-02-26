@@ -12,12 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "company_info")
-public class CompanyInfoEntity {
+@Table(name = "basic_info")
+public class BasicInfoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long ciIdx;
-    Long irIdx;
+    Long idx;
     String name;                // 기업명
     String address;             // 주소
     Date establishmentDate;     // 설립일
@@ -38,10 +37,10 @@ public class CompanyInfoEntity {
     String exitPlan;            // EXIT 계획
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="company_info_ciIdx")
-    List<InvestmentAttractionEntity> investmentAttraction;  // 기존투자유치
+    @JoinColumn(name="basic_info_idx")
+    List<AttractionEntity> investmentAttraction;  // 기존투자유치
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="company_info_ciIdx")
-    List<SubsidyEntity> subsidy;                                  // 지원금
+    @JoinColumn(name="basic_info_idx")
+    List<SubsidyEntity> subsidy;                  // 지원금
 }

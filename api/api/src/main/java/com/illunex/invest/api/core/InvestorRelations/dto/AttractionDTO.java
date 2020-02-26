@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class InvestmentAttractionDTO {
+public class AttractionDTO {
     Long idx;
     String name;
     String price;

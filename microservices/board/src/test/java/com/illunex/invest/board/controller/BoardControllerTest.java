@@ -43,20 +43,19 @@ public class BoardControllerTest {
 
     @Before
     public void setup() {
-        BoardDTO request = BoardDTO.builder().boardIdx(1L).postIdx(1L).build();
         BoardDTO response = BoardDTO.builder().boardIdx(1L).postIdx(1L).subject("test").content("test").build();
 
         List<Board> boardList = new ArrayList<Board>();
         for(int i = 0; i < 10; i++) {
-            boardList.add(Board.builder().boardIdx(1L).postIdx((long) i+1).subject("test").content("test").deleted(false).build());
+            boardList.add(Board.builder().boardIdx(1L).postIdx((long) i+1).subject("test2").content("test").deleted(false).build());
         }
 
         Pageable pageable = PageRequest.of(0, 10);
         Page<BoardDTO> boardDto = new PageImpl(boardList,pageable,10);
 
-        when(boardService.getPost(request))
+        when(boardService.getPost(1L, 1L))
                 .thenReturn(response);
-        when(boardService.getPostList(1L, "test", pageable))
+        when(boardService.getPostList(1L, "test2", pageable))
                 .thenReturn(boardDto);
 
         webTestClient = WebTestClient.bindToController(new BoardControllerImpl(boardService))
@@ -68,7 +67,7 @@ public class BoardControllerTest {
     @Test
     public void getPostListTest() {
         Pageable pageable = PageRequest.of(0, 10);
-        ResponseEntity<Page<BoardDTO>> result = boardController.getPostList(1L, "test", pageable);
+        ResponseEntity<Page<BoardDTO>> result = boardController.getPostList(1L, "test2", pageable);
 
         Assert.assertEquals(result.getBody().getTotalElements(), 10);
         Assert.assertEquals(result.getBody().getTotalPages(), 1);
