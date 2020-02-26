@@ -1,9 +1,7 @@
 package com.illunex.invest.InvestorRelations.service;
 
 import com.illunex.invest.InvestorRelations.persistence.entity.BasicInfoEntity;
-import com.illunex.invest.InvestorRelations.persistence.entity.IREntity;
 import com.illunex.invest.InvestorRelations.persistence.repository.BasicInfoRepository;
-import com.illunex.invest.InvestorRelations.persistence.repository.IRRepository;
 import com.illunex.invest.InvestorRelations.service.mapper.BasicInfoMapper;
 import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
 import lombok.RequiredArgsConstructor;
@@ -16,26 +14,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class BasicInfoInfoServiceImpl implements IRInfoService<BasicInfoDTO> {
-    private Log log = LogFactory.getLog(BasicInfoInfoServiceImpl.class);
+public class BasicInfoServiceImpl implements IRInfoService<BasicInfoDTO> {
+    private Log log = LogFactory.getLog(BasicInfoServiceImpl.class);
     private BasicInfoMapper basicInfoMapper = Mappers.getMapper(BasicInfoMapper.class);
 
     @Autowired
     BasicInfoRepository basicInfoRepository;
 
-    private final IRRepository irRepository;
-
-
     @Override
     public BasicInfoDTO get(Long irIdx) {
-//        BasicInfoEntity basicInfo = basicInfoRepository.findByIrEntityIrIdx(irIdx);
-        IREntity irEntity = irRepository.findById(irIdx).get();
+        BasicInfoEntity basicInfo = basicInfoRepository.findByIrEntityIdx(irIdx);
 
-        return basicInfoMapper.entityToDto(irEntity.getBasicInfoEntity());
+        return basicInfoMapper.entityToDto(basicInfo);
     }
 
     @Override
     public BasicInfoDTO edit(BasicInfoDTO basicInfoDTO) {
+
         BasicInfoEntity basicInfoEntity = basicInfoMapper.dtoToEntity(basicInfoDTO);
         BasicInfoEntity result = basicInfoRepository.save(basicInfoEntity);
 

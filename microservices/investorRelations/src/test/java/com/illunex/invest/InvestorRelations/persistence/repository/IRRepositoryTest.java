@@ -37,7 +37,7 @@ public class IRRepositoryTest {
         basicInfoEntity.setIrEntity(irEntity);
 
 
-        Long idx = irRepository.save(irEntity).getIrIdx();
+        Long idx = irRepository.save(irEntity).getIdx();
         IREntity findEntity = irRepository.findById(idx).get();
 
         Assert.assertEquals(findEntity.getBasicInfoEntity().getIdx().longValue(), 1L);

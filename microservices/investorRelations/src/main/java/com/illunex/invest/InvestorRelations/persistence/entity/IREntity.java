@@ -11,11 +11,11 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "investor_relations")
+@Table(name = "ir")
 public class IREntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long irIdx;
+    Long idx;
     String year;            // 년도
     Long companyIdx;        // 회사 기본키
     Boolean isPassword;     // 패스워드 사용유/무

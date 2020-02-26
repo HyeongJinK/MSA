@@ -36,12 +36,12 @@ public class BasicInfoEntity {
     String useInvestment;       // 투자금 사용용도
     String exitPlan;            // EXIT 계획
 
-    @OneToOne(mappedBy = "basicInfoEntity", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "basicInfoEntity", fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     IREntity irEntity;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="basic_info_idx")
-    List<AttractionEntity> investmentAttraction;  // 기존투자유치
+    List<AttractionEntity> attraction;            // 기존투자유치
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="basic_info_idx")

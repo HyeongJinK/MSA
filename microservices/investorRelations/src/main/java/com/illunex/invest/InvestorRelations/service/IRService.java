@@ -1,5 +1,6 @@
 package com.illunex.invest.InvestorRelations.service;
 
+import com.illunex.invest.InvestorRelations.persistence.entity.BasicInfoEntity;
 import com.illunex.invest.InvestorRelations.persistence.entity.IREntity;
 import com.illunex.invest.InvestorRelations.persistence.repository.IRRepository;
 import com.illunex.invest.InvestorRelations.service.mapper.IRMapper;
@@ -27,11 +28,22 @@ public class IRService {
         IREntity currentYearIR = irRepository.findByCompanyIdxAndYear(companyIdx, year);
 
         if (currentYearIR == null) {
-            irRepository.save(IREntity.builder()
+            BasicInfoEntity basicInfoEntity = BasicInfoEntity.builder()
+                    .build();
+            IREntity irEntity = IREntity.builder()
                     .companyIdx(companyIdx)
-                    .year(year)
-                    .build());
+                    .cardColor(setColor())
+                    .basicInfoEntity(basicInfoEntity)
+                    .build();
+            basicInfoEntity.setIrEntity(irEntity);
+
+            irRepository.save(irEntity);
+
         }
         return irMapper.entityListToDtoList(irRepository.findAllByCompanyIdx(companyIdx));
+    }
+
+    private String setColor() {
+        return "#000000";
     }
 }
