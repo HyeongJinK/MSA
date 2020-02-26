@@ -26,7 +26,7 @@ public class IREntity {
     Integer readCount;      // 조회수
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="irIdx")
+    @JoinColumn(name="basic_info_idx")
     BasicInfoEntity basicInfoEntity;                        // 기본정보
 
 //    @OneToMany

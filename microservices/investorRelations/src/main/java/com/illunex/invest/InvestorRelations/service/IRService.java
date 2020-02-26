@@ -38,7 +38,6 @@ public class IRService {
             basicInfoEntity.setIrEntity(irEntity);
 
             irRepository.save(irEntity);
-
         }
         return irMapper.entityListToDtoList(irRepository.findAllByCompanyIdx(companyIdx));
     }

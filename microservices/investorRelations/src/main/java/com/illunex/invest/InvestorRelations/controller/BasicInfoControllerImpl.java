@@ -24,7 +24,11 @@ public class BasicInfoControllerImpl implements BasicInfoController {
     public ResponseEntity<BasicInfoDTO> getBasicInfo(@RequestParam Long irIdx){
         BasicInfoDTO basicInfo = basicInfoServiceImpl.get(irIdx);
 
-        return new ResponseEntity<>(basicInfo, HttpStatus.OK);
+        if (basicInfo == null) {
+            return new ResponseEntity("basicInfo does not exist", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            return new ResponseEntity(basicInfo, HttpStatus.OK);
+        }
     }
 
     @CrossOrigin("*")
@@ -32,6 +36,12 @@ public class BasicInfoControllerImpl implements BasicInfoController {
     @Override
     public ResponseEntity<BasicInfoDTO> addBasicInfo(BasicInfoDTO basicInfoDTO) {
         BasicInfoDTO basicInfo = basicInfoServiceImpl.edit(basicInfoDTO);
-        return new ResponseEntity<>(basicInfo, HttpStatus.OK);
+
+        if (basicInfo.getName().equals("unavailable")) {
+            return new ResponseEntity("Cannot edit BasicInfo. Invalid IR Index.", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            return new ResponseEntity(basicInfo, HttpStatus.OK);
+        }
+
     }
 }

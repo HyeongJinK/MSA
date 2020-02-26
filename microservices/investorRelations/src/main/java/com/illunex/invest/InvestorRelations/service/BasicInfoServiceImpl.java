@@ -1,7 +1,10 @@
 package com.illunex.invest.InvestorRelations.service;
 
 import com.illunex.invest.InvestorRelations.persistence.entity.BasicInfoEntity;
+import com.illunex.invest.InvestorRelations.persistence.repository.AttractionRepository;
 import com.illunex.invest.InvestorRelations.persistence.repository.BasicInfoRepository;
+import com.illunex.invest.InvestorRelations.persistence.repository.IRRepository;
+import com.illunex.invest.InvestorRelations.persistence.repository.SubsidyRepository;
 import com.illunex.invest.InvestorRelations.service.mapper.BasicInfoMapper;
 import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +23,12 @@ public class BasicInfoServiceImpl implements IRInfoService<BasicInfoDTO> {
 
     @Autowired
     BasicInfoRepository basicInfoRepository;
+    @Autowired
+    IRRepository irRepository;
+    @Autowired
+    AttractionRepository attractionRepository;
+    @Autowired
+    SubsidyRepository subsidyRepository;
 
     @Override
     public BasicInfoDTO get(Long irIdx) {
@@ -30,10 +39,14 @@ public class BasicInfoServiceImpl implements IRInfoService<BasicInfoDTO> {
 
     @Override
     public BasicInfoDTO edit(BasicInfoDTO basicInfoDTO) {
-
         BasicInfoEntity basicInfoEntity = basicInfoMapper.dtoToEntity(basicInfoDTO);
-        BasicInfoEntity result = basicInfoRepository.save(basicInfoEntity);
 
-        return basicInfoMapper.entityToDto(result);
+        if (irRepository.findByBasicInfoEntityIdx(basicInfoDTO.getIdx()).isEmpty()) {
+            return BasicInfoDTO.builder().name("unavailable").build();
+        } else {
+//            attractionRepository.deleteAll(attractionRepository.findAllByBasicInfoEntityIdx(basicInfoDTO.getIdx()));
+            BasicInfoEntity result = basicInfoRepository.save(basicInfoEntity);
+            return basicInfoMapper.entityToDto(result);
+        }
     }
 }
