@@ -3,10 +3,12 @@ package com.illunex.invest.company.persistence.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "company")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +25,7 @@ public class CompanyEntity {
     String name;                // 이름
     String businessNumber;      // 사업자 등록번호
     String companyType;         // 산업분야    // todo enum 혹은 따로 DB 구성 여부
-    Date establishmentDate;     // 설립일
+    LocalDateTime establishmentDate;     // 설립일
     String employeeCount;       // 직원수
     String business;            // 기업구분  todo 스타트업, 중소기업, 중견기업, 대기업..... enum 사용 여부 확인
     String nation;              // 국가 todo 국가 타입 enum 고려

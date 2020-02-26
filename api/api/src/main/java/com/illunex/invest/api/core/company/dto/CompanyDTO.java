@@ -3,6 +3,7 @@ package com.illunex.invest.api.core.company.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class CompanyDTO {
     @ApiModelProperty(value="산업분야", name="companyType", required=false)
     String companyType;         // todo enum 혹은 따로 DB 구성 여부
     @ApiModelProperty(value="설립일", name="establishmentDate", required=false)
-    Date establishmentDate;
+    LocalDateTime establishmentDate;
     @ApiModelProperty(value="직원수", name="employeeCount", required=false)
     String employeeCount;
     @ApiModelProperty(value="기업구분", name="business", required=false)

@@ -4,6 +4,7 @@ import com.illunex.invest.api.core.company.controller.CompanyController;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import com.illunex.invest.company.exception.NoneCompanyException;
 import com.illunex.invest.company.service.CompanyService;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
@@ -16,14 +17,11 @@ import java.util.List;
 
 
 @RestController
+@RequiredArgsConstructor
 public class CompanyControllerImpl implements CompanyController {
     private Log log = LogFactory.getLog(CompanyControllerImpl.class);
 
-    final CompanyService companyService;
-
-    public CompanyControllerImpl(CompanyService companyService) {
-        this.companyService = companyService;
-    }
+    private final CompanyService companyService;
 
     @Override
     public ResponseEntity<List<CompanyDTO>> getAllList() {
