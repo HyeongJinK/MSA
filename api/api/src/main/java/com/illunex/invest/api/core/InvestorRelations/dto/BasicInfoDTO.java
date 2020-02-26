@@ -1,14 +1,16 @@
-package com.illunex.invest.InvestorRelations.persistence.entity;
+package com.illunex.invest.api.core.InvestorRelations.dto;
 
-import javax.persistence.*;
+import lombok.*;
+
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "company_info")
-public class CompanyInfoEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class BasicInfoDTO {
     Long ciIdx;
     Long irIdx;
     String name;                // 기업명
@@ -29,9 +31,7 @@ public class CompanyInfoEntity {
     String valuation;           // Valuation
     String useInvestment;       // 투자금 사용용도
     String exitPlan;            // EXIT 계획
-    @OneToMany
-    List<InvestmentAttractionEntity> investmentAttractionEntities;  // 기존투자유치
-    @OneToMany
-    List<SubsidyEntity> subsidies;
-    // 지원금
+
+    List<AttractionDTO> investmentAttraction; // 기존투자유치
+    List<SubsidyDTO> subsidy; // 지원금
 }
