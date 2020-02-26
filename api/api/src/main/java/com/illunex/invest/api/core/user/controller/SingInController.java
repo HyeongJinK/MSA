@@ -1,6 +1,6 @@
 package com.illunex.invest.api.core.user.controller;
 
-import com.illunex.invest.api.core.user.dto.JwtResponse;
+import com.illunex.invest.api.core.user.model.JwtResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

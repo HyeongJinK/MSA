@@ -1,4 +1,4 @@
-package com.illunex.invest.api.core.user.dto;
+package com.illunex.invest.api.core.user.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

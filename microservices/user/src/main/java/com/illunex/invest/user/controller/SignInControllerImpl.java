@@ -1,10 +1,10 @@
 package com.illunex.invest.user.controller;
 
 import com.illunex.invest.api.core.user.controller.SingInController;
-import com.illunex.invest.api.core.user.dto.JwtResponse;
+import com.illunex.invest.api.core.user.model.JwtResponse;
 import com.illunex.invest.user.service.JwtTokenUtil;
 import com.illunex.invest.user.service.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,13 +14,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class SignInControllerImpl implements SingInController {
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final UserDetailsServiceImpl userDetailsService;
 
 
     //TODO 에러 처리

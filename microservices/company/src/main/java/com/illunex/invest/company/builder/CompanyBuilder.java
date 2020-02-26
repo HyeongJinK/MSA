@@ -8,6 +8,7 @@ import com.illunex.invest.company.persistence.entity.CompanyMemberEntity;
 import com.illunex.invest.company.persistence.entity.CompanyProductEntity;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class CompanyBuilder {
     String name;
     String businessNumber;
     String companyType;
-    Date establishmentDate;
+    LocalDateTime establishmentDate;
     String employeeCount;
     String business;
     String nation;
@@ -57,7 +58,7 @@ public class CompanyBuilder {
     public CompanyBuilder companyType(String companyType) {
         this.companyType = companyType; return this;
     }
-    public CompanyBuilder establishmentDate(Date establishmentDate) {
+    public CompanyBuilder establishmentDate(LocalDateTime establishmentDate) {
         this.establishmentDate = establishmentDate; return this;
     }
     public CompanyBuilder employeeCount(String employeeCount) {
