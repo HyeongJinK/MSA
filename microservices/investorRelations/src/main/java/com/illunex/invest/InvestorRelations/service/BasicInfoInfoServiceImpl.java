@@ -31,7 +31,7 @@ public class BasicInfoInfoServiceImpl implements IRInfoService<BasicInfoDTO> {
 //        BasicInfoEntity basicInfo = basicInfoRepository.findByIrEntityIrIdx(irIdx);
         IREntity irEntity = irRepository.findById(irIdx).get();
 
-        return basicInfoMapper.entityToDto(irEntity.getBasicInfoEntity());
+        return basicInfoMapper.entityToDto(irEntity.getBasicInfo());
     }
 
     @Override

@@ -11,11 +11,11 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "investor_relations")
+@Table(name = "ir")
 public class IREntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long irIdx;
+    Long idx;
     String year;            // 년도
     Long companyIdx;        // 회사 기본키
     Boolean isPassword;     // 패스워드 사용유/무
@@ -26,8 +26,8 @@ public class IREntity {
     Integer readCount;      // 조회수
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="investor_relations_idx")
-    BasicInfoEntity basicInfoEntity;                        // 기본정보
+    @JoinColumn(name="ir_idx")
+    BasicInfoEntity basicInfo;                        // 기본정보
 
 //    @OneToMany
 //    @JoinColumn(name="history_idx")

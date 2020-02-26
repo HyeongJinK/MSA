@@ -38,7 +38,7 @@ public class BasicInfoEntity {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="basic_info_idx")
-    List<AttractionEntity> investmentAttraction;  // 기존투자유치
+    List<AttractionEntity> Attraction;  // 기존투자유치
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="basic_info_idx")

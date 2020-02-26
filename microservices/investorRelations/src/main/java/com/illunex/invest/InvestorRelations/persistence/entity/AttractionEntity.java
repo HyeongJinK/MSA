@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-@Table(name = "investment_attraction")
+@Table(name = "attraction")
 public class AttractionEntity {  // 기존 투자 유치
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
