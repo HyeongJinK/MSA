@@ -17,4 +17,8 @@ public class SubsidyEntity {
     Long idx;
     String name;                // title
     String value;               // 금액
+
+    @ManyToOne
+    @JoinColumn(name = "basic_info_idx")
+    BasicInfoEntity basicInfoEntity;
 }

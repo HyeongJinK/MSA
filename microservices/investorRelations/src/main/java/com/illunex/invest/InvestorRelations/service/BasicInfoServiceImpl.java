@@ -1,6 +1,8 @@
 package com.illunex.invest.InvestorRelations.service;
 
+import com.illunex.invest.InvestorRelations.persistence.entity.AttractionEntity;
 import com.illunex.invest.InvestorRelations.persistence.entity.BasicInfoEntity;
+import com.illunex.invest.InvestorRelations.persistence.entity.SubsidyEntity;
 import com.illunex.invest.InvestorRelations.persistence.repository.AttractionRepository;
 import com.illunex.invest.InvestorRelations.persistence.repository.BasicInfoRepository;
 import com.illunex.invest.InvestorRelations.persistence.repository.IRRepository;
@@ -13,6 +15,9 @@ import org.apache.commons.logging.LogFactory;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Service
@@ -38,14 +43,29 @@ public class BasicInfoServiceImpl implements IRInfoService<BasicInfoDTO> {
     }
 
     @Override
+    @Transactional
     public BasicInfoDTO edit(BasicInfoDTO basicInfoDTO) {
         BasicInfoEntity basicInfoEntity = basicInfoMapper.dtoToEntity(basicInfoDTO);
 
         if (irRepository.findByBasicInfoEntityIdx(basicInfoDTO.getIdx()).isEmpty()) {
             return BasicInfoDTO.builder().name("unavailable").build();
         } else {
-//            attractionRepository.deleteAll(attractionRepository.findAllByBasicInfoEntityIdx(basicInfoDTO.getIdx()));
+            attractionRepository.deleteAllByBasicInfoEntityIdx(basicInfoDTO.getIdx());
+            subsidyRepository.deleteAllByBasicInfoEntityIdx(basicInfoDTO.getIdx());
+
+            List<AttractionEntity> attractionEntities = basicInfoEntity.getAttraction();
+            List<SubsidyEntity> subsidyEntities = basicInfoEntity.getSubsidy();
+
+            for (AttractionEntity a: attractionEntities) {
+                a.setBasicInfoEntity(basicInfoEntity);
+            }
+
+            for (SubsidyEntity s: subsidyEntities){
+                s.setBasicInfoEntity(basicInfoEntity);
+            }
+
             BasicInfoEntity result = basicInfoRepository.save(basicInfoEntity);
+
             return basicInfoMapper.entityToDto(result);
         }
     }

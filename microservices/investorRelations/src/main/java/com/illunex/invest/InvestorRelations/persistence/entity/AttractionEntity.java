@@ -16,4 +16,8 @@ public class AttractionEntity {  // 기존 투자 유치
     Long idx;
     String name;                    // title
     String price;                   // 금액
+
+    @ManyToOne
+    @JoinColumn(name = "basic_info_idx")
+    BasicInfoEntity basicInfoEntity;
 }

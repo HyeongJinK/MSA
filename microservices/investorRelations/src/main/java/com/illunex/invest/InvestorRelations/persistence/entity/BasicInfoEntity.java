@@ -39,11 +39,9 @@ public class BasicInfoEntity {
     @OneToOne(mappedBy = "basicInfoEntity", fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     IREntity irEntity;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="basic_info_idx")
+    @OneToMany(mappedBy = "basicInfoEntity", cascade = CascadeType.ALL)
     List<AttractionEntity> attraction;            // 기존투자유치
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="basic_info_idx")
+    @OneToMany(mappedBy = "basicInfoEntity", cascade = CascadeType.ALL)
     List<SubsidyEntity> subsidy;                  // 지원금
 }
