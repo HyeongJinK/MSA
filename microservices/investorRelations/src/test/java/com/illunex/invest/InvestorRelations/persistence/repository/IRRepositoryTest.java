@@ -32,16 +32,16 @@ public class IRRepositoryTest {
                 .build();
         IREntity irEntity = IREntity.builder()
                 .companyIdx(1L)
-                .basicInfoEntity(basicInfoEntity)
+                .basicInfo(basicInfoEntity)
                 .build();
-        basicInfoEntity.setIrEntity(irEntity);
+        basicInfoEntity.setIr(irEntity);
 
 
         Long idx = irRepository.save(irEntity).getIdx();
         IREntity findEntity = irRepository.findById(idx).get();
 
-        Assert.assertEquals(findEntity.getBasicInfoEntity().getIdx().longValue(), 1L);
-        Assert.assertEquals(findEntity.getBasicInfoEntity().getAddress(), "askdfj");
+        Assert.assertEquals(findEntity.getBasicInfo().getIdx().longValue(), 1L);
+        Assert.assertEquals(findEntity.getBasicInfo().getAddress(), "askdfj");
 
     }
 

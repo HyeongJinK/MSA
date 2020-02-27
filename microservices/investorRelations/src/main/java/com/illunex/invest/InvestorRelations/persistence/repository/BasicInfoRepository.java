@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BasicInfoRepository extends JpaRepository<BasicInfoEntity, Long> {
-    BasicInfoEntity findByIrEntityIdx(Long irIdx);
+    BasicInfoEntity findByIrIdx(Long irIdx);
 }

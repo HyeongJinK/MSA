@@ -1,7 +1,9 @@
 package com.illunex.invest.InvestorRelations.service;
 
+import java.util.List;
+
 public interface IRInfoService<T> {
 
-    public T get(Long id);
-    public T edit(T t);
+    public List<T> getList(Long irIdx);
+    public List<T> editList(List<T> infoList);
 }

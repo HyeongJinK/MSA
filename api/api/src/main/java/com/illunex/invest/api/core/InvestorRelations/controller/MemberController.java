@@ -1,13 +1,16 @@
 package com.illunex.invest.api.core.InvestorRelations.controller;
 
-import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
+import com.illunex.invest.api.core.InvestorRelations.dto.HistoryDTO;
+import com.illunex.invest.api.core.InvestorRelations.dto.MemberDTO;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Api(produces = "produces Value")
-public interface BasicInfoController {
+public interface MemberController {
 //    @ApiOperation(value = "a1331"
 //            , notes = "Notes Test"
 //            , response = InvestorRelationsController.class
@@ -18,7 +21,7 @@ public interface BasicInfoController {
 //            @ApiResponse(code = 400, message = "Bad Request")
 //    })
 
-    ResponseEntity<BasicInfoDTO> getBasicInfo(@RequestParam Long irIdx);
+    ResponseEntity<List<MemberDTO>> getMemberList(@RequestParam Long irIdx);
 
-    ResponseEntity<BasicInfoDTO> editBasicInfo(@RequestBody BasicInfoDTO basicInfoDTO);
+    ResponseEntity<List<MemberDTO>> editMemberList(@RequestBody List<MemberDTO> memberDTOList);
 }

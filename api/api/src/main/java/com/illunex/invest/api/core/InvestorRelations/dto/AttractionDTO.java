@@ -2,6 +2,8 @@ package com.illunex.invest.api.core.InvestorRelations.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Builder
 @Getter
 @Setter
@@ -11,4 +13,5 @@ public class AttractionDTO {
     Long idx;
     String name;
     String price;
+    LocalDateTime date;
 }

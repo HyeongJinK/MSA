@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Builder
@@ -26,12 +27,15 @@ public class IREntity {
     Integer readCount;      // 조회수
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="irIdx")
-    BasicInfoEntity basicInfoEntity;                        // 기본정보
+    @JoinColumn(name="basic_info_idx")
+    BasicInfoEntity basicInfo;                        // 기본정보
 
-//    @OneToMany
-//    @JoinColumn(name="history_idx")
-//    List<HistoryEntity> histories;                              // 주요연혁
+    @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
+    List<HistoryEntity> history;                    // 주요연혁
+
+    @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
+    List<MemberEntity> member;                    // 주요연혁
+
 //
 //    @OneToMany
 //    @JoinColumn(name="major_personnel_idx")
