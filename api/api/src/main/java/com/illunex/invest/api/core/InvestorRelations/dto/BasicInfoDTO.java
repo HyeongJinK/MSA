@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BasicInfoDTO {
     Long idx;
+    Long irIdx;
     String name;                // 기업명
     String address;             // 주소
     Date establishmentDate;     // 설립일

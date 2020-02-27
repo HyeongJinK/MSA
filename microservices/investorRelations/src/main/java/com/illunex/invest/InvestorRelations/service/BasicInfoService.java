@@ -22,8 +22,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BasicInfoServiceImpl implements IRInfoService<BasicInfoDTO> {
-    private Log log = LogFactory.getLog(BasicInfoServiceImpl.class);
+public class BasicInfoService {
+    private Log log = LogFactory.getLog(BasicInfoService.class);
     private BasicInfoMapper basicInfoMapper = Mappers.getMapper(BasicInfoMapper.class);
 
     @Autowired
@@ -35,23 +35,24 @@ public class BasicInfoServiceImpl implements IRInfoService<BasicInfoDTO> {
     @Autowired
     SubsidyRepository subsidyRepository;
 
-    @Override
     public BasicInfoDTO get(Long irIdx) {
         BasicInfoEntity basicInfo = basicInfoRepository.findByIrIdx(irIdx);
 
         return basicInfoMapper.entityToDto(basicInfo);
     }
 
-    @Override
     @Transactional
     public BasicInfoDTO edit(BasicInfoDTO basicInfoDTO) {
         BasicInfoEntity basicInfoEntity = basicInfoMapper.dtoToEntity(basicInfoDTO);
 
-        if (irRepository.findByBasicInfoIdx(basicInfoDTO.getIdx()).isEmpty()) {
+
+        if (irRepository.findById(basicInfoDTO.getIrIdx()).isEmpty()) {
             return BasicInfoDTO.builder().name("unavailable").build();
         } else {
-            attractionRepository.deleteAllByBasicInfoIdx(basicInfoDTO.getIdx());
-            subsidyRepository.deleteAllByBasicInfoIdx(basicInfoDTO.getIdx());
+            basicInfoEntity.setIdx(irRepository.findById(basicInfoDTO.getIrIdx()).get().getBasicInfo().getIdx());
+
+            attractionRepository.deleteAllByBasicInfoIdx(basicInfoEntity.getIdx());
+            subsidyRepository.deleteAllByBasicInfoIdx(basicInfoEntity.getIdx());
 
             List<AttractionEntity> attractionEntities = basicInfoEntity.getAttraction();
             List<SubsidyEntity> subsidyEntities = basicInfoEntity.getSubsidy();
