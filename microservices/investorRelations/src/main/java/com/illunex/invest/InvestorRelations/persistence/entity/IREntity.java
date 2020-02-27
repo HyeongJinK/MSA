@@ -33,6 +33,8 @@ public class IREntity {
     @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
     List<HistoryEntity> history;                    // 주요연혁
 
+    @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
+    List<MemberEntity> member;                    // 주요연혁
 
 //
 //    @OneToMany

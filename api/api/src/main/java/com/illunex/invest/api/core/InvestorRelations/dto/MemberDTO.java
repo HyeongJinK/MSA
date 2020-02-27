@@ -1,20 +1,17 @@
-package com.illunex.invest.InvestorRelations.persistence.entity;
+package com.illunex.invest.api.core.InvestorRelations.dto;
 
 import lombok.*;
 
-import javax.persistence.*;
+import java.time.LocalDateTime;
 
-@Entity
+@Builder
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "major_personnel")
-public class MajorPersonnelEntity {// 주요인력
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class MemberDTO {
     Long idx;
+    Long irIdx;
     String imgUrl;              // 사진
     String rank;                // 직급
     String name;                // 이름
