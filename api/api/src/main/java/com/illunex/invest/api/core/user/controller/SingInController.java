@@ -1,14 +1,13 @@
 package com.illunex.invest.api.core.user.controller;
 
 import com.illunex.invest.api.core.user.model.JwtResponse;
+import com.illunex.invest.api.core.user.model.SignInRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Api(value = "로그인")
 @RequestMapping("/signIn")
@@ -31,6 +30,5 @@ public interface SingInController {
             )
     })
     @PostMapping({"", "/"})
-    ResponseEntity<JwtResponse> signIn(@RequestParam String username
-            , @RequestParam String password) throws Exception;
+    ResponseEntity<JwtResponse> signIn(@RequestBody SignInRequest signInRequest);
 }
