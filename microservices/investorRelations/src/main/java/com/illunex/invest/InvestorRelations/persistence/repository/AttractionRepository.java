@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface AttractionRepository extends JpaRepository<AttractionEntity, Long> {
-    List<AttractionEntity> deleteAllByBasicInfoEntityIdx(Long idx);
+    List<AttractionEntity> deleteAllByBasicInfoIdx(Long idx);
 }

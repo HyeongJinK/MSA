@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Builder
@@ -27,11 +28,12 @@ public class IREntity {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="basic_info_idx")
-    BasicInfoEntity basicInfoEntity;                        // 기본정보
+    BasicInfoEntity basicInfo;                        // 기본정보
 
-//    @OneToMany
-//    @JoinColumn(name="history_idx")
-//    List<HistoryEntity> histories;                              // 주요연혁
+    @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
+    List<HistoryEntity> history;                    // 주요연혁
+
+
 //
 //    @OneToMany
 //    @JoinColumn(name="major_personnel_idx")

@@ -10,4 +10,8 @@ public class HistoryEntity {
     Long idx;
     String date;
     String content;
+
+    @ManyToOne
+    @JoinColumn(name = "ir_idx")
+    IREntity ir;
 }

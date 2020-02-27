@@ -33,9 +33,9 @@ public class IRService {
             IREntity irEntity = IREntity.builder()
                     .companyIdx(companyIdx)
                     .cardColor(setColor())
-                    .basicInfoEntity(basicInfoEntity)
+                    .basicInfo(basicInfoEntity)
                     .build();
-            basicInfoEntity.setIrEntity(irEntity);
+            basicInfoEntity.setIr(irEntity);
 
             irRepository.save(irEntity);
         }

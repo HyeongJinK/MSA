@@ -37,7 +37,7 @@ public class BasicInfoServiceImpl implements IRInfoService<BasicInfoDTO> {
 
     @Override
     public BasicInfoDTO get(Long irIdx) {
-        BasicInfoEntity basicInfo = basicInfoRepository.findByIrEntityIdx(irIdx);
+        BasicInfoEntity basicInfo = basicInfoRepository.findByIrIdx(irIdx);
 
         return basicInfoMapper.entityToDto(basicInfo);
     }
@@ -47,21 +47,21 @@ public class BasicInfoServiceImpl implements IRInfoService<BasicInfoDTO> {
     public BasicInfoDTO edit(BasicInfoDTO basicInfoDTO) {
         BasicInfoEntity basicInfoEntity = basicInfoMapper.dtoToEntity(basicInfoDTO);
 
-        if (irRepository.findByBasicInfoEntityIdx(basicInfoDTO.getIdx()).isEmpty()) {
+        if (irRepository.findByBasicInfoIdx(basicInfoDTO.getIdx()).isEmpty()) {
             return BasicInfoDTO.builder().name("unavailable").build();
         } else {
-            attractionRepository.deleteAllByBasicInfoEntityIdx(basicInfoDTO.getIdx());
-            subsidyRepository.deleteAllByBasicInfoEntityIdx(basicInfoDTO.getIdx());
+            attractionRepository.deleteAllByBasicInfoIdx(basicInfoDTO.getIdx());
+            subsidyRepository.deleteAllByBasicInfoIdx(basicInfoDTO.getIdx());
 
             List<AttractionEntity> attractionEntities = basicInfoEntity.getAttraction();
             List<SubsidyEntity> subsidyEntities = basicInfoEntity.getSubsidy();
 
             for (AttractionEntity a: attractionEntities) {
-                a.setBasicInfoEntity(basicInfoEntity);
+                a.setBasicInfo(basicInfoEntity);
             }
 
             for (SubsidyEntity s: subsidyEntities){
-                s.setBasicInfoEntity(basicInfoEntity);
+                s.setBasicInfo(basicInfoEntity);
             }
 
             BasicInfoEntity result = basicInfoRepository.save(basicInfoEntity);

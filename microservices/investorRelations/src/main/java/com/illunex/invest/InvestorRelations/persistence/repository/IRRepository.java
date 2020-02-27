@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface IRRepository extends JpaRepository<IREntity, Long> {
     IREntity findByCompanyIdxAndYear(Long companyIdx, String year);
-    Optional<IREntity> findByBasicInfoEntityIdx(Long idx);
+    Optional<IREntity> findByBasicInfoIdx(Long idx);
     List<IREntity> findAllByCompanyIdx(Long companyIdx);
 }

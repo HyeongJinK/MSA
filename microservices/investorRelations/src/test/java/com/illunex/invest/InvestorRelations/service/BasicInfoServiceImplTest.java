@@ -1,38 +1,59 @@
 package com.illunex.invest.InvestorRelations.service;
 
-import com.illunex.invest.InvestorRelations.service.mapper.BasicInfoMapper;
+import com.illunex.invest.InvestorRelations.persistence.entity.BasicInfoEntity;
+import com.illunex.invest.InvestorRelations.persistence.entity.IREntity;
+import com.illunex.invest.InvestorRelations.persistence.repository.IRRepository;
 import com.illunex.invest.api.core.InvestorRelations.dto.AttractionDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.SubsidyDTO;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment=RANDOM_PORT, properties = {
         "eureka.client.enabled=false",
         "spring.cloud.config.enabled=false",
-        "spring.datasource.url=jdbc:h2:mem:IR"})
+        "spring.datasource.url=jdbc:h2:mem:basicInfo"})
 @Transactional
 public class BasicInfoServiceImplTest {
-    private BasicInfoMapper basicInfoMapper = Mappers.getMapper(BasicInfoMapper.class);
 
     @Autowired
     BasicInfoServiceImpl basicInfoService;
 
-//    @MockBean
-//    BasicInfoRepository basicInfoRepository;
-//
+    @MockBean
+    IRRepository irRepository;
+
+    @Before
+    public void setup() {
+        BasicInfoEntity basicInfoEntity = BasicInfoEntity.builder()
+                .idx(1L)
+                .build();
+
+        IREntity irEntity = IREntity.builder()
+                .idx(1L)
+                .basicInfo(basicInfoEntity)
+                .build();
+
+        irRepository.save(irEntity);
+
+        when(irRepository.findByBasicInfoIdx(1L))
+                .thenReturn(Optional.of(irEntity));
+    }
 
     @Test
     public void editTest(){
@@ -55,13 +76,11 @@ public class BasicInfoServiceImplTest {
                 .build());
 
         BasicInfoDTO basicInfoDTO = BasicInfoDTO.builder()
+                .idx(1L)
                 .address("1234")
                 .attraction(attractionDTO)
                 .subsidy(subsidyDTO)
                 .build();
-
-
-
 
         BasicInfoDTO result = basicInfoService.edit(basicInfoDTO);
 
