@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.illunex.invest</groupId>
-	<artifactId>company-composite</artifactId>
+	<artifactId>startup-composite</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>company-composite</name>
+	<name>startup-composite</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

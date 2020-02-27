@@ -1,6 +1,6 @@
 package com.illunex.invest.companycomposite.controller;
 
-import com.illunex.invest.api.composite.TemplateController;
+import com.illunex.invest.api.composite.startup.controller.TemplateController;
 import com.illunex.invest.companycomposite.service.CompanyServiceProxy;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.commons.logging.Log;

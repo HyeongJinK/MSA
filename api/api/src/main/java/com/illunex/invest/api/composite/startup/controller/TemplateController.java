@@ -1,4 +1,4 @@
-package com.illunex.invest.api.composite;
+package com.illunex.invest.api.composite.startup.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
