@@ -39,9 +39,10 @@ public class IREntity {
     @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
     List<ShareholderEntity> shareholder;                    // 주주현황
 
-//    @OneToOne
-//    @JoinColumn(name="finance_idx")
-//    FinanceEntity financeEntity;                                // 재무정보
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="finance_idx")
+    FinanceEntity finance;                                  // 기본정보
+
 //
 //    @OneToOne
 //    @JoinColumn(name="service_technology_idx")

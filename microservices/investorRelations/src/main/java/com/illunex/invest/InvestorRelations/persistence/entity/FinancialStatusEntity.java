@@ -20,4 +20,8 @@ public class FinancialStatusEntity {
     String expiryDate;              // 만기일
     String interestRate;            // 이자율
     String repaymentCondition;      // 상환조건
+
+    @ManyToOne
+    @JoinColumn(name = "finance_idx")
+    FinanceEntity finance;
 }
