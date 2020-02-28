@@ -1,13 +1,13 @@
 package com.illunex.invest.api.core.user.controller;
 
+import com.illunex.invest.api.core.user.dto.UserDTO;
+import com.illunex.invest.api.core.user.model.SignUpRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Api(value = "회원가입")
 @RequestMapping("/signUp")
@@ -30,6 +30,5 @@ public interface SignUpController {
             )
     })
     @PostMapping({"", "/"})
-    ResponseEntity<String> signUp(@RequestParam String username
-            , @RequestParam String password);
+    ResponseEntity<UserDTO> signUp(@RequestBody SignUpRequest signUpRequest);
 }

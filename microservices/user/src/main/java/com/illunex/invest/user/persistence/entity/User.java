@@ -8,8 +8,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "user"
+        , indexes = {
+            @Index(name = "IDX_USERNAME", unique=true, columnList = "username")
+})
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
 @Builder
