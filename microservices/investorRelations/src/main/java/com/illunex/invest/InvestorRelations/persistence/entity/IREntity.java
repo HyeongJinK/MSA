@@ -43,8 +43,8 @@ public class IREntity {
     @JoinColumn(name="finance_idx")
     FinanceEntity finance;                                  // 재무현황
 
-//
-//    @OneToOne
-//    @JoinColumn(name="service_technology_idx")
-//    ServiceTechnologyEntity serviceTechnologyEntity;            // 서비스 및 기술
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="product_idx")
+    ProductEntity product;                                  // 제품,기술,시장
+
 }

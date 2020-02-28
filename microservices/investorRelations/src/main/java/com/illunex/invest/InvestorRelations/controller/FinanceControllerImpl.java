@@ -1,10 +1,7 @@
 package com.illunex.invest.InvestorRelations.controller;
 
-import com.illunex.invest.InvestorRelations.service.BasicInfoService;
-import com.illunex.invest.InvestorRelations.service.FinanceService;
-import com.illunex.invest.api.core.InvestorRelations.controller.BasicInfoController;
+import com.illunex.invest.InvestorRelations.service.FinanceServiceImpl;
 import com.illunex.invest.api.core.InvestorRelations.controller.FinanceController;
-import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.FinanceDTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,17 +13,17 @@ import org.springframework.web.bind.annotation.*;
 public class FinanceControllerImpl implements FinanceController {
     private Log log = LogFactory.getLog(FinanceControllerImpl.class);
 
-    final FinanceService financeService;
+    final FinanceServiceImpl financeServiceImpl;
 
-    public FinanceControllerImpl(FinanceService financeService) {
-        this.financeService = financeService;
+    public FinanceControllerImpl(FinanceServiceImpl financeServiceImpl) {
+        this.financeServiceImpl = financeServiceImpl;
     }
 
     @CrossOrigin("*")
     @GetMapping("/finance")
     @Override
     public ResponseEntity<FinanceDTO> getFinanceInfo(@RequestParam Long irIdx){
-        FinanceDTO financeDTO = financeService.get(irIdx);
+        FinanceDTO financeDTO = financeServiceImpl.get(irIdx);
 
         if (financeDTO == null) {
             return new ResponseEntity("financeInfo does not exist", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -39,7 +36,7 @@ public class FinanceControllerImpl implements FinanceController {
     @PostMapping("/finance")
     @Override
     public ResponseEntity<FinanceDTO> editFinanceInfo(FinanceDTO financeDTO) {
-        FinanceDTO finance = financeService.edit(financeDTO);
+        FinanceDTO finance = financeServiceImpl.edit(financeDTO);
 
         if (finance.getTax().equals("unavailable")) {
             return new ResponseEntity("Cannot edit financeInfo. Invalid IR Index.", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,0 +1,85 @@
+package com.illunex.invest.InvestorRelations.service;
+
+import com.illunex.invest.InvestorRelations.persistence.entity.*;
+import com.illunex.invest.InvestorRelations.persistence.repository.*;
+import com.illunex.invest.InvestorRelations.service.mapper.ProductMapper;
+import com.illunex.invest.api.core.InvestorRelations.dto.ProductDTO;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+
+@Service
+@RequiredArgsConstructor
+public class ProductServiceImpl implements CommonIRService<ProductDTO> {
+    private Log log = LogFactory.getLog(ProductServiceImpl.class);
+    private ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
+
+    @Autowired
+    ProductRepository productRepository;
+    @Autowired
+    IRRepository irRepository;
+    @Autowired
+    CustomerRepository customerRepository;
+    @Autowired
+    IPRepository ipRepository;
+    @Autowired
+    MarketRepository marketRepository;
+    @Autowired
+    MarketPlayerRepository marketPlayerRepository;
+
+    @Override
+    public ProductDTO get(Long irIdx) {
+        ProductEntity productInfo = productRepository.findByIrIdx(irIdx);
+
+        return productMapper.entityToDto(productInfo);
+    }
+
+    @Override
+    @Transactional
+    public ProductDTO edit(ProductDTO productDTO) {
+        ProductEntity productEntity = productMapper.dtoToEntity(productDTO);
+
+
+        if (irRepository.findById(productDTO.getIrIdx()).isEmpty()) {
+            return ProductDTO.builder().productInformation("unavailable").build();
+        } else {
+            productEntity.setIdx(irRepository.findById(productDTO.getIrIdx()).get().getProduct().getIdx());
+
+            customerRepository.deleteAllByProductIdx(productEntity.getIdx());
+            ipRepository.deleteAllByProductIdx(productEntity.getIdx());
+            marketRepository.deleteAllByProductIdx(productEntity.getIdx());
+            marketPlayerRepository.deleteAllByProductIdx(productEntity.getIdx());
+
+            List<CustomerEntity> customerEntities = productEntity.getCustomer();
+            List<IPEntity> ipEntities = productEntity.getIp();
+            List<MarketEntity> marketEntities = productEntity.getMarket();
+            List<MarketPlayerEntity> marketPlayerEntities = productEntity.getMarketPlayer();
+
+
+            for (CustomerEntity c: customerEntities) {
+                c.setProduct(productEntity);
+            }
+            for (IPEntity i: ipEntities) {
+                i.setProduct(productEntity);
+            }
+            for (MarketEntity m: marketEntities) {
+                m.setProduct(productEntity);
+            }
+            for (MarketPlayerEntity m: marketPlayerEntities) {
+                m.setProduct(productEntity);
+            }
+
+            ProductEntity result = productRepository.save(productEntity);
+
+            return productMapper.entityToDto(result);
+        }
+    }
+
+}

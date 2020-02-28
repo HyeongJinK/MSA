@@ -4,7 +4,6 @@ import com.illunex.invest.InvestorRelations.persistence.entity.*;
 import com.illunex.invest.InvestorRelations.persistence.repository.HistoryRepository;
 import com.illunex.invest.InvestorRelations.persistence.repository.IRRepository;
 import com.illunex.invest.InvestorRelations.service.mapper.HistoryMapper;
-import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.HistoryDTO;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.logging.Log;
@@ -20,7 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class HistoryServiceImpl implements IRInfoService<HistoryDTO> {
+public class HistoryServiceImpl implements CommonIRListService<HistoryDTO> {
     private Log log = LogFactory.getLog(HistoryServiceImpl.class);
     private HistoryMapper historyMapper = Mappers.getMapper(HistoryMapper.class);
 

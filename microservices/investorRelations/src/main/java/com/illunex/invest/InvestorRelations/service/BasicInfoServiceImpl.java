@@ -22,8 +22,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BasicInfoService {
-    private Log log = LogFactory.getLog(BasicInfoService.class);
+public class BasicInfoServiceImpl implements CommonIRService<BasicInfoDTO> {
+    private Log log = LogFactory.getLog(BasicInfoServiceImpl.class);
     private BasicInfoMapper basicInfoMapper = Mappers.getMapper(BasicInfoMapper.class);
 
     @Autowired
@@ -35,12 +35,14 @@ public class BasicInfoService {
     @Autowired
     SubsidyRepository subsidyRepository;
 
+    @Override
     public BasicInfoDTO get(Long irIdx) {
         BasicInfoEntity basicInfo = basicInfoRepository.findByIrIdx(irIdx);
 
         return basicInfoMapper.entityToDto(basicInfo);
     }
 
+    @Override
     @Transactional
     public BasicInfoDTO edit(BasicInfoDTO basicInfoDTO) {
         BasicInfoEntity basicInfoEntity = basicInfoMapper.dtoToEntity(basicInfoDTO);

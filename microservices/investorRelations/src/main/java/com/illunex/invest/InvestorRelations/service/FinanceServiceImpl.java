@@ -2,9 +2,7 @@ package com.illunex.invest.InvestorRelations.service;
 
 import com.illunex.invest.InvestorRelations.persistence.entity.*;
 import com.illunex.invest.InvestorRelations.persistence.repository.*;
-import com.illunex.invest.InvestorRelations.service.mapper.BasicInfoMapper;
 import com.illunex.invest.InvestorRelations.service.mapper.FinanceMapper;
-import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.FinanceDTO;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.logging.Log;
@@ -19,8 +17,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FinanceService {
-    private Log log = LogFactory.getLog(FinanceService.class);
+public class FinanceServiceImpl implements CommonIRService<FinanceDTO> {
+    private Log log = LogFactory.getLog(FinanceServiceImpl.class);
     private FinanceMapper financeMapper = Mappers.getMapper(FinanceMapper.class);
 
     @Autowired
@@ -30,12 +28,14 @@ public class FinanceService {
     @Autowired
     FinancialStatusRepository financialStatusRepository;
 
+    @Override
     public FinanceDTO get(Long irIdx) {
         FinanceEntity finance = financeRepository.findByIrIdx(irIdx);
 
         return financeMapper.entityToDto(finance);
     }
 
+    @Override
     @Transactional
     public FinanceDTO edit(FinanceDTO financeDTO) {
         FinanceEntity finance = financeMapper.dtoToEntity(financeDTO);
@@ -44,7 +44,7 @@ public class FinanceService {
         if (irRepository.findById(financeDTO.getIrIdx()).isEmpty()) {
             return FinanceDTO.builder().tax("unavailable").build();
         } else {
-            finance.setIdx(irRepository.findById(financeDTO.getIrIdx()).get().getBasicInfo().getIdx());
+            finance.setIdx(irRepository.findById(financeDTO.getIrIdx()).get().getFinance().getIdx());
 
             financialStatusRepository.deleteAllByFinanceIdx(finance.getIdx());
 

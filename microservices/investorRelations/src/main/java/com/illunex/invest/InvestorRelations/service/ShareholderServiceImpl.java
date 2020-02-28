@@ -1,14 +1,10 @@
 package com.illunex.invest.InvestorRelations.service;
 
-import com.illunex.invest.InvestorRelations.persistence.entity.HistoryEntity;
 import com.illunex.invest.InvestorRelations.persistence.entity.IREntity;
 import com.illunex.invest.InvestorRelations.persistence.entity.ShareholderEntity;
-import com.illunex.invest.InvestorRelations.persistence.repository.HistoryRepository;
 import com.illunex.invest.InvestorRelations.persistence.repository.IRRepository;
 import com.illunex.invest.InvestorRelations.persistence.repository.ShareholderRepository;
-import com.illunex.invest.InvestorRelations.service.mapper.HistoryMapper;
 import com.illunex.invest.InvestorRelations.service.mapper.ShareholderMapper;
-import com.illunex.invest.api.core.InvestorRelations.dto.HistoryDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.ShareholderDTO;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.logging.Log;
@@ -24,7 +20,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ShareholderServiceImpl implements IRInfoService<ShareholderDTO> {
+public class ShareholderServiceImpl implements CommonIRListService<ShareholderDTO> {
     private Log log = LogFactory.getLog(ShareholderServiceImpl.class);
     private ShareholderMapper shareholderMapper = Mappers.getMapper(ShareholderMapper.class);
 
