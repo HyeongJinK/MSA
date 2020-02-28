@@ -41,7 +41,7 @@ public class IREntity {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="finance_idx")
-    FinanceEntity finance;                                  // 기본정보
+    FinanceEntity finance;                                  // 재무현황
 
 //
 //    @OneToOne
