@@ -28,23 +28,17 @@ public class IREntity {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="basic_info_idx")
-    BasicInfoEntity basicInfo;                        // 기본정보
+    BasicInfoEntity basicInfo;                              // 기본정보
 
     @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
-    List<HistoryEntity> history;                    // 주요연혁
+    List<HistoryEntity> history;                            // 주요연혁
 
     @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
-    List<MemberEntity> member;                    // 주요연혁
+    List<MemberEntity> member;                              // 주요인력
 
-//
-//    @OneToMany
-//    @JoinColumn(name="major_personnel_idx")
-//    List<MajorPersonnelEntity> majorPersonnelEntities;          // 주요인력
-//
-//    @OneToMany
-//    @JoinColumn(name="shareholder_status_idx")
-//    List<ShareHolderStatusEntity> shareHolderStatusEntities;    // 주주현황
-//
+    @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
+    List<ShareholderEntity> shareholder;                    // 주주현황
+
 //    @OneToOne
 //    @JoinColumn(name="finance_idx")
 //    FinanceEntity financeEntity;                                // 재무정보

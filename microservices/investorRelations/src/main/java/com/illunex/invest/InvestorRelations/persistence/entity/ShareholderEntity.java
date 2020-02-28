@@ -18,4 +18,8 @@ public class ShareholderEntity {
     String name;                // 주주명
     String value;               // 금액
     String etc;                 // 비고
+
+    @ManyToOne
+    @JoinColumn(name = "ir_idx")
+    IREntity ir;
 }
