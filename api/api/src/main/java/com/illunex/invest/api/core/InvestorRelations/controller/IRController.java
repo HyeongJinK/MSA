@@ -25,6 +25,8 @@ public interface IRController {
 
     ResponseEntity<IRDTO> changeCardColor(@RequestParam Long irIdx, @RequestParam String color);
 
-    ResponseEntity<IRDTO> setPassWord(@RequestParam Long irIdx, @RequestParam String password);
+    ResponseEntity<String> setPassWord(@RequestParam Long irIdx, @RequestParam String password);
+
+    ResponseEntity<String> confirmPassWord(@RequestParam Long irIdx, @RequestParam String password);
 
 }

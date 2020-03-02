@@ -71,7 +71,7 @@ public class IRService {
         }
     }
 
-    public IRDTO setPassWord(Long irIdx, String password) {
+    public String setPassWord(Long irIdx, String password) {
         try {
             IREntity irEntity = irRepository.findById(irIdx).get();
 
@@ -82,9 +82,24 @@ public class IRService {
             irEntity.setIsPassword(true);
             irRepository.save(irEntity);
 
-            return irMapper.entityToDto(irEntity);
+            return "Password set complete";
         } catch (Exception ex) {
-            return IRDTO.builder().password("unavailable").build();
+            return "unavailable";
+        }
+    }
+
+    public String confirmPassWord(Long irIdx, String password) {
+        try {
+            IREntity irEntity = irRepository.findById(irIdx).get();
+            PasswordEncoding passwordEncoding = new PasswordEncoding();
+
+            if (passwordEncoding.matches(password, irEntity.getPassword())) {
+                return "Password confirm complete";
+            } else {
+                return "Invalid password";
+            }
+        } catch (Exception ex){
+            return "Invalid IR Index";
         }
     }
 }
