@@ -2,7 +2,6 @@ package com.illunex.invest.api.core.InvestorRelations.dto;
 
 import lombok.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Builder

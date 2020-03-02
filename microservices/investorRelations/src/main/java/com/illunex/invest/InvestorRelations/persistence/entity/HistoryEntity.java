@@ -3,6 +3,7 @@ package com.illunex.invest.InvestorRelations.persistence.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -15,8 +16,8 @@ public class HistoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
-    String date;
     String content;
+    LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name = "ir_idx")

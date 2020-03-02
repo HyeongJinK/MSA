@@ -42,6 +42,10 @@ public class IRService {
                     .finance(financeEntity)
                     .product(productEntity)
                     .outcome(outcomeEntity)
+                    .isPassword(false)
+                    .readCount(0)
+                    .updateDate(LocalDateTime.now())
+                    .year(year)
                     .build();
             basicInfoEntity.setIr(irEntity);
 
@@ -64,6 +68,23 @@ public class IRService {
             return irMapper.entityToDto(irEntity);
         } catch (Exception ex) {
             return IRDTO.builder().cardColor("unavailable").build();
+        }
+    }
+
+    public IRDTO setPassWord(Long irIdx, String password) {
+        try {
+            IREntity irEntity = irRepository.findById(irIdx).get();
+
+            PasswordEncoding passwordEncoding = new PasswordEncoding();
+            String encodedPassword = passwordEncoding.encode(password);
+
+            irEntity.setPassword(encodedPassword);
+            irEntity.setIsPassword(true);
+            irRepository.save(irEntity);
+
+            return irMapper.entityToDto(irEntity);
+        } catch (Exception ex) {
+            return IRDTO.builder().password("unavailable").build();
         }
     }
 }

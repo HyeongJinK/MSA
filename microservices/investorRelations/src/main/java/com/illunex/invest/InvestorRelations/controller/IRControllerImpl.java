@@ -42,4 +42,17 @@ public class IRControllerImpl implements IRController {
         }
     }
 
+    @CrossOrigin("*")
+    @PostMapping("/list/pw/")
+    @Override
+    public ResponseEntity<IRDTO> setPassWord(@RequestParam Long irIdx, @RequestParam String password) {
+        IRDTO ir = IRService.setPassWord(irIdx, password);
+
+        if (ir.getPassword().equals("unavailable")) {
+            return new ResponseEntity("Cannot set password. Invalid IR Index.", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            return new ResponseEntity(ir, HttpStatus.OK);
+        }
+    }
+
 }

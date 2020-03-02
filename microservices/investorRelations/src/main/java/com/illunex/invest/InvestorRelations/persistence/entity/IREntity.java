@@ -3,7 +3,7 @@ package com.illunex.invest.InvestorRelations.persistence.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -23,7 +23,7 @@ public class IREntity {
     String password;        // 패스워드
     String progress;        // 작성 %
     String cardColor;       // 카드 색상
-    Date updateDate;        // 마지막 수정일
+    LocalDateTime updateDate;        // 마지막 수정일
     Integer readCount;      // 조회수
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
