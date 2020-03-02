@@ -36,12 +36,12 @@ public class ProductControllerImpl implements ProductController {
     @PostMapping("/product")
     @Override
     public ResponseEntity<ProductDTO> editProductInfo(ProductDTO productInfo) {
-        ProductDTO basicInfo = productServiceImpl.edit(productInfo);
+        ProductDTO product = productServiceImpl.edit(productInfo);
 
         if (productInfo.getProductInformation().equals("unavailable")) {
             return new ResponseEntity("Cannot edit ProductInfo. Invalid IR Index.", HttpStatus.INTERNAL_SERVER_ERROR);
         } else {
-            return new ResponseEntity(basicInfo, HttpStatus.OK);
+            return new ResponseEntity(product, HttpStatus.OK);
         }
 
     }

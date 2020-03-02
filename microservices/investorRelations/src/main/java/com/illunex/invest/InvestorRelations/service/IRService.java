@@ -1,9 +1,6 @@
 package com.illunex.invest.InvestorRelations.service;
 
-import com.illunex.invest.InvestorRelations.persistence.entity.BasicInfoEntity;
-import com.illunex.invest.InvestorRelations.persistence.entity.FinanceEntity;
-import com.illunex.invest.InvestorRelations.persistence.entity.IREntity;
-import com.illunex.invest.InvestorRelations.persistence.entity.ProductEntity;
+import com.illunex.invest.InvestorRelations.persistence.entity.*;
 import com.illunex.invest.InvestorRelations.persistence.repository.IRRepository;
 import com.illunex.invest.InvestorRelations.service.mapper.IRMapper;
 import com.illunex.invest.api.core.InvestorRelations.dto.IRDTO;
@@ -36,12 +33,15 @@ public class IRService {
                     .build();
             ProductEntity productEntity = ProductEntity.builder()
                     .build();
+            OutcomeEntity outcomeEntity = OutcomeEntity.builder()
+                    .build();
             IREntity irEntity = IREntity.builder()
                     .companyIdx(companyIdx)
                     .cardColor(setColor())
                     .basicInfo(basicInfoEntity)
                     .finance(financeEntity)
                     .product(productEntity)
+                    .outcome(outcomeEntity)
                     .build();
             basicInfoEntity.setIr(irEntity);
 

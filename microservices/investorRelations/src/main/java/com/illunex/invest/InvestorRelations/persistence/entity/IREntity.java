@@ -47,4 +47,8 @@ public class IREntity {
     @JoinColumn(name="product_idx")
     ProductEntity product;                                  // 제품,기술,시장
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="outcome_idx")
+    OutcomeEntity outcome;                                  // 성과 및 계획
+
 }
