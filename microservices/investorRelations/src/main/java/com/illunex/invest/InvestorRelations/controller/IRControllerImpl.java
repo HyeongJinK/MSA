@@ -7,10 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +23,23 @@ public class IRControllerImpl implements IRController {
 
     @CrossOrigin("*")
     @GetMapping("/list")
+    @Override
     public ResponseEntity<List<IRDTO>> getIRList(@RequestParam Long companyIdx){
         List<IRDTO> ir = IRService.getList(companyIdx);
         return new ResponseEntity<>(ir, HttpStatus.OK);
-    };
+    }
+
+    @CrossOrigin("*")
+    @PostMapping("/list/color")
+    @Override
+    public ResponseEntity<IRDTO> changeCardColor(@RequestParam Long irIdx, @RequestParam String color) {
+        IRDTO ir = IRService.changeCardColor(irIdx, color);
+
+        if (ir.getCardColor().equals("unavailable")) {
+            return new ResponseEntity("Cannot change card color. Invalid IR Index.", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            return new ResponseEntity(ir, HttpStatus.OK);
+        }
+    }
+
 }

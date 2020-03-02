@@ -1,8 +1,10 @@
 package com.illunex.invest.api.core.InvestorRelations.controller;
 
+import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.IRDTO;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -20,5 +22,7 @@ public interface IRController {
 //    })
 
     ResponseEntity<List<IRDTO>> getIRList(@RequestParam Long irIdx);
+
+    ResponseEntity<IRDTO> changeCardColor(@RequestParam Long irIdx, @RequestParam String color);
 
 }

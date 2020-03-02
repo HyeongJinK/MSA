@@ -53,4 +53,17 @@ public class IRService {
     private String setColor() {
         return "#000000";
     }
+
+    public IRDTO changeCardColor(Long irIdx, String color) {
+        try {
+            IREntity irEntity = irRepository.findById(irIdx).get();
+
+            irEntity.setCardColor(color);
+            irRepository.save(irEntity);
+
+            return irMapper.entityToDto(irEntity);
+        } catch (Exception ex) {
+            return IRDTO.builder().cardColor("unavailable").build();
+        }
+    }
 }
