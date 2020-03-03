@@ -11,15 +11,16 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "history")
-public class HistoryEntity {
+@Table(name = "ip")
+public class IPEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
-    String content;
-    LocalDateTime date;
+    String applicationNumber;            // 출원번호
+    String content;                      // 내용
+    LocalDateTime date;                  // 날짜
 
     @ManyToOne
-    @JoinColumn(name = "ir_idx")
-    IREntity ir;
+    @JoinColumn(name = "product_idx")
+    ProductEntity product;
 }

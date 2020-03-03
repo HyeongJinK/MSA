@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -41,8 +40,8 @@ public class BasicInfoEntity {
     IREntity ir;
 
     @OneToMany(mappedBy = "basicInfo", cascade = CascadeType.ALL)
-    List<AttractionEntity> attraction;            // 기존투자유치
+    List<AttractionEntity> attraction;   // 기존투자유치
 
     @OneToMany(mappedBy = "basicInfo", cascade = CascadeType.ALL)
-    List<SubsidyEntity> subsidy;                  // 지원금
+    List<SubsidyEntity> subsidy;         // 지원금
 }

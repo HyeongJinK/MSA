@@ -3,7 +3,7 @@ package com.illunex.invest.InvestorRelations.persistence.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -23,33 +23,32 @@ public class IREntity {
     String password;        // 패스워드
     String progress;        // 작성 %
     String cardColor;       // 카드 색상
-    Date updateDate;        // 마지막 수정일
+    LocalDateTime updateDate;        // 마지막 수정일
     Integer readCount;      // 조회수
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="basic_info_idx")
-    BasicInfoEntity basicInfo;                        // 기본정보
+    BasicInfoEntity basicInfo;                              // 기본정보
 
     @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
-    List<HistoryEntity> history;                    // 주요연혁
+    List<HistoryEntity> history;                            // 주요연혁
 
     @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
-    List<MemberEntity> member;                    // 주요연혁
+    List<MemberEntity> member;                              // 주요인력
 
-//
-//    @OneToMany
-//    @JoinColumn(name="major_personnel_idx")
-//    List<MajorPersonnelEntity> majorPersonnelEntities;          // 주요인력
-//
-//    @OneToMany
-//    @JoinColumn(name="shareholder_status_idx")
-//    List<ShareHolderStatusEntity> shareHolderStatusEntities;    // 주주현황
-//
-//    @OneToOne
-//    @JoinColumn(name="finance_idx")
-//    FinanceEntity financeEntity;                                // 재무정보
-//
-//    @OneToOne
-//    @JoinColumn(name="service_technology_idx")
-//    ServiceTechnologyEntity serviceTechnologyEntity;            // 서비스 및 기술
+    @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
+    List<ShareholderEntity> shareholder;                    // 주주현황
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="finance_idx")
+    FinanceEntity finance;                                  // 재무현황
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="product_idx")
+    ProductEntity product;                                  // 제품,기술,시장
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="outcome_idx")
+    OutcomeEntity outcome;                                  // 성과 및 계획
+
 }

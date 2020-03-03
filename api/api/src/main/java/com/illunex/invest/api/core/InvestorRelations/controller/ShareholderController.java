@@ -1,7 +1,7 @@
 package com.illunex.invest.api.core.InvestorRelations.controller;
 
-import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
-import com.illunex.invest.api.core.InvestorRelations.dto.IRDTO;
+import com.illunex.invest.api.core.InvestorRelations.dto.HistoryDTO;
+import com.illunex.invest.api.core.InvestorRelations.dto.ShareholderDTO;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Api(produces = "produces Value")
-public interface IRController {
+public interface ShareholderController {
 //    @ApiOperation(value = "a1331"
 //            , notes = "Notes Test"
 //            , response = InvestorRelationsController.class
@@ -21,14 +21,7 @@ public interface IRController {
 //            @ApiResponse(code = 400, message = "Bad Request")
 //    })
 
-    ResponseEntity<List<IRDTO>> getIRList(@RequestParam Long irIdx);
+    ResponseEntity<List<ShareholderDTO>> getShareholderList(@RequestParam Long irIdx);
 
-    ResponseEntity<IRDTO> changeCardColor(@RequestParam Long irIdx, @RequestParam String color);
-
-    ResponseEntity<String> setPassword(@RequestParam Long irIdx, @RequestParam String password);
-
-    ResponseEntity<String> confirmPassword(@RequestParam Long irIdx, @RequestParam String password);
-
-    ResponseEntity<String> changePassword(@RequestParam Long irIdx, @RequestParam String currentPassword, @RequestParam String newPassword);
-
+    ResponseEntity<List<ShareholderDTO>> editShareholderList(@RequestBody List<ShareholderDTO> shareholderDTOList);
 }

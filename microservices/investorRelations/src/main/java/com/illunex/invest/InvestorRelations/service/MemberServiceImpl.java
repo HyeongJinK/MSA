@@ -1,14 +1,10 @@
 package com.illunex.invest.InvestorRelations.service;
 
-import com.illunex.invest.InvestorRelations.persistence.entity.HistoryEntity;
 import com.illunex.invest.InvestorRelations.persistence.entity.IREntity;
 import com.illunex.invest.InvestorRelations.persistence.entity.MemberEntity;
-import com.illunex.invest.InvestorRelations.persistence.repository.HistoryRepository;
 import com.illunex.invest.InvestorRelations.persistence.repository.IRRepository;
 import com.illunex.invest.InvestorRelations.persistence.repository.MemberRepository;
-import com.illunex.invest.InvestorRelations.service.mapper.HistoryMapper;
 import com.illunex.invest.InvestorRelations.service.mapper.MemberMapper;
-import com.illunex.invest.api.core.InvestorRelations.dto.HistoryDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.logging.Log;
@@ -24,7 +20,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class MemberServiceImpl implements IRInfoService<MemberDTO> {
+public class MemberServiceImpl implements CommonIRListService<MemberDTO> {
     private Log log = LogFactory.getLog(MemberServiceImpl.class);
     private MemberMapper memberMapper = Mappers.getMapper(MemberMapper.class);
 
@@ -61,6 +57,12 @@ public class MemberServiceImpl implements IRInfoService<MemberDTO> {
             }
 
             List<MemberEntity> result = memberRepository.saveAll(memberEntities);
+
+            IREntity ir = irRepository.findById(irIdx).get();
+            Progress progress = new Progress();
+            String res = progress.progressCalculate(ir);
+            ir.setProgress(res);
+            irRepository.save(ir);
 
             return memberMapper.memberEntityListToDto(result);
         }

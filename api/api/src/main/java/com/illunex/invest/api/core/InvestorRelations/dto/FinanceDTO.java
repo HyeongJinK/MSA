@@ -1,22 +1,17 @@
-package com.illunex.invest.InvestorRelations.persistence.entity;
-
+package com.illunex.invest.api.core.InvestorRelations.dto;
 
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Builder
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "finance")
-public class FinanceEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FinanceDTO {
     Long idx;
+    Long irIdx;
     String currentAsset;                // 유동자산
     String currentLiabilities;          // 유동부채
     String quickAsset;                  // 당좌자산
@@ -44,9 +39,5 @@ public class FinanceEntity {
     String operatingProfit;             // 영업이익
     String netIncome;                   // 당기순이익
 
-    @OneToOne(mappedBy = "finance", fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    IREntity ir;
-
-    @OneToMany(mappedBy = "finance", cascade = CascadeType.ALL)
-    List<FinancialStatusEntity> financialStatus;   // 주요채무현황
+    List<FinancialStatusDTO> financialStatus; // 기존투자유치
 }

@@ -1,10 +1,7 @@
 package com.illunex.invest.InvestorRelations.controller;
 
-import com.illunex.invest.InvestorRelations.service.HistoryServiceImpl;
 import com.illunex.invest.InvestorRelations.service.MemberServiceImpl;
-import com.illunex.invest.api.core.InvestorRelations.controller.HistoryController;
 import com.illunex.invest.api.core.InvestorRelations.controller.MemberController;
-import com.illunex.invest.api.core.InvestorRelations.dto.HistoryDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.MemberDTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

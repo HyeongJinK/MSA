@@ -7,11 +7,10 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberDTO {
+public class ShareholderDTO {
     Long idx;
     Long irIdx;
-    String imgUrl;              // 사진
-    String rank;                // 직급
-    String name;                // 이름
+    String name;                // 주주명
+    String value;               // 금액
     String etc;                 // 비고
 }
