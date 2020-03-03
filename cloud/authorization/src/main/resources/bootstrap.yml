@@ -14,10 +14,10 @@ spring:
       maxInterval: 10000
       maxAttempts: 20
     uri: http://admin:${jhipster.registry.password}@${app.config-server}:8761/config
-
-app:
-  jwtSecret: JWTSuperSecretKey
-  jwtExpirationInMs: 604800000
+security:
+  oauth2:
+    authorization:
+      check-token-access: : isAuthenticated()
 ---
 spring.profiles: test
 app.config-server: jhipster-registry

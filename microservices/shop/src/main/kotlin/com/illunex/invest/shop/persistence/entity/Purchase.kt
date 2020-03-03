@@ -1,6 +1,5 @@
 package com.illunex.invest.shop.persistence.entity
 
-import jdk.vm.ci.meta.Local
 import java.time.LocalDateTime
 import javax.persistence.*
 
