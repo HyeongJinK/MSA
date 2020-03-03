@@ -1,6 +1,5 @@
 package com.illunex.invest.InvestorRelations.persistence.entity;
 
-import com.illunex.invest.InvestorRelations.persistence.entity.enumable.NationType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,13 +10,17 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "competitors")
-public class CompetitorsEntity {
+@Table(name = "market_player")
+public class MarketPlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long competitorsIdx;
-    @Enumerated(EnumType.STRING)
-    NationType nation;          // 국가
-    String description;         // 내용
+    Long idx;
+    String area;                // 지역
+    String name;                // 기업명
+    String content;             // 내용
     String sales;               // 매출
+
+    @ManyToOne
+    @JoinColumn(name = "product_idx")
+    ProductEntity product;
 }

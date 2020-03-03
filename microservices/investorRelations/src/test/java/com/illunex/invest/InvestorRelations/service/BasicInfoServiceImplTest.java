@@ -30,10 +30,10 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
         "spring.cloud.config.enabled=false",
         "spring.datasource.url=jdbc:h2:mem:basicInfo"})
 @Transactional
-public class BasicInfoServiceTest {
+public class BasicInfoServiceImplTest {
 
     @Autowired
-    BasicInfoService basicInfoService;
+    BasicInfoServiceImpl basicInfoServiceImpl;
 
     @MockBean
     IRRepository irRepository;
@@ -82,7 +82,7 @@ public class BasicInfoServiceTest {
                 .subsidy(subsidyDTO)
                 .build();
 
-        BasicInfoDTO result = basicInfoService.edit(basicInfoDTO);
+        BasicInfoDTO result = basicInfoServiceImpl.edit(basicInfoDTO);
 
         Assert.assertEquals(result.getAddress(), "1234");
         Assert.assertEquals(result.getAttraction().get(0).getName(), "123444");

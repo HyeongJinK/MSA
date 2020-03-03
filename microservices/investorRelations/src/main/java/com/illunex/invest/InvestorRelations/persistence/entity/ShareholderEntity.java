@@ -10,9 +10,16 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "target_market_and_scale")
-public class TargetMarketAndScaleEntity {
+@Table(name = "shareholder")
+public class ShareholderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
+    String name;                // 주주명
+    String value;               // 금액
+    String etc;                 // 비고
+
+    @ManyToOne
+    @JoinColumn(name = "ir_idx")
+    IREntity ir;
 }
