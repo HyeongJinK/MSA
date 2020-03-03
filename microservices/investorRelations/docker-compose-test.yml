@@ -1,7 +1,7 @@
 version: '2.1'
 
 services:
-  investorRelations:
+  investor-relations:
     build: ./
     mem_limit: 300m
     networks:
