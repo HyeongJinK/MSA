@@ -1,4 +1,5 @@
 server.port: 8081
-spring.security.oauth2.resourceserver.jwt.jwk-set-uri: http://${app.auth-server}:9999/.well-known/jwks.json
-
+---
+spring.profiles: test
+server.port: 80
 

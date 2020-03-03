@@ -19,6 +19,7 @@ logging.level:
   org.hibernate.SQL: debug
 ---
 spring.profiles: test
+server.port: 8080
 
 spring:
   datasource:
