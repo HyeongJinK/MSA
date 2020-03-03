@@ -1,0 +1,15 @@
+version: '2.1'
+
+services:
+  gateway:
+    build: ./cloud/gateway/
+    mem_limit: 300m
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+    networks:
+      - my-network
+    ports:
+      - 8080:8080
+networks:
+  my-network:
+    name: my-network

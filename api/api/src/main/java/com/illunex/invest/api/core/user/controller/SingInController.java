@@ -31,4 +31,6 @@ public interface SingInController {
     })
     @PostMapping({"", "/"})
     ResponseEntity<JwtResponse> signIn(@RequestBody SignInRequest signInRequest);
+//    @GetMapping({"", "/"})
+//    ResponseEntity<JwtResponse> signIn(@RequestParam String username, @RequestParam String password);
 }

@@ -15,6 +15,14 @@ spring:
       maxAttempts: 20
     uri: http://admin:${jhipster.registry.password}@${app.config-server}:8761/config
 
+ribbon:
+  ReadTimeout=60000:
+
+zuul:
+  routes:
+    startup:
+      path: /startup/**
+      url: http://localhost:8081
 ---
 spring.profiles: test
 app.config-server: jhipster-registry
