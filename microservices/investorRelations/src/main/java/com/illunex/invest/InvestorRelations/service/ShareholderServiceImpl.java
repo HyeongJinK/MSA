@@ -58,6 +58,12 @@ public class ShareholderServiceImpl implements CommonIRListService<ShareholderDT
 
             List<ShareholderEntity> result = shareholderRepository.saveAll(shareholderEntities);
 
+            IREntity ir = irRepository.findById(irIdx).get();
+            Progress progress = new Progress();
+            String res = progress.progressCalculate(ir);
+            ir.setProgress(res);
+            irRepository.save(ir);
+
             return shareholderMapper.shareholderEntityListToDto(result);
         }
 

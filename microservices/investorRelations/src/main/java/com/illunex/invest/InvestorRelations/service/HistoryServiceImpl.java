@@ -57,6 +57,12 @@ public class HistoryServiceImpl implements CommonIRListService<HistoryDTO> {
 
             List<HistoryEntity> result = historyRepository.saveAll(historyEntities);
 
+            IREntity ir = irRepository.findById(irIdx).get();
+            Progress progress = new Progress();
+            String res = progress.progressCalculate(ir);
+            ir.setProgress(res);
+            irRepository.save(ir);
+
             return historyMapper.historyEntityListToDto(result);
         }
 

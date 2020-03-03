@@ -58,6 +58,12 @@ public class MemberServiceImpl implements CommonIRListService<MemberDTO> {
 
             List<MemberEntity> result = memberRepository.saveAll(memberEntities);
 
+            IREntity ir = irRepository.findById(irIdx).get();
+            Progress progress = new Progress();
+            String res = progress.progressCalculate(ir);
+            ir.setProgress(res);
+            irRepository.save(ir);
+
             return memberMapper.memberEntityListToDto(result);
         }
 

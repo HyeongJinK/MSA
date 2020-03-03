@@ -44,7 +44,8 @@ public class FinanceServiceImpl implements CommonIRService<FinanceDTO> {
         if (irRepository.findById(financeDTO.getIrIdx()).isEmpty()) {
             return FinanceDTO.builder().tax("unavailable").build();
         } else {
-            finance.setIdx(irRepository.findById(financeDTO.getIrIdx()).get().getFinance().getIdx());
+            Long irIdx = financeDTO.getIrIdx();
+            finance.setIdx(irRepository.findById(irIdx).get().getFinance().getIdx());
 
             financialStatusRepository.deleteAllByFinanceIdx(finance.getIdx());
 
@@ -55,6 +56,12 @@ public class FinanceServiceImpl implements CommonIRService<FinanceDTO> {
             }
 
             FinanceEntity result = financeRepository.save(finance);
+
+            IREntity ir = irRepository.findById(irIdx).get();
+            Progress progress = new Progress();
+            String res = progress.progressCalculate(ir);
+            ir.setProgress(res);
+            irRepository.save(ir);
 
             return financeMapper.entityToDto(result);
         }

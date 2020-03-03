@@ -52,7 +52,8 @@ public class OutcomeServiceImpl implements CommonIRService<OutcomeDTO> {
         if (irRepository.findById(outcomeDTO.getIrIdx()).isEmpty()) {
             return OutcomeDTO.builder().content("unavailable").build();
         } else {
-            outcomeEntity.setIdx(irRepository.findById(outcomeDTO.getIrIdx()).get().getOutcome().getIdx());
+            Long irIdx = outcomeDTO.getIrIdx();
+            outcomeEntity.setIdx(irRepository.findById(irIdx).get().getOutcome().getIdx());
 
             investRepository.deleteAllByOutcomeIdx(outcomeEntity.getIdx());
             awardRepository.deleteAllByOutcomeIdx(outcomeEntity.getIdx());
@@ -83,6 +84,12 @@ public class OutcomeServiceImpl implements CommonIRService<OutcomeDTO> {
             }
 
             OutcomeEntity result = outcomeRepository.save(outcomeEntity);
+
+            IREntity ir = irRepository.findById(irIdx).get();
+            Progress progress = new Progress();
+            String res = progress.progressCalculate(ir);
+            ir.setProgress(res);
+            irRepository.save(ir);
 
             return outcomeMapper.entityToDto(result);
         }

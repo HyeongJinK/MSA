@@ -50,7 +50,8 @@ public class ProductServiceImpl implements CommonIRService<ProductDTO> {
         if (irRepository.findById(productDTO.getIrIdx()).isEmpty()) {
             return ProductDTO.builder().productInformation("unavailable").build();
         } else {
-            productEntity.setIdx(irRepository.findById(productDTO.getIrIdx()).get().getProduct().getIdx());
+            Long irIdx = productDTO.getIrIdx();
+            productEntity.setIdx(irRepository.findById(irIdx).get().getProduct().getIdx());
 
             customerRepository.deleteAllByProductIdx(productEntity.getIdx());
             ipRepository.deleteAllByProductIdx(productEntity.getIdx());
@@ -77,6 +78,12 @@ public class ProductServiceImpl implements CommonIRService<ProductDTO> {
             }
 
             ProductEntity result = productRepository.save(productEntity);
+
+            IREntity ir = irRepository.findById(irIdx).get();
+            Progress progress = new Progress();
+            String res = progress.progressCalculate(ir);
+            ir.setProgress(res);
+            irRepository.save(ir);
 
             return productMapper.entityToDto(result);
         }

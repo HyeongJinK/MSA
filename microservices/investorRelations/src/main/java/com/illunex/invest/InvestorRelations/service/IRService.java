@@ -43,6 +43,7 @@ public class IRService {
                     .product(productEntity)
                     .outcome(outcomeEntity)
                     .isPassword(false)
+                    .progress("0")
                     .readCount(0)
                     .updateDate(LocalDateTime.now())
                     .year(year)

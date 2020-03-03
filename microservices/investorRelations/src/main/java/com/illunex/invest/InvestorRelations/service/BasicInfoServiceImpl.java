@@ -2,6 +2,7 @@ package com.illunex.invest.InvestorRelations.service;
 
 import com.illunex.invest.InvestorRelations.persistence.entity.AttractionEntity;
 import com.illunex.invest.InvestorRelations.persistence.entity.BasicInfoEntity;
+import com.illunex.invest.InvestorRelations.persistence.entity.IREntity;
 import com.illunex.invest.InvestorRelations.persistence.entity.SubsidyEntity;
 import com.illunex.invest.InvestorRelations.persistence.repository.AttractionRepository;
 import com.illunex.invest.InvestorRelations.persistence.repository.BasicInfoRepository;
@@ -47,11 +48,11 @@ public class BasicInfoServiceImpl implements CommonIRService<BasicInfoDTO> {
     public BasicInfoDTO edit(BasicInfoDTO basicInfoDTO) {
         BasicInfoEntity basicInfoEntity = basicInfoMapper.dtoToEntity(basicInfoDTO);
 
-
         if (irRepository.findById(basicInfoDTO.getIrIdx()).isEmpty()) {
             return BasicInfoDTO.builder().name("unavailable").build();
         } else {
-            basicInfoEntity.setIdx(irRepository.findById(basicInfoDTO.getIrIdx()).get().getBasicInfo().getIdx());
+            Long irIdx = basicInfoDTO.getIrIdx();
+            basicInfoEntity.setIdx(irRepository.findById(irIdx).get().getBasicInfo().getIdx());
 
             attractionRepository.deleteAllByBasicInfoIdx(basicInfoEntity.getIdx());
             subsidyRepository.deleteAllByBasicInfoIdx(basicInfoEntity.getIdx());
@@ -68,6 +69,12 @@ public class BasicInfoServiceImpl implements CommonIRService<BasicInfoDTO> {
             }
 
             BasicInfoEntity result = basicInfoRepository.save(basicInfoEntity);
+
+            IREntity ir = irRepository.findById(irIdx).get();
+            Progress progress = new Progress();
+            String res = progress.progressCalculate(ir);
+            ir.setProgress(res);
+            irRepository.save(ir);
 
             return basicInfoMapper.entityToDto(result);
         }
