@@ -71,7 +71,7 @@ public class IRService {
         }
     }
 
-    public String setPassWord(Long irIdx, String password) {
+    public String setPassword(Long irIdx, String password) {
         try {
             IREntity irEntity = irRepository.findById(irIdx).get();
 
@@ -88,7 +88,7 @@ public class IRService {
         }
     }
 
-    public String confirmPassWord(Long irIdx, String password) {
+    public String confirmPassword(Long irIdx, String password) {
         try {
             IREntity irEntity = irRepository.findById(irIdx).get();
             PasswordEncoding passwordEncoding = new PasswordEncoding();
@@ -102,4 +102,25 @@ public class IRService {
             return "Invalid IR Index";
         }
     }
+
+    public String changePassword(Long irIdx, String currentPassword, String newPassword) {
+        try {
+            IREntity irEntity = irRepository.findById(irIdx).get();
+            PasswordEncoding passwordEncoding = new PasswordEncoding();
+
+            if (passwordEncoding.matches(currentPassword, irEntity.getPassword())) {
+                String encodedPassword = passwordEncoding.encode(newPassword);
+
+                irEntity.setPassword(encodedPassword);
+                irRepository.save(irEntity);
+
+                return "Password change complete";
+            } else {
+                return "Invalid password";
+            }
+        } catch (Exception ex){
+            return "Invalid IR Index";
+        }
+    }
+
 }

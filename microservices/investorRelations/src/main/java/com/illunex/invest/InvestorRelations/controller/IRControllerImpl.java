@@ -45,16 +45,25 @@ public class IRControllerImpl implements IRController {
     @CrossOrigin("*")
     @PostMapping("/list/pw/set")
     @Override
-    public ResponseEntity<String> setPassWord(@RequestParam Long irIdx, @RequestParam String password) {
-        String result = IRService.setPassWord(irIdx, password);
+    public ResponseEntity<String> setPassword(@RequestParam Long irIdx, @RequestParam String password) {
+        String result = IRService.setPassword(irIdx, password);
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
     @CrossOrigin("*")
     @PostMapping("/list/pw/confirm")
     @Override
-    public ResponseEntity<String> confirmPassWord(@RequestParam Long irIdx, @RequestParam String password) {
-        String result = IRService.confirmPassWord(irIdx, password);
+    public ResponseEntity<String> confirmPassword(@RequestParam Long irIdx, @RequestParam String password) {
+        String result = IRService.confirmPassword(irIdx, password);
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
+
+    @CrossOrigin("*")
+    @PostMapping("/list/pw/change")
+    @Override
+    public ResponseEntity<String> changePassword(@RequestParam Long irIdx, @RequestParam String currentPassword, @RequestParam String newPassword) {
+        String result = IRService.changePassword(irIdx, currentPassword, newPassword);
+
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
