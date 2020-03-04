@@ -18,7 +18,7 @@ services:
       - 8761:8761
 
   gateway:
-    build: ./cloud/gateway/
+    build: ../invest/gateway/
     mem_limit: 300m
     environment:
       - SPRING_PROFILES_ACTIVE=test
@@ -28,7 +28,7 @@ services:
       - 8080:8080
 
   company:
-    build: ./microservices/company
+    build: ../invest/company
     mem_limit: 300m
     networks:
       - my-network
@@ -36,7 +36,7 @@ services:
       - SPRING_PROFILES_ACTIVE=test
 
   startup:
-    build: ./microservices/startup-composite
+    build: ../invest/startup-composite
     mem_limit: 300m
     networks:
       - my-network
@@ -44,7 +44,7 @@ services:
       - SPRING_PROFILES_ACTIVE=test
 
   user:
-    build: ./microservices/user
+    build: ../invest/user
     mem_limit: 300m
     networks:
       - my-network
