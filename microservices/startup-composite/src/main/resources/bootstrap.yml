@@ -21,3 +21,7 @@ spring:
 spring.profiles: docker
 
 app.config-server: jhipster-registry
+---
+spring.profiles: test
+
+app.config-server: jhipster-registry
