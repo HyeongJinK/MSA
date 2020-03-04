@@ -22,6 +22,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -33,16 +34,6 @@ public class UserController {
     private final JwtTokenUtil jwtTokenUtil;
     private final UserDetailsService userDetailsService;
     private final UserCompositeIntegration userCompositeIntegration;
-
-    @GetMapping(value = "/test")
-    public String test() {
-        return "test";
-    }
-
-    @GetMapping(value = "/test2")
-    public UserDTO test2() {
-        return userCompositeIntegration.signIn("test");
-    }
 
     @PostMapping(value = "/signIn")
     public ResponseEntity<JwtResponse> signIn(@RequestBody SignInRequest request) {
@@ -61,35 +52,35 @@ public class UserController {
             throw new BadCredentialsException("INVALID_CREDENTIALS", e);
         }
     }
-//
-//    @ExceptionHandler(DisabledException.class)
-//    public ResponseEntity<HashMap> DisabledException(DisabledException e) {
-//        HashMap<String, Object> result = new HashMap<>();
-//        result.put("message", "USER_DISABLED");
-//
-//        return new ResponseEntity<>(result, HttpStatus.EXPECTATION_FAILED);
-//    }
-//
-//    @ExceptionHandler(BadCredentialsException.class)
-//    public ResponseEntity<HashMap> BadCredentialsException(BadCredentialsException e) {
-//        HashMap<String, Object> result = new HashMap<>();
-//        result.put("message", "INVALID_CREDENTIALS");
-//
-//        return new ResponseEntity<>(result, HttpStatus.EXPECTATION_FAILED);
-//    }
-//    @ExceptionHandler(UsernameNotFoundException.class)
-//    public ResponseEntity<HashMap> UsernameNotFoundException(UsernameNotFoundException e) {
-//        HashMap<String, Object> result = new HashMap<>();
-//        result.put("message", "UsernameNotFoundException");
-//
-//        return new ResponseEntity<>(result, HttpStatus.EXPECTATION_FAILED);
-//    }
-//
-//    @ExceptionHandler(UsernameSearchEmptyException.class)
-//    public ResponseEntity<HashMap> UsernameSearchEmpty(UsernameSearchEmptyException e) {
-//        HashMap<String, Object> result = new HashMap<>();
-//        result.put("message", "UsernameSearchEmpty");
-//
-//        return new ResponseEntity<>(result, HttpStatus.EXPECTATION_FAILED);
-//    }
+
+    @ExceptionHandler(DisabledException.class)
+    public ResponseEntity<HashMap> DisabledException(DisabledException e) {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("message", "USER_DISABLED");
+
+        return new ResponseEntity<>(result, HttpStatus.EXPECTATION_FAILED);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<HashMap> BadCredentialsException(BadCredentialsException e) {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("message", "INVALID_CREDENTIALS");
+
+        return new ResponseEntity<>(result, HttpStatus.EXPECTATION_FAILED);
+    }
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<HashMap> UsernameNotFoundException(UsernameNotFoundException e) {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("message", "UsernameNotFoundException");
+
+        return new ResponseEntity<>(result, HttpStatus.EXPECTATION_FAILED);
+    }
+
+    @ExceptionHandler(UsernameSearchEmptyException.class)
+    public ResponseEntity<HashMap> UsernameSearchEmpty(UsernameSearchEmptyException e) {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("message", "UsernameSearchEmpty");
+
+        return new ResponseEntity<>(result, HttpStatus.EXPECTATION_FAILED);
+    }
 }
