@@ -22,6 +22,18 @@ spring.profiles: test
 
 spring:
   datasource:
+    url: jdbc:mariadb://15.164.212.141:3306/invest_user
+    username: root
+    password: Illunex123!
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+---
+spring.profiles: test
+
+spring:
+  datasource:
     url: jdbc:mariadb://mariadb/invest_user
     username: root
     password: Illunex123!

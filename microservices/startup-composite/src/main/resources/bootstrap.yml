@@ -1,11 +1,13 @@
 app.config-server: localhost
 
+jwt.secret: illunex
+
 jhipster:
   registry:
     password: admin
 
 spring:
-  application.name: company-composite
+  application.name: startup
   cloud.config:
     failFast: true
     retry:
@@ -18,4 +20,4 @@ spring:
 ---
 spring.profiles: docker
 
-app.config-server: localhost
+app.config-server: jhipster-registry

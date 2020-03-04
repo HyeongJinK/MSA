@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
  * */
 @RequiredArgsConstructor
 public class CompanyRepositoryImpl implements CompanyCustomRepository {
-    private JPAQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
 
     @Override
     public void templateFunc(Long idx) {

@@ -1,5 +1,6 @@
 package com.illunex.invest.api.core.user.controller;
 
+import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.api.core.user.model.JwtResponse;
 import com.illunex.invest.api.core.user.model.SignInRequest;
 import io.swagger.annotations.Api;
@@ -30,5 +31,5 @@ public interface SingInController {
             )
     })
     @PostMapping({"", "/"})
-    ResponseEntity<JwtResponse> signIn(@RequestBody SignInRequest signInRequest);
+    ResponseEntity<UserDTO> signIn(@RequestBody SignInRequest signInRequest);
 }
