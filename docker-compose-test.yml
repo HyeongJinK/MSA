@@ -17,6 +17,39 @@ services:
     ports:
       - 8761:8761
 
+  gateway:
+    build: ./cloud/gateway/
+    mem_limit: 300m
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+    networks:
+      - my-network
+    ports:
+      - 8080:8080
+
+  company:
+    build: ./microservices/company
+    mem_limit: 300m
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+
+  startup:
+    build: ./microservices/startup-composite
+    mem_limit: 300m
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+
+  user:
+    build: ./microservices/user
+    mem_limit: 300m
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
 networks:
   my-network:
     name: my-network
