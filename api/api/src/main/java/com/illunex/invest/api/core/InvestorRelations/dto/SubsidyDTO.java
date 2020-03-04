@@ -13,5 +13,5 @@ public class SubsidyDTO {
     Long idx;
     String name;
     String value;
-    LocalDateTime date;
+    String date;
 }

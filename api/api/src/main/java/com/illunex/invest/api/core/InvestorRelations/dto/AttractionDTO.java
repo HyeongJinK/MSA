@@ -13,5 +13,5 @@ public class AttractionDTO {
     Long idx;
     String name;
     String price;
-    LocalDateTime date;
+    String date;
 }

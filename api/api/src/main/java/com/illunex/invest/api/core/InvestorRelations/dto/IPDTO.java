@@ -13,5 +13,5 @@ public class IPDTO {
     Long idx;
     String applicationNumber;            // 출원번호
     String content;                      // 내용
-    LocalDateTime date;                  // 날짜
+    String date;                         // 날짜
 }

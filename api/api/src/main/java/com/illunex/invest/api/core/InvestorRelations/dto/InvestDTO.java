@@ -13,5 +13,5 @@ public class InvestDTO {
     Long idx;
     String company;                  // 투자사
     String value;                    // 금액
-    LocalDateTime date;              // 날짜
+    String date;                     // 날짜
 }

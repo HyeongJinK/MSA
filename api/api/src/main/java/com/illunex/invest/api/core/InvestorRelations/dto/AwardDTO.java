@@ -13,5 +13,5 @@ public class AwardDTO {
     Long idx;
     String company;                  // 투자사
     String content;                  // 내용
-    LocalDateTime date;              // 날짜
+    String date;                     // 날짜
 }

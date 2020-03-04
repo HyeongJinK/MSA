@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +63,7 @@ public class ShareholderServiceImpl implements CommonIRListService<ShareholderDT
             Progress progress = new Progress();
             String res = progress.progressCalculate(ir);
             ir.setProgress(res);
+            ir.setUpdateDate(LocalDateTime.now());
             irRepository.save(ir);
 
             return shareholderMapper.shareholderEntityListToDto(result);
