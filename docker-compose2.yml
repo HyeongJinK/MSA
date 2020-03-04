@@ -10,6 +10,27 @@ services:
       - my-network
     ports:
       - 8080:8080
+  company:
+    build: ./microservices/company
+    mem_limit: 300m
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+  startup:
+    build: ./microservices/startup-composite
+    mem_limit: 300m
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+  user:
+    build: ./microservices/user
+    mem_limit: 300m
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
 networks:
   my-network:
     name: my-network

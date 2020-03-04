@@ -1,9 +1,9 @@
 package com.illunex.invest.user.service;
 
 import com.illunex.invest.user.exception.DuplicateUserException;
+import com.illunex.invest.user.exception.UsernameNotFoundException;
 import com.illunex.invest.user.exception.UsernameSearchEmptyException;
 import com.illunex.invest.user.persistence.entity.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class UserService {
     protected void userNullCheck(User currentUser) {

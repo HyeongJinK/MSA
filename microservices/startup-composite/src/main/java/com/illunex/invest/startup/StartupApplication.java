@@ -12,7 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
 @EnableFeignClients("com.illunex.invest.startup")
-//@EnableHystrix
+@EnableHystrix
 @EnableDiscoveryClient
 public class StartupApplication {
 	@Bean

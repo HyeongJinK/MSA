@@ -29,8 +29,13 @@ management:
       exposure:
         include: "*"
 ---
-spring.profiles: test
+spring.profiles: docker
 
 app:
   eureka-server: jhipster-registry
 ---
+spring.profiles: test
+
+app:
+  eureka-server: jhipster-registry
+
