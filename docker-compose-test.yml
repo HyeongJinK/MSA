@@ -36,7 +36,7 @@ services:
       - SPRING_PROFILES_ACTIVE=test
 
   startup:
-    build: ../invest/startup-composite
+    build: ../invest/startup
     mem_limit: 300m
     networks:
       - my-network
