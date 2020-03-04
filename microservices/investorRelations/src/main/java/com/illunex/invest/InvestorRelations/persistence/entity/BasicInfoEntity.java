@@ -3,7 +3,6 @@ package com.illunex.invest.InvestorRelations.persistence.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -19,7 +18,7 @@ public class BasicInfoEntity {
     Long idx;
     String name;                         // 기업명
     String address;                      // 주소
-    LocalDateTime establishmentDate;     // 설립일
+    String establishmentDate;            // 설립일
     String corporateNumber;              // 법인등록번호
     String ceo;                          // 대표
     String employeeCount;                // 직원수

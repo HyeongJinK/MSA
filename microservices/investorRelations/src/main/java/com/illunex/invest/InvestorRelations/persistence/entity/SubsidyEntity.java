@@ -3,7 +3,6 @@ package com.illunex.invest.InvestorRelations.persistence.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -18,7 +17,7 @@ public class SubsidyEntity {
     Long idx;
     String name;                // title
     String value;               // 금액
-    LocalDateTime date;         // 날짜
+    String date;                // 날짜
 
     @ManyToOne
     @JoinColumn(name = "basic_info_idx")

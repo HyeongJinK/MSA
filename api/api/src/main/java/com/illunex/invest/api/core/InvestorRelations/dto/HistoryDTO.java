@@ -13,5 +13,5 @@ public class HistoryDTO {
     Long idx;
     Long irIdx;
     String content;
-    LocalDateTime date;
+    String date;
 }

@@ -13,5 +13,5 @@ public class ExportDTO {
     Long idx;
     String content;                  // 내용
     String value;                    // 금액
-    LocalDateTime date;              // 날짜
+    String date;                     // 날짜
 }

@@ -15,7 +15,7 @@ public class BasicInfoDTO {
     Long irIdx;
     String name;                         // 기업명
     String address;                      // 주소
-    LocalDateTime establishmentDate;     // 설립일
+    String establishmentDate;     // 설립일
     String corporateNumber;              // 법인등록번호
     String ceo;                          // 대표
     String employeeCount;                // 직원수
