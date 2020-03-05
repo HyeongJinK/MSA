@@ -31,5 +31,5 @@ public interface SingInController {
             )
     })
     @PostMapping({"", "/"})
-    ResponseEntity<UserDTO> signIn(@RequestBody SignInRequest signInRequest);
+    ResponseEntity<UserDTO> findUser(@RequestBody SignInRequest signInRequest);
 }

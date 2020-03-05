@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "keyword")
 @Getter @Setter
-public class KeywordEntity {
+public class Keyword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long keywordIdx;

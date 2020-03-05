@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "company_member")
 @Getter @Setter
-public class CompanyMemberEntity {
+public class CompanyMember {
     @Id
     Long companyMemberIdx;
     String name;

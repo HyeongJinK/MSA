@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,11 +15,11 @@ import java.util.List;
 , "companyType", "establishmentDate", "employeeCount", "business", "nation"
 , "stocksList", "zipCode", "address", "addressDetail", "mainProductLine"
 , "description", "homePage"})
-public class CompanyEntity {
+public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long companyIdx;
-    Long userIdx;
+    Long userIdx;               // 회사 주인
     String logo;                // 로고
     String name;                // 이름
     String businessNumber;      // 사업자 등록번호
@@ -37,11 +36,11 @@ public class CompanyEntity {
     String description;         // 기업개요
     String homePage;            // 홈페이지
 
-    @OneToMany
-    List<CompanyProductEntity> companyProductEntities;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    List<CompanyProduct> companyProductEntities;
 
-    @OneToMany
-    List<CompanyMemberEntity> companyMemberEntities;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    List<CompanyMember> companyMemberEntities;
 
 
 }

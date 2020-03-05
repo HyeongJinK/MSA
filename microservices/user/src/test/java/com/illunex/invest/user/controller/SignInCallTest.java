@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ApiCallTest {
+public class SignInCallTest {
     @Test
     public void test() {
         String url = "http://localhost:7401/signIn";

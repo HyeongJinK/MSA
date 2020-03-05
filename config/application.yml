@@ -10,7 +10,6 @@ jhipster:
 
 app:
   eureka-server: localhost
-  auth-server: auth-server
 
 
 eureka:

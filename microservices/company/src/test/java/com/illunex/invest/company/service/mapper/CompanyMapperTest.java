@@ -2,21 +2,21 @@ package com.illunex.invest.company.service.mapper;
 
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import com.illunex.invest.company.builder.CompanyBuilder;
-import com.illunex.invest.company.persistence.entity.CompanyEntity;
+import com.illunex.invest.company.persistence.entity.Company;
 import org.junit.Test;
 import org.mapstruct.factory.Mappers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class CompanyEntityMapperTest {
+public class CompanyMapperTest {
     private CompanyMapper mapper = Mappers.getMapper(CompanyMapper.class);
 
     @Test
     public void entryToDtoTest() {
         assertNotNull(mapper);
 
-        CompanyEntity entity = CompanyBuilder.getInstance()
+        Company entity = CompanyBuilder.getInstance()
                 .companyIdx(1l)
                 .name("Test")
                 .entityBuild();
@@ -36,7 +36,7 @@ public class CompanyEntityMapperTest {
                 .name("Test")
                 .dtoBuild();
 
-        CompanyEntity entity = mapper.dtoToEntity(dto);
+        Company entity = mapper.dtoToEntity(dto);
 
         assertEquals(entity.getCompanyIdx(), dto.getCompanyIdx());
         assertEquals(entity.getName(), dto.getName());
