@@ -9,7 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 public class ShareholderDTO {
     Long idx;
-    Long irIdx;
     String name;                // 주주명
     String value;               // 금액
     String etc;                 // 비고

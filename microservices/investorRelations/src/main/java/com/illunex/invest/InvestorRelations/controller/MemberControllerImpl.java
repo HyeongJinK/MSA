@@ -2,6 +2,7 @@ package com.illunex.invest.InvestorRelations.controller;
 
 import com.illunex.invest.InvestorRelations.service.MemberServiceImpl;
 import com.illunex.invest.api.core.InvestorRelations.controller.MemberController;
+import com.illunex.invest.api.core.InvestorRelations.dto.EditDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.MemberDTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,13 +38,8 @@ public class MemberControllerImpl implements MemberController {
     @CrossOrigin("*")
     @PostMapping("/member")
     @Override
-    public ResponseEntity<List<MemberDTO>> editMemberList(@RequestBody List<MemberDTO> memberDTOList) {
-        List<MemberDTO> memberDTOS = memberServiceImpl.editList(memberDTOList);
-
-        if (memberDTOS.get(0).getName().equals("unavailable")) {
-            return new ResponseEntity("Cannot edit member. Invalid IR Index.", HttpStatus.INTERNAL_SERVER_ERROR);
-        } else {
-            return new ResponseEntity(memberDTOS, HttpStatus.OK);
-        }
+    public ResponseEntity<String> editMemberList(@RequestBody EditDTO editDTO) {
+        String result = memberServiceImpl.editList(editDTO.getIrIdx(), editDTO.getMember());
+        return new ResponseEntity(result, HttpStatus.OK);
     }
 }

@@ -38,17 +38,12 @@ public class HistoryServiceImpl implements CommonIRListService<HistoryDTO> {
 
     @Override
     @Transactional
-    public List<HistoryDTO> editList(List<HistoryDTO> infoList) {
+    public String editList(Long irIdx, List<HistoryDTO> infoList) {
         List<HistoryEntity> historyEntities = historyMapper.historyDtoListToEntity(infoList);
 
-        if (irRepository.findById(infoList.get(0).getIrIdx()).isEmpty()) {
-            List<HistoryEntity> historyEntityList = new ArrayList<>();
-            historyEntityList.add(HistoryEntity.builder().content("unavailable").build());
-
-            return historyMapper.historyEntityListToDto(historyEntityList);
+        if (irRepository.findById(irIdx).isEmpty()) {
+            return "Cannot edit history. Invalid IR Index.";
         } else {
-            Long irIdx = infoList.get(0).getIrIdx();
-
             historyRepository.deleteAllByIrIdx(irIdx);
             IREntity irEntity = irRepository.findById(irIdx).get();
 
@@ -56,7 +51,7 @@ public class HistoryServiceImpl implements CommonIRListService<HistoryDTO> {
                 h.setIr(irEntity);
             }
 
-            List<HistoryEntity> result = historyRepository.saveAll(historyEntities);
+            historyRepository.saveAll(historyEntities);
 
             IREntity ir = irRepository.findById(irIdx).get();
             Progress progress = new Progress();
@@ -65,7 +60,7 @@ public class HistoryServiceImpl implements CommonIRListService<HistoryDTO> {
             ir.setUpdateDate(LocalDateTime.now());
             irRepository.save(ir);
 
-            return historyMapper.historyEntityListToDto(result);
+            return "history edit complete";
         }
 
     }

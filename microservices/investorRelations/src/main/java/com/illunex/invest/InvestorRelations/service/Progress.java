@@ -29,7 +29,7 @@ public class Progress {
                 if (!rowNullCheck(ir.getBasicInfo().getCorporateNumber())) ++count;
                 if (!rowNullCheck(ir.getBasicInfo().getEmployeeCount())) ++count;
                 if (!rowNullCheck(ir.getBasicInfo().getEquities())) ++count;
-                if (!rowNullCheck(ir.getBasicInfo().getEstablishmentDate().toString())) ++count;
+                if (!rowNullCheck(ir.getBasicInfo().getEstablishmentDate())) ++count;
                 if (!rowNullCheck(ir.getBasicInfo().getExitPlan())) ++count;
                 if (!rowNullCheck(ir.getBasicInfo().getFaceValue())) ++count;
                 if (!rowNullCheck(ir.getBasicInfo().getHomePage())) ++count;
