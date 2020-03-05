@@ -2,6 +2,7 @@ package com.illunex.invest.api.core.InvestorRelations.controller;
 
 import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.IRDTO;
+import com.illunex.invest.api.core.InvestorRelations.dto.PasswordDTO;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,10 +26,12 @@ public interface IRController {
 
     ResponseEntity<IRDTO> changeCardColor(@RequestParam Long irIdx, @RequestParam String color);
 
-    ResponseEntity<String> setPassword(@RequestParam Long irIdx, @RequestParam String password);
+    ResponseEntity<String> setPassword(@RequestBody PasswordDTO passwordDTO);
 
-    ResponseEntity<String> confirmPassword(@RequestParam Long irIdx, @RequestParam String password);
+    ResponseEntity<String> confirmPassword(@RequestBody PasswordDTO passwordDTO);
 
-    ResponseEntity<String> changePassword(@RequestParam Long irIdx, @RequestParam String currentPassword, @RequestParam String newPassword);
+    ResponseEntity<String> changePassword(@RequestBody PasswordDTO passwordDTO);
+
+    ResponseEntity<String> resetPassword(@RequestParam Long irIdx);
 
 }
