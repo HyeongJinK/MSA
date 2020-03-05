@@ -20,7 +20,7 @@ public class SignInControllerImpl implements SingInController {
     private final SignInService signInService;
 
     @Override
-    public ResponseEntity<UserDTO> signIn(SignInRequest request) {
+    public ResponseEntity<UserDTO> findUser(SignInRequest request) {
         return ResponseEntity.ok(signInService.findByUsername(request.getUsername()));
     }
 
