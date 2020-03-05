@@ -45,16 +45,16 @@ public class UserCompositeIntegration {
         headers.setContentType(MediaType.APPLICATION_JSON);
         //  사용자 추가
 
-        System.out.println("=======================================");
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println(name);
-        System.out.println(businessNumber);
-        System.out.println(restTemplate);
-        System.out.println("=======================================");
+        logger.debug("=======================================");
+        logger.debug(username);
+        logger.debug(password);
+        logger.debug(name);
+        logger.debug(businessNumber);
+        logger.debug(restTemplate.toString());
+        logger.debug("=======================================");
         UserDTO user = restTemplate.postForObject(userUrl + "/signUp", new HttpEntity(new SignUpRequest(username, password, name), headers), UserDTO.class);
         result.put("user", user);
-        System.out.println(user.getId());
+        logger.debug(user.getId().toString());
         //  해당 사용자의 기업추가
         result.put("companyIdx", restTemplate.postForObject(companyUrl + "/register", new HttpEntity(new CompanyRegisterRequest(user.getId(), businessNumber), headers), Long.class));
         // TODO 인증 메일 보내기

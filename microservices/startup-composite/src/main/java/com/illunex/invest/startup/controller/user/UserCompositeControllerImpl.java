@@ -9,17 +9,21 @@ import com.illunex.invest.startup.exception.user.UsernameSearchEmptyException;
 import com.illunex.invest.startup.service.user.JwtTokenUtil;
 import com.illunex.invest.startup.service.user.UserCompositeIntegration;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
 @RestController
@@ -41,10 +45,11 @@ public class UserCompositeControllerImpl implements UserCompositeController {
     }
 
     @Override
-    public ResponseEntity<JwtResponse> signIn(SignInRequest request) {
+    public ResponseEntity<JwtResponse> signIn(SignInRequest request, HttpServletRequest httpServletRequest) {
         authenticate(request.getUsername(), request.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
+
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
