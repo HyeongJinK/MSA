@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface CommonIRListService<T> {
     public List<T> getList(Long irIdx);
-    public List<T> editList(List<T> infoList);
+    public String editList(Long irIdx, List<T> infoList);
 }

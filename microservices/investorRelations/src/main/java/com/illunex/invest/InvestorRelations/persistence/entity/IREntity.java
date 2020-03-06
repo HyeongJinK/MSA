@@ -30,13 +30,13 @@ public class IREntity {
     @JoinColumn(name="basic_info_idx")
     BasicInfoEntity basicInfo;                              // 기본정보
 
-    @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ir")
     List<HistoryEntity> history;                            // 주요연혁
 
-    @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ir")
     List<MemberEntity> member;                              // 주요인력
 
-    @OneToMany(mappedBy = "ir", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ir")
     List<ShareholderEntity> shareholder;                    // 주주현황
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

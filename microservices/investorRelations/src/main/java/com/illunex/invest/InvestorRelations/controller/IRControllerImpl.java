@@ -3,6 +3,7 @@ package com.illunex.invest.InvestorRelations.controller;
 import com.illunex.invest.InvestorRelations.service.IRService;
 import com.illunex.invest.api.core.InvestorRelations.controller.IRController;
 import com.illunex.invest.api.core.InvestorRelations.dto.IRDTO;
+import com.illunex.invest.api.core.InvestorRelations.dto.PasswordDTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
@@ -45,24 +46,32 @@ public class IRControllerImpl implements IRController {
     @CrossOrigin("*")
     @PostMapping("/list/pw/set")
     @Override
-    public ResponseEntity<String> setPassword(@RequestParam Long irIdx, @RequestParam String password) {
-        String result = IRService.setPassword(irIdx, password);
+    public ResponseEntity<String> setPassword(@RequestBody PasswordDTO passwordDTO) {
+        String result = IRService.setPassword(passwordDTO.getIrIdx(), passwordDTO.getPassword());
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
+
+    @CrossOrigin("*")
+    @PostMapping("/list/pw/reset")
+    @Override
+    public ResponseEntity<String> resetPassword(@RequestParam Long irIdx) {
+        String result = IRService.resetPassword(irIdx);
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
     @CrossOrigin("*")
     @PostMapping("/list/pw/confirm")
     @Override
-    public ResponseEntity<String> confirmPassword(@RequestParam Long irIdx, @RequestParam String password) {
-        String result = IRService.confirmPassword(irIdx, password);
+    public ResponseEntity<String> confirmPassword(@RequestBody PasswordDTO passwordDTO) {
+        String result = IRService.confirmPassword(passwordDTO.getIrIdx(), passwordDTO.getPassword());
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
     @CrossOrigin("*")
     @PostMapping("/list/pw/change")
     @Override
-    public ResponseEntity<String> changePassword(@RequestParam Long irIdx, @RequestParam String currentPassword, @RequestParam String newPassword) {
-        String result = IRService.changePassword(irIdx, currentPassword, newPassword);
+    public ResponseEntity<String> changePassword(@RequestBody PasswordDTO passwordDTO) {
+        String result = IRService.changePassword(passwordDTO.getIrIdx(), passwordDTO.getPassword(), passwordDTO.getNewPassword());
 
         return new ResponseEntity(result, HttpStatus.OK);
     }

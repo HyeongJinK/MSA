@@ -39,17 +39,12 @@ public class ShareholderServiceImpl implements CommonIRListService<ShareholderDT
 
     @Override
     @Transactional
-    public List<ShareholderDTO> editList(List<ShareholderDTO> infoList) {
+    public String editList(Long irIdx, List<ShareholderDTO> infoList) {
         List<ShareholderEntity> shareholderEntities = shareholderMapper.shareholderDtoListToEntity(infoList);
 
-        if (irRepository.findById(infoList.get(0).getIrIdx()).isEmpty()) {
-            List<ShareholderEntity> shareholderEntityList = new ArrayList<>();
-            shareholderEntityList.add(ShareholderEntity.builder().name("unavailable").build());
-
-            return shareholderMapper.shareholderEntityListToDto(shareholderEntityList);
+        if (irRepository.findById(irIdx).isEmpty()) {
+            return "Cannot edit shareholder. Invalid IR Index.";
         } else {
-            Long irIdx = infoList.get(0).getIrIdx();
-
             shareholderRepository.deleteAllByIrIdx(irIdx);
             IREntity irEntity = irRepository.findById(irIdx).get();
 
@@ -57,7 +52,7 @@ public class ShareholderServiceImpl implements CommonIRListService<ShareholderDT
                 s.setIr(irEntity);
             }
 
-            List<ShareholderEntity> result = shareholderRepository.saveAll(shareholderEntities);
+            shareholderRepository.saveAll(shareholderEntities);
 
             IREntity ir = irRepository.findById(irIdx).get();
             Progress progress = new Progress();
@@ -66,7 +61,7 @@ public class ShareholderServiceImpl implements CommonIRListService<ShareholderDT
             ir.setUpdateDate(LocalDateTime.now());
             irRepository.save(ir);
 
-            return shareholderMapper.shareholderEntityListToDto(result);
+            return "shareholder edit complete";
         }
 
     }

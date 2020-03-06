@@ -89,6 +89,19 @@ public class IRService {
         }
     }
 
+    public String resetPassword(Long irIdx) {
+        try {
+            IREntity irEntity = irRepository.findById(irIdx).get();
+            irEntity.setPassword("");
+            irEntity.setIsPassword(false);
+            irRepository.save(irEntity);
+
+            return "Password reset complete";
+        } catch (Exception ex) {
+            return "unavailable";
+        }
+    }
+
     public String confirmPassword(Long irIdx, String password) {
         try {
             IREntity irEntity = irRepository.findById(irIdx).get();

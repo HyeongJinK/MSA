@@ -1,5 +1,6 @@
 package com.illunex.invest.api.core.InvestorRelations.controller;
 
+import com.illunex.invest.api.core.InvestorRelations.dto.EditDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.HistoryDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.MemberDTO;
 import io.swagger.annotations.Api;
@@ -23,5 +24,5 @@ public interface MemberController {
 
     ResponseEntity<List<MemberDTO>> getMemberList(@RequestParam Long irIdx);
 
-    ResponseEntity<List<MemberDTO>> editMemberList(@RequestBody List<MemberDTO> memberDTOList);
+    ResponseEntity<String> editMemberList(@RequestBody EditDTO editDTO);
 }
