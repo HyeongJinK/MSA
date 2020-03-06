@@ -1,6 +1,6 @@
 package com.illunex.invest.company.persistence.repository.Impl;
 
-import com.illunex.invest.company.persistence.entity.QCompanyEntity;
+import com.illunex.invest.company.persistence.entity.QCompany;
 import com.illunex.invest.company.persistence.repository.custom.CompanyCustomRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -10,14 +10,14 @@ import lombok.RequiredArgsConstructor;
  * */
 @RequiredArgsConstructor
 public class CompanyRepositoryImpl implements CompanyCustomRepository {
-    private JPAQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
 
     @Override
     public void templateFunc(Long idx) {
         /**
          * 템플릿 함수
          * */
-        QCompanyEntity company = QCompanyEntity.companyEntity;
+        QCompany company = QCompany.company;
 
         queryFactory.selectFrom(company)
                 .where(company.name.eq("test")

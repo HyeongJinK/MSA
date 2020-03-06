@@ -17,8 +17,14 @@ spring:
 
 logging.level:
   org.hibernate.SQL: debug
+
+---
+spring.profiles: docker
+server.port: 8080
+
 ---
 spring.profiles: test
+server.port: 8080
 
 spring:
   datasource:

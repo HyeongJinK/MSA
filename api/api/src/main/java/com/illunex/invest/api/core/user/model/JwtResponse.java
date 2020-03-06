@@ -1,10 +1,10 @@
 package com.illunex.invest.api.core.user.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Getter
+@AllArgsConstructor
 public class JwtResponse {
-    private final String jwtToken;
+    private String jwtToken;
 }

@@ -4,15 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <modules>
-        <module>cloud/gateway</module>
-        <module>cloud/authorization</module>
-<!--        <module>front/startup</module>-->
+<!--        <module>cloud/gateway</module>-->
         <module>microservices/investorRelations</module>
         <module>microservices/company</module>
         <module>microservices/board</module>
         <module>microservices/user</module>
-<!--        <module>microservices/invest</module>-->
-<!--        <module>microservices/shop</module>-->
+        <module>microservices/invest</module>
+        <module>microservices/shop</module>
         <module>microservices/startup-composite</module>
         <module>api/api</module>
         <module>util/common</module>

@@ -2,6 +2,7 @@ package com.illunex.invest.company.controller;
 
 import com.illunex.invest.api.core.company.controller.CompanyController;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
+import com.illunex.invest.api.core.company.model.CompanyRegisterRequest;
 import com.illunex.invest.company.exception.NoneCompanyException;
 import com.illunex.invest.company.service.CompanyService;
 import lombok.RequiredArgsConstructor;
@@ -35,8 +36,10 @@ public class CompanyControllerImpl implements CompanyController {
     }
 
     @Override
-    public ResponseEntity<Long> insertCompany(CompanyDTO companyDTO) {
-        return null;
+    public ResponseEntity<Long> registerCompany(CompanyRegisterRequest request) {
+        return new ResponseEntity<>(companyService.registerCompany(request.getUserIdx()
+                    , request.getBusinessNumber())
+            , HttpStatus.OK);
     }
 
     @ExceptionHandler(NoneCompanyException.class)

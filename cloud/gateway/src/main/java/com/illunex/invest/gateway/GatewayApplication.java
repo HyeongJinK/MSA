@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
-import org.springframework.cloud.sleuth.sampler.SamplerAutoConfiguration;
 
 @EnableZuulProxy
 @EnableDiscoveryClient
@@ -17,7 +16,24 @@ public class GatewayApplication {
 	}
 
 	@Bean
-	public SamplerAutoConfiguration defaultSampler() {
-		return new SamplerAutoConfiguration();
+	public QueryParamPreFilter preFilter() {
+		return new QueryParamPreFilter();
 	}
+
+	@Bean
+	public OkHttpRoutingFilter routeFilter() {
+		return new OkHttpRoutingFilter();
+	}
+
+//	@Bean
+//	public PostFilter postFilter() {
+//		return new PostFilter();
+//	}
+//
+//	@Bean
+//	public ErrorFilter errorFilter() {
+//		return new ErrorFilter();
+//	}
+//
+
 }

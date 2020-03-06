@@ -1,10 +1,9 @@
 package com.illunex.invest.company.controller;
 
+import com.illunex.invest.api.core.user.model.SignInRequest;
 import com.illunex.invest.common.exception.exceptions.TemplateException;
 import com.illunex.invest.company.exception.TestException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TemplateController {
@@ -12,6 +11,17 @@ public class TemplateController {
     public String test() {
         return "test";
     }
+
+    @PostMapping("/test2")
+    public String test2() {
+        return "test2";
+    }
+
+    @PostMapping("/test3")
+    public String test3(@RequestBody SignInRequest signInRequest) {
+        return signInRequest.getUsername();
+    }
+
 
     @GetMapping("/errorTemplate")
     public String errorTemplate() {

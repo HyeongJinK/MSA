@@ -1,7 +1,7 @@
 package com.illunex.invest.company.persistence.repository;
 
 import com.illunex.invest.company.builder.CompanyBuilder;
-import com.illunex.invest.company.persistence.entity.CompanyEntity;
+import com.illunex.invest.company.persistence.entity.Company;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,18 +23,18 @@ public class CompanyRepositoryTest {
 
     @Before
     public void setup() {
-        CompanyEntity companyEntity = CompanyBuilder.getInstance()
+        Company company = CompanyBuilder.getInstance()
                 .userIdx(1l)
                 .name("Test")
                 .entityBuild();
 
-        repository.save(companyEntity);
+        repository.save(company);
     }
 
     @Test
     public void findByUserIdx() {
-        CompanyEntity companyEntity = repository.findByUserIdx(1l).get();
+        Company company = repository.findByUserIdx(1l).get();
 
-        Assert.assertEquals(companyEntity.getName(), "Test");
+        Assert.assertEquals(company.getName(), "Test");
     }
 }
