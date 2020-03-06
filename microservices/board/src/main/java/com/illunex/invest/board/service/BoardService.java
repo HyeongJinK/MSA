@@ -38,14 +38,14 @@ public class BoardService {
                     return BoardDTO.builder().content("deleted").build();
                 } else {
                     Board post = BoardMapper.MAPPER.dtoToEntity(boardDto);
-                    post.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
+                    post.setRegDate(LocalDateTime.now());
                     boardRepository.save(post);
                     return BoardMapper.MAPPER.entityToDto(post);
                 }
             }
         } else {
             Board post = BoardMapper.MAPPER.dtoToEntity(boardDto);
-            post.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
+            post.setRegDate(LocalDateTime.now());
             boardRepository.save(post);
             return BoardMapper.MAPPER.entityToDto(post);
         }

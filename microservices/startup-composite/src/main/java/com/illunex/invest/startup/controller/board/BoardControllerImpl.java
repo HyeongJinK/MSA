@@ -1,24 +1,16 @@
 package com.illunex.invest.startup.controller.board;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.illunex.invest.api.core.board.controller.BoardController;
 import com.illunex.invest.api.core.board.dto.BoardDTO;
-import com.illunex.invest.api.core.user.dto.UserDTO;
-import com.illunex.invest.api.core.user.model.SignUpRequest;
-import com.netflix.ribbon.proxy.annotation.Http;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -41,7 +33,7 @@ public class BoardControllerImpl implements BoardController {
         System.out.println("------postIdx-----"+postIdx);
         try {
             System.out.println("------try-----");
-            ResponseEntity<BoardDTO> result = restTemplate.getForEntity(boardUrl + "/notice?boardIdx={boardIdx}&postIdx={postIdx}", BoardDTO.class, boardIdx, postIdx);
+            ResponseEntity<BoardDTO> result = restTemplate.getForEntity(boardUrl + "/board/notice?boardIdx={boardIdx}&postIdx={postIdx}", BoardDTO.class, boardIdx, postIdx);
             System.out.println("-------result------"+ result);
             return result;
         } catch (RestClientException e) {
