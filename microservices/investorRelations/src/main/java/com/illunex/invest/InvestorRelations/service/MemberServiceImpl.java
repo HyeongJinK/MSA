@@ -39,17 +39,12 @@ public class MemberServiceImpl implements CommonIRListService<MemberDTO> {
 
     @Override
     @Transactional
-    public List<MemberDTO> editList(List<MemberDTO> infoList) {
+    public String editList(Long irIdx, List<MemberDTO> infoList) {
         List<MemberEntity> memberEntities = memberMapper.memberDtoListToEntity(infoList);
 
-        if (irRepository.findById(infoList.get(0).getIrIdx()).isEmpty()) {
-            List<MemberEntity> historyEntityList = new ArrayList<>();
-            historyEntityList.add(MemberEntity.builder().name("unavailable").build());
-
-            return memberMapper.memberEntityListToDto(historyEntityList);
+        if (irRepository.findById(irIdx).isEmpty()) {
+            return "Cannot edit member. Invalid IR Index.";
         } else {
-            Long irIdx = infoList.get(0).getIrIdx();
-
             memberRepository.deleteAllByIrIdx(irIdx);
             IREntity irEntity = irRepository.findById(irIdx).get();
 
@@ -57,7 +52,7 @@ public class MemberServiceImpl implements CommonIRListService<MemberDTO> {
                 h.setIr(irEntity);
             }
 
-            List<MemberEntity> result = memberRepository.saveAll(memberEntities);
+            memberRepository.saveAll(memberEntities);
 
             IREntity ir = irRepository.findById(irIdx).get();
             Progress progress = new Progress();
@@ -66,7 +61,7 @@ public class MemberServiceImpl implements CommonIRListService<MemberDTO> {
             ir.setUpdateDate(LocalDateTime.now());
             irRepository.save(ir);
 
-            return memberMapper.memberEntityListToDto(result);
+            return "member edit complete";
         }
 
     }

@@ -1,7 +1,7 @@
 package com.illunex.invest.api.core.InvestorRelations.controller;
 
-import com.illunex.invest.api.core.InvestorRelations.dto.BasicInfoDTO;
 import com.illunex.invest.api.core.InvestorRelations.dto.HistoryDTO;
+import com.illunex.invest.api.core.InvestorRelations.dto.EditDTO;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,5 +23,5 @@ public interface HistoryController {
 
     ResponseEntity<List<HistoryDTO>> getHistoryList(@RequestParam Long irIdx);
 
-    ResponseEntity<List<HistoryDTO>> editHistoryList(@RequestBody List<HistoryDTO> historyDTOList);
+    ResponseEntity<String> editHistoryList(@RequestBody EditDTO editDTO);
 }

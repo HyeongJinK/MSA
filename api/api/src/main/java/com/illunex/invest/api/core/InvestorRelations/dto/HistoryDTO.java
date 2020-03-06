@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class HistoryDTO {
     Long idx;
-    Long irIdx;
     String content;
     String date;
 }
