@@ -26,7 +26,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/board")
 public class BoardControllerImpl implements BoardController {
     Logger logger = LoggerFactory.getLogger(com.illunex.invest.startup.controller.board.BoardControllerImpl.class);
 
@@ -35,7 +34,6 @@ public class BoardControllerImpl implements BoardController {
 
     private final String boardUrl = "http://board";
 
-    @GetMapping(value = "/notice")
     @Override
     public ResponseEntity<BoardDTO> getPost(Long boardIdx, Long postIdx) {
         System.out.println("------startup composite getPost-----");
