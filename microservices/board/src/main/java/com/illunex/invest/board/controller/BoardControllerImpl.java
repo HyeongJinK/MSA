@@ -34,8 +34,6 @@ public class BoardControllerImpl implements BoardController {
         }
     }
 
-    @CrossOrigin("*")
-    @GetMapping("/notice")
     @Override
     public ResponseEntity<BoardDTO> getPost(@RequestParam Long boardIdx, @RequestParam Long postIdx) {
         BoardDTO post = boardService.getPost(boardIdx, postIdx);
