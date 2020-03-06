@@ -6,10 +6,12 @@ import com.illunex.invest.api.core.user.model.SignInRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
+@RequestMapping(value = "/user")
 public interface UserCompositeController {
     @PostMapping(value = "/signUp")
     ResponseEntity<HashMap> signUp(@RequestBody SignUpRequest signUpRequest);
