@@ -46,12 +46,12 @@ public class OutcomeServiceImpl implements CommonIRService<OutcomeDTO> {
 
     @Override
     @Transactional
-    public OutcomeDTO edit(OutcomeDTO outcomeDTO) {
+    public String edit(OutcomeDTO outcomeDTO) {
         OutcomeEntity outcomeEntity = outcomeMapper.dtoToEntity(outcomeDTO);
 
 
         if (irRepository.findById(outcomeDTO.getIrIdx()).isEmpty()) {
-            return OutcomeDTO.builder().content("unavailable").build();
+            return "Cannot edit outcome. Invalid IR Index.";
         } else {
             Long irIdx = outcomeDTO.getIrIdx();
             outcomeEntity.setIdx(irRepository.findById(irIdx).get().getOutcome().getIdx());
@@ -93,7 +93,7 @@ public class OutcomeServiceImpl implements CommonIRService<OutcomeDTO> {
             ir.setUpdateDate(LocalDateTime.now());
             irRepository.save(ir);
 
-            return outcomeMapper.entityToDto(result);
+            return "Outcome edit success";
         }
     }
 

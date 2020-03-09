@@ -1,5 +1,6 @@
 package com.illunex.invest.ir.controller;
 
+import com.illunex.invest.api.core.ir.dto.ListDTO;
 import com.illunex.invest.ir.service.ShareholderServiceImpl;
 import com.illunex.invest.api.core.ir.controller.ShareholderController;
 import com.illunex.invest.api.core.ir.dto.EditDTO;
@@ -22,21 +23,13 @@ public class ShareholderControllerImpl implements ShareholderController {
         this.shareholderServiceImpl = shareholderServiceImpl;
     }
 
-    @CrossOrigin("*")
-    @GetMapping("/shareholder")
     @Override
-    public ResponseEntity<List<ShareholderDTO>> getShareholderList(Long irIdx) {
-        List<ShareholderDTO> shareholderDTOS = shareholderServiceImpl.getList(irIdx);
+    public ResponseEntity<ListDTO> getShareholderList(Long irIdx) {
+        ListDTO shareholder = shareholderServiceImpl.getList(irIdx);
 
-        if (shareholderDTOS == null) {
-            return new ResponseEntity("shareholder does not exist", HttpStatus.INTERNAL_SERVER_ERROR);
-        } else {
-            return new ResponseEntity(shareholderDTOS, HttpStatus.OK);
-        }
+        return new ResponseEntity(shareholder, HttpStatus.OK);
     }
 
-    @CrossOrigin("*")
-    @PostMapping("/shareholder")
     @Override
     public ResponseEntity<String> editShareholderList(@RequestBody EditDTO editDTO) {
         String result = shareholderServiceImpl.editList(editDTO.getIrIdx(), editDTO.getShareholder());

@@ -1,5 +1,6 @@
 package com.illunex.invest.ir.controller;
 
+import com.illunex.invest.api.core.ir.dto.ListDTO;
 import com.illunex.invest.ir.service.HistoryServiceImpl;
 import com.illunex.invest.api.core.ir.controller.HistoryController;
 import com.illunex.invest.api.core.ir.dto.HistoryDTO;
@@ -22,21 +23,13 @@ public class HistoryControllerImpl implements HistoryController {
         this.historyServiceImpl = historyServiceImpl;
     }
 
-    @CrossOrigin("*")
-    @GetMapping("/history")
     @Override
-    public ResponseEntity<List<HistoryDTO>> getHistoryList(Long irIdx) {
-        List<HistoryDTO> historyDTOS = historyServiceImpl.getList(irIdx);
+    public ResponseEntity<ListDTO> getHistoryList(Long irIdx) {
+        ListDTO history = historyServiceImpl.getList(irIdx);
 
-        if (historyDTOS == null) {
-            return new ResponseEntity("history does not exist", HttpStatus.INTERNAL_SERVER_ERROR);
-        } else {
-            return new ResponseEntity(historyDTOS, HttpStatus.OK);
-        }
+        return new ResponseEntity<>(history, HttpStatus.OK);
     }
 
-    @CrossOrigin("*")
-    @PostMapping("/history")
     @Override
     public ResponseEntity<String> editHistoryList(@RequestBody EditDTO editDTO) {
         String result = historyServiceImpl.editList(editDTO.getIrIdx(), editDTO.getHistory());

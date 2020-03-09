@@ -10,6 +10,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class IRListDTO {
+public class ListDTO {
     List<IRDTO> irList;
+    List<HistoryDTO> historyList;
+    List<MemberDTO> memberList;
+    List<ShareholderDTO> shareholderList;
 }

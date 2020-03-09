@@ -82,16 +82,9 @@ public class BasicInfoServiceImplTest {
                 .subsidy(subsidyDTO)
                 .build();
 
-        BasicInfoDTO result = basicInfoServiceImpl.edit(basicInfoDTO);
+        String result = basicInfoServiceImpl.edit(basicInfoDTO);
 
-        Assert.assertEquals(result.getAddress(), "1234");
-        Assert.assertEquals(result.getAttraction().get(0).getName(), "123444");
-        Assert.assertEquals(result.getAttraction().get(1).getName(), "555");
-        Assert.assertEquals(result.getSubsidy().get(0).getName(), "test");
-        Assert.assertEquals(result.getSubsidy().get(0).getValue(), "test");
-
-
+        Assert.assertEquals(result, "BasicInfo edit success");
     }
-
 
 }

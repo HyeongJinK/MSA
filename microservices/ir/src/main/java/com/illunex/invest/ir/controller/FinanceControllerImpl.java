@@ -19,8 +19,6 @@ public class FinanceControllerImpl implements FinanceController {
         this.financeServiceImpl = financeServiceImpl;
     }
 
-    @CrossOrigin("*")
-    @GetMapping("/finance")
     @Override
     public ResponseEntity<FinanceDTO> getFinanceInfo(@RequestParam Long irIdx){
         FinanceDTO financeDTO = financeServiceImpl.get(irIdx);
@@ -32,17 +30,10 @@ public class FinanceControllerImpl implements FinanceController {
         }
     }
 
-    @CrossOrigin("*")
-    @PostMapping("/finance")
     @Override
-    public ResponseEntity<FinanceDTO> editFinanceInfo(FinanceDTO financeDTO) {
-        FinanceDTO finance = financeServiceImpl.edit(financeDTO);
+    public ResponseEntity<String> editFinanceInfo(FinanceDTO financeDTO) {
+        String result = financeServiceImpl.edit(financeDTO);
 
-        if (finance.getTax().equals("unavailable")) {
-            return new ResponseEntity("Cannot edit financeInfo. Invalid IR Index.", HttpStatus.INTERNAL_SERVER_ERROR);
-        } else {
-            return new ResponseEntity(finance, HttpStatus.OK);
-        }
-
+        return new ResponseEntity(result, HttpStatus.OK);
     }
 }

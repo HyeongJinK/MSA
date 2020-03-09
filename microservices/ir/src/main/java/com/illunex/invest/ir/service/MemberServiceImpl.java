@@ -1,5 +1,6 @@
 package com.illunex.invest.ir.service;
 
+import com.illunex.invest.api.core.ir.dto.ListDTO;
 import com.illunex.invest.ir.persistence.entity.IREntity;
 import com.illunex.invest.ir.persistence.entity.MemberEntity;
 import com.illunex.invest.ir.persistence.repository.IRRepository;
@@ -31,10 +32,10 @@ public class MemberServiceImpl implements CommonIRListService<MemberDTO> {
     IRRepository irRepository;
 
     @Override
-    public List<MemberDTO> getList(Long irIdx) {
+    public ListDTO getList(Long irIdx) {
         List<MemberEntity> memberEntities = memberRepository.findAllByIrIdx(irIdx);
-
-        return memberMapper.memberEntityListToDto(memberEntities);
+        List<MemberDTO> result = memberMapper.memberEntityListToDto(memberEntities);
+        return ListDTO.builder().memberList(result).build();
     }
 
     @Override

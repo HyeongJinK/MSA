@@ -3,15 +3,13 @@ package com.illunex.invest.ir.controller;
 import com.illunex.invest.ir.service.IRService;
 import com.illunex.invest.api.core.ir.controller.IRController;
 import com.illunex.invest.api.core.ir.dto.IRDTO;
-import com.illunex.invest.api.core.ir.dto.IRListDTO;
+import com.illunex.invest.api.core.ir.dto.ListDTO;
 import com.illunex.invest.api.core.ir.dto.PasswordDTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class IRControllerImpl implements IRController {
@@ -24,8 +22,8 @@ public class IRControllerImpl implements IRController {
     }
 
     @Override
-    public ResponseEntity<IRListDTO> getIRList(@RequestParam Long companyIdx){
-        IRListDTO ir = IRService.getList(companyIdx);
+    public ResponseEntity<ListDTO> getIRList(@RequestParam Long companyIdx){
+        ListDTO ir = IRService.getList(companyIdx);
         return new ResponseEntity<>(ir, HttpStatus.OK);
     }
 

@@ -19,8 +19,6 @@ public class ProductControllerImpl implements ProductController {
         this.productServiceImpl = productServiceImpl;
     }
 
-    @CrossOrigin("*")
-    @GetMapping("/product")
     @Override
     public ResponseEntity<ProductDTO> getProductInfo(@RequestParam Long irIdx){
         ProductDTO productInfo = productServiceImpl.get(irIdx);
@@ -32,17 +30,11 @@ public class ProductControllerImpl implements ProductController {
         }
     }
 
-    @CrossOrigin("*")
-    @PostMapping("/product")
     @Override
-    public ResponseEntity<ProductDTO> editProductInfo(ProductDTO productInfo) {
-        ProductDTO product = productServiceImpl.edit(productInfo);
+    public ResponseEntity<String> editProductInfo(ProductDTO productInfo) {
+        String result = productServiceImpl.edit(productInfo);
 
-        if (productInfo.getProductInformation().equals("unavailable")) {
-            return new ResponseEntity("Cannot edit ProductInfo. Invalid IR Index.", HttpStatus.INTERNAL_SERVER_ERROR);
-        } else {
-            return new ResponseEntity(product, HttpStatus.OK);
-        }
+        return new ResponseEntity(result, HttpStatus.OK);
 
     }
 }

@@ -1,14 +1,11 @@
 package com.illunex.invest.api.core.ir.controller;
 
-import com.illunex.invest.api.core.ir.dto.BasicInfoDTO;
 import com.illunex.invest.api.core.ir.dto.IRDTO;
-import com.illunex.invest.api.core.ir.dto.IRListDTO;
+import com.illunex.invest.api.core.ir.dto.ListDTO;
 import com.illunex.invest.api.core.ir.dto.PasswordDTO;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Api(produces = "produces Value")
 @RequestMapping(value = "/ir")
@@ -23,7 +20,7 @@ public interface IRController {
 //            @ApiResponse(code = 400, message = "Bad Request")
 //    })
     @GetMapping(value = "/list")
-    ResponseEntity<IRListDTO> getIRList(@RequestParam Long companyIdx);
+    ResponseEntity<ListDTO> getIRList(@RequestParam Long companyIdx);
     @PostMapping(value = "/color")
     ResponseEntity<String> changeCardColor(@RequestBody IRDTO irdto);
     @PostMapping(value = "/pw/set")

@@ -1,5 +1,6 @@
 package com.illunex.invest.ir.service;
 
+import com.illunex.invest.api.core.ir.dto.ListDTO;
 import com.illunex.invest.ir.persistence.entity.IREntity;
 import com.illunex.invest.ir.persistence.entity.ShareholderEntity;
 import com.illunex.invest.ir.persistence.repository.IRRepository;
@@ -31,10 +32,10 @@ public class ShareholderServiceImpl implements CommonIRListService<ShareholderDT
     IRRepository irRepository;
 
     @Override
-    public List<ShareholderDTO> getList(Long irIdx) {
+    public ListDTO getList(Long irIdx) {
         List<ShareholderEntity> shareholderEntities = shareholderRepository.findAllByIrIdx(irIdx);
-
-        return shareholderMapper.shareholderEntityListToDto(shareholderEntities);
+        List<ShareholderDTO> result = shareholderMapper.shareholderEntityListToDto(shareholderEntities);
+        return ListDTO.builder().shareholderList(result).build();
     }
 
     @Override

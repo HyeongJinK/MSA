@@ -1,5 +1,6 @@
 package com.illunex.invest.ir.service;
 
+import com.illunex.invest.api.core.ir.dto.ListDTO;
 import com.illunex.invest.ir.persistence.entity.*;
 import com.illunex.invest.ir.persistence.repository.HistoryRepository;
 import com.illunex.invest.ir.persistence.repository.IRRepository;
@@ -30,10 +31,10 @@ public class HistoryServiceImpl implements CommonIRListService<HistoryDTO> {
     IRRepository irRepository;
 
     @Override
-    public List<HistoryDTO> getList(Long irIdx) {
+    public ListDTO getList(Long irIdx) {
         List<HistoryEntity> historyEntities = historyRepository.findAllByIrIdx(irIdx);
-
-        return historyMapper.historyEntityListToDto(historyEntities);
+        List<HistoryDTO> result = historyMapper.historyEntityListToDto(historyEntities);
+        return ListDTO.builder().historyList(result).build();
     }
 
     @Override
@@ -62,6 +63,5 @@ public class HistoryServiceImpl implements CommonIRListService<HistoryDTO> {
 
             return "history edit complete";
         }
-
     }
 }

@@ -4,7 +4,7 @@ import com.illunex.invest.ir.persistence.entity.*;
 import com.illunex.invest.ir.persistence.repository.IRRepository;
 import com.illunex.invest.ir.service.mapper.IRMapper;
 import com.illunex.invest.api.core.ir.dto.IRDTO;
-import com.illunex.invest.api.core.ir.dto.IRListDTO;
+import com.illunex.invest.api.core.ir.dto.ListDTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mapstruct.factory.Mappers;
@@ -23,7 +23,7 @@ public class IRService {
     @Autowired
     IRRepository irRepository;
 
-    public IRListDTO getList(Long companyIdx) {
+    public ListDTO getList(Long companyIdx) {
         String year = String.valueOf(LocalDateTime.now().getYear());
         IREntity currentYearIR = irRepository.findByCompanyIdxAndYear(companyIdx, year);
 
@@ -54,7 +54,7 @@ public class IRService {
             irRepository.save(irEntity);
         }
         List<IRDTO> result = irMapper.entityListToDtoList(irRepository.findAllByCompanyIdx(companyIdx));
-        return IRListDTO.builder().irList(result).build();
+        return ListDTO.builder().irList(result).build();
     }
 
     private String setColor() {

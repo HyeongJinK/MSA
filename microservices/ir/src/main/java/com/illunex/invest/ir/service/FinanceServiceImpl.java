@@ -38,12 +38,12 @@ public class FinanceServiceImpl implements CommonIRService<FinanceDTO> {
 
     @Override
     @Transactional
-    public FinanceDTO edit(FinanceDTO financeDTO) {
+    public String edit(FinanceDTO financeDTO) {
         FinanceEntity finance = financeMapper.dtoToEntity(financeDTO);
 
 
         if (irRepository.findById(financeDTO.getIrIdx()).isEmpty()) {
-            return FinanceDTO.builder().tax("unavailable").build();
+            return "Cannot edit finance. Invalid IR Index.";
         } else {
             Long irIdx = financeDTO.getIrIdx();
             finance.setIdx(irRepository.findById(irIdx).get().getFinance().getIdx());
@@ -65,7 +65,7 @@ public class FinanceServiceImpl implements CommonIRService<FinanceDTO> {
             ir.setUpdateDate(LocalDateTime.now());
             irRepository.save(ir);
 
-            return financeMapper.entityToDto(result);
+            return "Finance edit success";
         }
     }
 }

@@ -44,12 +44,12 @@ public class ProductServiceImpl implements CommonIRService<ProductDTO> {
 
     @Override
     @Transactional
-    public ProductDTO edit(ProductDTO productDTO) {
+    public String edit(ProductDTO productDTO) {
         ProductEntity productEntity = productMapper.dtoToEntity(productDTO);
 
 
         if (irRepository.findById(productDTO.getIrIdx()).isEmpty()) {
-            return ProductDTO.builder().productInformation("unavailable").build();
+            return "Cannot edit Product. Invalid IR Index.";
         } else {
             Long irIdx = productDTO.getIrIdx();
             productEntity.setIdx(irRepository.findById(irIdx).get().getProduct().getIdx());
@@ -87,7 +87,7 @@ public class ProductServiceImpl implements CommonIRService<ProductDTO> {
             ir.setUpdateDate(LocalDateTime.now());
             irRepository.save(ir);
 
-            return productMapper.entityToDto(result);
+            return "Product edit success";
         }
     }
 

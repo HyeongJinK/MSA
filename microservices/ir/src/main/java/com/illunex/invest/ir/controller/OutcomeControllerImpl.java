@@ -19,8 +19,6 @@ public class OutcomeControllerImpl implements OutcomeController {
         this.outcomeServiceImpl = outcomeServiceImpl;
     }
 
-    @CrossOrigin("*")
-    @GetMapping("/outcome")
     @Override
     public ResponseEntity<OutcomeDTO> getOutcomeInfo(@RequestParam Long irIdx){
         OutcomeDTO outcomeInfo = outcomeServiceImpl.get(irIdx);
@@ -32,17 +30,10 @@ public class OutcomeControllerImpl implements OutcomeController {
         }
     }
 
-    @CrossOrigin("*")
-    @PostMapping("/outcome")
     @Override
-    public ResponseEntity<OutcomeDTO> editOutcomeInfo(OutcomeDTO outcomeInfo) {
-        OutcomeDTO outcome = outcomeServiceImpl.edit(outcomeInfo);
+    public ResponseEntity<String> editOutcomeInfo(OutcomeDTO outcomeInfo) {
+        String result = outcomeServiceImpl.edit(outcomeInfo);
 
-        if (outcome.getContent().equals("unavailable")) {
-            return new ResponseEntity("Cannot edit outcomeInfo. Invalid IR Index.", HttpStatus.INTERNAL_SERVER_ERROR);
-        } else {
-            return new ResponseEntity(outcome, HttpStatus.OK);
-        }
-
+        return new ResponseEntity(result, HttpStatus.OK);
     }
 }

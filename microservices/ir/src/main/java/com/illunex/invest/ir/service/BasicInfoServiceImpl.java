@@ -46,11 +46,11 @@ public class BasicInfoServiceImpl implements CommonIRService<BasicInfoDTO> {
 
     @Override
     @Transactional
-    public BasicInfoDTO edit(BasicInfoDTO basicInfoDTO) {
+    public String edit(BasicInfoDTO basicInfoDTO) {
         BasicInfoEntity basicInfoEntity = basicInfoMapper.dtoToEntity(basicInfoDTO);
 
         if (irRepository.findById(basicInfoDTO.getIrIdx()).isEmpty()) {
-            return BasicInfoDTO.builder().name("unavailable").build();
+            return "Cannot edit BasicInfo. Invalid IR Index.";
         } else {
             Long irIdx = basicInfoDTO.getIrIdx();
             basicInfoEntity.setIdx(irRepository.findById(irIdx).get().getBasicInfo().getIdx());
@@ -69,7 +69,7 @@ public class BasicInfoServiceImpl implements CommonIRService<BasicInfoDTO> {
                 s.setBasicInfo(basicInfoEntity);
             }
 
-            BasicInfoEntity result = basicInfoRepository.save(basicInfoEntity);
+            basicInfoRepository.save(basicInfoEntity);
 
             IREntity ir = irRepository.findById(irIdx).get();
             Progress progress = new Progress();
@@ -78,7 +78,7 @@ public class BasicInfoServiceImpl implements CommonIRService<BasicInfoDTO> {
             ir.setUpdateDate(LocalDateTime.now());
             irRepository.save(ir);
 
-            return basicInfoMapper.entityToDto(result);
+            return "BasicInfo edit success";
         }
     }
 }
