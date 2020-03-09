@@ -1,13 +1,11 @@
 package com.illunex.invest.api.core.board.controller;
 
 import com.illunex.invest.api.core.board.dto.BoardDTO;
+import com.illunex.invest.api.core.board.dto.BoardListDTO;
 import io.swagger.annotations.Api;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Pageable;
 
@@ -26,13 +24,13 @@ public interface BoardController {
 
     @GetMapping(value = "/notice")
     ResponseEntity<BoardDTO> getPost(@RequestParam Long boardIdx, @RequestParam Long postIdx);
-
-    ResponseEntity<Page<BoardDTO>> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable);
-
-    ResponseEntity<BoardDTO> addPost(@RequestBody BoardDTO boardDto);
-
-    ResponseEntity<BoardDTO> updatePost(@RequestBody BoardDTO boardDto);
-
-    ResponseEntity<String> deletePost(@RequestParam Long boardIdx, @RequestParam Long postIdx);
+    @GetMapping(value = "/notices")
+    ResponseEntity<BoardListDTO> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable);
+    @PostMapping(value = "/notice/add")
+    ResponseEntity<String> addPost(@RequestBody BoardDTO boardDto);
+    @PostMapping(value = "/notice/edit")
+    ResponseEntity<String> editPost(@RequestBody BoardDTO boardDto);
+    @PostMapping(value = "/notice/delete")
+    ResponseEntity<String> deletePost(@RequestBody BoardDTO boardDto);
 
 }
