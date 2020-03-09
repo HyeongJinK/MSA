@@ -15,13 +15,18 @@ public class SignUpServiceImpl extends UserService implements SignUpService {
     private UserMapper mapper = Mappers.getMapper(UserMapper.class);
 
     @Override
-    public UserDTO signUp(String username, String password, String name) {
+    public UserDTO signUp(String username, String password, String name, String vender, Long companyIdx) {
         User user = userRepository.findByUsername(username);
 
         DuplicateUserCheck(user);
 
-        return mapper.entityToDto(userRepository.save(User.createUser(username, password, name, "illunex")));
+        return mapper.entityToDto(userRepository.save(
+                User.createCompanyAdminUser(username
+                        , password
+                        , name
+                        , vender
+                        , GenerateToken.CreateToken()
+                        , companyIdx
+                )));
     }
-
-
 }

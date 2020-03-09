@@ -41,6 +41,7 @@ public class UserCompositeControllerImpl implements UserCompositeController {
                 , signUpRequest.getPassword()
                 , signUpRequest.getName()
                 , signUpRequest.getBusinessNumber()
+                , "illunex"
         );
     }
 

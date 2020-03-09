@@ -41,7 +41,7 @@ public class BoardControllerImpl implements BoardController {
         System.out.println("------postIdx-----"+postIdx);
         try {
             System.out.println("------try-----");
-            ResponseEntity<BoardDTO> result = restTemplate.getForEntity(boardUrl + "/notice?boardIdx={boardIdx}&postIdx={postIdx}", BoardDTO.class, boardIdx, postIdx);
+            ResponseEntity<BoardDTO> result = restTemplate.getForEntity(boardUrl + "/board/notice?boardIdx={boardIdx}&postIdx={postIdx}", BoardDTO.class, boardIdx, postIdx);
             System.out.println("-------result------"+ result);
             return result;
         } catch (RestClientException e) {

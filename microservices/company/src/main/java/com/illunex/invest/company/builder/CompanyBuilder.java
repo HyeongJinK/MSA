@@ -1,11 +1,11 @@
 package com.illunex.invest.company.builder;
 
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
-import com.illunex.invest.api.core.company.dto.CompanyMemberDTO;
-import com.illunex.invest.api.core.company.dto.CompanyProductDTO;
+import com.illunex.invest.api.core.company.dto.MemberDTO;
+import com.illunex.invest.api.core.company.dto.ProductDTO;
 import com.illunex.invest.company.persistence.entity.Company;
-import com.illunex.invest.company.persistence.entity.CompanyMember;
-import com.illunex.invest.company.persistence.entity.CompanyProduct;
+import com.illunex.invest.company.persistence.entity.Member;
+import com.illunex.invest.company.persistence.entity.Product;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -30,10 +30,10 @@ public class CompanyBuilder {
     String mainProductLine;
     String description;
     String homePage;
-    List<CompanyProduct> companyProducts;
-    List<CompanyMember> companyMembers;
-    List<CompanyProductDTO> companyProductsDTO;
-    List<CompanyMemberDTO> companyMembersDTO;
+    List<Product> products;
+    List<Member> members;
+    List<ProductDTO> companyProductsDTO;
+    List<MemberDTO> companyMembersDTO;
 
     public static CompanyBuilder getInstance() {
         return new CompanyBuilder();
@@ -90,16 +90,16 @@ public class CompanyBuilder {
     public CompanyBuilder homePage(String homePage) {
         this.homePage = homePage; return this;
     }
-    public CompanyBuilder companyProducts(List<CompanyProduct> companyProducts) {
-        this.companyProducts = companyProducts; return this;
+    public CompanyBuilder companyProducts(List<Product> products) {
+        this.products = products; return this;
     }
-    public CompanyBuilder companyMembers(List<CompanyMember> companyMembers) {
-        this.companyMembers = companyMembers; return this;
+    public CompanyBuilder companyMembers(List<Member> members) {
+        this.members = members; return this;
     }
-    public CompanyBuilder companyProductsDTO(List<CompanyProductDTO> companyProductsDTO) {
+    public CompanyBuilder companyProductsDTO(List<ProductDTO> companyProductsDTO) {
         this.companyProductsDTO = companyProductsDTO; return this;
     }
-    public CompanyBuilder companyMembersDTO(List<CompanyMemberDTO> companyMembersDTO) {
+    public CompanyBuilder companyMembersDTO(List<MemberDTO> companyMembersDTO) {
         this.companyMembersDTO = companyMembersDTO; return this;
     }
 
@@ -107,7 +107,7 @@ public class CompanyBuilder {
         return new Company(companyIdx, userIdx, logo, name, businessNumber
                 , companyType, establishmentDate, employeeCount, business, nation
                 , stocksList, zipCode, address, addressDetail, mainProductLine
-                , description, homePage, companyProducts, companyMembers);
+                , description, homePage, products, members);
     }
     public CompanyDTO dtoBuild() {
         return new CompanyDTO(companyIdx, userIdx, logo, name, businessNumber

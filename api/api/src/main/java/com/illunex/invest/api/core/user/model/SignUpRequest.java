@@ -11,4 +11,6 @@ public class SignUpRequest {
     String username;
     String password;
     String name;
+    String vender;
+    Long companyIdx;
 }

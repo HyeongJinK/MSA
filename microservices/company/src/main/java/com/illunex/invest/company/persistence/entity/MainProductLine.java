@@ -6,9 +6,10 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "keyword")
+@Table(name = "main_product_line")
 @Getter @Setter
-public class Keyword {
+public class MainProductLine {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    String title;
 }

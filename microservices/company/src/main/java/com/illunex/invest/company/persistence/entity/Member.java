@@ -6,9 +6,13 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "keyword")
+@Table(name = "member")
 @Getter @Setter
-public class Keyword {
+public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    Long companyMemberIdx;
+    String name;
+    String rank;
+    String career;
+    String imgUrl;
 }

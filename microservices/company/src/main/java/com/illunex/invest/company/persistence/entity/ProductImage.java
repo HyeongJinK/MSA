@@ -1,14 +1,11 @@
 package com.illunex.invest.company.persistence.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "keyword")
-@Getter @Setter
-public class Keyword {
+@Table(name = "product_image")
+public class ProductImage {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    String imgUrl;
 }

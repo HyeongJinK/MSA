@@ -7,6 +7,8 @@ import java.sql.Timestamp;
 @Builder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BoardDTO {
     private Long postIdx;
     private Long boardIdx;

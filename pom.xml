@@ -10,7 +10,7 @@
         <module>microservices/user</module>
         <module>microservices/invest</module>
         <module>microservices/shop</module>
-        <module>microservices/mail</module>
+        <module>microservices/communication</module>
         <module>microservices/startup-composite</module>
         <module>api/api</module>
         <module>util/common</module>
