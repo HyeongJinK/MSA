@@ -21,7 +21,7 @@ public interface CompanyController {
 
     @ApiOperation(value = "회사번호로 회사 조회")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "companyId"
+            @ApiImplicitParam(name = "id"
                     , value = "회사번호"
                     , required = true
                     , dataType = "CompanyDTO"
@@ -34,7 +34,7 @@ public interface CompanyController {
             @ApiResponse(code = 400, message = "Bad Request")
     })
     @GetMapping("/read/{companyId}")
-    ResponseEntity<CompanyDTO> getCompany(@PathVariable Long companyId);
+    ResponseEntity<CompanyDTO> getCompany(@PathVariable Long id);
 
     @ApiOperation(value = "회사번호에 일치하는 회사 업데이트")
     @PostMapping("/form")

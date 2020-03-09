@@ -17,9 +17,9 @@ public interface ProductMapper {
     ProductDTO entityToDto(Product product);
     Product dtoToEntity(ProductDTO productDTO);
 
-    List<ProductImage> imageToEntity(List<ProductImageDTO> productImageDTOS);
-    List<Keyword> keywordToEntity(List<KeywordDTO> keywordDTOS);
-    Company companyToEntity(CompanyDTO companyDTO);
+    List<ProductImage> imageToEntity(List<ProductImageDTO> productImages);
+    List<Keyword> keywordToEntity(List<KeywordDTO> keywords);
+    Company companyToEntity(CompanyDTO company);
 
     List<ProductImageDTO> imageToDto(List<ProductImage> productImages);
     List<KeywordDTO> keywordToDto(List<Keyword> keywords);

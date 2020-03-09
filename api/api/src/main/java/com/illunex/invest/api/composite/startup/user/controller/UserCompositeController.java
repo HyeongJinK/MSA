@@ -14,7 +14,7 @@ import java.util.HashMap;
 @RequestMapping(value = "/user")
 public interface UserCompositeController {
     @PostMapping(value = "/signUp")
-    ResponseEntity<HashMap> signUp(@RequestBody SignUpRequest signUpRequest);
+    ResponseEntity<HashMap<String, Object>> signUp(@RequestBody SignUpRequest signUpRequest);
     @PostMapping(value = "/signIn")
     ResponseEntity<JwtResponse> signIn(@RequestBody SignInRequest signInRequest, HttpServletRequest httpServletRequest);
 }

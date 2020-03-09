@@ -19,9 +19,9 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyMapper mapper = Mappers.getMapper(CompanyMapper.class);
     private final CompanyRepository companyRepository;
 
-    public CompanyDTO getCompanyByUserIdx(final Long userIdx) {
-        Company company = companyRepository.findByUserIdx(userIdx).orElseGet(() -> {
-            throw new NoneCompanyException(userIdx.toString());
+    public CompanyDTO getCompanyById(final Long id) {
+        Company company = companyRepository.findById(id).orElseGet(() -> {
+            throw new NoneCompanyException(id.toString());
         });
         return mapper.entityToDto(company);
     }

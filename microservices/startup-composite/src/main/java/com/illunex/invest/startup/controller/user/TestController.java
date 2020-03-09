@@ -1,5 +1,7 @@
 package com.illunex.invest.startup.controller.user;
 
+import com.illunex.invest.startup.service.company.CompanyCompositeIntegration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
+    @Autowired
+    CompanyCompositeIntegration companyCompositeIntegration;
+
     @GetMapping("/testUser")
     public void userTest() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -24,5 +29,10 @@ public class TestController {
                 System.out.println(role.getAuthority());
             }
         }
+    }
+
+    @GetMapping("/testProduct")
+    public void productTest() {
+        companyCompositeIntegration.test();
     }
 }
