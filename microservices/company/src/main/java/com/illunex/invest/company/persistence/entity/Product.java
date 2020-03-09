@@ -1,6 +1,8 @@
 package com.illunex.invest.company.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import java.util.List;
 @Entity
 @Table(name= "product")
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -24,4 +28,8 @@ public class Product {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "productId")
     List<Keyword> keywords = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "companyId")
+    Company company;
 }

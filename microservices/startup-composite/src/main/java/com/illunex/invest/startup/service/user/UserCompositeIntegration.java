@@ -52,7 +52,7 @@ public class UserCompositeIntegration {
         logger.debug(businessNumber);
         logger.debug(restTemplate.toString());
         logger.debug("=======================================");
-        Long companyIdx = restTemplate.postForObject(companyUrl + "/register", new HttpEntity<>(new CompanyRegisterRequest(businessNumber), headers), Long.class);
+        Long companyIdx = restTemplate.postForObject(companyUrl + "/company/register", new HttpEntity<>(new CompanyRegisterRequest(businessNumber), headers), Long.class);
         result.put("companyIdx", companyIdx);
         UserDTO user = restTemplate.postForObject(userUrl + "/signUp", new HttpEntity<>(new SignUpRequest(username, password, name, vender, companyIdx), headers), UserDTO.class);
         result.put("user", user);

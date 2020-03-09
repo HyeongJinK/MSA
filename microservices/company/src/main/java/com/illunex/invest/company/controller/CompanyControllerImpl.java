@@ -30,15 +30,20 @@ public class CompanyControllerImpl implements CompanyController {
     }
 
     @Override
-    public ResponseEntity<CompanyDTO> getCompany(Long userIdx) {
-        log.debug(userIdx);
-        return new ResponseEntity<>(companyService.getCompanyByUserIdx(userIdx), HttpStatus.OK);
+    public ResponseEntity<CompanyDTO> getCompany(Long userId) {
+        log.debug(userId);
+        return new ResponseEntity<>(companyService.getCompanyByUserIdx(userId), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<CompanyDTO> updateCompany(CompanyDTO companyDTO) {
+
+        return null;
     }
 
     @Override
     public ResponseEntity<Long> registerCompany(CompanyRegisterRequest request) {
-        return new ResponseEntity<>(companyService.registerCompany(request.getUserIdx()
-                    , request.getBusinessNumber())
+        return new ResponseEntity<>(companyService.registerCompany(request.getBusinessNumber())
             , HttpStatus.OK);
     }
 

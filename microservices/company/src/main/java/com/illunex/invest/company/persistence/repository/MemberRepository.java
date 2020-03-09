@@ -1,9 +1,9 @@
 package com.illunex.invest.company.persistence.repository;
 
-import com.illunex.invest.company.persistence.entity.Product;
+import com.illunex.invest.company.persistence.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CompanyProductRepository extends JpaRepository<Product, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long> {
 }

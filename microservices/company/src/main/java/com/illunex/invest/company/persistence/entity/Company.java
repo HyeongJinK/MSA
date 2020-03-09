@@ -34,10 +34,10 @@ public class Company {
     String description;         // 기업개요
     String homePage;            // 홈페이지
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<MainProductLine> mainProductLines = new ArrayList<>();     // 주요제품군
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "company")
     List<Product> productEntities = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)

@@ -28,10 +28,14 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     @Transactional
-    public Long registerCompany(Long userIdx, String businessNumber) {
+    public Long registerCompany(String businessNumber) {
         return companyRepository.save(CompanyBuilder.getInstance()
-                .userIdx(userIdx)
                 .businessNumber(businessNumber)
                 .entityBuild()).getCompanyIdx();
+    }
+
+    @Override
+    public CompanyDTO updateCompany(CompanyDTO companyDTO) {
+        return mapper.entityToDto(companyRepository.save(mapper.dtoToEntity(companyDTO)));
     }
 }
