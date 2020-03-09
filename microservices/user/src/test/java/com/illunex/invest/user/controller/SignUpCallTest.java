@@ -25,7 +25,7 @@ public class SignUpCallTest {
         req_payload.put("username", "test");
         req_payload.put("password", "test1234");
         //String param = "{'username':'test','password': 'test1234'}";
-        SignUpRequest param = new SignUpRequest("test3", "test1234", "akdsjfk");
+        SignUpRequest param = new SignUpRequest("test3", "test1234", "akdsjfk", "illunex", 1L);
         HttpEntity<SignUpRequest> request = new HttpEntity<>(param, headers);
 
         UserDTO response = new RestTemplate().postForObject(url, request , UserDTO.class );

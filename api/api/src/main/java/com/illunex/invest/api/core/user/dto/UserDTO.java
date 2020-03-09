@@ -17,4 +17,6 @@ public class UserDTO {
     private String profileImg;
     private String vender;
     private Long companyIdx;
+    private Boolean certification;
+    private String token;
 }

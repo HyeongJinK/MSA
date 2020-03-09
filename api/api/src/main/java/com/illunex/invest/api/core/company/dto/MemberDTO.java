@@ -1,10 +1,14 @@
 package com.illunex.invest.api.core.company.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter
-public class CompanyMemberDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class MemberDTO {
     Long companyMemberIdx;
     String name;
     String rank;

@@ -36,11 +36,12 @@ public class UserCompositeControllerImpl implements UserCompositeController {
 
 
     @Override
-    public ResponseEntity<HashMap> signUp(SignUpRequest signUpRequest) {
+    public ResponseEntity<HashMap<String, Object>> signUp(SignUpRequest signUpRequest) {
         return userCompositeIntegration.signUp(signUpRequest.getUsername()
                 , signUpRequest.getPassword()
                 , signUpRequest.getName()
                 , signUpRequest.getBusinessNumber()
+                , "illunex"
         );
     }
 

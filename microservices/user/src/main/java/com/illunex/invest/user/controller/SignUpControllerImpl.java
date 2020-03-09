@@ -22,7 +22,9 @@ public class SignUpControllerImpl implements SignUpController {
     public ResponseEntity<UserDTO> signUp(SignUpRequest signUpRequest) {
         return new ResponseEntity(signUpService.signUp(signUpRequest.getUsername()
                     , signUpRequest.getPassword()
-                    , signUpRequest.getName())
+                    , signUpRequest.getName()
+                    , signUpRequest.getVender()
+                    , signUpRequest.getCompanyIdx())
                 , HttpStatus.OK);
     }
 

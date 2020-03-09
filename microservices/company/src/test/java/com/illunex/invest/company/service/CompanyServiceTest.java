@@ -31,25 +31,24 @@ public class CompanyServiceTest {
 
     @Before
     public void setup() {
-        when(companyRepository.findByUserIdx(1l))
+        when(companyRepository.findById(1l))
                 .thenReturn(Optional.of(CompanyBuilder.getInstance()
                         .companyIdx(1l)
                         .name("test")
-                        .userIdx(100l)
                         .entityBuild()));
-        when(companyRepository.findByUserIdx(2l))
+        when(companyRepository.findById(2l))
                 .thenReturn(Optional.empty());
     }
 
     @Test
     public void findByUserIdxTest() {
-        CompanyDTO company = companyService.getCompanyByUserIdx(1l);
+        CompanyDTO company = companyService.getCompanyById(1l);
 
         Assert.assertEquals(company.getName(), "test");
     }
 
     @Test(expected = NoneCompanyException.class)
     public void findByUserIdxNullTest() throws NoneCompanyException {
-        CompanyDTO company = companyService.getCompanyByUserIdx(2l);
+        CompanyDTO company = companyService.getCompanyById(2l);
     }
 }

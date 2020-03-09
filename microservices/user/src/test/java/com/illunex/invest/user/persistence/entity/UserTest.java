@@ -10,7 +10,7 @@ public class UserTest {
 
     @Test
     public void createUser() {
-        User user = User.createUser("username", "password", "testName", "Web");
+        User user = User.createCompanyAdminUser("username", "password", "testName", "Web", "sadf", 1L);
 
         Assert.assertEquals(user.getUsername(), "username");
         Assert.assertEquals(user.getPassword(), User.encodePassword("password"));

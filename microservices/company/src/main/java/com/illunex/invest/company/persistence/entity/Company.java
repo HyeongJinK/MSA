@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,15 +12,13 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(of = {"companyIdx", "userIdx", "logo", "name", "businessNumber"
+@ToString(of = {"companyIdx", "logo", "name", "businessNumber"
 , "companyType", "establishmentDate", "employeeCount", "business", "nation"
-, "stocksList", "zipCode", "address", "addressDetail", "mainProductLine"
-, "description", "homePage"})
+, "stocksList", "zipCode", "address", "addressDetail", "description", "homePage"})
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long companyIdx;
-    Long userIdx;               // 회사 주인
     String logo;                // 로고
     String name;                // 이름
     String businessNumber;      // 사업자 등록번호
@@ -32,15 +31,17 @@ public class Company {
     String zipCode;             // 우편번호
     String address;             // 주소
     String addressDetail;       // 상세주소
-    String mainProductLine;     // 주요제품군
     String description;         // 기업개요
     String homePage;            // 홈페이지
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    List<CompanyProduct> companyProductEntities;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<MainProductLine> mainProductLines = new ArrayList<>();     // 주요제품군
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    List<CompanyMember> companyMemberEntities;
+    List<Product> productEntities = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    List<Member> memberEntities = new ArrayList<>();
 
 
 }

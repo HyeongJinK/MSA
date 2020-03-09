@@ -37,16 +37,22 @@ public class User {
     private String vender;
 
     private Long companyIdx;
+
+    private Boolean certification = false;
+    private String token;
 //    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private List<AccessControl> accessControlList = new ArrayList<>();
 
-    public static User createUser(String username, String password, String name, String vender) {
+    public static User createCompanyAdminUser(String username, String password, String name, String vender, String token, Long companyIdx) {
         return User.builder()
                 .username(username)
                 .password(encodePassword(password))
                 .name(name)
-                .roles(Role.initRoles())
+                .roles(Role.companyAdminRoles())
                 .vender(vender)
+                .certification(false)
+                .token(token)
+                .companyIdx(companyIdx)
                 .build();
     }
 

@@ -19,19 +19,23 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyMapper mapper = Mappers.getMapper(CompanyMapper.class);
     private final CompanyRepository companyRepository;
 
-    public CompanyDTO getCompanyByUserIdx(final Long userIdx) {
-        Company company = companyRepository.findByUserIdx(userIdx).orElseGet(() -> {
-            throw new NoneCompanyException(userIdx.toString());
+    public CompanyDTO getCompanyById(final Long id) {
+        Company company = companyRepository.findById(id).orElseGet(() -> {
+            throw new NoneCompanyException(id.toString());
         });
         return mapper.entityToDto(company);
     }
 
     @Override
     @Transactional
-    public Long registerCompany(Long userIdx, String businessNumber) {
+    public Long registerCompany(String businessNumber) {
         return companyRepository.save(CompanyBuilder.getInstance()
-                .userIdx(userIdx)
                 .businessNumber(businessNumber)
                 .entityBuild()).getCompanyIdx();
+    }
+
+    @Override
+    public CompanyDTO updateCompany(CompanyDTO companyDTO) {
+        return mapper.entityToDto(companyRepository.save(mapper.dtoToEntity(companyDTO)));
     }
 }

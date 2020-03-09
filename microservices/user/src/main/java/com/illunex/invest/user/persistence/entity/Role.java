@@ -30,4 +30,11 @@ public class Role {
         roles.add(new Role("ROLE_USER"));
         return roles;
     }
+
+    public static Set<Role> companyAdminRoles() {
+        Set<Role> roles = new HashSet<>();
+        roles.add(new Role("ROLE_USER"));
+        roles.add(new Role("ROLE_COMPANY_ADMIN"));
+        return roles;
+    }
 }

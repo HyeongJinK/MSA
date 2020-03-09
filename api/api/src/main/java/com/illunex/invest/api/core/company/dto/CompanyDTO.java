@@ -4,20 +4,18 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-@ToString(of = {"companyIdx", "userIdx", "logo", "name", "businessNumber"
+@ToString(of = {"companyIdx", "logo", "name", "businessNumber"
         , "companyType", "establishmentDate", "employeeCount", "business", "nation"
-        , "stocksList", "zipCode", "address", "addressDetail", "mainProductLine"
+        , "stocksList", "zipCode", "address", "addressDetail"
         , "description", "homePage"})
 public class CompanyDTO {
     Long companyIdx;
-    @ApiModelProperty(value="유저 번호", name="userIdx", required=true)
-    Long userIdx;
     @ApiModelProperty(value="로고", name="logo", required=true)
     String logo;
     @ApiModelProperty(value="회사 이름", name="name", required=true)
@@ -42,15 +40,15 @@ public class CompanyDTO {
     String address;
     @ApiModelProperty(value="상세주소", name="addressDetail", required=false)
     String addressDetail;
-    @ApiModelProperty(value="주요제품군", name="mainProductLine", required=false)
-    String mainProductLine;
     @ApiModelProperty(value="기업개요", name="description", required=false)
     String description;
     @ApiModelProperty(value="홈페이지", name="homePage", required=false)
     String homePage;
 
+    @ApiModelProperty(value="주요제품군", name="companyProducts", required=false)
+    List<MainProductLineDTO> mainProductLines = new ArrayList<>();
     @ApiModelProperty(value="상품 리스트", name="companyProducts", required=false)
-    List<CompanyProductDTO> companyProducts;
+    List<ProductDTO> companyProducts;
     @ApiModelProperty(value="팀원 리스트", name="companyMembers", required=false)
-    List<CompanyMemberDTO> companyMembers;
+    List<MemberDTO> companyMembers;
 }

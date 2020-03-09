@@ -24,7 +24,6 @@ public class CompanyRepositoryTest {
     @Before
     public void setup() {
         Company company = CompanyBuilder.getInstance()
-                .userIdx(1l)
                 .name("Test")
                 .entityBuild();
 
@@ -33,7 +32,7 @@ public class CompanyRepositoryTest {
 
     @Test
     public void findByUserIdx() {
-        Company company = repository.findByUserIdx(1l).get();
+        Company company = repository.findById(1l).get();
 
         Assert.assertEquals(company.getName(), "Test");
     }

@@ -37,7 +37,7 @@ public class CompanyControllerTest {
 
     @Before
     public void setup() {
-        when(companyService.getCompanyByUserIdx(1l))
+        when(companyService.getCompanyById(1l))
                 .thenReturn(CompanyBuilder.getInstance()
                         .companyIdx(1l)
                         .name("test")

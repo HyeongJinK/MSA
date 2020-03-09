@@ -9,16 +9,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Api(value = "회사 API")
-@RequestMapping(value = "")
+@RequestMapping(value = "/company")
 public interface CompanyController {
     @ApiOperation(value = "회사 전체 리스트 조회")
-    @GetMapping({"/list"})
+    @GetMapping({"/", ""})
     ResponseEntity<List<CompanyDTO>> getAllList();
 
-    @ApiOperation(value = "유저 번호로 회사 조회")
+    @ApiOperation(value = "회사 신규 등록")
+    @PostMapping("/register")
+    ResponseEntity<Long> registerCompany(@RequestBody CompanyRegisterRequest request);
+
+    @ApiOperation(value = "회사번호로 회사 조회")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userIdx"
-                    , value = "유저번호"
+            @ApiImplicitParam(name = "id"
+                    , value = "회사번호"
                     , required = true
                     , dataType = "CompanyDTO"
                     , paramType = "path"
@@ -29,10 +33,10 @@ public interface CompanyController {
             @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 400, message = "Bad Request")
     })
-    @GetMapping("/user/{userIdx}")
-    ResponseEntity<CompanyDTO> getCompany(@PathVariable Long userIdx);
+    @GetMapping("/read/{companyId}")
+    ResponseEntity<CompanyDTO> getCompany(@PathVariable Long id);
 
-    @ApiOperation(value = "회사 신규 등록")
-    @PostMapping("/register")
-    ResponseEntity<Long> registerCompany(@RequestBody CompanyRegisterRequest request);
+    @ApiOperation(value = "회사번호에 일치하는 회사 업데이트")
+    @PostMapping("/form")
+    ResponseEntity<CompanyDTO> updateCompany(@RequestBody CompanyDTO companyDTO);
 }
