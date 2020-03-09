@@ -2,6 +2,7 @@ package com.illunex.invest.startup.controller.board;
 
 import com.illunex.invest.api.core.board.controller.BoardController;
 import com.illunex.invest.api.core.board.dto.BoardDTO;
+import com.illunex.invest.api.core.board.dto.BoardListDTO;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,13 +33,8 @@ public class BoardControllerImpl implements BoardController {
     }
 
     @Override
-    public ResponseEntity<Page<BoardDTO>> getPostList(Long boardIdx, String subject, Pageable pageable) {
-//        try {
-//            return restTemplate.getForEntity(boardUrl + "/notices?boardIdx={boardIdx}&subject={subject}&page={}&size={}", Page<BoardDTO>, boardIdx, subject, pageable.getPageNumber(), pageable.getPageSize());
-//        } catch (RestClientException e) {
-//            e.printStackTrace();
-//        }
-        return null;
+    public ResponseEntity<BoardListDTO> getPostList(Long boardIdx, String subject, Pageable pageable) {
+        return restTemplate.getForEntity(boardUrl + "/board/notices?boardIdx={boardIdx}&subject={subject}&page={}&size={}", BoardListDTO.class, boardIdx, subject, pageable.getPageNumber(), pageable.getPageSize());
     }
 
     @Override

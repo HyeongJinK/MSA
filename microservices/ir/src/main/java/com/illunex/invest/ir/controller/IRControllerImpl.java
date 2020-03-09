@@ -25,9 +25,7 @@ public class IRControllerImpl implements IRController {
 
     @Override
     public ResponseEntity<IRListDTO> getIRList(@RequestParam Long companyIdx){
-        System.out.println("--- ir getIRList ---"+ companyIdx);
         IRListDTO ir = IRService.getList(companyIdx);
-        System.out.println("--- ir ---"+ ir);
         return new ResponseEntity<>(ir, HttpStatus.OK);
     }
 

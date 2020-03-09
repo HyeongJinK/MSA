@@ -1,6 +1,7 @@
 package com.illunex.invest.api.core.board.controller;
 
 import com.illunex.invest.api.core.board.dto.BoardDTO;
+import com.illunex.invest.api.core.board.dto.BoardListDTO;
 import io.swagger.annotations.Api;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public interface BoardController {
     @GetMapping(value = "/notice")
     ResponseEntity<BoardDTO> getPost(@RequestParam Long boardIdx, @RequestParam Long postIdx);
     @GetMapping(value = "/notices")
-    ResponseEntity<Page<BoardDTO>> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable);
+    ResponseEntity<BoardListDTO> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable);
     @PostMapping(value = "/notice/add")
     ResponseEntity<String> addPost(@RequestBody BoardDTO boardDto);
     @PostMapping(value = "/notice/edit")

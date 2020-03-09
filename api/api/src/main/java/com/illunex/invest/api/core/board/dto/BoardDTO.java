@@ -16,5 +16,4 @@ public class BoardDTO {
     private String subject;
     private LocalDateTime regDate;
     private String content;
-
 }

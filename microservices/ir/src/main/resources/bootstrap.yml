@@ -5,7 +5,7 @@ jhipster:
     password: admin
 
 spring:
-  application.name: investorRelations
+  application.name: ir
   cloud.config:
     failFast: true
     retry:
