@@ -21,8 +21,6 @@ public class BoardControllerImpl implements BoardController {
         this.boardService = boardService;
     }
 
-    @CrossOrigin("*")
-    @GetMapping("/notices")
     @Override
     public ResponseEntity<Page<BoardDTO>> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable) {
         Page<BoardDTO> postList = boardService.getPostList(boardIdx, subject, pageable);
@@ -38,49 +36,39 @@ public class BoardControllerImpl implements BoardController {
     public ResponseEntity<BoardDTO> getPost(@RequestParam Long boardIdx, @RequestParam Long postIdx) {
         BoardDTO post = boardService.getPost(boardIdx, postIdx);
 
-        if (post == null) {
-            return new ResponseEntity("Post does not exist", HttpStatus.INTERNAL_SERVER_ERROR);
-        } else {
-            return new ResponseEntity(post, HttpStatus.OK);
-        }
+        return new ResponseEntity(post, HttpStatus.OK);
     }
 
-    @CrossOrigin("*")
-    @PostMapping("/notice")
     @Override
-    public ResponseEntity<BoardDTO> addPost(@RequestBody BoardDTO boardDto) {
+    public ResponseEntity<String> addPost(@RequestBody BoardDTO boardDto) {
         BoardDTO post = boardService.editPost(boardDto);
 
         if (post.getContent().equals("unavailable")) {
-            return new ResponseEntity("Cannot add Post. Invalid PostIndex.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Cannot add Post. Invalid PostIndex.", HttpStatus.OK);
         } else {
-            return new ResponseEntity(post, HttpStatus.OK);
+            return new ResponseEntity("Post add success", HttpStatus.OK);
         }
     }
 
-    @CrossOrigin("*")
-    @PutMapping("/notice")
     @Override
-    public ResponseEntity<BoardDTO> updatePost(@RequestBody BoardDTO boardDto) {
+    public ResponseEntity<String> editPost(@RequestBody BoardDTO boardDto) {
         BoardDTO post = boardService.editPost(boardDto);
 
         if (post.getContent().equals("unavailable")) {
-            return new ResponseEntity("Cannot update Post. Invalid PostIndex.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Cannot update Post. Invalid PostIndex.", HttpStatus.OK);
         } else if (post.getContent().equals("deleted")) {
-            return new ResponseEntity("Cannot update Post. Post already deleted.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Cannot update Post. Post already deleted.", HttpStatus.OK);
         } else {
-            return new ResponseEntity(post, HttpStatus.OK);
+            return new ResponseEntity("Post edit success", HttpStatus.OK);
         }
     }
 
-    @CrossOrigin("*")
-    @DeleteMapping("/notice")
     @Override
-    public ResponseEntity<String> deletePost(@RequestParam Long boardIdx, @RequestParam Long postIdx) {
-        BoardDTO post = boardService.deletePost(boardIdx, postIdx);
+    public ResponseEntity<String> deletePost(@RequestBody BoardDTO boardDto) {
+        BoardDTO post = boardService.deletePost(boardDto.getBoardIdx(), boardDto.getPostIdx());
 
         if (post == null) {
-            return new ResponseEntity("Cannot delete Post", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Cannot delete Post", HttpStatus.OK);
         } else {
             return new ResponseEntity("Post delete success", HttpStatus.OK);
         }

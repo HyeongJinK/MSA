@@ -26,6 +26,7 @@ public class BoardService {
 
     public BoardDTO getPost(Long boardIdx, Long postIdx) {
         Board post = boardRepository.findByBoardIdxAndPostIdxAndDeleted(boardIdx, postIdx,false);
+
         return BoardMapper.MAPPER.entityToDto(post);
     }
 

@@ -28,19 +28,7 @@ public class BoardControllerImpl implements BoardController {
 
     @Override
     public ResponseEntity<BoardDTO> getPost(Long boardIdx, Long postIdx) {
-        System.out.println("------startup composite getPost-----");
-        System.out.println("------boardIdx-----"+boardIdx);
-        System.out.println("------postIdx-----"+postIdx);
-        try {
-            System.out.println("------try-----");
-            ResponseEntity<BoardDTO> result = restTemplate.getForEntity(boardUrl + "/board/notice?boardIdx={boardIdx}&postIdx={postIdx}", BoardDTO.class, boardIdx, postIdx);
-            System.out.println("-------result------"+ result);
-            return result;
-        } catch (RestClientException e) {
-            System.out.println("------catch-----");
-            e.printStackTrace();
-        }
-        return null;
+        return restTemplate.getForEntity(boardUrl + "/board/notice?boardIdx={boardIdx}&postIdx={postIdx}", BoardDTO.class, boardIdx, postIdx);
     }
 
     @Override
@@ -54,35 +42,24 @@ public class BoardControllerImpl implements BoardController {
     }
 
     @Override
-    public ResponseEntity<BoardDTO> addPost(BoardDTO boardDto) {
+    public ResponseEntity<String> addPost(BoardDTO boardDto) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        try {
-            return restTemplate.postForEntity(boardUrl + "/notice", new HttpEntity(boardDto, headers), BoardDTO.class);
-        } catch (RestClientException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        return restTemplate.postForEntity(boardUrl + "/board/notice/add", new HttpEntity(boardDto, headers), String.class);
     }
 
     @Override
-    public ResponseEntity<BoardDTO> updatePost(BoardDTO boardDto) {
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        try {
-//            return restTemplate.put(boardUrl + "/notice", new HttpEntity(boardDto, headers));
-//        } catch (RestClientException e) {
-//            e.printStackTrace();
-//        }
-
-        return null;
+    public ResponseEntity<String> editPost(BoardDTO boardDto) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return restTemplate.postForEntity(boardUrl + "/board/notice/edit", new HttpEntity(boardDto, headers), String.class);
     }
 
     @Override
-    public ResponseEntity<String> deletePost(Long boardIdx, Long postIdx) {
-
-        return null;
+    public ResponseEntity<String> deletePost(BoardDTO boardDto) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return restTemplate.postForEntity(boardUrl + "/board/notice/delete", new HttpEntity(boardDto, headers), String.class);
    }
 
 }
