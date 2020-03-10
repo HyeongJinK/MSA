@@ -1,6 +1,7 @@
 package com.illunex.invest.ir.service;
 
 import com.illunex.invest.api.core.ir.dto.ListDTO;
+import com.illunex.invest.ir.persistence.entity.HistoryEntity;
 import com.illunex.invest.ir.persistence.entity.IREntity;
 import com.illunex.invest.ir.persistence.entity.ShareholderEntity;
 import com.illunex.invest.ir.persistence.repository.IRRepository;
@@ -22,14 +23,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ShareholderServiceImpl implements CommonIRListService<ShareholderDTO> {
+public class ShareholderServiceImpl extends CommonIRListService<ShareholderDTO> {
     private Log log = LogFactory.getLog(ShareholderServiceImpl.class);
     private ShareholderMapper shareholderMapper = Mappers.getMapper(ShareholderMapper.class);
 
     @Autowired
     ShareholderRepository shareholderRepository;
-    @Autowired
-    IRRepository irRepository;
 
     @Override
     public ListDTO getList(Long irIdx) {
@@ -42,28 +41,19 @@ public class ShareholderServiceImpl implements CommonIRListService<ShareholderDT
     @Transactional
     public String editList(Long irIdx, List<ShareholderDTO> infoList) {
         List<ShareholderEntity> shareholderEntities = shareholderMapper.shareholderDtoListToEntity(infoList);
+        IREntity ir = irRepository.findById(irIdx).orElse(null);
 
-        if (irRepository.findById(irIdx).isEmpty()) {
-            return "Cannot edit shareholder. Invalid IR Index.";
-        } else {
-            shareholderRepository.deleteAllByIrIdx(irIdx);
-            IREntity irEntity = irRepository.findById(irIdx).get();
-
-            for (ShareholderEntity s: shareholderEntities) {
-                s.setIr(irEntity);
-            }
-
+        return editTemplate(ir, () -> {
+            editShareholder(ir, shareholderEntities);
             shareholderRepository.saveAll(shareholderEntities);
+        }, "Cannot edit Shareholder. Invalid IR Index."
+        , "Shareholder edit success");
+    }
 
-            IREntity ir = irRepository.findById(irIdx).get();
-            Progress progress = new Progress();
-            String res = progress.progressCalculate(ir);
-            ir.setProgress(res);
-            ir.setUpdateDate(LocalDateTime.now());
-            irRepository.save(ir);
-
-            return "shareholder edit complete";
+    private void editShareholder(IREntity irEntity, List<ShareholderEntity> shareholderEntities) {
+        shareholderRepository.deleteAllByIrIdx(irEntity.getIdx());
+        for (ShareholderEntity s: shareholderEntities){
+            s.setIr(irEntity);
         }
-
     }
 }
