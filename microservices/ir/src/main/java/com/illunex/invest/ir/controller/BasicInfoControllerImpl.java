@@ -32,4 +32,6 @@ public class BasicInfoControllerImpl implements BasicInfoController {
 
         return new ResponseEntity(result, HttpStatus.OK);
     }
+
+    //test
 }
