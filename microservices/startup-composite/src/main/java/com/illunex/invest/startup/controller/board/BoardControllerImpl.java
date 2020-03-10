@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Arrays;
+
 @RestController
 @RequiredArgsConstructor
 public class BoardControllerImpl implements BoardController {
@@ -30,9 +32,8 @@ public class BoardControllerImpl implements BoardController {
 
     @Override
     public ResponseEntity<Page<BoardDTO>> getPostList(Long boardIdx, String subject, Pageable pageable) {
-        ResponseEntity<HelperPage> data = restTemplate.getForEntity(boardUrl + "/board/notices?boardIdx={boardIdx}&subject={subject}&page={}&size={}", HelperPage.class, boardIdx, subject, pageable.getPageNumber(), pageable.getPageSize());
-        Page<BoardDTO> postList = data.getBody();
-        return new ResponseEntity(postList, HttpStatus.OK);
+        HelperPage<BoardDTO> data = restTemplate.getForObject(boardUrl + "/board/notices?boardIdx={boardIdx}&subject={subject}&page={page}&size={size}", HelperPage.class, boardIdx, subject, pageable.getPageNumber(), pageable.getPageSize());
+        return new ResponseEntity(data, HttpStatus.OK);
     }
 
     @Override

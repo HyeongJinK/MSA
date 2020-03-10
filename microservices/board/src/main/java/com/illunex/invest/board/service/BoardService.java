@@ -20,9 +20,7 @@ public class BoardService {
 
     public Page<BoardDTO> getPostList(Long boardIdx, String subject, Pageable pageable) {
         Page<Board> postList = boardRepository.findAllByBoardIdxAndDeletedAndSubjectContainingOrderByPostIdxDesc(boardIdx, false, subject, pageable);
-        Page<BoardDTO> result = new PageImpl<>(BoardMapper.MAPPER.entityListToDtoList(postList.getContent()), postList.getPageable(), postList.getTotalElements());
-
-        return result;
+        return new PageImpl<>(BoardMapper.MAPPER.entityListToDtoList(postList.getContent()), postList.getPageable(), postList.getTotalElements());
     }
 
     public BoardDTO getPost(Long boardIdx, Long postIdx) {
