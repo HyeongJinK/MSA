@@ -8,8 +8,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Qualifier(value = "CompanyProductRepository")
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<ProductDTO> findByCompanyCompanyIdx(Long companyIdx, Pageable pageable);
+    List<ProductDTO> findByCompanyCompanyIdx(Long companyIdx);
+    ProductDTO save(Product product);
 }
