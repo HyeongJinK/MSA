@@ -30,8 +30,7 @@ public class BasicInfoServiceImpl implements CommonIRService<BasicInfoDTO> {
 
     @Autowired
     BasicInfoRepository basicInfoRepository;
-    @Autowired
-    IRRepository irRepository;
+
     @Autowired
     AttractionRepository attractionRepository;
     @Autowired
@@ -48,37 +47,28 @@ public class BasicInfoServiceImpl implements CommonIRService<BasicInfoDTO> {
     @Transactional
     public String edit(BasicInfoDTO basicInfoDTO) {
         BasicInfoEntity basicInfoEntity = basicInfoMapper.dtoToEntity(basicInfoDTO);
+        IREntity ir = irRepository.findById(basicInfoDTO.getIrIdx()).orElse(null);
 
-        if (irRepository.findById(basicInfoDTO.getIrIdx()).isEmpty()) {
-            return "Cannot edit BasicInfo. Invalid IR Index.";
-        } else {
-            Long irIdx = basicInfoDTO.getIrIdx();
-            basicInfoEntity.setIdx(irRepository.findById(irIdx).get().getBasicInfo().getIdx());
-
-            attractionRepository.deleteAllByBasicInfoIdx(basicInfoEntity.getIdx());
-            subsidyRepository.deleteAllByBasicInfoIdx(basicInfoEntity.getIdx());
-
-            List<AttractionEntity> attractionEntities = basicInfoEntity.getAttraction();
-            List<SubsidyEntity> subsidyEntities = basicInfoEntity.getSubsidy();
-
-            for (AttractionEntity a: attractionEntities) {
-                a.setBasicInfo(basicInfoEntity);
-            }
-
-            for (SubsidyEntity s: subsidyEntities){
-                s.setBasicInfo(basicInfoEntity);
-            }
-
+        return editTemplate(ir, () -> {
+            basicInfoEntity.setIdx(ir.getBasicInfo().getIdx());
+            editAttraction(basicInfoEntity);
+            editSubsidy(basicInfoEntity);
             basicInfoRepository.save(basicInfoEntity);
+        }, "Cannot edit BasicInfo. Invalid IR Index."
+        , "BasicInfo edit success");
+    }
 
-            IREntity ir = irRepository.findById(irIdx).get();
-            Progress progress = new Progress();
-            String res = progress.progressCalculate(ir);
-            ir.setProgress(res);
-            ir.setUpdateDate(LocalDateTime.now());
-            irRepository.save(ir);
+    private void editSubsidy(BasicInfoEntity basicInfoEntity) {
+        subsidyRepository.deleteAllByBasicInfoIdx(basicInfoEntity.getIdx());
+        for (SubsidyEntity s: basicInfoEntity.getSubsidy()){
+            s.setBasicInfo(basicInfoEntity);
+        }
+    }
 
-            return "BasicInfo edit success";
+    private void editAttraction(BasicInfoEntity basicInfoEntity) {
+        attractionRepository.deleteAllByBasicInfoIdx(basicInfoEntity.getIdx());
+        for (AttractionEntity a: basicInfoEntity.getAttraction()) {
+            a.setBasicInfo(basicInfoEntity);
         }
     }
 }
