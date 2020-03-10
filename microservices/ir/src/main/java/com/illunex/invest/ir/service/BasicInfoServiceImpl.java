@@ -1,15 +1,14 @@
 package com.illunex.invest.ir.service;
 
+import com.illunex.invest.api.core.ir.dto.BasicInfoDTO;
 import com.illunex.invest.ir.persistence.entity.AttractionEntity;
 import com.illunex.invest.ir.persistence.entity.BasicInfoEntity;
 import com.illunex.invest.ir.persistence.entity.IREntity;
 import com.illunex.invest.ir.persistence.entity.SubsidyEntity;
 import com.illunex.invest.ir.persistence.repository.AttractionRepository;
 import com.illunex.invest.ir.persistence.repository.BasicInfoRepository;
-import com.illunex.invest.ir.persistence.repository.IRRepository;
 import com.illunex.invest.ir.persistence.repository.SubsidyRepository;
 import com.illunex.invest.ir.service.mapper.BasicInfoMapper;
-import com.illunex.invest.api.core.ir.dto.BasicInfoDTO;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,19 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-
 @Service
 @RequiredArgsConstructor
-public class BasicInfoServiceImpl implements CommonIRService<BasicInfoDTO> {
+public class BasicInfoServiceImpl extends CommonIRService<BasicInfoDTO> {
     private Log log = LogFactory.getLog(BasicInfoServiceImpl.class);
     private BasicInfoMapper basicInfoMapper = Mappers.getMapper(BasicInfoMapper.class);
 
     @Autowired
     BasicInfoRepository basicInfoRepository;
-
     @Autowired
     AttractionRepository attractionRepository;
     @Autowired

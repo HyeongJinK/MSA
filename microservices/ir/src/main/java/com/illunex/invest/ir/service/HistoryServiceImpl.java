@@ -21,14 +21,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class HistoryServiceImpl implements CommonIRListService<HistoryDTO> {
+public class HistoryServiceImpl extends CommonIRListService<HistoryDTO> {
     private Log log = LogFactory.getLog(HistoryServiceImpl.class);
     private HistoryMapper historyMapper = Mappers.getMapper(HistoryMapper.class);
 
     @Autowired
     HistoryRepository historyRepository;
-    @Autowired
-    IRRepository irRepository;
 
     @Override
     public ListDTO getList(Long irIdx) {
@@ -41,27 +39,19 @@ public class HistoryServiceImpl implements CommonIRListService<HistoryDTO> {
     @Transactional
     public String editList(Long irIdx, List<HistoryDTO> infoList) {
         List<HistoryEntity> historyEntities = historyMapper.historyDtoListToEntity(infoList);
+        IREntity ir = irRepository.findById(irIdx).orElse(null);
 
-        if (irRepository.findById(irIdx).isEmpty()) {
-            return "Cannot edit history. Invalid IR Index.";
-        } else {
-            historyRepository.deleteAllByIrIdx(irIdx);
-            IREntity irEntity = irRepository.findById(irIdx).get();
-
-            for (HistoryEntity h: historyEntities) {
-                h.setIr(irEntity);
-            }
-
+        return editTemplate(ir, () -> {
+            editHistory(ir, historyEntities);
             historyRepository.saveAll(historyEntities);
+        }, "Cannot edit History. Invalid IR Index."
+        , "History edit success");
+    }
 
-            IREntity ir = irRepository.findById(irIdx).get();
-            Progress progress = new Progress();
-            String res = progress.progressCalculate(ir);
-            ir.setProgress(res);
-            ir.setUpdateDate(LocalDateTime.now());
-            irRepository.save(ir);
-
-            return "history edit complete";
+    private void editHistory(IREntity irEntity, List<HistoryEntity> historyEntities) {
+        historyRepository.deleteAllByIrIdx(irEntity.getIdx());
+        for (HistoryEntity s: historyEntities){
+            s.setIr(irEntity);
         }
     }
 }
