@@ -1,0 +1,18 @@
+app.config-server: localhost
+
+server:
+  port: 8761
+
+spring:
+  application.name: eureka-server
+  cloud.config:
+    uri: http://${app.config-server}:8888
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+---
+spring.profiles: docker2
+
+app.config-server: config-server
