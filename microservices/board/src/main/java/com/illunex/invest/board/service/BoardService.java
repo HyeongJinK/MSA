@@ -1,7 +1,6 @@
 package com.illunex.invest.board.service;
 
 import com.illunex.invest.api.core.board.dto.BoardDTO;
-import com.illunex.invest.api.core.board.dto.BoardListDTO;
 import com.illunex.invest.board.persistence.entity.Board;
 import com.illunex.invest.board.persistence.repository.BoardRepository;
 import com.illunex.invest.board.service.mapper.BoardMapper;
@@ -11,7 +10,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Service
@@ -20,10 +18,11 @@ public class BoardService {
     @Autowired
     BoardRepository boardRepository;
 
-    public BoardListDTO getPostList(Long boardIdx, String subject, Pageable pageable) {
+    public Page<BoardDTO> getPostList(Long boardIdx, String subject, Pageable pageable) {
         Page<Board> postList = boardRepository.findAllByBoardIdxAndDeletedAndSubjectContainingOrderByPostIdxDesc(boardIdx, false, subject, pageable);
+        Page<BoardDTO> result = new PageImpl<>(BoardMapper.MAPPER.entityListToDtoList(postList.getContent()), postList.getPageable(), postList.getTotalElements());
 
-        return BoardListDTO.builder().boardDTOS(new PageImpl<>(BoardMapper.MAPPER.entityListToDtoList(postList.getContent()), postList.getPageable(), postList.getTotalElements())).build();
+        return result;
     }
 
     public BoardDTO getPost(Long boardIdx, Long postIdx) {

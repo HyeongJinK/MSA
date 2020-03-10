@@ -2,7 +2,6 @@ package com.illunex.invest.board.controller;
 
 import com.illunex.invest.api.core.board.controller.BoardController;
 import com.illunex.invest.api.core.board.dto.BoardDTO;
-import com.illunex.invest.api.core.board.dto.BoardListDTO;
 import com.illunex.invest.board.service.BoardService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,8 +22,8 @@ public class BoardControllerImpl implements BoardController {
     }
 
     @Override
-    public ResponseEntity<BoardListDTO> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable) {
-        BoardListDTO postList = boardService.getPostList(boardIdx, subject, pageable);
+    public ResponseEntity<Page<BoardDTO>> getPostList(@RequestParam Long boardIdx, @RequestParam String subject, Pageable pageable) {
+        Page<BoardDTO> postList = boardService.getPostList(boardIdx, subject, pageable);
 
         return new ResponseEntity(postList, HttpStatus.OK);
     }
