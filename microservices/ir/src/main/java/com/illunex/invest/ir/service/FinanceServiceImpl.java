@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FinanceServiceImpl implements CommonIRService<FinanceDTO> {
+public class FinanceServiceImpl extends CommonIRService<FinanceDTO> {
     private Log log = LogFactory.getLog(FinanceServiceImpl.class);
     private FinanceMapper financeMapper = Mappers.getMapper(FinanceMapper.class);
 

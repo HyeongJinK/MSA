@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDTO> getProductByCompanyIdx(Long companyIdx) {
-        return productRepository.findByCompanyCompanyIdx(companyIdx);
+        return mapper.entityToDto(productRepository.findByCompanyCompanyIdx(companyIdx));
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO edit(ProductDTO productDTO) {
-        return productRepository.save(mapper.dtoToEntity(productDTO));
+        return mapper.entityToDto(productRepository.save(mapper.dtoToEntity(productDTO)));
     }
 
     @Override

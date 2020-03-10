@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProductServiceImpl implements CommonIRService<ProductDTO> {
+public class ProductServiceImpl extends CommonIRService<ProductDTO> {
     private Log log = LogFactory.getLog(ProductServiceImpl.class);
     private ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
 

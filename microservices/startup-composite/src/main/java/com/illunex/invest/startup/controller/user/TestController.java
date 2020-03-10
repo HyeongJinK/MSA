@@ -1,5 +1,6 @@
 package com.illunex.invest.startup.controller.user;
 
+import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.startup.service.company.CompanyCompositeIntegration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,11 +18,12 @@ public class TestController {
     public void userTest() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal != null) {
-            UserDetails userDetails = (UserDetails) principal;
+            UserDTO userDetails = (UserDTO) principal;
 
             String username = userDetails.getUsername();
             String password = userDetails.getPassword();
 
+            System.out.println(userDetails.getCompanyIdx());
             System.out.println(username);
             System.out.println(password);
 

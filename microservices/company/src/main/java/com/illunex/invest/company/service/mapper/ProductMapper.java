@@ -9,6 +9,7 @@ import com.illunex.invest.company.persistence.entity.Keyword;
 import com.illunex.invest.company.persistence.entity.Product;
 import com.illunex.invest.company.persistence.entity.ProductImage;
 import org.mapstruct.Mapper;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -16,6 +17,9 @@ import java.util.List;
 public interface ProductMapper {
     ProductDTO entityToDto(Product product);
     Product dtoToEntity(ProductDTO productDTO);
+
+    List<ProductDTO> entityToDto(List<Product> product);
+    List<Product> dtoToEntity(List<ProductDTO> productDTO);
 
     List<ProductImage> imageToEntity(List<ProductImageDTO> productImages);
     List<Keyword> keywordToEntity(List<KeywordDTO> keywords);

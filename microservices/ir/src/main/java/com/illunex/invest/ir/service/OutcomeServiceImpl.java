@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class OutcomeServiceImpl implements CommonIRService<OutcomeDTO> {
+public class OutcomeServiceImpl extends CommonIRService<OutcomeDTO> {
     private Log log = LogFactory.getLog(OutcomeServiceImpl.class);
     private OutcomeMapper outcomeMapper = Mappers.getMapper(OutcomeMapper.class);
 

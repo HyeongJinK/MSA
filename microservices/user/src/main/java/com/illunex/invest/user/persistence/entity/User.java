@@ -1,9 +1,12 @@
 package com.illunex.invest.user.persistence.entity;
 
+import com.illunex.invest.api.core.user.model.UserInterface;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter @Setter
 @Builder
-public class User {
+public class User implements UserInterface {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long id;
@@ -30,7 +33,7 @@ public class User {
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> authorities = new HashSet<>();
 
     private String profileImg;
 
@@ -48,7 +51,7 @@ public class User {
                 .username(username)
                 .password(encodePassword(password))
                 .name(name)
-                .roles(Role.companyAdminRoles())
+                .authorities(Role.companyAdminRoles())
                 .vender(vender)
                 .certification(false)
                 .token(token)
@@ -59,5 +62,30 @@ public class User {
     public static String encodePassword(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(password);
+    }
+
+    @Override
+    public Collection<Role> getAuthorities() {
+        return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
