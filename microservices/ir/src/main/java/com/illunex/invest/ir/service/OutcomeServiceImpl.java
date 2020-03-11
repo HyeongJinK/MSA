@@ -1,9 +1,9 @@
 package com.illunex.invest.ir.service;
 
+import com.illunex.invest.api.core.ir.dto.OutcomeDTO;
 import com.illunex.invest.ir.persistence.entity.*;
 import com.illunex.invest.ir.persistence.repository.*;
 import com.illunex.invest.ir.service.mapper.OutcomeMapper;
-import com.illunex.invest.api.core.ir.dto.OutcomeDTO;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,10 +11,6 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +20,6 @@ public class OutcomeServiceImpl extends CommonIRService<OutcomeDTO> {
 
     @Autowired
     OutcomeRepository outcomeRepository;
-    @Autowired
-    IRRepository irRepository;
     @Autowired
     InvestRepository investRepository;
     @Autowired
@@ -48,52 +42,52 @@ public class OutcomeServiceImpl extends CommonIRService<OutcomeDTO> {
     @Transactional
     public String edit(OutcomeDTO outcomeDTO) {
         OutcomeEntity outcomeEntity = outcomeMapper.dtoToEntity(outcomeDTO);
+        IREntity ir = irRepository.findById(outcomeDTO.getIrIdx()).orElse(null);
 
+        return editTemplate(ir, () -> {
+            outcomeEntity.setIdx(ir.getOutcome().getIdx());
+            editInvest(outcomeEntity);
+            editAward(outcomeEntity);
+            editExport(outcomeEntity);
+            editFund(outcomeEntity);
+            editPlan(outcomeEntity);
+            outcomeRepository.save(outcomeEntity);
+        }, "Cannot edit outcome. Invalid IR Index."
+        , "outcome edit success");
+    }
 
-        if (irRepository.findById(outcomeDTO.getIrIdx()).isEmpty()) {
-            return "Cannot edit outcome. Invalid IR Index.";
-        } else {
-            Long irIdx = outcomeDTO.getIrIdx();
-            outcomeEntity.setIdx(irRepository.findById(irIdx).get().getOutcome().getIdx());
+    private void editInvest(OutcomeEntity outcomeEntity) {
+        investRepository.deleteAllByOutcomeIdx(outcomeEntity.getIdx());
+        for (InvestEntity s: outcomeEntity.getInvest()){
+            s.setOutcome(outcomeEntity);
+        }
+    }
 
-            investRepository.deleteAllByOutcomeIdx(outcomeEntity.getIdx());
-            awardRepository.deleteAllByOutcomeIdx(outcomeEntity.getIdx());
-            exportRepository.deleteAllByOutcomeIdx(outcomeEntity.getIdx());
-            fundRepository.deleteAllByOutcomeIdx(outcomeEntity.getIdx());
-            planRepository.deleteAllByOutcomeIdx(outcomeEntity.getIdx());
+    private void editAward(OutcomeEntity outcomeEntity) {
+        awardRepository.deleteAllByOutcomeIdx(outcomeEntity.getIdx());
+        for (AwardEntity s: outcomeEntity.getAward()){
+            s.setOutcome(outcomeEntity);
+        }
+    }
 
-            List<InvestEntity> investEntities = outcomeEntity.getInvest();
-            List<AwardEntity> awardEntities = outcomeEntity.getAward();
-            List<ExportEntity> exportEntities = outcomeEntity.getExport();
-            List<FundEntity> fundEntities = outcomeEntity.getFund();
-            List<PlanEntity> planEntities = outcomeEntity.getPlan();
+    private void editExport(OutcomeEntity outcomeEntity) {
+        exportRepository.deleteAllByOutcomeIdx(outcomeEntity.getIdx());
+        for (ExportEntity s: outcomeEntity.getExport()){
+            s.setOutcome(outcomeEntity);
+        }
+    }
 
-            for (InvestEntity i: investEntities) {
-                i.setOutcome(outcomeEntity);
-            }
-            for (AwardEntity a: awardEntities) {
-                a.setOutcome(outcomeEntity);
-            }
-            for (ExportEntity e: exportEntities) {
-                e.setOutcome(outcomeEntity);
-            }
-            for (FundEntity f: fundEntities) {
-                f.setOutcome(outcomeEntity);
-            }
-            for (PlanEntity p: planEntities) {
-                p.setOutcome(outcomeEntity);
-            }
+    private void editFund(OutcomeEntity outcomeEntity) {
+        fundRepository.deleteAllByOutcomeIdx(outcomeEntity.getIdx());
+        for (FundEntity s: outcomeEntity.getFund()){
+            s.setOutcome(outcomeEntity);
+        }
+    }
 
-            OutcomeEntity result = outcomeRepository.save(outcomeEntity);
-
-            IREntity ir = irRepository.findById(irIdx).get();
-            Progress progress = new Progress();
-            String res = progress.progressCalculate(ir);
-            ir.setProgress(res);
-            ir.setUpdateDate(LocalDateTime.now());
-            irRepository.save(ir);
-
-            return "Outcome edit success";
+    private void editPlan(OutcomeEntity outcomeEntity) {
+        planRepository.deleteAllByOutcomeIdx(outcomeEntity.getIdx());
+        for (PlanEntity s: outcomeEntity.getPlan()){
+            s.setOutcome(outcomeEntity);
         }
     }
 

@@ -12,16 +12,16 @@ public abstract class CommonIRService<T> {
 
     abstract public T get(Long irIdx);
     abstract public String edit(T info);
-    protected String editTemplate(IREntity ir, Runnable runnable, String success, String fail) {
+    protected String editTemplate(IREntity ir, Runnable runnable, String fail, String success) {
         if (ir == null) {
-            return success;
+            return fail;
         } else {
             runnable.run();
 
             ir.progressCalculate();
             irRepository.save(ir);
 
-            return fail;
+            return success;
         }
     }
 }

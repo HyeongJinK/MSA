@@ -1,9 +1,9 @@
 package com.illunex.invest.ir.service;
 
+import com.illunex.invest.api.core.ir.dto.ProductDTO;
 import com.illunex.invest.ir.persistence.entity.*;
 import com.illunex.invest.ir.persistence.repository.*;
 import com.illunex.invest.ir.service.mapper.ProductMapper;
-import com.illunex.invest.api.core.ir.dto.ProductDTO;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,10 +11,6 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +20,6 @@ public class ProductServiceImpl extends CommonIRService<ProductDTO> {
 
     @Autowired
     ProductRepository productRepository;
-    @Autowired
-    IRRepository irRepository;
     @Autowired
     CustomerRepository customerRepository;
     @Autowired
@@ -46,49 +40,44 @@ public class ProductServiceImpl extends CommonIRService<ProductDTO> {
     @Transactional
     public String edit(ProductDTO productDTO) {
         ProductEntity productEntity = productMapper.dtoToEntity(productDTO);
+        IREntity ir = irRepository.findById(productDTO.getIrIdx()).orElse(null);
 
+        return editTemplate(ir, () -> {
+            productEntity.setIdx(ir.getProduct().getIdx());
+            editCustomer(productEntity);
+            editIP(productEntity);
+            editMarket(productEntity);
+            editMarketPlayer(productEntity);
+            productRepository.save(productEntity);
+        }, "Cannot edit Product. Invalid IR Index."
+        , "Product edit success");
+    }
 
-        if (irRepository.findById(productDTO.getIrIdx()).isEmpty()) {
-            return "Cannot edit Product. Invalid IR Index.";
-        } else {
-            Long irIdx = productDTO.getIrIdx();
-            productEntity.setIdx(irRepository.findById(irIdx).get().getProduct().getIdx());
-
-            customerRepository.deleteAllByProductIdx(productEntity.getIdx());
-            ipRepository.deleteAllByProductIdx(productEntity.getIdx());
-            marketRepository.deleteAllByProductIdx(productEntity.getIdx());
-            marketPlayerRepository.deleteAllByProductIdx(productEntity.getIdx());
-
-            List<CustomerEntity> customerEntities = productEntity.getCustomer();
-            List<IPEntity> ipEntities = productEntity.getIp();
-            List<MarketEntity> marketEntities = productEntity.getMarket();
-            List<MarketPlayerEntity> marketPlayerEntities = productEntity.getMarketPlayer();
-
-
-            for (CustomerEntity c: customerEntities) {
-                c.setProduct(productEntity);
-            }
-            for (IPEntity i: ipEntities) {
-                i.setProduct(productEntity);
-            }
-            for (MarketEntity m: marketEntities) {
-                m.setProduct(productEntity);
-            }
-            for (MarketPlayerEntity m: marketPlayerEntities) {
-                m.setProduct(productEntity);
-            }
-
-            ProductEntity result = productRepository.save(productEntity);
-
-            IREntity ir = irRepository.findById(irIdx).get();
-            Progress progress = new Progress();
-            String res = progress.progressCalculate(ir);
-            ir.setProgress(res);
-            ir.setUpdateDate(LocalDateTime.now());
-            irRepository.save(ir);
-
-            return "Product edit success";
+    private void editCustomer(ProductEntity productEntity) {
+        customerRepository.deleteAllByProductIdx(productEntity.getIdx());
+        for (CustomerEntity s: productEntity.getCustomer()){
+            s.setProduct(productEntity);
         }
     }
 
+    private void editIP(ProductEntity productEntity) {
+        ipRepository.deleteAllByProductIdx(productEntity.getIdx());
+        for (IPEntity s: productEntity.getIp()){
+            s.setProduct(productEntity);
+        }
+    }
+
+    private void editMarket(ProductEntity productEntity) {
+        marketRepository.deleteAllByProductIdx(productEntity.getIdx());
+        for (MarketEntity s: productEntity.getMarket()){
+            s.setProduct(productEntity);
+        }
+    }
+
+    private void editMarketPlayer(ProductEntity productEntity) {
+        marketPlayerRepository.deleteAllByProductIdx(productEntity.getIdx());
+        for (MarketPlayerEntity s: productEntity.getMarketPlayer()){
+            s.setProduct(productEntity);
+        }
+    }
 }

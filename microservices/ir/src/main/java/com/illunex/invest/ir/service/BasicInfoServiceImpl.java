@@ -26,7 +26,6 @@ public class BasicInfoServiceImpl extends CommonIRService<BasicInfoDTO> {
 
     @Autowired
     BasicInfoRepository basicInfoRepository;
-
     @Autowired
     AttractionRepository attractionRepository;
     @Autowired

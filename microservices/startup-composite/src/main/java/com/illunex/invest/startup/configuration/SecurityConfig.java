@@ -39,10 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/user/**").permitAll()
-                .antMatchers("/board/**").permitAll()
                 .antMatchers("/testProduct").permitAll()
-                .anyRequest().permitAll()
-//                .anyRequest().authenticated()
+//                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                     .and()
                 .cors()
                     .and()
@@ -74,9 +73,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*");
-        //configuration.addAllowedOrigin("http://localhost:3000");
-        //configuration.addAllowedOrigin("https://startup.effectmall.com");
+        // - (3)
+        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedOrigin("https://startup.effectmall.com");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
