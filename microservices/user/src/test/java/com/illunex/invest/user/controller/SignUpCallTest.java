@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class SignUpCallTest {
     @Test
     public void test() {
-        String url = "http://localhost:7401/signUp";
+        String url = "http://localhost:7210/signUp";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

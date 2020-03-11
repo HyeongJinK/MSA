@@ -27,7 +27,7 @@ public class UserCompositeIntegration {
     private final RestTemplate restTemplate;
     //private final WebClient.Builder loadBalanceWebClientBuilder;
     private final String userUrl = "http://user";
-    //private final String userUrl = "http://localhost:7401";
+    //private final String userUrl = "http://localhost:7210";
     private final String companyUrl = "http://company";
     private final String communicationUrl = "http://communication";
     private final String startUpUrl = "https://startup.effectmall.com";
