@@ -1,6 +1,6 @@
 FROM openjdk:12.0.2
 
-EXPOSE  7401
+EXPOSE  7210
 
 ADD ./target/*.jar user.jar
 
