@@ -16,8 +16,7 @@ import java.util.List;
 , "companyType", "establishmentDate", "employeeCount", "business", "nation"
 , "stocksList", "zipCode", "address", "addressDetail", "description", "homePage"})
 public class Company {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long companyIdx;
     String logo;                // 로고
     String name;                // 이름
@@ -43,5 +42,6 @@ public class Company {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     List<Member> memberEntities = new ArrayList<>();
 
-
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    List<Plugin> plugins = new ArrayList<>();
 }

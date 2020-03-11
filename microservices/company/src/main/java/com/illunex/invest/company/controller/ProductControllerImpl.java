@@ -20,7 +20,7 @@ public class ProductControllerImpl implements ProductController {
 
     @Override
     public ResponseEntity<List<ProductDTO>> getProductList(Long companyId) {
-        return null;
+        return new ResponseEntity<>(productService.getProductByCompanyIdx(companyId), HttpStatus.OK);
     }
 
     @Override
@@ -30,11 +30,11 @@ public class ProductControllerImpl implements ProductController {
 
     @Override
     public ResponseEntity<ProductDTO> addProduct(ProductDTO productDTO) {
-        return null;
+        return new ResponseEntity<>(productService.edit(productDTO), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<ProductDTO> readProduct(Long productId) {
-        return null;
+        return new ResponseEntity<>(productService.read(productId), HttpStatus.OK);
     }
 }

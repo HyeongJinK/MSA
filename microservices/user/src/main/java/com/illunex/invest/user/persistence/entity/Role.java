@@ -1,6 +1,6 @@
 package com.illunex.invest.user.persistence.entity;
 
-import lombok.AccessLevel;
+import com.illunex.invest.api.core.user.model.RoleInterface;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,12 +13,12 @@ import java.util.Set;
 @Table(name = "role")
 @Getter @Setter
 @NoArgsConstructor
-public class Role {
+public class Role implements RoleInterface {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-    @ManyToMany(mappedBy = "roles", cascade = CascadeType.DETACH)
+    @ManyToMany(mappedBy = "authorities", cascade = CascadeType.DETACH)
     private Set<User> users = new HashSet<>();
 
     public Role(String name) {
@@ -36,5 +36,10 @@ public class Role {
         roles.add(new Role("ROLE_USER"));
         roles.add(new Role("ROLE_COMPANY_ADMIN"));
         return roles;
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }

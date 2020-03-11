@@ -2,25 +2,21 @@ package com.illunex.invest.startup.controller.user;
 
 import com.illunex.invest.api.composite.startup.user.controller.UserCompositeController;
 import com.illunex.invest.api.composite.startup.user.model.SignUpRequest;
-import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.api.core.user.model.JwtResponse;
 import com.illunex.invest.api.core.user.model.SignInRequest;
 import com.illunex.invest.startup.exception.user.UsernameSearchEmptyException;
 import com.illunex.invest.startup.service.user.JwtTokenUtil;
 import com.illunex.invest.startup.service.user.UserCompositeIntegration;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

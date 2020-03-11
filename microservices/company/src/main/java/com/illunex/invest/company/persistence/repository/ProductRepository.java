@@ -9,11 +9,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Qualifier(value = "CompanyProductRepository")
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<ProductDTO> findByCompanyCompanyIdx(Long companyIdx, Pageable pageable);
-    List<ProductDTO> findByCompanyCompanyIdx(Long companyIdx);
-    ProductDTO save(Product product);
+    List<Product> findByCompanyCompanyIdx(Long companyIdx);
+    Optional<Product> findById(Long id);
 }

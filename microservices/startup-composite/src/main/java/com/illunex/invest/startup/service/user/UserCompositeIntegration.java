@@ -5,15 +5,19 @@ import com.illunex.invest.api.core.company.model.CompanyRegisterRequest;
 import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.api.core.user.model.SignInRequest;
 import com.illunex.invest.api.core.user.model.SignUpRequest;
+import com.netflix.appinfo.InstanceInfo;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -22,8 +26,8 @@ public class UserCompositeIntegration {
 
     private final RestTemplate restTemplate;
     //private final WebClient.Builder loadBalanceWebClientBuilder;
-
     private final String userUrl = "http://user";
+    //private final String userUrl = "http://localhost:7401";
     private final String companyUrl = "http://company";
     private final String communicationUrl = "http://communication";
     private final String startUpUrl = "https://startup.effectmall.com";
