@@ -21,9 +21,16 @@ public class IRControllerImpl implements IRController {
         this.IRService = IRService;
     }
 
+
+    @Override
+    public ResponseEntity<IRDTO> getIR(@RequestParam Long companyIdx, @RequestParam String year) {
+        IRDTO ir = IRService.getIR(companyIdx, year);
+        return new ResponseEntity<>(ir, HttpStatus.OK);
+    }
+
     @Override
     public ResponseEntity<ListDTO> getIRList(@RequestParam Long companyIdx){
-        ListDTO ir = IRService.getList(companyIdx);
+        ListDTO ir = IRService.getIRList(companyIdx);
         return new ResponseEntity<>(ir, HttpStatus.OK);
     }
 

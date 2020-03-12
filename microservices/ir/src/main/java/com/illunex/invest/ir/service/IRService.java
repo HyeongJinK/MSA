@@ -23,7 +23,7 @@ public class IRService {
     @Autowired
     IRRepository irRepository;
 
-    public ListDTO getList(Long companyIdx) {
+    public ListDTO getIRList(Long companyIdx) {
         String year = String.valueOf(LocalDateTime.now().getYear());
         IREntity currentYearIR = irRepository.findByCompanyIdxAndYear(companyIdx, year);
 
@@ -55,6 +55,10 @@ public class IRService {
         }
         List<IRDTO> result = irMapper.entityListToDtoList(irRepository.findAllByCompanyIdx(companyIdx));
         return ListDTO.builder().irList(result).build();
+    }
+
+    public IRDTO getIR(Long companyIdx, String year) {
+        return irMapper.entityToDto(irRepository.findByCompanyIdxAndYear(companyIdx, year));
     }
 
     private String setColor() {
