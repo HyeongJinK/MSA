@@ -3,31 +3,28 @@ package com.illunex.invest.startup.service.user;
 import com.illunex.invest.api.core.communication.model.SignUpMailRequest;
 import com.illunex.invest.api.core.company.model.CompanyRegisterRequest;
 import com.illunex.invest.api.core.user.dto.UserDTO;
+import com.illunex.invest.api.core.user.model.ChangePasswordRequest;
 import com.illunex.invest.api.core.user.model.SignInRequest;
 import com.illunex.invest.api.core.user.model.SignUpRequest;
-import com.netflix.appinfo.InstanceInfo;
+import com.illunex.invest.startup.service.DefaultCompositeIntegration;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class UserCompositeIntegration {
+public class UserCompositeIntegration extends DefaultCompositeIntegration {
     Logger logger = LoggerFactory.getLogger(UserCompositeIntegration.class);
 
     private final RestTemplate restTemplate;
     //private final WebClient.Builder loadBalanceWebClientBuilder;
     private final String userUrl = "http://user";
-    //private final String userUrl = "http://localhost:7210";
     private final String companyUrl = "http://company";
     private final String communicationUrl = "http://communication";
     private final String startUpUrl = "https://startup.effectmall.com";
@@ -66,5 +63,16 @@ public class UserCompositeIntegration {
 
         // 결과 리턴
         return new ResponseEntity<HashMap<String, Object>>(result, HttpStatus.OK);
+    }
+
+    public ResponseEntity<HashMap<String, Object>> changePassword(String prePassword, String password) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        return new ResponseEntity<>(restTemplate.postForObject(userUrl + "/changePassword"
+                        , new HttpEntity<>(new ChangePasswordRequest(getUser().getUsername(), prePassword, password)
+                                , headers)
+                    , HashMap.class)
+                , HttpStatus.OK);
     }
 }

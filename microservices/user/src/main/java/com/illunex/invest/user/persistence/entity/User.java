@@ -64,6 +64,11 @@ public class User implements UserInterface {
         return encoder.encode(password);
     }
 
+    public static boolean matchPassword(String prePassword, String inputPassword) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder.matches(inputPassword, prePassword);
+    }
+
     @Override
     public Collection<Role> getAuthorities() {
         return authorities;
