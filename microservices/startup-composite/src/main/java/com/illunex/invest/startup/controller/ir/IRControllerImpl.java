@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -21,6 +22,11 @@ public class IRControllerImpl implements IRController {
     private final WebClient.Builder loadBalanceWebClientBuilder;
 
     private final String irUrl = "http://ir";
+
+    @Override
+    public ResponseEntity<IRDTO> getIR(@RequestParam Long companyIdx, @RequestParam String year) {
+        return restTemplate.getForEntity(irUrl + "/ir/?companyIdx={companyIdx}&year={year}", IRDTO.class, companyIdx, year);
+    }
 
     @Override
     public ResponseEntity<ListDTO> getIRList(Long companyIdx) {

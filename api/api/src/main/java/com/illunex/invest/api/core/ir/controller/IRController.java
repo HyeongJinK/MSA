@@ -19,6 +19,8 @@ public interface IRController {
 //            @ApiResponse(code = 200, message = "Success"),
 //            @ApiResponse(code = 400, message = "Bad Request")
 //    })
+    @GetMapping(value = "/")
+    ResponseEntity<IRDTO> getIR(@RequestParam Long companyIdx, @RequestParam String year);
     @GetMapping(value = "/list")
     ResponseEntity<ListDTO> getIRList(@RequestParam Long companyIdx);
     @PostMapping(value = "/color")
