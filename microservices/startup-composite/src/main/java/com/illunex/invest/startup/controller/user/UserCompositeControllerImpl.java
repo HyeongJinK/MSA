@@ -2,7 +2,9 @@ package com.illunex.invest.startup.controller.user;
 
 import com.illunex.invest.api.composite.startup.user.controller.UserCompositeController;
 import com.illunex.invest.api.composite.startup.user.model.SignUpRequest;
+import com.illunex.invest.api.core.user.model.ChangePasswordRequest;
 import com.illunex.invest.api.core.user.model.JwtResponse;
+import com.illunex.invest.api.core.user.model.MyPageChangePasswordRequest;
 import com.illunex.invest.api.core.user.model.SignInRequest;
 import com.illunex.invest.startup.exception.user.UsernameSearchEmptyException;
 import com.illunex.invest.startup.service.user.JwtTokenUtil;
@@ -42,12 +44,17 @@ public class UserCompositeControllerImpl implements UserCompositeController {
     }
 
     @Override
-    public ResponseEntity<JwtResponse> signIn(SignInRequest request, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<JwtResponse> signIn(SignInRequest request) {
         authenticate(request.getUsername(), request.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new JwtResponse(token));
+    }
+
+    @Override
+    public ResponseEntity<HashMap<String, Object>> changePassword(MyPageChangePasswordRequest request) {
+        return userCompositeIntegration.changePassword(request.getPrePassword(), request.getPassword());
     }
 
     private void authenticate(String username, String password) {
@@ -69,25 +76,28 @@ public class UserCompositeControllerImpl implements UserCompositeController {
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<HashMap> BadCredentialsException(BadCredentialsException e) {
+    public ResponseEntity<HashMap<String, Object>> BadCredentialsException(BadCredentialsException e) {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("message", "INVALID_CREDENTIALS");
+        result.put("status", 417);
+        result.put("message", "비밀번호가 틀렸습니다.");
 
-        return new ResponseEntity<>(result, HttpStatus.EXPECTATION_FAILED);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
     @ExceptionHandler(UsernameNotFoundException.class)
-    public ResponseEntity<HashMap> UsernameNotFoundException(UsernameNotFoundException e) {
+    public ResponseEntity<HashMap<String, Object>> UsernameNotFoundException(UsernameNotFoundException e) {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("message", "UsernameNotFoundException");
+        result.put("status", 417);
+        result.put("message", "없는 유저입니다.");
 
-        return new ResponseEntity<>(result, HttpStatus.EXPECTATION_FAILED);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @ExceptionHandler(UsernameSearchEmptyException.class)
-    public ResponseEntity<HashMap> UsernameSearchEmpty(UsernameSearchEmptyException e) {
+    public ResponseEntity<HashMap<String, Object>> UsernameSearchEmpty(UsernameSearchEmptyException e) {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("message", "UsernameSearchEmpty");
+        result.put("status", 417);
+        result.put("message", "없는 유저입니다.");
 
-        return new ResponseEntity<>(result, HttpStatus.EXPECTATION_FAILED);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

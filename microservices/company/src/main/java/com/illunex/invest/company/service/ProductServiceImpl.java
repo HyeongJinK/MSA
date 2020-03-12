@@ -1,6 +1,7 @@
 package com.illunex.invest.company.service;
 
 import com.illunex.invest.api.core.company.dto.ProductDTO;
+import com.illunex.invest.company.persistence.entity.Product;
 import com.illunex.invest.company.persistence.repository.ProductRepository;
 import com.illunex.invest.company.service.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
@@ -9,12 +10,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Qualifier("CompanyProductService")
+@Transactional(readOnly = true)
 public class ProductServiceImpl implements ProductService {
     private ProductMapper mapper = Mappers.getMapper(ProductMapper.class);
 
@@ -32,12 +35,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductDTO edit(ProductDTO productDTO) {
         return mapper.entityToDto(productRepository.save(mapper.dtoToEntity(productDTO)));
     }
 
     @Override
     public ProductDTO read(Long productId) {
-        return null;
+        Product product = productRepository.findById(productId).orElse(null);
+        if (product == null) {
+            // TODO
+        }
+
+        product.setCompany(product.getCompany());
+
+        return mapper.entityToDto(product);
     }
 }
