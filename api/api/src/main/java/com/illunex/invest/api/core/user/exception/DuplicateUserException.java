@@ -1,4 +1,4 @@
-package com.illunex.invest.user.exception;
+package com.illunex.invest.api.core.user.exception;
 
 public class DuplicateUserException extends RuntimeException {
     public DuplicateUserException(String s) {

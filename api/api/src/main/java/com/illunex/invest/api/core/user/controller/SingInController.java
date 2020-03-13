@@ -1,13 +1,15 @@
 package com.illunex.invest.api.core.user.controller;
 
-import com.illunex.invest.api.core.user.dto.UserDTO;
+import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.core.user.model.SignInRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Api(value = "로그인")
 @RequestMapping("/signIn")
@@ -30,5 +32,5 @@ public interface SingInController {
             )
     })
     @PostMapping({"", "/"})
-    ResponseEntity<UserDTO> findUser(@RequestBody SignInRequest signInRequest);
+    ResponseEntity<ResponseData> findUser(@RequestBody SignInRequest signInRequest);
 }

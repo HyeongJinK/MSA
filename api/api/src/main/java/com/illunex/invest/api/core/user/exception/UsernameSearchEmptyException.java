@@ -1,4 +1,4 @@
-package com.illunex.invest.user.exception;
+package com.illunex.invest.api.core.user.exception;
 
 public class UsernameSearchEmptyException extends RuntimeException {
     public UsernameSearchEmptyException(String message) {

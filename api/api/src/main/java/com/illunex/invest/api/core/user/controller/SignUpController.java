@@ -1,5 +1,6 @@
 package com.illunex.invest.api.core.user.controller;
 
+import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.api.core.user.model.SignUpRequest;
 import io.swagger.annotations.Api;
@@ -30,5 +31,8 @@ public interface SignUpController {
             )
     })
     @PostMapping({"", "/"})
-    ResponseEntity<UserDTO> signUp(@RequestBody SignUpRequest signUpRequest);
+    ResponseEntity<ResponseData> signUp(@RequestBody SignUpRequest signUpRequest);
+
+    @PostMapping({"/invite"})
+    ResponseEntity<ResponseData> invite(@RequestBody SignUpRequest signUpRequest);
 }

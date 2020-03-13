@@ -1,4 +1,4 @@
-package com.illunex.invest.startup.service.company;
+package com.illunex.invest.api.common.response;
 
 
 import com.fasterxml.jackson.annotation.JsonCreator;

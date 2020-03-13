@@ -21,8 +21,14 @@ public class Role implements RoleInterface {
     @ManyToMany(mappedBy = "authorities", cascade = CascadeType.DETACH)
     private Set<User> users = new HashSet<>();
 
+    private int detailedRights;
+
     public Role(String name) {
         this.name = name;
+    }
+    public Role(String name, int detailedRights) {
+        this.name = name;
+        this.detailedRights = detailedRights;
     }
 
     public static Set<Role> initRoles() {
@@ -34,7 +40,7 @@ public class Role implements RoleInterface {
     public static Set<Role> companyAdminRoles() {
         Set<Role> roles = new HashSet<>();
         roles.add(new Role("ROLE_USER"));
-        roles.add(new Role("ROLE_COMPANY_ADMIN"));
+        roles.add(new Role("ROLE_COMPANY", 15));
         return roles;
     }
 

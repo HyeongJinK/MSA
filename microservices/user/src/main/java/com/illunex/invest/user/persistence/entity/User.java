@@ -42,9 +42,8 @@ public class User implements UserInterface {
     private Long companyIdx;
 
     private Boolean certification = false;
+
     private String token;
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<AccessControl> accessControlList = new ArrayList<>();
 
     public static User createCompanyAdminUser(String username, String password, String name, String vender, String token, Long companyIdx) {
         return User.builder()
