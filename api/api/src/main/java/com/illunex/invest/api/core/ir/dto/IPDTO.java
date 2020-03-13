@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class IPDTO {
     Long idx;
-    String select;                       // 선택
+    String area;                         // 선택
     String applicationNumber;            // 출원번호
     String content;                      // 내용
     String date;                         // 날짜
