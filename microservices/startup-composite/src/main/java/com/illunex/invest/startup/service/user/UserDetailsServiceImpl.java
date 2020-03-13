@@ -2,7 +2,7 @@ package com.illunex.invest.startup.service.user;
 
 
 import com.illunex.invest.api.core.user.dto.UserDTO;
-import com.illunex.invest.startup.exception.user.UsernameSearchEmptyException;
+import com.illunex.invest.api.core.user.exception.UsernameSearchEmptyException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

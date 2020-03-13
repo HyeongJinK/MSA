@@ -1,6 +1,9 @@
 package com.illunex.invest.startup.service;
 
 import com.illunex.invest.api.core.user.dto.UserDTO;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class DefaultCompositeIntegration {
@@ -14,5 +17,12 @@ public class DefaultCompositeIntegration {
         else {
             return null;
         }
+    }
+
+    @NotNull
+    protected HttpHeaders getDefaultHeader() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return headers;
     }
 }

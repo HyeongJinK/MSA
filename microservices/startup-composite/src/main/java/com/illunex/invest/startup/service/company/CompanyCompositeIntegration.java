@@ -9,19 +9,13 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// TODO 유저 권한설정 기능추가, 예외 처리
 @Component
 @RequiredArgsConstructor
 public class CompanyCompositeIntegration extends DefaultCompositeIntegration {
     private final RestTemplate restTemplate;
 
     private final String companyUrl = "http://company";
-
-//    public void test() {
-//        ResponseEntity<HelperPage> data = restTemplate.getForEntity(companyUrl + "/product/page/1", HelperPage.class);
-//
-//        List<ProductDTO> companyDTOList = data.getBody().getContent();
-//    }
 
     public List<ProductDTO> getProductList() {
         Long companyId = getUser().getCompanyIdx();

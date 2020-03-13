@@ -1,8 +1,8 @@
 package com.illunex.invest.user.service;
 
-import com.illunex.invest.user.exception.DuplicateUserException;
-import com.illunex.invest.user.exception.UsernameNotFoundException;
-import com.illunex.invest.user.exception.UsernameSearchEmptyException;
+import com.illunex.invest.api.core.user.exception.DuplicateUserException;
+import com.illunex.invest.api.core.user.exception.UsernameNotFoundException;
+import com.illunex.invest.api.core.user.exception.UsernameSearchEmptyException;
 import com.illunex.invest.user.persistence.entity.User;
 
 public class UserService {
