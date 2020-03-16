@@ -12,6 +12,7 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @ToString(of = {"companyIdx", "logo", "name", "businessNumber"
 , "companyType", "establishmentDate", "employeeCount", "business", "nation"
 , "stocksList", "zipCode", "address", "addressDetail", "description", "homePage"})
@@ -37,10 +38,10 @@ public class Company {
     List<MainProductLine> mainProductLines = new ArrayList<>();     // 주요제품군
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    List<Product> productEntities = new ArrayList<>();
+    List<Product> products = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    List<Member> memberEntities = new ArrayList<>();
+    List<Member> members = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     List<Plugin> plugins = new ArrayList<>();

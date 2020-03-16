@@ -1,10 +1,10 @@
-package com.illunex.invest.communication.controller;
+package com.illunex.invest.communication.controller.mail;
 
 import com.illunex.invest.api.core.communication.controller.MailController;
 import com.illunex.invest.api.core.communication.model.SignUpMailRequest;
-import com.illunex.invest.communication.dto.SenderDto;
-import com.illunex.invest.communication.model.SignUpMail;
-import com.illunex.invest.communication.service.Sender;
+import com.illunex.invest.communication.dto.mail.SenderDto;
+import com.illunex.invest.communication.model.mail.SignUpMail;
+import com.illunex.invest.communication.service.mail.Sender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

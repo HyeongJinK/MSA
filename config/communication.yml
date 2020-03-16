@@ -1,0 +1,36 @@
+server.port: 7501
+
+spring:
+  datasource:
+    url: jdbc:mariadb://15.164.212.141:3306/invest_communication
+    username: root
+    password: Illunex123!
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  deevtools:
+    livereload:
+      enabled: true
+
+logging.level:
+  org.hibernate.SQL: debug
+
+---
+spring.profiles: docker
+server.port: 8080
+
+---
+spring.profiles: test
+server.port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mariadb://mariadb/invest_communication
+    username: root
+    password: Illunex123!
+  jpa:
+    hibernate:
+      ddl-auto: update

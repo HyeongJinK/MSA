@@ -3,6 +3,7 @@ package com.illunex.invest.company.controller;
 import com.illunex.invest.api.core.company.controller.CompanyController;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import com.illunex.invest.company.builder.CompanyBuilder;
+import com.illunex.invest.company.persistence.entity.Company;
 import com.illunex.invest.company.service.CompanyService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -38,10 +39,10 @@ public class CompanyControllerTest {
     @Before
     public void setup() {
         when(companyService.getCompanyById(1l))
-                .thenReturn(CompanyBuilder.getInstance()
+                .thenReturn(CompanyDTO.builder()
                         .companyIdx(1l)
                         .name("test")
-                        .dtoBuild()
+                        .build()
                 );
 
         webTestClient = WebTestClient.bindToController(new CompanyControllerImpl(companyService))

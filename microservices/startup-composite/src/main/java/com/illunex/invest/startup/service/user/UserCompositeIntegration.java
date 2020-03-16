@@ -11,32 +11,23 @@ import com.illunex.invest.api.core.user.model.SignInRequest;
 import com.illunex.invest.api.core.user.model.SignUpRequest;
 import com.illunex.invest.startup.service.DefaultCompositeIntegration;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
-@RequiredArgsConstructor
 public class UserCompositeIntegration extends DefaultCompositeIntegration {
     Logger logger = LoggerFactory.getLogger(UserCompositeIntegration.class);
 
-    private final RestTemplate restTemplate;
-    //private final WebClient.Builder loadBalanceWebClientBuilder;
-    private final String userUrl = "http://user";
-    private final String companyUrl = "http://company";
-    private final String communicationUrl = "http://communication";
-    private final String startUpUrl = "https://startup.effectmall.com";
+    public UserCompositeIntegration(RestTemplate restTemplate, WebClient.Builder loadBalanceWebClientBuilder) {
+        super(restTemplate, loadBalanceWebClientBuilder);
+    }
+
 
     @HystrixCommand(fallbackMethod = "signInError")
     public UserDTO signIn(String username) {
@@ -73,20 +64,12 @@ public class UserCompositeIntegration extends DefaultCompositeIntegration {
                     , ResponseData.class));
     }
 
-    public ResponseEntity<ResponseData> signature(MultipartFile file) {
-        LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-        try {
-            map.add("file", new ByteArrayResource(file.getBytes()));
-            map.add("fileName", file.getOriginalFilename());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<>(map, headers);
-        return restTemplate.postForEntity(userUrl + "", requestEntity, ResponseData.class);
+    public ResponseEntity<ResponseData> signature(MultipartFile file) {
+        // TODO 업로드한 경로 시그니처에 저장
+        return fileUpload(file, "invest-startup", "user/signature/");
     }
+
 
 
     private UserDTO UserDTOParser(ResponseData res) {

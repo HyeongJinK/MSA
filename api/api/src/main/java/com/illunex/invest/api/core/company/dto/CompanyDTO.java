@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
+@Builder
 @ToString(of = {"companyIdx", "logo", "name", "businessNumber"
         , "companyType", "establishmentDate", "employeeCount", "business", "nation"
         , "stocksList", "zipCode", "address", "addressDetail"
@@ -48,7 +49,7 @@ public class CompanyDTO {
     @ApiModelProperty(value="주요제품군", name="companyProducts", required=false)
     List<MainProductLineDTO> mainProductLines = new ArrayList<>();
     @ApiModelProperty(value="상품 리스트", name="companyProducts", required=false)
-    List<ProductDTO> companyProducts;
+    List<ProductDTO> products;
     @ApiModelProperty(value="팀원 리스트", name="companyMembers", required=false)
-    List<MemberDTO> companyMembers;
+    List<MemberDTO> members;
 }

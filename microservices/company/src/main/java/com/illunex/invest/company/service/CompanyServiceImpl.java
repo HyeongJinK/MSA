@@ -29,9 +29,9 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     @Transactional
     public Long registerCompany(String businessNumber) {
-        return companyRepository.save(CompanyBuilder.getInstance()
+        return companyRepository.save(Company.builder()
                 .businessNumber(businessNumber)
-                .entityBuild()).getCompanyIdx();
+                .build()).getCompanyIdx();
     }
 
     @Override

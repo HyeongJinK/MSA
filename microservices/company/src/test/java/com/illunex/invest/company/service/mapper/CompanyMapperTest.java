@@ -16,10 +16,10 @@ public class CompanyMapperTest {
     public void entryToDtoTest() {
         assertNotNull(mapper);
 
-        Company entity = CompanyBuilder.getInstance()
+        Company entity = Company.builder()
                 .companyIdx(1l)
                 .name("Test")
-                .entityBuild();
+                .build();
 
         CompanyDTO dto = mapper.entityToDto(entity);
 
@@ -31,10 +31,10 @@ public class CompanyMapperTest {
     public void dtoToEntityTest() {
         assertNotNull(mapper);
 
-        CompanyDTO dto = CompanyBuilder.getInstance()
+        CompanyDTO dto = CompanyDTO.builder()
                 .companyIdx(1l)
                 .name("Test")
-                .dtoBuild();
+                .build();
 
         Company entity = mapper.dtoToEntity(dto);
 
