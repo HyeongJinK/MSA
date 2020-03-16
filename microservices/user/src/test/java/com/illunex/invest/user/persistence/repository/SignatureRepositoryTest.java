@@ -1,14 +1,16 @@
 package com.illunex.invest.user.persistence.repository;
 
-
+import com.illunex.invest.user.persistence.entity.Signature;
 import com.illunex.invest.user.persistence.entity.User;
-import lombok.RequiredArgsConstructor;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -17,23 +19,22 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
         "eureka.client.enabled=false",
         "spring.cloud.config.enabled=false",
         "spring.datasource.url=jdbc:h2:mem:user"})
-public class UserRepositoryTest {
+@Transactional
+public class SignatureRepositoryTest {
     @Autowired UserRepository userRepository;
+    @Autowired SignatureRepository signatureRepository;
 
-    @Test(expected = DataIntegrityViolationException.class)
-    public void saveTestNotPassword() {
+    @Test
+    public void findByUserId() {
         User user = User.builder()
                 .username("test")
                 .password("test1234")
                 .build();
 
-        userRepository.save(user);
-    }
+        User u = userRepository.save(user);
+        //signatureRepository.save(Signature.createSignature("test", u.getId()));
+        //List<Signature> signatures = signatureRepository.findByUserId(u.getId());
 
-    @Test
-    public void saveTest() {
-        User user = User.builder()
-                .build();
-        userRepository.save(user);
+        //Assert.assertEquals(signatures.get(0).getImgUrl(), "test");
     }
 }

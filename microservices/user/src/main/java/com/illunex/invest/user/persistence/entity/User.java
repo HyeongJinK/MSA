@@ -6,9 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "user"
@@ -44,6 +42,9 @@ public class User implements UserInterface {
     private Boolean certification = false;
 
     private String token;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "user")
+    private List<Signature> signatures = new ArrayList<>();
 
     public static User createCompanyAdminUser(String username, String password, String name, String vender, String token, Long companyIdx) {
         return User.builder()
