@@ -72,8 +72,9 @@ public class UserCompositeIntegration extends DefaultCompositeIntegration {
     public ResponseEntity<ResponseData> signature(MultipartFile file) {
 
         ResponseEntity<ResponseData> uploadRes = fileUpload(file, "invest-startup", "user/signature/");
+
         return restTemplate.postForEntity(userUrl + "/signature/add", new HttpEntity<>(SignatureRequest.builder()
-                .imgUrl("")
+                .imgUrl(String.valueOf(uploadRes.getBody().getData()))
                 .userId(getUser().getId())
                 .build()), ResponseData.class);
     }
