@@ -15,10 +15,11 @@ public class FileControllerImpl implements FileController {
 
     @Override
     public ResponseEntity<ResponseData> upload(MultipartFile file, String bucket, String path) {
-        fileService.fileUpload(file, bucket, path);
+        String key = fileService.fileUpload(file, bucket, path);
 
         return ResponseEntity.ok(ResponseData.builder()
                 .errorCode(0)
+                .data(key)
                 .message("success")
                 .build());
     }
