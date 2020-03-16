@@ -2,7 +2,7 @@ package com.illunex.invest.startup.service.user;
 
 import com.google.gson.Gson;
 import com.illunex.invest.api.common.response.ResponseData;
-import com.illunex.invest.api.common.response.ResponseListData;
+import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.communication.model.SignUpMailRequest;
 import com.illunex.invest.api.core.company.model.CompanyRegisterRequest;
 import com.illunex.invest.api.core.user.dto.UserDTO;
@@ -78,8 +78,8 @@ public class UserCompositeIntegration extends DefaultCompositeIntegration {
                 .build()), ResponseData.class);
     }
 
-    public ResponseEntity<ResponseListData> signatureList() {
-        return restTemplate.getForEntity(userUrl + "/signature/list?userId="+getUser().getId(), ResponseListData.class);
+    public ResponseEntity<ResponseList> signatureList() {
+        return restTemplate.getForEntity(userUrl + "/signature/list?userId="+getUser().getId(), ResponseList.class);
     }
 
 

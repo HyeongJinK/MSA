@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ResponseListData<T> {
+public class ResponseList<T> {
     int errorCode;
     String message;
     List<T> data;

@@ -2,7 +2,7 @@ package com.illunex.invest.startup.controller.user;
 
 import com.illunex.invest.api.common.exception.FileUploadException;
 import com.illunex.invest.api.common.response.ResponseData;
-import com.illunex.invest.api.common.response.ResponseListData;
+import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.composite.startup.user.controller.UserCompositeController;
 import com.illunex.invest.api.composite.startup.user.model.SignUpRequest;
 import com.illunex.invest.api.core.user.exception.UsernameSearchEmptyException;
@@ -62,7 +62,7 @@ public class UserCompositeControllerImpl extends StartupDefaultController implem
     }
 
     @Override
-    public ResponseEntity<ResponseListData> signature() {
+    public ResponseEntity<ResponseList> signature() {
         return userCompositeIntegration.signatureList();
     }
 

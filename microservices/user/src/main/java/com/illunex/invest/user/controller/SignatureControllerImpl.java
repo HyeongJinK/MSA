@@ -1,7 +1,7 @@
 package com.illunex.invest.user.controller;
 
 import com.illunex.invest.api.common.response.ResponseData;
-import com.illunex.invest.api.common.response.ResponseListData;
+import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.user.controller.SignatureController;
 import com.illunex.invest.api.core.user.dto.SignatureDTO;
 import com.illunex.invest.api.core.user.model.SignatureRequest;
@@ -16,8 +16,8 @@ public class SignatureControllerImpl extends UserDefaultController implements Si
     private final SignatureService signatureService;
 
     @Override
-    public ResponseEntity<ResponseListData> signatureList(Long userId) {
-        ResponseListData<SignatureDTO> data = new ResponseListData(0
+    public ResponseEntity<ResponseList> signatureList(Long userId) {
+        ResponseList<SignatureDTO> data = new ResponseList(0
                 , "Success"
                 , signatureService.signatureList(userId));
         return ResponseEntity.ok(data);
