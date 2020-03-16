@@ -1,6 +1,7 @@
 package com.illunex.invest.communication.service;
 
-import com.illunex.invest.communication.dto.SenderDto;
+import com.illunex.invest.communication.dto.mail.SenderDto;
+import com.illunex.invest.communication.service.mail.Sender;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 

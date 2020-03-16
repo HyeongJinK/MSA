@@ -1,4 +1,4 @@
-package com.illunex.invest.communication.model;
+package com.illunex.invest.communication.model.mail;
 
 public class SignUpMail {
     public static String from = "manager@illunex.com";

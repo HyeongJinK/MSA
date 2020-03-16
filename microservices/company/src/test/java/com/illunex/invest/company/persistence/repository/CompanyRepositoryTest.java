@@ -23,9 +23,9 @@ public class CompanyRepositoryTest {
 
     @Before
     public void setup() {
-        Company company = CompanyBuilder.getInstance()
+        Company company = Company.builder()
                 .name("Test")
-                .entityBuild();
+                .build();
 
         repository.save(company);
     }

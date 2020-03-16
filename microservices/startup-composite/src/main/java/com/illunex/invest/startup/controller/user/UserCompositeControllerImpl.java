@@ -1,5 +1,6 @@
 package com.illunex.invest.startup.controller.user;
 
+import com.illunex.invest.api.common.exception.FileUploadException;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.composite.startup.user.controller.UserCompositeController;
 import com.illunex.invest.api.composite.startup.user.model.SignUpRequest;
@@ -19,7 +20,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
@@ -60,7 +62,7 @@ public class UserCompositeControllerImpl extends StartupDefaultController implem
 
     @Override
     public ResponseEntity<ResponseData> signature(MultipartFile file) {
-        return null;
+        return userCompositeIntegration.signature(file);
     }
 
     private void authenticate(String username, String password) {
@@ -90,6 +92,11 @@ public class UserCompositeControllerImpl extends StartupDefaultController implem
 
     @ExceptionHandler(UsernameSearchEmptyException.class)
     public ResponseEntity<ResponseData> UsernameSearchEmpty(UsernameSearchEmptyException e) {
+        return exceptionProcess(e.getMessage());
+    }
+
+    @ExceptionHandler(FileUploadException.class)
+    public ResponseEntity<ResponseData> FileUpload(FileUploadException e) {
         return exceptionProcess(e.getMessage());
     }
 }

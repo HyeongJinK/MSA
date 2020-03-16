@@ -1,4 +1,4 @@
-package com.illunex.invest.communication.dto;
+package com.illunex.invest.communication.dto.mail;
 
 import com.amazonaws.services.simpleemail.model.*;
 import lombok.Builder;

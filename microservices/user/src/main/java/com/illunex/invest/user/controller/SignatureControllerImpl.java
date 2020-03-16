@@ -15,7 +15,7 @@ public class SignatureControllerImpl extends UserDefaultController implements Si
 
     @Override
     public ResponseEntity<ResponseData> changePassword(Long userId, MultipartFile file, String fileName) {
-        signatureService.addSignature(file, userId);
+        signatureService.addSignature(userId);
         return ResponseEntity.ok(ResponseData.builder()
                 .errorCode(0)
                 .data("success")

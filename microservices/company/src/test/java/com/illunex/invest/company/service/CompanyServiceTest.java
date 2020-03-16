@@ -3,6 +3,7 @@ package com.illunex.invest.company.service;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import com.illunex.invest.company.builder.CompanyBuilder;
 import com.illunex.invest.company.exception.NoneCompanyException;
+import com.illunex.invest.company.persistence.entity.Company;
 import com.illunex.invest.company.persistence.repository.CompanyRepository;
 import org.junit.Assert;
 import org.junit.Before;
@@ -32,10 +33,10 @@ public class CompanyServiceTest {
     @Before
     public void setup() {
         when(companyRepository.findById(1l))
-                .thenReturn(Optional.of(CompanyBuilder.getInstance()
+                .thenReturn(Optional.of(Company.builder()
                         .companyIdx(1l)
                         .name("test")
-                        .entityBuild()));
+                        .build()));
         when(companyRepository.findById(2l))
                 .thenReturn(Optional.empty());
     }

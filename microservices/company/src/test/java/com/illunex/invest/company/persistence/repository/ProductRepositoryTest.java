@@ -26,9 +26,9 @@ public class ProductRepositoryTest {
 
     @Before
     public void setup() {
-        Company company = CompanyBuilder.getInstance()
+        Company company = Company.builder()
                 .name("Company")
-                .entityBuild();
+                .build();
 
         Product product = Product.builder()
                 .title("Test Product")
