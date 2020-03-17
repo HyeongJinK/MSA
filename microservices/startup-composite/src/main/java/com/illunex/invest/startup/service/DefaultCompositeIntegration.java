@@ -6,6 +6,7 @@ import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.core.user.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -27,7 +28,8 @@ public class DefaultCompositeIntegration {
     protected final String communicationUrl = "http://communication";
     protected final String startUpUrl = "https://startup.effectmall.com";
 
-    protected UserDTO getUser() {
+    @Cacheable(value="user")
+    public UserDTO getUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal != null) {
             UserDTO userDetails = (UserDTO) principal;

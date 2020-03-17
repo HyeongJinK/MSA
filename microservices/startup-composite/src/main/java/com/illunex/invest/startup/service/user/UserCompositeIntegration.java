@@ -2,6 +2,7 @@ package com.illunex.invest.startup.service.user;
 
 import com.google.gson.Gson;
 import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.communication.model.SignUpMailRequest;
 import com.illunex.invest.api.core.company.model.CompanyRegisterRequest;
 import com.illunex.invest.api.core.user.dto.UserDTO;
@@ -9,6 +10,7 @@ import com.illunex.invest.api.core.user.exception.UsernameSearchEmptyException;
 import com.illunex.invest.api.core.user.model.ChangePasswordRequest;
 import com.illunex.invest.api.core.user.model.SignInRequest;
 import com.illunex.invest.api.core.user.model.SignUpRequest;
+import com.illunex.invest.api.core.user.model.SignatureRequest;
 import com.illunex.invest.startup.service.DefaultCompositeIntegration;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
@@ -58,16 +60,27 @@ public class UserCompositeIntegration extends DefaultCompositeIntegration {
 
     @HystrixCommand(fallbackMethod = "changePasswordError")
     public ResponseEntity<ResponseData> changePassword(String prePassword, String password) {
-        return ResponseEntity.ok(restTemplate.postForObject(userUrl + "/changePassword"
+        return restTemplate.postForEntity(userUrl + "/changePassword"
                         , new HttpEntity<>(new ChangePasswordRequest(getUser().getUsername(), prePassword, password)
                                 , getDefaultHeader())
-                    , ResponseData.class));
+                    , ResponseData.class);
     }
 
 
+
+
     public ResponseEntity<ResponseData> signature(MultipartFile file) {
-        // TODO 업로드한 경로 시그니처에 저장
-        return fileUpload(file, "invest-startup", "user/signature/");
+
+        ResponseEntity<ResponseData> uploadRes = fileUpload(file, "invest-startup", "user/signature/");
+
+        return restTemplate.postForEntity(userUrl + "/signature/add", new HttpEntity<>(SignatureRequest.builder()
+                .imgUrl(String.valueOf(uploadRes.getBody().getData()))
+                .userId(getUser().getId())
+                .build()), ResponseData.class);
+    }
+
+    public ResponseEntity<ResponseList> signatureList() {
+        return restTemplate.getForEntity(userUrl + "/signature/list?userId="+getUser().getId(), ResponseList.class);
     }
 
 

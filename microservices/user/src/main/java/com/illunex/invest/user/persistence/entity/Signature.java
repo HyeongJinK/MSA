@@ -1,6 +1,6 @@
 package com.illunex.invest.user.persistence.entity;
 
-import com.illunex.invest.user.persistence.entity.enumable.SignatureStatus;
+import com.illunex.invest.api.core.user.enumable.SignatureStatus;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,9 +1,11 @@
 package com.illunex.invest.user.service;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.illunex.invest.api.core.user.dto.SignatureDTO;
+import com.illunex.invest.api.core.user.model.SignatureRequest;
 
-import java.io.IOException;
+import java.util.List;
 
 public interface SignatureService {
-    public void addSignature(Long userId);
+    List<SignatureDTO> signatureList(Long userId);
+    SignatureDTO addSignature(SignatureRequest request);
 }
