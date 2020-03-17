@@ -1,5 +1,6 @@
 package com.illunex.invest.startup.service;
 
+import com.illunex.invest.api.common.exception.ExpireUserException;
 import com.illunex.invest.api.common.exception.FileUploadException;
 import com.illunex.invest.api.common.request.MultipartInputStreamFileResource;
 import com.illunex.invest.api.common.response.ResponseData;
@@ -32,9 +33,13 @@ public class DefaultCompositeIntegration {
     public UserDTO getUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal != null) {
+            try {
             UserDTO userDetails = (UserDTO) principal;
 
             return userDetails;
+            } catch (ClassCastException e) {
+                throw new ExpireUserException("계정이 만료되었습니다.");
+            }
         }
         else {
             return null;
