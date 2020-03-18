@@ -21,4 +21,8 @@ public interface UserCompositeController {
     ResponseEntity<ResponseList> signature();
     @PostMapping(value = "/signature")
     ResponseEntity<ResponseData> signature(@RequestParam("file") MultipartFile file);
+    @PutMapping(value = "/signature")
+    ResponseEntity<ResponseData> toggleSignature(@RequestParam Long id);
+    @DeleteMapping(value = "/signature")
+    ResponseEntity<ResponseData> delSignature(@RequestParam Long id);
 }

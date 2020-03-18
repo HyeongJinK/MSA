@@ -54,6 +54,13 @@ public class DefaultCompositeIntegration {
     }
 
     @NotNull
+    protected HttpHeaders getDefaultHeader(MediaType type) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(type);
+        return headers;
+    }
+
+    @NotNull
     protected ResponseEntity<ResponseData> fileUpload(MultipartFile file, String bucket, String path) {
         LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
