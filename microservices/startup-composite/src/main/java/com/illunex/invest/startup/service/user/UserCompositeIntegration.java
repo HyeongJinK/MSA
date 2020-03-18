@@ -15,9 +15,10 @@ import com.illunex.invest.startup.service.DefaultCompositeIntegration;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -66,9 +67,6 @@ public class UserCompositeIntegration extends DefaultCompositeIntegration {
                     , ResponseData.class);
     }
 
-
-
-
     public ResponseEntity<ResponseData> signature(MultipartFile file) {
 
         ResponseEntity<ResponseData> uploadRes = fileUpload(file, "invest-startup", "user/signature/");
@@ -83,7 +81,18 @@ public class UserCompositeIntegration extends DefaultCompositeIntegration {
         return restTemplate.getForEntity(userUrl + "/signature/list?userId="+getUser().getId(), ResponseList.class);
     }
 
+    public ResponseEntity<ResponseData> signatureStatusToggle(Long id) {
+        MultiValueMap<String, Object> map= new LinkedMultiValueMap<>();
+        map.add("id", id);
 
+        return restTemplate.exchange(userUrl + "/signature/toggle", HttpMethod.PUT, new HttpEntity<>(map, getDefaultHeader(MediaType.APPLICATION_FORM_URLENCODED)), ResponseData.class);
+    }
+
+    public ResponseEntity<ResponseData> signatureDelete(Long id) {
+        MultiValueMap<String, Object> map= new LinkedMultiValueMap<>();
+
+        return restTemplate.exchange(userUrl + "/signature/delete?id="+id, HttpMethod.DELETE, new HttpEntity<>(map, getDefaultHeader(MediaType.APPLICATION_FORM_URLENCODED)), ResponseData.class);
+    }
 
     private UserDTO UserDTOParser(ResponseData res) {
         Gson gson = new Gson();

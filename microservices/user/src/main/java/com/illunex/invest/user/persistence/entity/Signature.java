@@ -23,4 +23,13 @@ public class Signature {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "userId")
     User user;
+
+    public Signature toggleStatus() {
+        if (this.status == SignatureStatus.Inactive) {
+            this.status = SignatureStatus.Active;
+        } else {
+            this.status = SignatureStatus.Inactive;
+        }
+        return this;
+    }
 }
