@@ -31,4 +31,22 @@ public class SignatureControllerImpl extends UserDefaultController implements Si
                 .message("Success")
                 .build());
     }
+
+    @Override
+    public ResponseEntity<ResponseData> toggleSignature(Long id) {
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .data(signatureService.toggleSignature(id))
+                .message("Success")
+                .build());
+    }
+
+    @Override
+    public ResponseEntity<ResponseData> deleteSignature(Long id) {
+        signatureService.deleteSignature(id);
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("Success")
+                .build());
+    }
 }

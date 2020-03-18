@@ -40,4 +40,18 @@ public class SignatureServiceImpl implements SignatureService {
                         .build())
                 .build()));
     }
+
+    @Override
+    @Transactional
+    public String toggleSignature(Long id) {
+        Signature signature = signatureRepository.findById(id).get().toggleStatus();
+        signatureRepository.save(signature);
+        return signature.getStatus().toString();
+    }
+
+    @Override
+    @Transactional
+    public void deleteSignature(Long id) {
+        signatureRepository.deleteById(id);
+    }
 }

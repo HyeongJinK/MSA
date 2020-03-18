@@ -14,4 +14,8 @@ public interface SignatureController {
     ResponseEntity<ResponseList> signatureList(@RequestParam("userId") Long userId);
     @PostMapping("/add")
     ResponseEntity<ResponseData> addSignature(@RequestBody SignatureRequest request);
+    @PutMapping("/toggle")
+    ResponseEntity<ResponseData> toggleSignature(@RequestParam("id") Long id);
+    @DeleteMapping("/delete")
+    ResponseEntity<ResponseData> deleteSignature(@RequestParam("id") Long id);
 }

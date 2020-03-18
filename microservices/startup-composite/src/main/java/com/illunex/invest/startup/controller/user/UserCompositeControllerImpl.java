@@ -1,6 +1,5 @@
 package com.illunex.invest.startup.controller.user;
 
-import com.illunex.invest.api.common.exception.ExpireUserException;
 import com.illunex.invest.api.common.exception.FileUploadException;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
@@ -14,7 +13,6 @@ import com.illunex.invest.startup.controller.StartupDefaultController;
 import com.illunex.invest.startup.service.user.JwtTokenUtil;
 import com.illunex.invest.startup.service.user.UserCompositeIntegration;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -71,6 +69,16 @@ public class UserCompositeControllerImpl extends StartupDefaultController implem
     @Override
     public ResponseEntity<ResponseData> signature(MultipartFile file) {
         return userCompositeIntegration.signature(file);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData> toggleSignature(Long id) {
+        return userCompositeIntegration.signatureStatusToggle(id);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData> delSignature(Long id) {
+        return userCompositeIntegration.signatureDelete(id);
     }
 
     private void authenticate(String username, String password) {

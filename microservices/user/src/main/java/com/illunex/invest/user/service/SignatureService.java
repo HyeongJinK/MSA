@@ -8,4 +8,6 @@ import java.util.List;
 public interface SignatureService {
     List<SignatureDTO> signatureList(Long userId);
     SignatureDTO addSignature(SignatureRequest request);
+    String toggleSignature(Long id);
+    void deleteSignature(Long id);
 }
