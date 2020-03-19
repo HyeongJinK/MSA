@@ -43,6 +43,6 @@ public class Company {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     List<Member> members = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "company")
     List<Plugin> plugins = new ArrayList<>();
 }

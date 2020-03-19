@@ -2,7 +2,6 @@ package com.illunex.invest.user.persistence.entity;
 
 import com.illunex.invest.api.core.user.model.UserInterface;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
@@ -11,7 +10,8 @@ import java.util.*;
 @Entity
 @Table(name = "user"
         , indexes = {
-            @Index(name = "IDX_USERNAME", unique=true, columnList = "username")
+            @Index(name = "IDX_USERNAME", unique = true, columnList = "username"),
+            @Index(name = "IDX_COMPANY_IDX", columnList = "companyIdx")
 })
 @NoArgsConstructor
 @AllArgsConstructor
@@ -46,17 +46,27 @@ public class User implements UserInterface {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "user")
     private List<Signature> signatures = new ArrayList<>();
 
+    public static User createUser(String username, String password, String name, String vender, String token, Long companyIdx) {
+        return getUserBuilder(username, password, name, vender, token, companyIdx)
+                .authorities(Role.initRoles())
+                .build();
+    }
+
     public static User createCompanyAdminUser(String username, String password, String name, String vender, String token, Long companyIdx) {
+        return getUserBuilder(username, password, name, vender, token, companyIdx)
+                .authorities(Role.companyAdminRoles())
+                .build();
+    }
+
+    private static UserBuilder getUserBuilder(String username, String password, String name, String vender, String token, Long companyIdx) {
         return User.builder()
                 .username(username)
                 .password(encodePassword(password))
                 .name(name)
-                .authorities(Role.companyAdminRoles())
                 .vender(vender)
                 .certification(false)
                 .token(token)
-                .companyIdx(companyIdx)
-                .build();
+                .companyIdx(companyIdx);
     }
 
     public static String encodePassword(String password) {

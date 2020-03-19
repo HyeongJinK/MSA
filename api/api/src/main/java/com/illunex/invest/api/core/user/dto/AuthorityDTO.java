@@ -1,21 +1,19 @@
 package com.illunex.invest.api.core.user.dto;
 
-import com.illunex.invest.api.core.user.model.RoleInterface;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-public class RoleDTO implements RoleInterface {
+public class AuthorityDTO {
     private Long id;
     private String name;
-    private int detailedRights;
-
-    @Override
-    public String getAuthority() {
-        return name;
-    }
+    private Set<RoleDTO> authorities = new HashSet<>();
+    private String profileImg;
 }

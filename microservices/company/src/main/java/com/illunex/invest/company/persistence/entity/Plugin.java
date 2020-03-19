@@ -20,4 +20,8 @@ public class Plugin {
     LocalDateTime expiryDate;
     @Enumerated(value = EnumType.STRING)
     PluginState state;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "companyId")
+    Company company;
 }
