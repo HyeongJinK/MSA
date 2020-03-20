@@ -1,6 +1,6 @@
 package com.illunex.invest.shop.persistence.entity
 
-import com.illunex.invest.shop.persistence.entity.enumable.ViewMode
+import com.illunex.invest.api.core.shop.enumable.ViewMode
 import java.math.BigDecimal
 import javax.persistence.*
 

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PluginRepository extends JpaRepository<Plugin, Long> {
-    List<Plugin> findByCompanyCompanyIdx(Long companyIdx);
+    List<Plugin> findByCompanyCompanyIdxOrderByPluginIdAsc(Long companyIdx);
 }

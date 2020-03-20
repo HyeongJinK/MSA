@@ -1,17 +1,13 @@
 package com.illunex.invest.user.controller;
 
-import com.illunex.invest.api.core.user.model.SignInRequest;
+import com.illunex.invest.api.core.user.request.SignInRequest;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class SignInCallTest {
     @Test

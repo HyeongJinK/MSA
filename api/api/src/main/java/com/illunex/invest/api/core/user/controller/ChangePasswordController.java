@@ -1,7 +1,7 @@
 package com.illunex.invest.api.core.user.controller;
 
 import com.illunex.invest.api.common.response.ResponseData;
-import com.illunex.invest.api.core.user.model.ChangePasswordRequest;
+import com.illunex.invest.api.core.user.request.ChangePasswordRequest;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

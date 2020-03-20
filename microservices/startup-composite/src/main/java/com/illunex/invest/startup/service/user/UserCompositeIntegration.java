@@ -4,13 +4,13 @@ import com.google.gson.Gson;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.communication.model.SignUpMailRequest;
-import com.illunex.invest.api.core.company.model.CompanyRegisterRequest;
+import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
 import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.api.core.user.exception.UsernameSearchEmptyException;
-import com.illunex.invest.api.core.user.model.ChangePasswordRequest;
-import com.illunex.invest.api.core.user.model.SignInRequest;
-import com.illunex.invest.api.core.user.model.SignUpRequest;
-import com.illunex.invest.api.core.user.model.SignatureRequest;
+import com.illunex.invest.api.core.user.request.ChangePasswordRequest;
+import com.illunex.invest.api.core.user.request.SignInRequest;
+import com.illunex.invest.api.core.user.request.SignUpRequest;
+import com.illunex.invest.api.core.user.request.SignatureRequest;
 import com.illunex.invest.startup.service.DefaultCompositeIntegration;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
@@ -48,9 +48,9 @@ public class UserCompositeIntegration extends DefaultCompositeIntegration {
     @HystrixCommand(fallbackMethod = "signUpError")
     public ResponseEntity<ResponseData> signUp(String username, String password, String name, String businessNumber, String vender) {
         // 회사 등록
-        Long companyIdx = restTemplate.postForObject(companyUrl + "/company/register", new HttpEntity<>(new CompanyRegisterRequest(businessNumber), getDefaultHeader()), Long.class);
+        ResponseData<Long> companyRes = restTemplate.postForObject(companyUrl + "/company/register", new HttpEntity<>(new CompanyRegisterRequest(businessNumber), getDefaultHeader()), ResponseData.class);
         // 사용자 추가
-        ResponseData res = restTemplate.postForObject(userUrl + "/signUp", new HttpEntity<>(new SignUpRequest(username, password, name, vender, companyIdx), getDefaultHeader()), ResponseData.class);
+        ResponseData res = restTemplate.postForObject(userUrl + "/signUp", new HttpEntity<>(new SignUpRequest(username, password, name, vender, companyRes.getData()), getDefaultHeader()), ResponseData.class);
         UserDTO user = UserDTOParser(res);
         //  인증 메일 보내기
         restTemplate.postForObject(communicationUrl + "/mail/signUp", new HttpEntity<>(new SignUpMailRequest(user.getUsername(), startUpUrl+"/user/register/confirm?token="+user.getToken()), getDefaultHeader()), String.class);

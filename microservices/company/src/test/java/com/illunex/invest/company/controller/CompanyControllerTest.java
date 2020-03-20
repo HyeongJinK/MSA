@@ -1,5 +1,6 @@
 package com.illunex.invest.company.controller;
 
+import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.core.company.controller.CompanyController;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import com.illunex.invest.company.builder.CompanyBuilder;
@@ -53,24 +54,11 @@ public class CompanyControllerTest {
 
     @Test
     public void getCompanyTest() {
-        ResponseEntity<CompanyDTO> result = companyController.getCompany(1l);
+        ResponseEntity<ResponseData> result = companyController.getCompany(1l);
 
-        CompanyDTO company = result.getBody();
+        CompanyDTO company = (CompanyDTO) result.getBody().getData();
 
         Assert.assertEquals(company.getCompanyIdx().longValue(), 1l);
         Assert.assertEquals(company.getName(), "test");
-    }
-
-    @Test
-    public void getCompanyHttpTest() {
-        webTestClient.get()
-                .uri("/company/user/1")
-                .accept(APPLICATION_JSON_UTF8)
-                .exchange()
-                .expectStatus().isEqualTo(HttpStatus.OK)
-                .expectHeader().contentType(APPLICATION_JSON_UTF8)
-                .expectBody()
-                .jsonPath("companyIdx").isEqualTo("1")
-                .jsonPath("name").isEqualTo("test");
     }
 }

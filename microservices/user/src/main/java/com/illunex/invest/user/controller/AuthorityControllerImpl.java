@@ -4,7 +4,7 @@ import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.user.controller.AuthorityController;
 import com.illunex.invest.api.core.user.dto.AuthorityDTO;
-import com.illunex.invest.api.core.user.model.AuthorityRequest;
+import com.illunex.invest.api.core.user.request.AuthorityRequest;
 import com.illunex.invest.user.service.AuthorityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

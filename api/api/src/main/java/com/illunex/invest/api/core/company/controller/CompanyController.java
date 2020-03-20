@@ -1,7 +1,9 @@
 package com.illunex.invest.api.core.company.controller;
 
+import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
-import com.illunex.invest.api.core.company.model.CompanyRegisterRequest;
+import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +15,11 @@ import java.util.List;
 public interface CompanyController {
     @ApiOperation(value = "회사 전체 리스트 조회")
     @GetMapping({"/", ""})
-    ResponseEntity<List<CompanyDTO>> getAllList();
+    ResponseEntity<ResponseList> getAllList();
 
     @ApiOperation(value = "회사 신규 등록")
     @PostMapping("/register")
-    ResponseEntity<Long> registerCompany(@RequestBody CompanyRegisterRequest request);
+    ResponseEntity<ResponseData> registerCompany(@RequestBody CompanyRegisterRequest request);
 
     @ApiOperation(value = "회사번호로 회사 조회")
     @ApiImplicitParams({
@@ -34,9 +36,9 @@ public interface CompanyController {
             @ApiResponse(code = 400, message = "Bad Request")
     })
     @GetMapping("/read/{companyId}")
-    ResponseEntity<CompanyDTO> getCompany(@PathVariable Long id);
+    ResponseEntity<ResponseData> getCompany(@PathVariable Long id);
 
     @ApiOperation(value = "회사번호에 일치하는 회사 업데이트")
     @PostMapping("/form")
-    ResponseEntity<CompanyDTO> updateCompany(@RequestBody CompanyDTO companyDTO);
+    ResponseEntity<ResponseData> updateCompany(@RequestBody CompanyDTO companyDTO);
 }

@@ -1,5 +1,7 @@
 package com.illunex.invest.company.controller;
 
+import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.company.controller.ProductController;
 import com.illunex.invest.api.core.company.dto.ProductDTO;
 import com.illunex.invest.company.service.ProductService;
@@ -10,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 public class ProductControllerImpl implements ProductController {
@@ -19,8 +19,8 @@ public class ProductControllerImpl implements ProductController {
     private final ProductService productService;
 
     @Override
-    public ResponseEntity<List<ProductDTO>> getProductList(Long companyId) {
-        return new ResponseEntity<>(productService.getProductByCompanyIdx(companyId), HttpStatus.OK);
+    public ResponseEntity<ResponseList> getProductList(Long companyId) {
+        return ResponseEntity.ok(new ResponseList(0, "success", productService.getProductByCompanyIdx(companyId)));
     }
 
     @Override
@@ -29,12 +29,20 @@ public class ProductControllerImpl implements ProductController {
     }
 
     @Override
-    public ResponseEntity<ProductDTO> addProduct(ProductDTO productDTO) {
-        return new ResponseEntity<>(productService.edit(productDTO), HttpStatus.OK);
+    public ResponseEntity<ResponseData> addProduct(ProductDTO productDTO) {
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .data(productService.edit(productDTO))
+                .build());
     }
 
     @Override
-    public ResponseEntity<ProductDTO> readProduct(Long productId) {
-        return new ResponseEntity<>(productService.read(productId), HttpStatus.OK);
+    public ResponseEntity<ResponseData> readProduct(Long productId) {
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .data(productService.read(productId))
+                .build());
     }
 }

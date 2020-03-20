@@ -27,6 +27,8 @@ public class DefaultCompositeIntegration {
     protected final String userUrl = "http://user";
     protected final String companyUrl = "http://company";
     protected final String communicationUrl = "http://communication";
+    protected final String shopUrl = "http://shop";
+    protected final String investUrl = "http://invest";
     protected final String startUpUrl = "https://startup.effectmall.com";
 
     @Cacheable(value="user")

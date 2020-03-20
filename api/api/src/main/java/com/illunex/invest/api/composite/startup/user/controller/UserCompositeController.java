@@ -2,9 +2,9 @@ package com.illunex.invest.api.composite.startup.user.controller;
 
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
-import com.illunex.invest.api.composite.startup.user.model.SignUpRequest;
-import com.illunex.invest.api.core.user.model.MyPageChangePasswordRequest;
-import com.illunex.invest.api.core.user.model.SignInRequest;
+import com.illunex.invest.api.composite.startup.user.request.SignUpRequest;
+import com.illunex.invest.api.core.user.request.MyPageChangePasswordRequest;
+import com.illunex.invest.api.core.user.request.SignInRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
