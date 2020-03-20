@@ -13,7 +13,7 @@ public class BoardEntityMapperTest {
     private BoardMapper mapper = Mappers.getMapper(BoardMapper.class);
 
     @Test
-    public void entryToDtoTest() {
+    public void entityToDtoTest() {
         assertNotNull(mapper);
 
         Board board = Board.builder().boardIdx(1L).postIdx(1L).build();

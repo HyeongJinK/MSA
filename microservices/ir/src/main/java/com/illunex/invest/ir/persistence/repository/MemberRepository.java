@@ -11,4 +11,5 @@ import java.util.List;
 public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
     List<MemberEntity> deleteAllByIrIdx(Long irIdx);
     List<MemberEntity> findAllByIrIdx(Long irIdx);
+    List<MemberEntity> findAllByIrIdxAndImgStatus(Long irIdx, String status);
 }
