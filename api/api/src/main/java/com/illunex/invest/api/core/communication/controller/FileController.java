@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("/file")
 public interface FileController {
-
     @PostMapping("/upload")
     ResponseEntity<ResponseData> upload(@RequestParam("file") MultipartFile file
             , @RequestParam("bucket") String bucket
