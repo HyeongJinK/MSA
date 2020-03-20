@@ -1,4 +1,4 @@
-package com.illunex.invest.communication.persistence.file.entry;
+package com.illunex.invest.communication.persistence.file.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileExtension {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String extension;
 }

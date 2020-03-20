@@ -13,7 +13,7 @@ public class CompanyMapperTest {
     private CompanyMapper mapper = Mappers.getMapper(CompanyMapper.class);
 
     @Test
-    public void entryToDtoTest() {
+    public void entityToDtoTest() {
         assertNotNull(mapper);
 
         Company entity = Company.builder()
