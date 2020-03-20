@@ -1,9 +1,8 @@
 package com.illunex.invest.api.core.ir.controller;
 
 import com.illunex.invest.api.common.response.ResponseData;
-import com.illunex.invest.api.core.ir.dto.EditDTO;
-import com.illunex.invest.api.core.ir.dto.ImgUploadDTO;
-import com.illunex.invest.api.core.ir.dto.ListDTO;
+import com.illunex.invest.api.core.communication.dto.MultiFileDeleteDTO;
+import com.illunex.invest.api.core.ir.dto.ImgDTO;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +20,8 @@ public interface ImgUploadController {
 //            @ApiResponse(code = 200, message = "Success"),
 //            @ApiResponse(code = 400, message = "Bad Request")
 //    })
-    @PostMapping(value = "/img")
-    ResponseEntity<String> imgUpload(@RequestParam("file") MultipartFile file);
-    @DeleteMapping(value = "/img")
-    ResponseEntity<String> imgDelete(@RequestBody ImgUploadDTO imgUploadDTO);
+    @PostMapping(value = "/img/temp")
+    ResponseEntity<String> imgTemp(@RequestBody ImgDTO imgDTO);
+    @PostMapping(value = "/img/delete")
+    ResponseEntity<MultiFileDeleteDTO> imgDelete(@RequestBody ImgDTO imgDTO);
 }

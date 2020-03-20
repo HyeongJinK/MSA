@@ -4,6 +4,7 @@ import com.illunex.invest.api.common.exception.ExpireUserException;
 import com.illunex.invest.api.common.exception.FileUploadException;
 import com.illunex.invest.api.common.request.MultipartInputStreamFileResource;
 import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.core.communication.dto.MultiFileDeleteDTO;
 import com.illunex.invest.api.core.user.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +26,7 @@ public class DefaultCompositeIntegration {
     protected final RestTemplate restTemplate;
     protected final WebClient.Builder loadBalanceWebClientBuilder;
     protected final String userUrl = "http://user";
+    protected final String irUrl = "http://ir";
     protected final String companyUrl = "http://company";
     protected final String communicationUrl = "http://communication";
     protected final String startUpUrl = "https://startup.effectmall.com";
@@ -79,5 +81,13 @@ public class DefaultCompositeIntegration {
             e.printStackTrace();
             throw new FileUploadException("파일 업로드 실패");
         }
+    }
+
+    @NotNull
+    protected ResponseEntity<String> multiFileDelete(MultiFileDeleteDTO multiFileDeleteDTO) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        return restTemplate.postForEntity(communicationUrl + "/file/multiFileDelete", new HttpEntity(multiFileDeleteDTO, headers), String.class);
     }
 }

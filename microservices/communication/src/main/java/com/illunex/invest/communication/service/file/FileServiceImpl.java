@@ -6,6 +6,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.DeleteObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -31,6 +33,16 @@ public class FileServiceImpl implements FileService {
             e.printStackTrace();
         }
         return "https://"+bucket+".s3.ap-northeast-2.amazonaws.com/"+fileName;
+    }
+
+    @Override
+    public String multiFileDelete(String bucket, String[] keys) {
+        AmazonS3 amazonS3 = getAmazonS3();
+
+        DeleteObjectsRequest delObjReq = new DeleteObjectsRequest(bucket).withKeys(keys);
+        amazonS3.deleteObjects(delObjReq);
+
+        return "File delete success";
     }
 
     private AmazonS3 getAmazonS3() {
