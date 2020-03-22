@@ -22,7 +22,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.io.IOException;
 
 @RequiredArgsConstructor
-public class DefaultCompositeIntegration {
+public class DefaultIntegrationService {
     protected final RestTemplate restTemplate;
     protected final WebClient.Builder loadBalanceWebClientBuilder;
     protected final String userUrl = "http://user";

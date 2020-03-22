@@ -20,13 +20,16 @@ public class AuthorityControllerImpl extends UserDefaultController  implements A
         ResponseList<AuthorityDTO> data = new ResponseList(0
                 , "success"
                 , authorityService.getMemberAuthorityList(companyIdx));
-        ResponseEntity.ok(data);
 
-        return null;
+        return ResponseEntity.ok(data);
     }
 
     @Override
     public ResponseEntity<ResponseData> setMemberAuthority(AuthorityRequest request) {
-        return null;
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .data(authorityService.setMemberAuthorityList(request))
+                .build());
     }
 }

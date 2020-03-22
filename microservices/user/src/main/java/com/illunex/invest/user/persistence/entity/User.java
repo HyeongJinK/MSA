@@ -46,21 +46,26 @@ public class User implements UserInterface {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "user")
     private List<Signature> signatures = new ArrayList<>();
 
+    private String rank;
+
     public static User createUser(String username, String password, String name, String vender, String token, Long companyIdx) {
         return getUserBuilder(username, password, name, vender, token, companyIdx)
                 .authorities(Role.initRoles())
+                .rank("직원")
                 .build();
     }
 
     public static User createCompanyAdminUser(String username, String password, String name, String vender, String token, Long companyIdx) {
         return getUserBuilder(username, password, name, vender, token, companyIdx)
                 .authorities(Role.companyAdminRoles())
+                .rank("대표")
                 .build();
     }
 
     private static UserBuilder getUserBuilder(String username, String password, String name, String vender, String token, Long companyIdx) {
         return User.builder()
                 .username(username)
+                .profileImg("")
                 .password(encodePassword(password))
                 .name(name)
                 .vender(vender)

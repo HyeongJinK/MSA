@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,6 +15,6 @@ import java.util.Set;
 public class AuthorityDTO {
     private Long id;
     private String name;
-    private Set<RoleDTO> authorities = new HashSet<>();
+    protected Set<RoleDTO> authorities = new HashSet<>();
     private String profileImg;
 }

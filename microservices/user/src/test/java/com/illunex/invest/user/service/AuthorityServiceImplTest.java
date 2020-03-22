@@ -1,5 +1,6 @@
 package com.illunex.invest.user.service;
 
+import com.illunex.invest.api.core.user.request.AuthorityItem;
 import com.illunex.invest.api.core.user.request.AuthorityRequest;
 import com.illunex.invest.user.persistence.entity.Role;
 import com.illunex.invest.user.persistence.entity.User;
@@ -63,8 +64,8 @@ public class AuthorityServiceImplTest {
                 }));
         authorities.add(new Role("ROLE_IR", 1));
         authorities.add(new Role("ROLE_INVEST", 3));
-        List<AuthorityRequest.AuthorityItem> data = new ArrayList<>();
-        data.add(new AuthorityRequest.AuthorityItem(user2.getId(), mapper.UserEntitySetToDtoSet(authorities)));
+        List<AuthorityItem> data = new ArrayList<>();
+        data.add(new AuthorityItem(user2.getId(), mapper.UserEntitySetToDtoSet(authorities)));
 
         authorityService.setMemberAuthorityList(new AuthorityRequest(data));
 

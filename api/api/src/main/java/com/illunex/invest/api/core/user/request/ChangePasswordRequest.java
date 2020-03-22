@@ -1,5 +1,6 @@
 package com.illunex.invest.api.core.user.request;
 
+import com.illunex.invest.api.composite.startup.mypage.request.MyPageChangePasswordRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

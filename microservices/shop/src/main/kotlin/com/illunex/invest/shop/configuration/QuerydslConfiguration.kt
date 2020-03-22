@@ -9,10 +9,10 @@ import javax.persistence.PersistenceContext
 @Configuration
 class QuerydslConfiguration {
     @PersistenceContext
-    private val em: EntityManager? = null
+    val entityManager: EntityManager? = null
 
     @Bean
-    fun jpaQueryFactory(): JPAQueryFactory? {
-        return JPAQueryFactory(em)
+    fun jpaQueryFactory(): JPAQueryFactory {
+        return JPAQueryFactory(entityManager)
     }
 }

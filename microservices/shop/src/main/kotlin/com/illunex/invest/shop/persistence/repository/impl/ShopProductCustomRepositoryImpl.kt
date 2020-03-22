@@ -1,9 +1,5 @@
-package com.illunex.invest.shop.persistence.repository.Impl
+package com.illunex.invest.shop.persistence.repository.impl
 
-import com.illunex.invest.api.core.shop.enumable.ViewMode
-import com.illunex.invest.shop.persistence.entity.Product
-import com.illunex.invest.shop.persistence.entity.QPlugin
-import com.illunex.invest.shop.persistence.entity.QProduct
 import com.illunex.invest.shop.persistence.repository.custom.ShopProductCustomRepository
 import com.querydsl.jpa.impl.JPAQueryFactory
 

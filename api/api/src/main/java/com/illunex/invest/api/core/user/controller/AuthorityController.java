@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "권한설정")
 @RequestMapping("/authority")
 public interface AuthorityController {
-    @GetMapping({"", "/"})
-    ResponseEntity<ResponseList> getMemberAuthorityList(@RequestParam("companyIdx") Long companyIdx);
     @PostMapping({"", "/"})
     ResponseEntity<ResponseData> setMemberAuthority(@RequestBody AuthorityRequest request);
+    @GetMapping("/{companyIdx}")
+    ResponseEntity<ResponseList> getMemberAuthorityList(@PathVariable("companyIdx") Long companyIdx);
 
 }

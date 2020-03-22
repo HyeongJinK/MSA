@@ -34,6 +34,8 @@ public class PluginControllerImpl implements PluginController {
 
     @Override
     public ResponseEntity<ResponseList> getPlugins(Long companyIdx) {
-        return ResponseEntity.ok(new ResponseList<>(0, "success", pluginService.getPlugins(companyIdx)));
+        return ResponseEntity.ok(new ResponseList<>(0
+                , "success"
+                , pluginService.getPlugins(companyIdx)));
     }
 }

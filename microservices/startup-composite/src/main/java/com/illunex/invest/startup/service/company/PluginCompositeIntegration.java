@@ -1,12 +1,12 @@
 package com.illunex.invest.startup.service.company;
 
-import com.illunex.invest.startup.service.DefaultCompositeIntegration;
+import com.illunex.invest.startup.service.DefaultIntegrationService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
-public class PluginCompositeIntegration extends DefaultCompositeIntegration {
+public class PluginCompositeIntegration extends DefaultIntegrationService {
     public PluginCompositeIntegration(RestTemplate restTemplate, WebClient.Builder loadBalanceWebClientBuilder) {
         super(restTemplate, loadBalanceWebClientBuilder);
     }

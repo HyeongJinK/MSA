@@ -37,6 +37,6 @@ public class AuthorityServiceImpl implements AuthorityService {
                     user.setAuthorities(mapper.UserDtoSetToEntitySet(authorityItem.getAuthorities()));
                     userRepository.save(user);
                 }));
-        return null;
+        return "success";
     }
 }

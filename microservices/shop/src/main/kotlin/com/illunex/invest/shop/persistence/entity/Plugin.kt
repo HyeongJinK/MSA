@@ -16,7 +16,9 @@ class Plugin {
 
     constructor()
 
-    constructor(title: String) {
+    constructor(title: String, pluginRole: List<PluginRole>) {
         this.title = title
+        this.pluginRole = pluginRole
     }
+
 }

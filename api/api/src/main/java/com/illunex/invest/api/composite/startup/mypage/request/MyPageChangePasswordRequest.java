@@ -1,4 +1,4 @@
-package com.illunex.invest.api.core.user.request;
+package com.illunex.invest.api.composite.startup.mypage.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.illunex.invest.shop.persistence.repository.Impl
+package com.illunex.invest.shop.persistence.repository.impl
 
 import com.illunex.invest.shop.persistence.entity.Purchase
 import com.illunex.invest.shop.persistence.entity.QPurchase.purchase

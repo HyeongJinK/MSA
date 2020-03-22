@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "플러그인 조회, 설치")
 @RequestMapping("/product")
 public interface ProductController {
-    // TODO 플러그인 목록 (판매중인 목록, 회사 번호(라이센스 체크))
+    // 플러그인 목록 (판매중인 목록, 회사 번호(라이센스 체크))
     @GetMapping("/plugin/{companyIdx}")
     ResponseEntity<ResponseList<ProductDTO>> getPlugins(@PathVariable("companyIdx") Long companyIdx);
-    // TODO 플러그인 설치
+    // 플러그인 설치
     @PostMapping("/purchase")
     ResponseEntity<ResponseData<PurchaseDTO>> purchase(@RequestBody PurchaseRequest purchaseRequest);
 }

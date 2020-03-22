@@ -1,10 +1,10 @@
-package com.illunex.invest.startup.service.shop;
+package com.illunex.invest.startup.service.mypage;
 
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.shop.request.BuyProductRequest;
 import com.illunex.invest.api.core.shop.request.PurchaseRequest;
-import com.illunex.invest.startup.service.DefaultCompositeIntegration;
+import com.illunex.invest.startup.service.DefaultIntegrationService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class PluginProductCompositeIntegration extends DefaultCompositeIntegration {
-    public PluginProductCompositeIntegration(RestTemplate restTemplate, WebClient.Builder loadBalanceWebClientBuilder) {
+public class PluginIntegrationService extends DefaultIntegrationService {
+    public PluginIntegrationService(RestTemplate restTemplate, WebClient.Builder loadBalanceWebClientBuilder) {
         super(restTemplate, loadBalanceWebClientBuilder);
     }
 
