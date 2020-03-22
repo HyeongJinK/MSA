@@ -1,7 +1,7 @@
 package com.illunex.invest.startup.service.company;
 
 import com.illunex.invest.api.core.company.dto.ProductDTO;
-import com.illunex.invest.startup.service.DefaultCompositeIntegration;
+import com.illunex.invest.startup.service.DefaultIntegrationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 // TODO 유저 권한설정 기능추가, 예외 처리
 @Component
-public class CompanyCompositeIntegration extends DefaultCompositeIntegration {
+public class CompanyCompositeIntegration extends DefaultIntegrationService {
     public CompanyCompositeIntegration(RestTemplate restTemplate, WebClient.Builder loadBalanceWebClientBuilder) {
         super(restTemplate, loadBalanceWebClientBuilder);
     }

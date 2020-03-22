@@ -1,33 +1,31 @@
 package com.illunex.invest.shop.service.mapper
 
 import com.illunex.invest.api.core.shop.dto.ProductDTO
-import com.illunex.invest.api.core.shop.dto.ProductDTOBuilder
+import com.illunex.invest.api.core.shop.builder.ProductDTOBuilder
 import com.illunex.invest.api.core.shop.enumable.ProductState
+import com.illunex.invest.api.core.shop.enumable.ViewMode
 import com.illunex.invest.shop.persistence.entity.Product
-import com.illunex.invest.shop.persistence.entity.Purchase
 
 class ProductMapper {
-    fun productDtoTOEntity(product: Product): ProductDTO {
+    fun DtoTOEntity(product: Product): ProductDTO {
         var productDto: ProductDTO = ProductDTO();
 
         return productDto;
     }
 
-    fun productDtoListToEntityList(products: List<Product>, purchases: List<Purchase>): List<ProductDTO> {
+    fun DtoTOEntity(products: List<Product>): List<ProductDTO> {
         var productDtoList: ArrayList<ProductDTO> = ArrayList()
 
-//        if (purchases == null) {
-//            for (product in products) {
-//                createProductDto(productDtoList, product, ProductState.NONE);
-//            }
-//        } else {
-//            for (product in products) {
-//                for (purchase in purchases) {
-//                    if (product.id.equals(purchase.get))
-//                }
-//            }
-//        }
-
+        products.stream().forEach { product ->
+            run {
+                productDtoList.add(ProductDTO(product.id
+                        , product.title
+                        , product.description
+                        , product.imgUrl
+                        , product.price
+                        , product.viewMode))
+            }
+        }
 
         return productDtoList;
     }
@@ -38,7 +36,7 @@ class ProductMapper {
                 .title(product.title)
                 .description(product.description)
                 .price(product.price)
-                .productState(productState)
+                .view(ViewMode.OPEN)
                 .build());
     }
 }

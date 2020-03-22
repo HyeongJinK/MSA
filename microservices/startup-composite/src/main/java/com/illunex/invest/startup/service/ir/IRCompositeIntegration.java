@@ -3,7 +3,7 @@ package com.illunex.invest.startup.service.ir;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.core.communication.dto.MultiFileDeleteDTO;
 import com.illunex.invest.api.core.ir.dto.ImgDTO;
-import com.illunex.invest.startup.service.DefaultCompositeIntegration;
+import com.illunex.invest.startup.service.DefaultIntegrationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
-public class IRCompositeIntegration extends DefaultCompositeIntegration {
+public class IRCompositeIntegration extends DefaultIntegrationService {
     Logger logger = LoggerFactory.getLogger(IRCompositeIntegration.class);
 
     public IRCompositeIntegration(RestTemplate restTemplate, WebClient.Builder loadBalanceWebClientBuilder) {

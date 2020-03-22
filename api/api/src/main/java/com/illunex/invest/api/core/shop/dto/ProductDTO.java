@@ -1,6 +1,7 @@
 package com.illunex.invest.api.core.shop.dto;
 
 import com.illunex.invest.api.core.shop.enumable.ProductState;
+import com.illunex.invest.api.core.shop.enumable.ViewMode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ public class ProductDTO {
     private Long id;
     private String title;
     private String description;
+    private String imgUrl;
     private BigDecimal price;
-    private ProductState productState;
+    private ViewMode viewMode;
 }

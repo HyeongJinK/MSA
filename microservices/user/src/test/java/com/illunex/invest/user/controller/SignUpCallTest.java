@@ -1,7 +1,7 @@
 package com.illunex.invest.user.controller;
 
 import com.illunex.invest.api.core.user.dto.UserDTO;
-import com.illunex.invest.api.core.user.model.SignUpRequest;
+import com.illunex.invest.api.core.user.request.SignUpRequest;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

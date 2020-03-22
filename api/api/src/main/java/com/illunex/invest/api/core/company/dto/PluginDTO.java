@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PluginDTO {
     Long id;
-    String pluginTitle;
-    LocalDateTime regDate;
-    LocalDateTime expiryDate;
+    Long pluginId;
     PluginState state;
 }

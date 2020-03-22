@@ -8,4 +8,10 @@ class PluginRole {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
     var roleTitle: String = ""
+
+    constructor()
+
+    constructor(roleTitle: String) {
+        this.roleTitle = roleTitle
+    }
 }

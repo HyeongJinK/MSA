@@ -22,12 +22,12 @@ public class Company {
     String logo;                // 로고
     String name;                // 이름
     String businessNumber;      // 사업자 등록번호
-    String companyType;         // 산업분야    // todo enum 혹은 따로 DB 구성 여부
+    String companyType;         // 산업분야
     LocalDateTime establishmentDate;     // 설립일
     String employeeCount;       // 직원수
-    String business;            // 기업구분  todo 스타트업, 중소기업, 중견기업, 대기업..... enum 사용 여부 확인
-    String nation;              // 국가 todo 국가 타입 enum 고려
-    String stocksList;          // 상장구분 todo 미상장, 코스닥, 코스피, enum
+    String business;            // 기업구분
+    String nation;              // 국가
+    String stocksList;          // 상장구분
     String zipCode;             // 우편번호
     String address;             // 주소
     String addressDetail;       // 상세주소
@@ -43,6 +43,10 @@ public class Company {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     List<Member> members = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "company")
     List<Plugin> plugins = new ArrayList<>();
+
+    public Company(Long companyIdx) {
+        this.companyIdx = companyIdx;
+    }
 }

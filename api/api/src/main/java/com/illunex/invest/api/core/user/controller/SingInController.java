@@ -1,7 +1,7 @@
 package com.illunex.invest.api.core.user.controller;
 
 import com.illunex.invest.api.common.response.ResponseData;
-import com.illunex.invest.api.core.user.model.SignInRequest;
+import com.illunex.invest.api.core.user.request.SignInRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

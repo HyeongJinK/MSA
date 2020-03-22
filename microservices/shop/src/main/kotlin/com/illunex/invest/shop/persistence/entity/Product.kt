@@ -1,6 +1,6 @@
 package com.illunex.invest.shop.persistence.entity
 
-import com.illunex.invest.shop.persistence.entity.enumable.ViewMode
+import com.illunex.invest.api.core.shop.enumable.ViewMode
 import java.math.BigDecimal
 import javax.persistence.*
 
@@ -11,6 +11,7 @@ class Product {
     var id: Long? = null
     var title: String = ""
     var description: String = ""
+    var imgUrl: String= ""
     var price: BigDecimal = BigDecimal.ZERO
     @Enumerated(value = EnumType.STRING)
     var viewMode: ViewMode = ViewMode.OPEN
@@ -23,12 +24,13 @@ class Product {
         this.id = id
     }
 
-    constructor(title: String, description: String, price: BigDecimal, viewMode: ViewMode, plugins: List<Plugin>) {
+    constructor(id: Long?, title: String, description: String, imgUrl: String, price: BigDecimal, viewMode: ViewMode, plugins: List<Plugin>) {
+        this.id = id
         this.title = title
         this.description = description
+        this.imgUrl = imgUrl
         this.price = price
         this.viewMode = viewMode
         this.plugins = plugins
     }
-
 }

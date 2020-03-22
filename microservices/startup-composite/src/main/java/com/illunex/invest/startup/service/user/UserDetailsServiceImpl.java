@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
     //Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
-    private final UserCompositeIntegration userCompositeIntegration;
+    private final UserIntegrationService userIntegrationService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         usernameParameterCheck(username);
-        UserDTO currentUser = userCompositeIntegration.signIn(username);
+        UserDTO currentUser = userIntegrationService.signIn(username);
         userNullCheck(currentUser);
 
         return currentUser;

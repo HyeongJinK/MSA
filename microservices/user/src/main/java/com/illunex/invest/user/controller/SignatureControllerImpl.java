@@ -4,7 +4,7 @@ import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.user.controller.SignatureController;
 import com.illunex.invest.api.core.user.dto.SignatureDTO;
-import com.illunex.invest.api.core.user.model.SignatureRequest;
+import com.illunex.invest.api.core.user.request.SignatureRequest;
 import com.illunex.invest.user.service.SignatureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

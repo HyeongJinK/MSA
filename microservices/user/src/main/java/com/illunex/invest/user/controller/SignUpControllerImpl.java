@@ -2,7 +2,7 @@ package com.illunex.invest.user.controller;
 
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.core.user.controller.SignUpController;
-import com.illunex.invest.api.core.user.model.SignUpRequest;
+import com.illunex.invest.api.core.user.request.SignUpRequest;
 import com.illunex.invest.user.service.SignUpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

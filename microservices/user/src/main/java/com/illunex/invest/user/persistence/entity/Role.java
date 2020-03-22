@@ -4,6 +4,7 @@ import com.illunex.invest.api.core.user.model.RoleInterface;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Table(name = "role")
 @Getter @Setter
 @NoArgsConstructor
+@ToString(of = {"name"})
 public class Role implements RoleInterface {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,7 +42,7 @@ public class Role implements RoleInterface {
     public static Set<Role> companyAdminRoles() {
         Set<Role> roles = new HashSet<>();
         roles.add(new Role("ROLE_USER"));
-        roles.add(new Role("ROLE_COMPANY", 15));
+        roles.add(new Role("ROLE_COMPANY_ADMIN", 15));
         return roles;
     }
 
