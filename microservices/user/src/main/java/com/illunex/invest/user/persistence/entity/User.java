@@ -49,20 +49,6 @@ public class User implements UserInterface {
     private String rank;
 
     public static User createUser(String username, String password, String name, String vender, String token, Long companyIdx) {
-        return getUserBuilder(username, password, name, vender, token, companyIdx)
-                .authorities(Role.initRoles())
-                .rank("직원")
-                .build();
-    }
-
-    public static User createCompanyAdminUser(String username, String password, String name, String vender, String token, Long companyIdx) {
-        return getUserBuilder(username, password, name, vender, token, companyIdx)
-                .authorities(Role.companyAdminRoles())
-                .rank("대표")
-                .build();
-    }
-
-    private static UserBuilder getUserBuilder(String username, String password, String name, String vender, String token, Long companyIdx) {
         return User.builder()
                 .username(username)
                 .profileImg("")
@@ -71,8 +57,38 @@ public class User implements UserInterface {
                 .vender(vender)
                 .certification(false)
                 .token(token)
-                .companyIdx(companyIdx);
+                .companyIdx(companyIdx)
+                .authorities(Role.initRoles())
+                .rank("직원")
+                .build();
     }
+
+    public static User createCompanyAdminUser(String username, String password, String name, String vender, String token, Long companyIdx) {
+        return User.builder()
+                .username(username)
+                .profileImg("")
+                .password(encodePassword(password))
+                .name(name)
+                .vender(vender)
+                .certification(false)
+                .token(token)
+                .companyIdx(companyIdx)
+                .authorities(Role.companyAdminRoles())
+                .rank("대표")
+                .build();
+    }
+
+//    private static UserBuilder getUserBuilder(String username, String password, String name, String vender, String token, Long companyIdx) {
+//        return User.builder()
+//                .username(username)
+//                .profileImg("")
+//                .password(encodePassword(password))
+//                .name(name)
+//                .vender(vender)
+//                .certification(false)
+//                .token(token)
+//                .companyIdx(companyIdx);
+//    }
 
     public static String encodePassword(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
