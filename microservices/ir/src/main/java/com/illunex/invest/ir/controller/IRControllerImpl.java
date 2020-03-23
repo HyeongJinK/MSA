@@ -36,7 +36,7 @@ public class IRControllerImpl implements IRController {
 
     @Override
     public ResponseEntity<String> changeCardColor(@RequestBody IRDTO irdto) {
-        String result = IRService.changeCardColor(irdto.getIrIdx(), irdto.getCardColor());
+        String result = IRService.changeCardColor(irdto.getIdx(), irdto.getCardColor());
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
