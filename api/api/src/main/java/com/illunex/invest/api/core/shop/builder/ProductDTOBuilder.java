@@ -49,6 +49,7 @@ public class ProductDTOBuilder {
     }
 
     public ProductDTO build() {
-        return new ProductDTO(id, title, description, imgUrl, price, viewMode);
+        return
+                new ProductDTO(id, title, description, imgUrl, price, viewMode, false);
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public interface PluginController {
     @PostMapping({"", "/"})
     ResponseEntity<ResponseData> savePlugins(@RequestBody PluginRequest request);
-    @PostMapping("/toggle")
+    @PutMapping("/toggle")
     ResponseEntity<ResponseData> togglePlugins(@RequestParam("id") Long id);
     @GetMapping("/{companyIdx}")
     ResponseEntity<ResponseList> getPlugins(@PathVariable Long companyIdx);

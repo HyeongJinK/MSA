@@ -26,9 +26,9 @@ public class Plugin {
     @JoinColumn(name = "companyId")
     Company company;
 
-    public static Plugin createPlugin(PluginRequest request) {
+    public static Plugin createPlugin(PluginRequest request, Long id) {
         return Plugin.builder()
-                .pluginId(request.getPluginId())
+                .pluginId(id)
                 .company(new Company(request.getCompanyId()))
                 .state(PluginState.OPEN)
                 .expiryDate(request.getExpiryDate())

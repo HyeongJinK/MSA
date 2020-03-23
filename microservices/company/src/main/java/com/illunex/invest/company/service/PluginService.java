@@ -6,7 +6,7 @@ import com.illunex.invest.api.core.company.request.PluginRequest;
 import java.util.List;
 
 public interface PluginService {
-    Long savePlugin(PluginRequest request);
+    List<Long> savePlugin(PluginRequest request);
     void togglePlugin(Long id);
     List<PluginDTO> getPlugins(Long companyIdx);
 }

@@ -1,9 +1,12 @@
 package com.illunex.invest.startup.service;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import com.illunex.invest.api.common.exception.ExpireUserException;
 import com.illunex.invest.api.common.exception.FileUploadException;
 import com.illunex.invest.api.common.request.MultipartInputStreamFileResource;
 import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.communication.dto.MultiFileDeleteDTO;
 import com.illunex.invest.api.core.user.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class DefaultIntegrationService {
@@ -91,5 +97,21 @@ public class DefaultIntegrationService {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         return restTemplate.postForEntity(communicationUrl + "/file/multiFileDelete", new HttpEntity(multiFileDeleteDTO, headers), String.class);
+    }
+
+    protected List ListDTOParser(ResponseList res, Class c) {
+        Gson gson = new Gson();
+        ArrayList result = new ArrayList<>();
+        if (res.getErrorCode() == 0) {
+            List lists = res.getData();
+
+            lists.stream().forEach(m -> {
+                System.out.println(m.toString());
+                result.add(gson.fromJson(m.toString(), c));
+            });
+            return result;
+        } else {
+            return new ArrayList();
+        }
     }
 }

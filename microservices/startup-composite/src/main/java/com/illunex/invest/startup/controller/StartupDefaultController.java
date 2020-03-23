@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 public class StartupDefaultController extends DefaultController {
     @ExceptionHandler(ExpireUserException.class)
-    public ResponseEntity<ResponseData> FileUpload(ExpireUserException e) {
+    public ResponseEntity<ResponseData> ExpireUser(ExpireUserException e) {
         return new ResponseEntity<>(ResponseData.builder()
                 .errorCode(44)
                 .message(e.getMessage())

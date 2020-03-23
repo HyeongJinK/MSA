@@ -1,6 +1,5 @@
 package com.illunex.invest.startup.service.mypage;
 
-import com.google.gson.Gson;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.composite.startup.mypage.dto.AuthorityExDTO;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +44,7 @@ public class AuthorityIntegrationService extends DefaultIntegrationService {
                 , ResponseList.class);
         List<AuthorityExDTO> memberAuthority = ListDTOParser(memberAuthorityRes.getBody(), AuthorityExDTO.class);
         // 두개 목록을 조합
+
         return memberAuthority.stream().map(m -> {
             roleNames.stream().forEach(role -> {
                 m.getAuthorities().add(new RoleDTO(role));
@@ -54,20 +53,6 @@ public class AuthorityIntegrationService extends DefaultIntegrationService {
         }).collect(Collectors.toList());
     }
 
-    private List ListDTOParser(ResponseList res, Class c) {
-        Gson gson = new Gson();
-        ArrayList result = new ArrayList<>();
-        if (res.getErrorCode() == 0) {
-            List lists = res.getData();
-
-            lists.stream().forEach(m -> {
-                result.add(gson.fromJson(m.toString(), c));
-            });
-            return result;
-        } else {
-            return new ArrayList();
-        }
-    }
     // 권한 수정
     public ResponseEntity<ResponseData> edit(AuthorityRequest request) {
         // 권한 수정

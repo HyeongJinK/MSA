@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public interface PluginCompositeController {
     @ApiOperation(value = "조회")
     @GetMapping(value = {"", "/"})
-    ResponseEntity<ResponseList> getPlugins();
+    ResponseEntity<ResponseData> getPlugins();
     @ApiOperation(value = "구매")
     @PostMapping(value = {"", "/"})
     ResponseEntity<ResponseData> purchase(@RequestBody BuyProductRequest request);

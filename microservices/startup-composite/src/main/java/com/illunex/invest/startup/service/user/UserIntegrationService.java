@@ -30,7 +30,7 @@ public class UserIntegrationService extends DefaultIntegrationService {
     public UserDTO signIn(String username) {
         ResponseData res = restTemplate.postForObject(userUrl + "/signIn", new HttpEntity<>(new SignInRequest(username, ""), getDefaultHeader()), ResponseData.class);
 
-        UserDTO user = UserDTOParser(res);
+        UserDTO user = userDTOParser(res);
 
         if (user != null) {
             return user;
@@ -45,7 +45,7 @@ public class UserIntegrationService extends DefaultIntegrationService {
         ResponseData<Long> companyRes = restTemplate.postForObject(companyUrl + "/company/register", new HttpEntity<>(new CompanyRegisterRequest(businessNumber), getDefaultHeader()), ResponseData.class);
         // 사용자 추가
         ResponseData res = restTemplate.postForObject(userUrl + "/signUp", new HttpEntity<>(new SignUpRequest(username, password, name, vender, companyRes.getData()), getDefaultHeader()), ResponseData.class);
-        UserDTO user = UserDTOParser(res);
+        UserDTO user = userDTOParser(res);
         //  인증 메일 보내기
         restTemplate.postForObject(communicationUrl + "/mail/signUp", new HttpEntity<>(new SignUpMailRequest(user.getUsername(), startUpUrl+"/user/register/confirm?token="+user.getToken()), getDefaultHeader()), String.class);
 
@@ -55,7 +55,7 @@ public class UserIntegrationService extends DefaultIntegrationService {
 
 
 
-    private UserDTO UserDTOParser(ResponseData res) {
+    private UserDTO userDTOParser(ResponseData res) {
         Gson gson = new Gson();
         if (res.getErrorCode() == 0) {
             return gson.fromJson(res.getData().toString(), UserDTO.class);

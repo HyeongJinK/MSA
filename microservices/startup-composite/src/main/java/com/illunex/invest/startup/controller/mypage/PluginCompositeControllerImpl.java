@@ -16,8 +16,12 @@ public class PluginCompositeControllerImpl extends StartupDefaultController impl
     private final PluginIntegrationService pluginIntegrationService;
 
     @Override
-    public ResponseEntity<ResponseList> getPlugins() {
-        return pluginIntegrationService.getPlugins();
+    public ResponseEntity<ResponseData> getPlugins() {
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .data(pluginIntegrationService.getPlugins())
+                .build());
     }
 
     @Override
