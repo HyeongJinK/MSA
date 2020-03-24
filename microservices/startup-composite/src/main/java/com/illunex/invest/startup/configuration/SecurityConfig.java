@@ -37,10 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+
                 .antMatchers("/user/**").permitAll()
-                .antMatchers("/testProduct").permitAll()
+                //.antMatchers("/myPage/**").hasRole("COMPANY")
 //                .anyRequest().permitAll()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .anyRequest().authenticated()
                     .and()
                 .cors()

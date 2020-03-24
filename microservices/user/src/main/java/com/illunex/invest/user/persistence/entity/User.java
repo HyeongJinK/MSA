@@ -51,7 +51,7 @@ public class User implements UserInterface {
     public static User createUser(String username, String password, String name, String vender, String token, Long companyIdx) {
         return User.builder()
                 .username(username)
-                .profileImg("")
+                .profileImg("\"\"")
                 .password(encodePassword(password))
                 .name(name)
                 .vender(vender)
@@ -66,7 +66,7 @@ public class User implements UserInterface {
     public static User createCompanyAdminUser(String username, String password, String name, String vender, String token, Long companyIdx) {
         return User.builder()
                 .username(username)
-                .profileImg("")
+                .profileImg("\"\"")
                 .password(encodePassword(password))
                 .name(name)
                 .vender(vender)

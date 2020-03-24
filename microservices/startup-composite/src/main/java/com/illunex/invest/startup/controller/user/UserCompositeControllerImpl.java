@@ -1,5 +1,6 @@
 package com.illunex.invest.startup.controller.user;
 
+import com.illunex.invest.api.common.exception.ExpireUserException;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.composite.startup.user.controller.UserCompositeController;
 import com.illunex.invest.api.composite.startup.user.request.SignUpRequest;
@@ -47,6 +48,11 @@ public class UserCompositeControllerImpl extends StartupDefaultController implem
                 .errorCode(0)
                 .data(new JwtResponse(token))
                 .build());
+    }
+
+    @Override
+    public ResponseEntity<ResponseData> expire() {
+        throw new ExpireUserException("계정이 만료되었습니다.");
     }
 
     private void authenticate(String username, String password) {

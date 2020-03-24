@@ -1,9 +1,9 @@
 package com.illunex.invest.user.service;
 
-import com.illunex.invest.api.core.user.dto.UserDTO;
+import com.illunex.invest.api.core.user.dto.UserInfoDTO;
 import com.illunex.invest.user.persistence.entity.User;
 import com.illunex.invest.user.persistence.repository.UserRepository;
-import com.illunex.invest.user.service.mapper.UserMapper;
+import com.illunex.invest.user.service.mapper.UserInfoMapper;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SignUpServiceImpl extends UserService implements SignUpService {
     private final UserRepository userRepository;
-    private UserMapper mapper = Mappers.getMapper(UserMapper.class);
+    private UserInfoMapper mapper = Mappers.getMapper(UserInfoMapper.class);
 
     @Override
-    public UserDTO signUp(String username, String password, String name, String vender, Long companyIdx) {
+    public UserInfoDTO signUp(String username, String password, String name, String vender, Long companyIdx) {
         User user = userRepository.findByUsername(username);
 
         DuplicateUserCheck(user);

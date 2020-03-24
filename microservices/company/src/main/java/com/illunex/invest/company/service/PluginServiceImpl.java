@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,8 +20,13 @@ public class PluginServiceImpl implements PluginService {
     private PluginMapper mapper = Mappers.getMapper(PluginMapper.class);
 
     @Override
-    public Long savePlugin(PluginRequest request) {
-        return pluginRepository.save(Plugin.createPlugin(request)).getId();
+    public List<Long> savePlugin(PluginRequest request) {
+        List<Long> result = new ArrayList<>();
+        request.getPluginId().stream()
+                .forEach(id -> {
+                    result.add(pluginRepository.save(Plugin.createPlugin(request, id)).getId());
+                });
+        return result;
     }
 
     @Override

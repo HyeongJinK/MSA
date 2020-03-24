@@ -23,7 +23,8 @@ class ProductMapper {
                         , product.description
                         , product.imgUrl
                         , product.price
-                        , product.viewMode))
+                        , product.viewMode
+                        , false))
             }
         }
 

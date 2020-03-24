@@ -14,13 +14,23 @@ import java.util.List;
 public class PurchaseDTO {
     private Long id;
     Long userId;
-    LocalDateTime regDate;
     Boolean cancel;
-    LocalDateTime cancelDate;
-    List<PurchaseDetailDTO> purchaseDetails = new ArrayList<>();
 
-    public PurchaseDTO(Long id, LocalDateTime regDate) {
+    List<PurchaseDetailDTO> purchaseDetails = new ArrayList<>();
+    List<Long> ids = new ArrayList<>();
+
+    public PurchaseDTO(Long id) {
         this.id = id;
-        this.regDate = regDate;
+    }
+
+    public PurchaseDTO(Long id, Long userId, Boolean cancel, List<PurchaseDetailDTO> purchaseDetails) {
+        this.id = id;
+        this.userId = userId;
+        this.cancel = cancel;
+        this.purchaseDetails = purchaseDetails;
+    }
+
+    public void setIds(List<Long> ids) {
+        this.ids = ids;
     }
 }

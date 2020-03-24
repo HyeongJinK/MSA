@@ -5,12 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PluginRequest {
-    Long pluginId;
+    List<Long> pluginId = new ArrayList<>();
     LocalDateTime expiryDate;
     Long companyId;
 }

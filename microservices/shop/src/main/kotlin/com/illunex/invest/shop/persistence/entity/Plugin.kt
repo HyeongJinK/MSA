@@ -21,4 +21,7 @@ class Plugin {
         this.pluginRole = pluginRole
     }
 
+    fun getId(): Long {
+        return id;
+    }
 }

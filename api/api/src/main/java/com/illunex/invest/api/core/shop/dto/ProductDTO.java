@@ -1,6 +1,5 @@
 package com.illunex.invest.api.core.shop.dto;
 
-import com.illunex.invest.api.core.shop.enumable.ProductState;
 import com.illunex.invest.api.core.shop.enumable.ViewMode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,4 +17,9 @@ public class ProductDTO {
     private String imgUrl;
     private BigDecimal price;
     private ViewMode viewMode;
+    private boolean installed = false;
+
+    public void setInstalled(boolean installed) {
+        this.installed = installed;
+    }
 }
