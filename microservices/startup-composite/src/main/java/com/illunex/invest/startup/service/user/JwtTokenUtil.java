@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 @Component
 public class JwtTokenUtil {
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+    public static final long JWT_TOKEN_VALIDITY = 72 * 60 * 60;
     @Value("${jwt.secret}")
     private String secret;
 
@@ -35,7 +35,7 @@ public class JwtTokenUtil {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
-    private Boolean isTokenExpired(String token) {
+    public Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }

@@ -5,7 +5,7 @@ import com.illunex.invest.shop.persistence.entity.Purchase;
 
 class PurchaseMapper {
     fun DtoTOEntity(purchase: Purchase): PurchaseDTO {
-        var purchaseDTO: PurchaseDTO = PurchaseDTO(purchase.id, purchase.regDate)
+        var purchaseDTO: PurchaseDTO = PurchaseDTO(purchase.id)
 
         return purchaseDTO
     }
