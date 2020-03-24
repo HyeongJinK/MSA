@@ -33,6 +33,7 @@ public class Company {
     String addressDetail;       // 상세주소
     String description;         // 기업개요
     String homePage;            // 홈페이지
+    LocalDateTime updateDate;   // 마지막 수정일
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<MainProductLine> mainProductLines = new ArrayList<>();     // 주요제품군

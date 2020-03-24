@@ -45,6 +45,7 @@ public class CompanyDTO {
     String description;
     @ApiModelProperty(value="홈페이지", name="homePage", required=false)
     String homePage;
+    LocalDateTime updateDate;
 
     @ApiModelProperty(value="주요제품군", name="companyProducts", required=false)
     List<MainProductLineDTO> mainProductLines = new ArrayList<>();
