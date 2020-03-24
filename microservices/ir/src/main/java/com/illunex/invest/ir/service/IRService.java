@@ -62,7 +62,7 @@ public class IRService {
     }
 
     private String setColor() {
-        return "#000000";
+        return "#00bff3";
     }
 
     public String changeCardColor(Long irIdx, String color) {

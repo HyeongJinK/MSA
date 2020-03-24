@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class IRDTO {
-    Long irIdx;
+    Long idx;
     String year;                    // 년도
     Long companyIdx;                // 회사 기본키
     Boolean isPassword;             // 패스워드 사용유/무
