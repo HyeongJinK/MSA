@@ -5,6 +5,7 @@ import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.core.communication.model.SignUpMailRequest;
 import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
 import com.illunex.invest.api.core.user.dto.UserDTO;
+import com.illunex.invest.api.core.user.dto.UserInfoDTO;
 import com.illunex.invest.api.core.user.exception.UsernameSearchEmptyException;
 import com.illunex.invest.api.core.user.request.SignInRequest;
 import com.illunex.invest.api.core.user.request.SignUpRequest;
@@ -26,7 +27,7 @@ public class UserIntegrationService extends DefaultIntegrationService {
         super(restTemplate, loadBalanceWebClientBuilder);
     }
 
-    @HystrixCommand(fallbackMethod = "signInError")
+    //@HystrixCommand(fallbackMethod = "signInError")
     public UserDTO signIn(String username) {
         ResponseData res = restTemplate.postForObject(userUrl + "/signIn", new HttpEntity<>(new SignInRequest(username, ""), getDefaultHeader()), ResponseData.class);
 
@@ -39,13 +40,21 @@ public class UserIntegrationService extends DefaultIntegrationService {
         }
     }
 
-    @HystrixCommand(fallbackMethod = "signUpError")
+    //@HystrixCommand(fallbackMethod = "signUpError")
     public ResponseEntity<ResponseData> signUp(String username, String password, String name, String businessNumber, String vender) {
         // 회사 등록
-        ResponseData<Long> companyRes = restTemplate.postForObject(companyUrl + "/company/register", new HttpEntity<>(new CompanyRegisterRequest(businessNumber), getDefaultHeader()), ResponseData.class);
+        ResponseData companyRes = restTemplate.postForObject(companyUrl + "/company/register", new HttpEntity<>(new CompanyRegisterRequest(businessNumber), getDefaultHeader()), ResponseData.class);
+        Long companyIdx = Long.parseLong(String.valueOf(companyRes.getData()));
         // 사용자 추가
-        ResponseData res = restTemplate.postForObject(userUrl + "/signUp", new HttpEntity<>(new SignUpRequest(username, password, name, vender, companyRes.getData()), getDefaultHeader()), ResponseData.class);
-        UserDTO user = userDTOParser(res);
+        ResponseData res = restTemplate.postForObject(userUrl + "/signUp"
+                , new HttpEntity<>(new SignUpRequest(username
+                        , password
+                        , name
+                        , vender
+                        , companyIdx)
+                        , getDefaultHeader())
+                , ResponseData.class);
+        UserInfoDTO user = UserInfoDTOParser(res);
         //  인증 메일 보내기
         restTemplate.postForObject(communicationUrl + "/mail/signUp", new HttpEntity<>(new SignUpMailRequest(user.getUsername(), startUpUrl+"/user/register/confirm?token="+user.getToken()), getDefaultHeader()), String.class);
 
@@ -53,7 +62,14 @@ public class UserIntegrationService extends DefaultIntegrationService {
         return ResponseEntity.ok(res);
     }
 
-
+    private UserInfoDTO UserInfoDTOParser(ResponseData res) {
+        Gson gson = new Gson();
+        if (res.getErrorCode() == 0) {
+            return gson.fromJson(res.getData().toString(), UserInfoDTO.class);
+        } else {
+            return null;
+        }
+    }
 
     private UserDTO userDTOParser(ResponseData res) {
         Gson gson = new Gson();
@@ -63,6 +79,7 @@ public class UserIntegrationService extends DefaultIntegrationService {
             return null;
         }
     }
+
 
     public UserDTO signInError(String username) {
         throw new UsernameSearchEmptyException("통신에 장애가 있습니다.");
