@@ -74,16 +74,19 @@ public class IREntity {
                 if (!rowNullCheck(getBasicInfo().getBusinessNumber())) ++count;
                 if (!rowNullCheck(getBasicInfo().getCeo())) ++count;
                 if (!rowNullCheck(getBasicInfo().getCompanyType())) ++count;
+
                 if (!rowNullCheck(getBasicInfo().getCorporateNumber())) ++count;
                 if (!rowNullCheck(getBasicInfo().getEmployeeCount())) ++count;
                 if (!rowNullCheck(getBasicInfo().getEquities())) ++count;
                 if (!rowNullCheck(getBasicInfo().getEstablishmentDate())) ++count;
                 if (!rowNullCheck(getBasicInfo().getExitPlan())) ++count;
+
                 if (!rowNullCheck(getBasicInfo().getFaceValue())) ++count;
                 if (!rowNullCheck(getBasicInfo().getHomePage())) ++count;
                 if (!rowNullCheck(getBasicInfo().getName())) ++count;
                 if (!rowNullCheck(getBasicInfo().getPhone())) ++count;
                 if (!rowNullCheck(getBasicInfo().getSettlement())) ++count;
+
                 if (!rowNullCheck(getBasicInfo().getTotalStocks())) ++count;
                 if (!rowNullCheck(getBasicInfo().getUseInvestment())) ++count;
                 if (!rowNullCheck(getBasicInfo().getValuation())) ++count;
@@ -111,33 +114,31 @@ public class IREntity {
             }
 
             if(!(getFinance() == null)) {
-                int count = 0, total = 27;
+                int count = 0, total = 21;
                 if (!rowNullCheck(getFinance().getCapital())) ++count;
                 if (!rowNullCheck(getFinance().getCost())) ++count;
-                if (!rowNullCheck(getFinance().getCurrentAsset())) ++count;
+                if (!rowNullCheck(getFinance().getOtherCurrentAsset())) ++count;
                 if (!rowNullCheck(getFinance().getCurrentLiabilities())) ++count;
-                if (!rowNullCheck(getFinance().getGrossProfit())) ++count;
                 if (!rowNullCheck(getFinance().getIntangibleAssets())) ++count;
+
                 if (!rowNullCheck(getFinance().getInventories())) ++count;
                 if (!rowNullCheck(getFinance().getInvestments())) ++count;
-                if (!rowNullCheck(getFinance().getNetIncome())) ++count;
-                if (!rowNullCheck(getFinance().getNonCurrentAssets())) ++count;
+                if (!rowNullCheck(getFinance().getOtherNonCurrentAssets())) ++count;
                 if (!rowNullCheck(getFinance().getNonCurrentLiabilities())) ++count;
                 if (!rowNullCheck(getFinance().getNonOperatingExpenses())) ++count;
-                if (!rowNullCheck(getFinance().getOperatingProfit())) ++count;
-                if (!rowNullCheck(getFinance().getOrdinaryProfit())) ++count;
-                if (!rowNullCheck(getFinance().getOtherAssets())) ++count;
+
+                if (!rowNullCheck(getFinance().getCapitalAdjustment())) ++count;
                 if (!rowNullCheck(getFinance().getOtherComprehensiveIncome())) ++count;
                 if (!rowNullCheck(getFinance().getOtherRevenue())) ++count;
                 if (!rowNullCheck(getFinance().getQuickAsset())) ++count;
                 if (!rowNullCheck(getFinance().getRetainedEarnings())) ++count;
+
                 if (!rowNullCheck(getFinance().getSales())) ++count;
                 if (!rowNullCheck(getFinance().getSga())) ++count;
                 if (!rowNullCheck(getFinance().getSurplus())) ++count;
                 if (!rowNullCheck(getFinance().getTangibleAssets())) ++count;
                 if (!rowNullCheck(getFinance().getTax())) ++count;
-                if (!rowNullCheck(getFinance().getTotalCapital())) ++count;
-                if (!rowNullCheck(getFinance().getTotalLiabilities())) ++count;
+
                 if (!listNullCheck(getFinance().getFinancialStatus())) ++count;
                 calculateResult += count / total;
             }
@@ -149,6 +150,7 @@ public class IREntity {
                 if (!rowNullCheck(getProduct().getPositioning())) ++count;
                 if (!rowNullCheck(getProduct().getProductDifference())) ++count;
                 if (!rowNullCheck(getProduct().getProductInformation())) ++count;
+
                 if (!rowNullCheck(getProduct().getTechnologyDifference())) ++count;
                 if (!listNullCheck(getProduct().getCustomer())) ++count;
                 if (!listNullCheck(getProduct().getIp())) ++count;
