@@ -3,6 +3,7 @@ package com.illunex.invest.startup.controller.ir;
 import com.illunex.invest.api.core.ir.dto.IRDTO;
 import com.illunex.invest.api.core.ir.dto.ListDTO;
 import com.illunex.invest.api.core.ir.dto.PasswordDTO;
+import com.illunex.invest.api.core.user.dto.AuthorityDTO;
 import com.illunex.invest.startup.service.ir.IRCompositeIntegration;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ public class IRController {
     private final WebClient.Builder loadBalanceWebClientBuilder;
     private final IRCompositeIntegration irCompositeIntegration;
     private final String irUrl = "http://ir";
+    protected final String userUrl = "http://user";
 
     @GetMapping(value = "ir/")
     public ResponseEntity<IRDTO> getIR(@RequestParam String year) {
@@ -65,5 +67,10 @@ public class IRController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return restTemplate.postForEntity(irUrl + "/ir/pw/change", new HttpEntity(passwordDTO, headers), String.class);
+    }
+
+    @GetMapping(value = "ir/auth")
+    public ResponseEntity<AuthorityDTO> getMemberAuth() {
+        return restTemplate.getForEntity(userUrl+"/authority/ir?userIdx={userIdx}", AuthorityDTO.class, irCompositeIntegration.getUser().getCompanyIdx());
     }
 }
