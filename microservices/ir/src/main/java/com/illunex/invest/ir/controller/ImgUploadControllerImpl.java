@@ -28,7 +28,6 @@ public class ImgUploadControllerImpl implements ImgUploadController {
         this.imgUploadServiceImpl = imgUploadServiceImpl;
     }
 
-
     @Override
     public ResponseEntity<String> imgTemp(ImgDTO imgDTO) {
         imgUploadServiceImpl.imgTemp(imgDTO);
