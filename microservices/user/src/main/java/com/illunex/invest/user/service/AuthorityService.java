@@ -8,5 +8,5 @@ import java.util.List;
 public interface AuthorityService {
     List<AuthorityDTO> getMemberAuthorityList(Long companyIdx);
     String setMemberAuthorityList(AuthorityRequest request);
-
+    AuthorityDTO getIRAuthority(Long userIdx);
 }
