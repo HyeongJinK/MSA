@@ -1,17 +1,16 @@
 package com.illunex.invest.api.composite.startup.company.controller;
 
-import com.illunex.invest.api.core.company.dto.ProductDTO;
+import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping(value = "/company")
 public interface CompanyCompositeController {
-    @GetMapping(value = {"/product", "/product/list"})
-    ResponseEntity<List<ProductDTO>> productList();
-    @PostMapping(value = "/product/form")
-    ResponseEntity<ProductDTO> editProduct(@RequestBody  ProductDTO productDTO);
-    @GetMapping(value = "/product/{productId}")
-    ResponseEntity<ProductDTO> readProduct(@PathVariable Long productId);
+    @GetMapping
+    ResponseEntity<ResponseData> getCompanyInfo();
+    @PostMapping
+    ResponseEntity<ResponseData> editCompanyInfo(CompanyDTO companyDTO);
 }

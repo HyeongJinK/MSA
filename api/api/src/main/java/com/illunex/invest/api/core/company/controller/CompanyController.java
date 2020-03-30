@@ -35,8 +35,8 @@ public interface CompanyController {
             @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 400, message = "Bad Request")
     })
-    @GetMapping("/read/{companyId}")
-    ResponseEntity<ResponseData> getCompany(@PathVariable Long id);
+    @GetMapping("/read/{id}")
+    ResponseEntity<CompanyDTO> getCompany(@PathVariable Long id);
 
     @ApiOperation(value = "회사번호에 일치하는 회사 업데이트")
     @PostMapping("/form")

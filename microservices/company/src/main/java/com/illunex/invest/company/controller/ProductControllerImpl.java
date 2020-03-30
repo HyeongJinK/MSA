@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class ProductControllerImpl implements ProductController {
@@ -19,8 +21,8 @@ public class ProductControllerImpl implements ProductController {
     private final ProductService productService;
 
     @Override
-    public ResponseEntity<ResponseList> getProductList(Long companyId) {
-        return ResponseEntity.ok(new ResponseList(0, "success", productService.getProductByCompanyIdx(companyId)));
+    public ResponseEntity<List<ProductDTO>> getProductList(Long companyId) {
+        return ResponseEntity.ok(productService.getProductByCompanyIdx(companyId));
     }
 
     @Override
@@ -38,11 +40,12 @@ public class ProductControllerImpl implements ProductController {
     }
 
     @Override
-    public ResponseEntity<ResponseData> readProduct(Long productId) {
-        return ResponseEntity.ok(ResponseData.builder()
-                .errorCode(0)
-                .message("success")
-                .data(productService.read(productId))
-                .build());
+    public ResponseEntity<ProductDTO> readProduct(Long productId) {
+        return ResponseEntity.ok(productService.read(productId));
+    }
+
+    @Override
+    public ResponseEntity<ResponseData> deleteProduct(Long productId) {
+        return null;
     }
 }

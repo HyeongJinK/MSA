@@ -1,4 +1,4 @@
-package com.illunex.invest.api.composite.startup.company.controller;
+package com.illunex.invest.api.composite.startup;
 
 import com.illunex.invest.api.common.response.ResponseData;
 import org.jetbrains.annotations.NotNull;

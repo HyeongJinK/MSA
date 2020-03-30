@@ -1,9 +1,6 @@
 package com.illunex.invest.company.persistence.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,9 +8,12 @@ import javax.persistence.*;
 @Table(name = "main_product_line")
 @Getter @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class MainProductLine {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String title;
+
+    public MainProductLine(String title) {
+        this.title = title;
+    }
 }

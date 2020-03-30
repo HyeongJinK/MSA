@@ -19,4 +19,9 @@ public class Member {
     String rank;
     String career;
     String imgUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "companyId")
+    Company company;
+
 }

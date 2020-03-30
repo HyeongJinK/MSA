@@ -37,10 +37,10 @@ public class Company {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<MainProductLine> mainProductLines = new ArrayList<>();     // 주요제품군
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "company")
     List<Product> products = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "company")
     List<Member> members = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "company")
