@@ -39,4 +39,9 @@ public class AuthorityServiceImpl implements AuthorityService {
                 }));
         return "success";
     }
+
+    @Override
+    public AuthorityDTO getIRAuthority(Long userIdx) {
+        return mapper.entityToDto(userRepository.findById(userIdx).get());
+    }
 }

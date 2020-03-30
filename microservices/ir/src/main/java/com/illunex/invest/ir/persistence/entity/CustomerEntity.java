@@ -14,6 +14,7 @@ public class CustomerEntity {  // 주요 매출처
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
+    String area;                    // 선택
     String content;                 // 내용
     String price;                   // 금액
 

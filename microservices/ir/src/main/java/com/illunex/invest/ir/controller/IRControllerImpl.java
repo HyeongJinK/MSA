@@ -16,7 +16,6 @@ public class IRControllerImpl implements IRController {
     private Log log = LogFactory.getLog(IRControllerImpl.class);
 
     final IRService IRService;
-
     public IRControllerImpl(IRService IRService) {
         this.IRService = IRService;
     }
