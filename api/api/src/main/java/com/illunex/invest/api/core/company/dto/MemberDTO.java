@@ -1,5 +1,6 @@
 package com.illunex.invest.api.core.company.dto;
 
+import com.illunex.invest.api.composite.startup.company.dto.CompanyInfoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,6 @@ public class MemberDTO {
     String rank;
     String career;
     String imgUrl;
+
+    CompanyInfoDTO companyDTO;
 }

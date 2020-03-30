@@ -8,7 +8,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-public class KeywordDTO {
-    Long keywordIdx;
+public class CompanyIdDTO {
     Long companyIdx;
 }

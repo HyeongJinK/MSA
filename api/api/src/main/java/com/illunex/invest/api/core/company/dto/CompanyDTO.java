@@ -24,17 +24,17 @@ public class CompanyDTO {
     @ApiModelProperty(value="사업자 등록번호", name="businessNumber", required=true)
     String businessNumber;
     @ApiModelProperty(value="산업분야", name="companyType", required=false)
-    String companyType;         // todo enum 혹은 따로 DB 구성 여부
+    String companyType;
     @ApiModelProperty(value="설립일", name="establishmentDate", required=false)
     LocalDateTime establishmentDate;
     @ApiModelProperty(value="직원수", name="employeeCount", required=false)
     String employeeCount;
     @ApiModelProperty(value="기업구분", name="business", required=false)
-    String business;            //todo 스타트업, 중소기업, 중견기업, 대기업..... enum 사용 여부 확인
+    String business;
     @ApiModelProperty(value="국가", name="nation", required=false)
-    String nation;              // todo 국가 타입 enum 고려
+    String nation;
     @ApiModelProperty(value="상장구분", name="stocksList", required=false)
-    String stocksList;          // todo 미상장, 코스닥, 코스피, enum
+    String stocksList;
     @ApiModelProperty(value="우편번호", name="zipCode", required=false)
     String zipCode;
     @ApiModelProperty(value="주소", name="address", required=false)
@@ -49,8 +49,4 @@ public class CompanyDTO {
 
     @ApiModelProperty(value="주요제품군", name="companyProducts", required=false)
     List<MainProductLineDTO> mainProductLines = new ArrayList<>();
-    @ApiModelProperty(value="상품 리스트", name="companyProducts", required=false)
-    List<ProductDTO> products;
-    @ApiModelProperty(value="팀원 리스트", name="companyMembers", required=false)
-    List<MemberDTO> members;
 }

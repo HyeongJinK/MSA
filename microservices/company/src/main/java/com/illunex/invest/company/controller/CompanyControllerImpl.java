@@ -8,7 +8,7 @@ import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
 import com.illunex.invest.company.exception.NoneCompanyException;
 import com.illunex.invest.company.service.CompanyService;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.logging.Log;
+import lombok.extern.java.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
-
+@Log
 @RestController
 @RequiredArgsConstructor
 public class CompanyControllerImpl implements CompanyController {
-    private Log log = LogFactory.getLog(CompanyControllerImpl.class);
 
     private final CompanyService companyService;
 
@@ -31,14 +30,11 @@ public class CompanyControllerImpl implements CompanyController {
     }
 
     @Override
-    public ResponseEntity<ResponseData> getCompany(Long id) {
-        log.debug(id);
-
-        return ResponseEntity.ok(ResponseData.builder()
-                .errorCode(0)
-                .message("success")
-                .data(companyService.getCompanyById(id))
-                .build());
+    public ResponseEntity<CompanyDTO> getCompany(Long id) {
+        log.info(id.toString());
+        CompanyDTO companyDTO = companyService.getCompanyById(id);
+        log.info(companyDTO.toString());
+        return ResponseEntity.ok(companyDTO);
     }
 
     @Override
@@ -56,11 +52,7 @@ public class CompanyControllerImpl implements CompanyController {
     }
 
     @ExceptionHandler(NoneCompanyException.class)
-    public ResponseEntity<ResponseData> NoneCompanyException(NoneCompanyException e) {
-        return ResponseEntity.ok(ResponseData.builder()
-                .errorCode(100)
-                .message("회사가 없습니다.")
-                .data(e.getMessage())
-                .build());
+    public ResponseEntity<CompanyDTO> NoneCompanyException(NoneCompanyException e) {
+        return ResponseEntity.status(500).body(null);
     }
 }

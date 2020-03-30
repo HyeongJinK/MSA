@@ -8,18 +8,21 @@ import com.illunex.invest.company.service.mapper.PluginMapper;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class PluginServiceImpl implements PluginService {
     private final PluginRepository pluginRepository;
 
     private PluginMapper mapper = Mappers.getMapper(PluginMapper.class);
 
     @Override
+    @Transactional
     public List<Long> savePlugin(PluginRequest request) {
         List<Long> result = new ArrayList<>();
         request.getPluginId().stream()
@@ -30,6 +33,7 @@ public class PluginServiceImpl implements PluginService {
     }
 
     @Override
+    @Transactional
     public void togglePlugin(Long id) {
         Plugin plugin = pluginRepository.findById(id).orElse(null);
 

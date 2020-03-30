@@ -8,7 +8,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-public class KeywordDTO {
-    Long keywordIdx;
-    Long companyIdx;
+public class ShareholderPersonDTO {
+    Long id;
+    String info;
+    String address;
+    String stock;
+    String stockValue;
+    String totalValue;
+    String stake;
 }

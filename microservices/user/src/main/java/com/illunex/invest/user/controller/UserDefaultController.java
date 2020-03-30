@@ -1,7 +1,7 @@
 package com.illunex.invest.user.controller;
 
 import com.illunex.invest.api.common.response.ResponseData;
-import com.illunex.invest.api.composite.startup.company.controller.DefaultController;
+import com.illunex.invest.api.composite.startup.DefaultController;
 import com.illunex.invest.api.core.user.exception.DuplicateUserException;
 import com.illunex.invest.api.core.user.exception.UsernameNotFoundException;
 import com.illunex.invest.api.core.user.exception.UsernameSearchEmptyException;

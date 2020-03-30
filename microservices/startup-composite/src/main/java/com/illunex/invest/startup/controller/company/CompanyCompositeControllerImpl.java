@@ -1,7 +1,10 @@
 package com.illunex.invest.startup.controller.company;
 
+import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.composite.startup.company.controller.CompanyCompositeController;
+import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import com.illunex.invest.api.core.company.dto.ProductDTO;
+import com.illunex.invest.startup.controller.StartupDefaultController;
 import com.illunex.invest.startup.service.company.CompanyCompositeIntegration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,21 +15,24 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class CompanyCompositeControllerImpl implements CompanyCompositeController {
+public class CompanyCompositeControllerImpl extends StartupDefaultController implements CompanyCompositeController {
     private final CompanyCompositeIntegration companyCompositeIntegration;
 
+
     @Override
-    public ResponseEntity<List<ProductDTO>> productList() {
-        return new ResponseEntity<>(companyCompositeIntegration.getProductList(), HttpStatus.OK);
+    public ResponseEntity<ResponseData> getCompanyInfo() {
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .data(companyCompositeIntegration.getCompanyInfo())
+                .build());
     }
 
     @Override
-    public ResponseEntity<ProductDTO> editProduct(ProductDTO productDTO) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<ProductDTO> readProduct(Long productId) {
-        return null;
+    public ResponseEntity<ResponseData> editCompanyInfo(CompanyDTO companyDTO) {
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .build());
     }
 }

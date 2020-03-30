@@ -54,9 +54,9 @@ public class CompanyControllerTest {
 
     @Test
     public void getCompanyTest() {
-        ResponseEntity<ResponseData> result = companyController.getCompany(1l);
+        ResponseEntity<CompanyDTO> result = companyController.getCompany(1l);
 
-        CompanyDTO company = (CompanyDTO) result.getBody().getData();
+        CompanyDTO company = result.getBody();
 
         Assert.assertEquals(company.getCompanyIdx().longValue(), 1l);
         Assert.assertEquals(company.getName(), "test");

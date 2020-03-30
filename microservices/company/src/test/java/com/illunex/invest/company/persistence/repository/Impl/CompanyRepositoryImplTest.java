@@ -1,8 +1,8 @@
-package com.illunex.invest.company.persistence.repository;
+package com.illunex.invest.company.persistence.repository.Impl;
 
-import com.illunex.invest.company.builder.CompanyBuilder;
 import com.illunex.invest.company.persistence.entity.Company;
 import com.illunex.invest.company.persistence.entity.MainProductLine;
+import com.illunex.invest.company.persistence.repository.CompanyRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @RunWith(SpringRunner.class)
@@ -23,9 +24,10 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
         , "eureka.client.enabled=false"
         , "spring.cloud.config.enabled=false"})
 @Transactional
-public class CompanyRepositoryTest {
+public class CompanyRepositoryImplTest {
     @Autowired
     CompanyRepository repository;
+
     Company company;
     @Before
     public void setup() {
@@ -39,8 +41,9 @@ public class CompanyRepositoryTest {
     }
 
     @Test
-    public void findByUserIdx() {
-        Company result = repository.findById(company.getCompanyIdx()).get();
+    public void findByCompanyIdx() {
+        Company result = repository.findByCompanyIdx(company.getCompanyIdx()).get();
         Assert.assertEquals(result.getName(), "Test");
+        Assert.assertEquals(result.getMainProductLines().size(), 2);
     }
 }
