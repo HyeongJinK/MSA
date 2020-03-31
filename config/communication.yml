@@ -2,7 +2,7 @@ server.port: 7601
 
 spring:
   datasource:
-    url: jdbc:mariadb://15.164.212.141:3306/invest_communication
+    url: jdbc:mariadb://13.124.193.64:3306/invest_communication
     username: root
     password: Illunex123!
   jpa:
