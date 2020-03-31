@@ -41,11 +41,12 @@ services:
     image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/shop
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
+
   ir:
     image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/ir
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
-      -
+
   board:
     image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/board
     environment:
