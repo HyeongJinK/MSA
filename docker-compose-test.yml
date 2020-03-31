@@ -3,8 +3,6 @@ version: '3.0'
 services:
   jhipster-registry:
     image: jhipster/jhipster-registry:v6.0.2
-    networks:
-      - my-network
     volumes:
       - ./config:/config
     environment:
@@ -19,15 +17,11 @@ services:
 
   company:
     build: ../invest/company
-    networks:
-      - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
 
   startup:
     build: ../invest/startup
-    networks:
-      - my-network
     ports:
       - 8080:8080
     environment:
@@ -35,34 +29,24 @@ services:
 
   user:
     build: ../invest/user
-    networks:
-      - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
 
   communication:
     build: ../invest/communication
-    networks:
-      - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
 
   shop:
     build: ../invest/shop
-    networks:
-      - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
   ir:
     build: ../invest/ir
-    networks:
-      - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
   board:
     build: ../invest/board
-    networks:
-      - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
 networks: {}
