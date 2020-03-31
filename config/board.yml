@@ -11,7 +11,7 @@ spring:
       hibernate:
         format_sql: true
   datasource:
-    url: jdbc:mariadb://13.124.193.64:3306/invest_board
+    url: jdbc:mariadb://13.125.122.99:3306/invest_board
     username: root
     password: Illunex123!
 
