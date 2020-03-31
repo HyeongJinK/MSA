@@ -4,7 +4,7 @@ spring.jpa.hibernate.ddl-auto: update
 
 spring:
   datasource:
-    url: jdbc:mariadb://15.164.212.141:3306/invest
+    url: jdbc:mariadb://13.124.193.64:3306/invest
     username: root
     password: Illunex123!
   jpa:
