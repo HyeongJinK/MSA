@@ -16,37 +16,37 @@ services:
       - 8761:8761
 
   company:
-    build: ../invest/company
+    image: company:latest
     environment:
       - SPRING_PROFILES_ACTIVE=test
 
   startup:
-    build: ../invest/startup
+    image: startup:latest
     ports:
       - 8080:8080
     environment:
       - SPRING_PROFILES_ACTIVE=test
 
   user:
-    build: ../invest/user
+    image: user:latest
     environment:
       - SPRING_PROFILES_ACTIVE=test
 
   communication:
-    build: ../invest/communication
+    image: communication:latest
     environment:
       - SPRING_PROFILES_ACTIVE=test
 
   shop:
-    build: ../invest/shop
+    image: shop:latest
     environment:
       - SPRING_PROFILES_ACTIVE=test
   ir:
-    build: ../invest/ir
+    image: ir:latest
     environment:
       - SPRING_PROFILES_ACTIVE=test
   board:
-    build: ../invest/board
+    image: board:latest
     environment:
       - SPRING_PROFILES_ACTIVE=test
 networks: {}
