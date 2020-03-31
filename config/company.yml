@@ -28,7 +28,7 @@ server.port: 8080
 
 spring:
   datasource:
-    url: jdbc:mariadb://mariadb/invest_company
+    url: jdbc:mariadb://13.125.122.99:3306/invest_company
     username: root
     password: Illunex123!
   jpa:
