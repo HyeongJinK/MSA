@@ -3,6 +3,8 @@ version: '3.0'
 services:
   jhipster-registry:
     image: jhipster/jhipster-registry:v6.0.2
+    networks:
+      - my-network
     volumes:
       - ./config:/config
     environment:
@@ -16,37 +18,60 @@ services:
       - 8761:8761
 
   company:
-    image: company:latest
+    build: ../invest/company
+    mem_limit: 300m
+    networks:
+      - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
 
   startup:
-    image: startup:latest
+    build: ../invest/startup
+    mem_limit: 300m
+    networks:
+      - my-network
     ports:
       - 8080:8080
     environment:
       - SPRING_PROFILES_ACTIVE=test
 
   user:
-    image: user:latest
+    build: ../invest/user
+    mem_limit: 300m
+    networks:
+      - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
 
   communication:
-    image: communication:latest
+    build: ../invest/communication
+    mem_limit: 300m
+    networks:
+      - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
 
   shop:
-    image: shop:latest
+    build: ../invest/shop
+    mem_limit: 300m
+    networks:
+      - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
   ir:
-    image: ir:latest
+    build: ../invest/ir
+    mem_limit: 300m
+    networks:
+      - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
   board:
-    image: board:latest
+    build: ../invest/board
+    mem_limit: 300m
+    networks:
+      - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
-networks: {}
+networks:
+  my-network:
+    name: my-network
