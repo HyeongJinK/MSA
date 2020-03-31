@@ -1,0 +1,52 @@
+version: '3.0'
+
+services:
+#  jhipster-registry:
+#    image: jhipster/jhipster-registry:v6.0.2
+#    volumes:
+#      - ./config:/config
+#    environment:
+#      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+#      - SPRING_PROFILES_ACTIVE=swam,swagger
+#      - SPRING_SECURITY_USER_PASSWORD=admin
+#      - JHIPSTER_REGISTRY_PASSWORD=admin
+#      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE=native
+#      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_LOCATIONS=file:./config
+#    ports:
+#      - 8761:8761
+
+  company:
+    image: company:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam
+
+  startup:
+    image: startup:latest
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam
+
+  user:
+    image: user:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam
+
+  communication:
+    image: communication:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam
+
+  shop:
+    image: shop:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam
+##  ir:
+##    image: ir:latest
+##    environment:
+##      - SPRING_PROFILES_ACTIVE=test
+#  board:
+#    image: board:latest
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=swam
+networks: {}
