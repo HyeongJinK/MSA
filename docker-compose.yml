@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.0'
 
 services:
   jhipster-registry:
@@ -16,15 +16,6 @@ services:
       - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_LOCATIONS=file:./config
     ports:
       - 8761:8761
-#  gateway:
-#    build: ./cloud/gateway
-#    mem_limit: 300m
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=test
-#    networks:
-#      - my-network
-#    ports:
-#      - 8080:8080
   company:
     build: ./microservices/company
     mem_limit: 300m
