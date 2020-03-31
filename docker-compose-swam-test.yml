@@ -16,37 +16,38 @@ services:
 #      - 8761:8761
 
   company:
-    image: company:latest
+    image: ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/company
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
 
   startup:
-    image: startup:latest
+    image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/startup
     ports:
       - 8080:8080
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
 
   user:
-    image: user:latest
+    image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/user
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
 
   communication:
-    image: communication:latest
+    image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/communication
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
 
   shop:
-    image: shop:latest
+    image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/shop
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
-##  ir:
-##    image: ir:latest
-##    environment:
-##      - SPRING_PROFILES_ACTIVE=test
-#  board:
-#    image: board:latest
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=swam-test
+  ir:
+    image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/ir
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam-test
+      -
+  board:
+    image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/board
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam-test
 networks: {}
