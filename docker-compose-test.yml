@@ -19,7 +19,6 @@ services:
 
   company:
     build: ../invest/company
-    mem_limit: 300m
     networks:
       - my-network
     environment:
@@ -27,7 +26,6 @@ services:
 
   startup:
     build: ../invest/startup
-    mem_limit: 300m
     networks:
       - my-network
     ports:
@@ -37,7 +35,6 @@ services:
 
   user:
     build: ../invest/user
-    mem_limit: 300m
     networks:
       - my-network
     environment:
@@ -45,7 +42,6 @@ services:
 
   communication:
     build: ../invest/communication
-    mem_limit: 300m
     networks:
       - my-network
     environment:
@@ -53,21 +49,18 @@ services:
 
   shop:
     build: ../invest/shop
-    mem_limit: 300m
     networks:
       - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
   ir:
     build: ../invest/ir
-    mem_limit: 300m
     networks:
       - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
   board:
     build: ../invest/board
-    mem_limit: 300m
     networks:
       - my-network
     environment:
