@@ -3,8 +3,8 @@ version: '2.1'
 services:
   jhipster-registry:
     image: jhipster/jhipster-registry:v6.0.2
-    networks:
-      - my-network
+#    networks:
+#      - my-network
     volumes:
       - ./config:/config
     environment:
@@ -72,6 +72,6 @@ services:
 #      - my-network
 #    environment:
 #      - SPRING_PROFILES_ACTIVE=test
-networks:
-  my-network:
-    name: my-network
+#networks:
+#  my-network:
+#    name: my-network
