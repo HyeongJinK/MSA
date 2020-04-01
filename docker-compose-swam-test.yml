@@ -1,54 +1,40 @@
 version: '3.0'
 
 services:
-#  jhipster-registry:
-#    image: jhipster/jhipster-registry:v6.0.2
-#    volumes:
-#      - ./config:/config
-#    environment:
-#      - _JAVA_OPTIONS=-Xmx512m -Xms256m
-#      - SPRING_PROFILES_ACTIVE=swam-test,swagger
-#      - SPRING_SECURITY_USER_PASSWORD=admin
-#      - JHIPSTER_REGISTRY_PASSWORD=admin
-#      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE=native
-#      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_LOCATIONS=file:./config
-#    ports:
-#      - 8761:8761
-
   company:
-    image: ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/company
+    image: 13.209.17.102:5000/company
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
 
   startup:
-    image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/startup
+    image:  13.209.17.102:5000/startup
     ports:
       - 8080:8080
     environment:
       - SPRING_PROFILES_ACTIVE="swam-test"
 
   user:
-    image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/user
+    image:  13.209.17.102:5000/user
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
 
   communication:
-    image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/communication
+    image:  13.209.17.102:5000/communication
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
 
   shop:
-    image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/shop
+    image:  13.209.17.102:5000/shop
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
 
   ir:
-    image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/ir
+    image:  13.209.17.102:5000/ir
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
 
   board:
-    image:  ec2-13-209-17-102.ap-northeast-2.compute.amazonaws.com:5000/board
+    image:  13.209.17.102:5000/board
     environment:
       - SPRING_PROFILES_ACTIVE=swam-test
 networks: {}
