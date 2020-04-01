@@ -11,7 +11,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      - SPRING_PROFILES_ACTIVE="swam-new-test"
+      - SPRING_PROFILES_ACTIVE=swam-new-test
 
   user:
     image:  13.209.17.102:5000/user
