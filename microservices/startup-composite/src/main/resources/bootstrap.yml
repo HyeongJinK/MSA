@@ -52,3 +52,11 @@ app.config-server: 13.125.122.99
 spring:
   cloud.config:
     uri: http://admin:${jhipster.registry.password}@${app.config-server}:8761/config
+---
+spring.profiles: swam-new-test
+
+app.config-server: 13.209.48.160
+
+spring:
+  cloud.config:
+    uri: http://admin:${jhipster.registry.password}@${app.config-server}:8761/config
