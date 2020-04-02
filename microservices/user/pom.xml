@@ -211,6 +211,13 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>swam-test</id>
+			<properties>
+				<env>swam-test</env>
+				<spring.profiles.active>swam-test</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
 			<id>stage</id>
 			<properties>
 				<env>stage</env>

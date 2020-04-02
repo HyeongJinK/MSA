@@ -1,7 +1,7 @@
-package com.illunex.invest.startup.aop.user;
+package com.illunex.invest.vc.aop.user;
 
-import com.illunex.invest.startup.service.user.JwtTokenUtil;
-import com.illunex.invest.startup.service.user.UserDetailsServiceImpl;
+import com.illunex.invest.vc.service.user.JwtTokenUtil;
+import com.illunex.invest.vc.service.user.UserDetailsServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
