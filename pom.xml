@@ -14,6 +14,7 @@
         <module>microservices/shop</module>
         <module>microservices/communication</module>
         <module>microservices/startup-composite</module>
+        <module>microservices/vc-composite</module>
         <module>api/api</module>
         <module>util/common</module>
     </modules>
