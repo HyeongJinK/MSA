@@ -17,14 +17,13 @@ spring:
 
 logging.level:
   org.hibernate.SQL: debug
----
-spring.profiles: docker
+
 ---
 spring.profiles: test
 
 spring:
   datasource:
-    url: jdbc:mariadb://mariadb/invest_shop
+    url: jdbc:mariadb://mariadb/invest_company
     username: root
     password: Illunex123!
   jpa:

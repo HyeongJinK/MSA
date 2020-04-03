@@ -1,4 +1,4 @@
-server.port: 7210
+server.port: 7301
 
 spring:
   datasource:
@@ -26,7 +26,7 @@ spring.profiles: test
 
 spring:
   datasource:
-    url: jdbc:mariadb://mariadb/invest_user
+    url: jdbc:mariadb://mariadb/invest_company
     username: root
     password: Illunex123!
   jpa:

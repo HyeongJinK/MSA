@@ -32,3 +32,28 @@ spring:
     uri: http://admin:${jhipster.registry.password}@${app.config-server}:8761/config
 
 app.config-server: jhipster-registry
+---
+spring.profiles: swam
+
+app.config-server: 192.168.234.161
+
+spring:
+  cloud.config:
+    uri: http://admin:${jhipster.registry.password}@${app.config-server}:8761/config
+
+---
+spring.profiles: swam-test
+
+app.config-server: 13.125.122.99
+
+spring:
+  cloud.config:
+    uri: http://admin:${jhipster.registry.password}@${app.config-server}:8761/config
+---
+spring.profiles: swam-new-test
+
+app.config-server: 13.209.48.160
+
+spring:
+  cloud.config:
+    uri: http://admin:${jhipster.registry.password}@${app.config-server}:8761/config

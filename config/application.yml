@@ -1,6 +1,15 @@
 app:
   eureka-server: localhost
 
+configserver:
+  name: Docker JHipster Registry
+  status: Connected to the JHipster Registry running in Docker
+
+jhipster:
+  security:
+    authentication:
+      jwt:
+        secret: my-secret-key-which-should-be-changed-in-production-and-be-base64-encoded
 
 eureka:
   client:
@@ -11,24 +20,14 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 5
     leaseExpirationDurationInSeconds: 5
----
-spring.profiles: docker2
 
-app:
-  eureka-server: eureka
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 ---
 spring.profiles: docker
-
-configserver:
-  name: Docker JHipster Registry
-  status: Connected to the JHipster Registry running in Docker
-
-jhipster:
-  security:
-    authentication:
-      jwt:
-        secret: my-secret-key-which-should-be-changed-in-production-and-be-base64-encoded
 
 app:
   eureka-server: jhipster-registry
@@ -37,31 +36,10 @@ eureka:
   client:
     serviceUrl:
       defaultZone: "http://admin:${jhipster.registry.password}@${app.eureka-server}:8761/eureka/"
-    initialInstanceInfoReplicationIntervalSeconds: 5
-    registryFetchIntervalSeconds: 5
-  instance:
-    leaseRenewalIntervalInSeconds: 5
-    leaseExpirationDurationInSeconds: 5
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
 
 ---
 spring.profiles: test
 
-configserver:
-  name: Docker JHipster Registry
-  status: Connected to the JHipster Registry running in Docker
-
-jhipster:
-  security:
-    authentication:
-      jwt:
-        secret: my-secret-key-which-should-be-changed-in-production-and-be-base64-encoded
-
 app:
   eureka-server: jhipster-registry
 
@@ -69,15 +47,35 @@ eureka:
   client:
     serviceUrl:
       defaultZone: "http://admin:${jhipster.registry.password}@${app.eureka-server}:8761/eureka/"
-    initialInstanceInfoReplicationIntervalSeconds: 5
-    registryFetchIntervalSeconds: 5
-  instance:
-    leaseRenewalIntervalInSeconds: 5
-    leaseExpirationDurationInSeconds: 5
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+---
+spring.profiles: swam
 
+app:
+  eureka-server: 192.168.234.161
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: "http://admin:${jhipster.registry.password}@${app.eureka-server}:8761/eureka/"
+
+---
+spring.profiles: swam-test
+
+app:
+  eureka-server: 13.125.122.99
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: "http://admin:${jhipster.registry.password}@${app.eureka-server}:8761/eureka/"
+
+---
+spring.profiles: swam-new-test
+app:
+  eureka-server: 13.209.48.160
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: "http://admin:${jhipster.registry.password}@${app.eureka-server}:8761/eureka/"

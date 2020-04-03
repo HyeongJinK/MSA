@@ -1,0 +1,40 @@
+version: '3.0'
+
+services:
+  company:
+    image: 13.209.17.102:5000/company
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam-new-test
+
+  startup:
+    image:  13.209.17.102:5000/startup
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam-new-test
+
+  user:
+    image:  13.209.17.102:5000/user
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam-new-test
+
+  communication:
+    image:  13.209.17.102:5000/communication
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam-new-test
+
+  shop:
+    image:  13.209.17.102:5000/shop
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam-new-test
+
+  ir:
+    image:  13.209.17.102:5000/ir
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam-new-test
+
+  board:
+    image:  13.209.17.102:5000/board
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam-new-test
+networks: {}

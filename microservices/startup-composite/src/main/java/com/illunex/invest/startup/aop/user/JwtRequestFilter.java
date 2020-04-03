@@ -1,11 +1,9 @@
 package com.illunex.invest.startup.aop.user;
 
-import com.illunex.invest.api.common.exception.ExpireUserException;
 import com.illunex.invest.startup.service.user.JwtTokenUtil;
 import com.illunex.invest.startup.service.user.UserDetailsServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

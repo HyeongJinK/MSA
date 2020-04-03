@@ -20,15 +20,13 @@ logging.level:
 
 ---
 spring.profiles: docker
-server.port: 8080
 
 ---
 spring.profiles: test
-server.port: 8080
 
 spring:
   datasource:
-    url: jdbc:mariadb://mariadb/invest_communication
+    url: jdbc:mariadb://mariadb/invest_company
     username: root
     password: Illunex123!
   jpa:
