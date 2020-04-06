@@ -32,6 +32,15 @@ services:
       - 8080:8080
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+  vc:
+    build: ./microservices/vc-composite
+    mem_limit: 300m
+    networks:
+      - my-network
+    ports:
+      - 8081:8081
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
   user:
     build: ./microservices/user
     mem_limit: 300m
