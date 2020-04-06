@@ -38,4 +38,8 @@ public class RoleDTO implements RoleInterface {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+    public boolean isRead() {
+        return (this.detailedRights & 1) == 1;
+    }
 }

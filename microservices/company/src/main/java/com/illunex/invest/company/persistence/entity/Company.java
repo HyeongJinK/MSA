@@ -23,7 +23,7 @@ public class Company {
     String name;                // 이름
     String businessNumber;      // 사업자 등록번호
     String companyType;         // 산업분야
-    LocalDateTime establishmentDate;     // 설립일
+    String establishmentDate;     // 설립일
     String employeeCount;       // 직원수
     String business;            // 기업구분
     String nation;              // 국가

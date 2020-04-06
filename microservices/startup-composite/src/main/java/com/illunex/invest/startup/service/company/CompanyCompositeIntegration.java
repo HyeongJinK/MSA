@@ -8,6 +8,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Log
@@ -25,9 +26,17 @@ public class CompanyCompositeIntegration extends DefaultIntegrationService {
     }
 
     public void editCompany(CompanyDTO companyDTO) {
-        /*ResponseEntity<ResponseData> res = */restTemplate.postForEntity(companyUrl + "/company/form/"
+        companyDTO.setCompanyIdx(getUser().getCompanyIdx());
+        log.info(companyDTO.toString());
+        restTemplate.postForEntity(companyUrl + "/company/form/"
                 , new HttpEntity<>(companyDTO, getDefaultHeader())
                 , ResponseData.class);
+    }
+
+    public String uploadLogo(MultipartFile file) {
+        ResponseEntity<ResponseData> uploadRes = fileUpload(file, bucket, "company/logo/");
+
+        return String.valueOf(uploadRes.getBody().getData());
     }
 
 }

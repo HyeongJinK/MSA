@@ -23,7 +23,7 @@ public class SignatureIntegrationService extends DefaultIntegrationService {
 
     public ResponseEntity<ResponseData> signature(MultipartFile file) {
 
-        ResponseEntity<ResponseData> uploadRes = fileUpload(file, "invest-startup", "user/signature/");
+        ResponseEntity<ResponseData> uploadRes = fileUpload(file, bucket, "user/signature/");
 
         return restTemplate.postForEntity(userUrl + "/signature/add", new HttpEntity<>(SignatureRequest.builder()
                 .imgUrl(String.valueOf(uploadRes.getBody().getData()))
