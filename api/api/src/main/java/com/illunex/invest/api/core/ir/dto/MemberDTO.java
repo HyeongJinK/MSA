@@ -12,6 +12,7 @@ public class MemberDTO {
     String imgUrl;              // 사진
     String imgStatus;           // 사진 저장 유무
     String rank;                // 직급
+    String department;          // 부서
     String name;                // 이름
     String etc;                 // 비고
 }
