@@ -38,6 +38,7 @@ public class DefaultIntegrationService {
     protected final String shopUrl = "http://shop";
     protected final String investUrl = "http://invest";
     protected final String startUpUrl = "https://startup.effectmall.com";
+    protected final String bucket = "invest-startup";
 
     @Cacheable(value="user")
     public UserDTO getUser() {

@@ -1,10 +1,14 @@
 package com.illunex.invest.startup.service.company;
 
+import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import com.illunex.invest.api.core.company.dto.ProductDTO;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
@@ -37,11 +41,16 @@ public class ProductCompositeIntegration extends DefaultIntegrationService {
 
     public ProductDTO editProduct(ProductDTO productDTO) {
         Long companyId = getUser().getCompanyIdx();
-        if (companyId != productDTO.getCompany().getCompanyIdx()) {
-            // TODO 수정할 권한이 없음
-        }
-
-
+        productDTO.setCompany(CompanyDTO.builder().companyIdx(companyId).build());
+        restTemplate.postForEntity(companyUrl + "/product/"
+                , new HttpEntity<>(productDTO, getDefaultHeader())
+                , ResponseData.class);
         return null;
+    }
+
+    public String uploadLogo(MultipartFile file) {
+        ResponseEntity<ResponseData> uploadRes = fileUpload(file, bucket, "company/product/");
+
+        return String.valueOf(uploadRes.getBody().getData());
     }
 }

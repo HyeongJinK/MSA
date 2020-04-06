@@ -1,4 +1,4 @@
-package com.illunex.invest.communication.controller.mail;
+package com.illunex.invest.communication.controller.file;
 
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.core.communication.controller.FileController;

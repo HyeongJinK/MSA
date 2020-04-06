@@ -26,7 +26,7 @@ public class CompanyDTO {
     @ApiModelProperty(value="산업분야", name="companyType", required=false)
     String companyType;
     @ApiModelProperty(value="설립일", name="establishmentDate", required=false)
-    LocalDateTime establishmentDate;
+    String establishmentDate;
     @ApiModelProperty(value="직원수", name="employeeCount", required=false)
     String employeeCount;
     @ApiModelProperty(value="기업구분", name="business", required=false)

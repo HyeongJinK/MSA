@@ -39,7 +39,11 @@ public class CompanyControllerImpl implements CompanyController {
 
     @Override
     public ResponseEntity<ResponseData> updateCompany(CompanyDTO companyDTO) {
-        return null;
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .data(companyService.updateCompany(companyDTO))
+                .build());
     }
 
     @Override

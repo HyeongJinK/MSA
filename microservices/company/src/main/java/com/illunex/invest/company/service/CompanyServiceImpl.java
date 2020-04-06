@@ -11,6 +11,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Log
 @Service
 @Transactional(readOnly = true)
@@ -36,7 +38,10 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    @Transactional
     public CompanyDTO updateCompany(CompanyDTO companyDTO) {
+        companyDTO.setUpdateDate(LocalDateTime.now());
+        log.info(companyDTO.toString());
         return mapper.entityToDto(companyRepository.save(mapper.dtoToEntity(companyDTO)));
     }
 }
