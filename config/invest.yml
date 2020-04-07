@@ -1,4 +1,4 @@
-server.port: 7201
+server.port: 7701
 
 spring.jpa.hibernate.ddl-auto: update
 
