@@ -16,9 +16,10 @@ public class Product {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String title;           // 제품명
+    @Column(name = "description", length = 4000)
     String description;     // 제품 설명
     String viewMode;        // 공개 여부
-    
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "productId")
     List<ProductImage> productImages = new ArrayList<>();   // 제품 이미지

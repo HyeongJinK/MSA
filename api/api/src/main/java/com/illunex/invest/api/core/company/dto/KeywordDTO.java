@@ -9,6 +9,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter @Setter
 public class KeywordDTO {
-    Long keywordIdx;
-    Long companyIdx;
+    Long id;
+    String title;
 }
