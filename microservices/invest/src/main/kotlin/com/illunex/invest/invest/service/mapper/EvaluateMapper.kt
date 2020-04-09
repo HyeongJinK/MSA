@@ -10,27 +10,39 @@ import java.util.stream.Collectors
 
 class EvaluateMapper {
     fun DtoTOEntity(evaluate: Evaluate): EvaluateDTO {
-        var evaluateDTO: EvaluateDTO = EvaluateDTO();
+        val evaluateDTO: EvaluateDTO = EvaluateDTO(
+              evaluate.idx
+            , evaluate.companyIdx
+            , evaluate.product
+            , evaluate.company
+            , evaluate.imgUrl
+            , evaluate.updateDate
+            , evaluate.scale
+            , evaluate.status
+            , evaluate.score
+            , evaluate.judges
+            , evaluate.reviewItem)
 
         return evaluateDTO;
     }
 
     fun DtoTOEntity(evaluate: List<Evaluate>): List<EvaluateDTO> {
-        var evaluateDTOList: ArrayList<EvaluateDTO> = ArrayList()
+        val evaluateDTOList: ArrayList<EvaluateDTO> = ArrayList()
 
         evaluate.stream().forEach { evaluate ->
             run {
-                evaluateDTOList.add(EvaluateDTO(evaluate.idx
-                        , evaluate.companyIdx
-                        , evaluate.product
-                        , evaluate.company
-                        , evaluate.imgUrl
-                        , evaluate.updateDate
-                        , evaluate.scale
-                        , evaluate.status
-                        , evaluate.score
-                        , evaluate.judges
-                        , evaluate.reviewItem))
+                evaluateDTOList.add(EvaluateDTO(
+                      evaluate.idx
+                    , evaluate.companyIdx
+                    , evaluate.product
+                    , evaluate.company
+                    , evaluate.imgUrl
+                    , evaluate.updateDate
+                    , evaluate.scale
+                    , evaluate.status
+                    , evaluate.score
+                    , evaluate.judges
+                    , evaluate.reviewItem))
             }
         }
 

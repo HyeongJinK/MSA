@@ -1,6 +1,7 @@
 package com.illunex.invest.api.core.invest.controller;
 
 import com.illunex.invest.api.core.invest.dto.EvaluateDTO;
+import com.illunex.invest.api.core.invest.dto.EvaluateListDTO;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,5 +23,7 @@ public interface EvaluateController {
 //            @ApiResponse(code = 400, message = "Bad Request")
 //    })
     @GetMapping(value = "/list")
-    ResponseEntity<List<EvaluateDTO>> getEvaluateList(@RequestParam Long companyIdx);
+    ResponseEntity<EvaluateListDTO> getEvaluateList(@RequestParam Long companyIdx);
+    @GetMapping(value = "/detail")
+    ResponseEntity<EvaluateDTO> getEvaluate(@RequestParam Long evaluateIdx);
 }
