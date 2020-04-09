@@ -1,4 +1,4 @@
-package com.illunex.invest.vc.controller.invest;
+package com.illunex.invest.vc.controller;
 
 import com.illunex.invest.api.core.ir.dto.*;
 import com.illunex.invest.vc.service.invest.InvestCompositeIntegration;
@@ -12,8 +12,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @RestController
 @RequiredArgsConstructor
-public class InvestController {
-    Logger logger = LoggerFactory.getLogger(InvestController.class);
+public class IRController {
+    Logger logger = LoggerFactory.getLogger(IRController.class);
 
     private final RestTemplate restTemplate;
     private final WebClient.Builder loadBalanceWebClientBuilder;
