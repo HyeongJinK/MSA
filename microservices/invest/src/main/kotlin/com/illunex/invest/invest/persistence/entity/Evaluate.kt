@@ -15,6 +15,7 @@ data class Evaluate(
     var updateDate: String,
     var scale: String,
     var status: String,
+    var content: String,
     var score: Int,
 
     @OneToMany(mappedBy = "evaluate", cascade = [CascadeType.ALL])

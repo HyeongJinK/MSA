@@ -18,6 +18,7 @@ public class EvaluateDTO {
     String updateDate;
     String scale;
     String status;
+    String content;
     Integer score;
 
     List<JudgeDTO> judgeList;

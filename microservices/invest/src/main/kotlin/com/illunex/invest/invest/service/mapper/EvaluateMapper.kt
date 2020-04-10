@@ -19,6 +19,7 @@ class EvaluateMapper {
             , evaluate.updateDate
             , evaluate.scale
             , evaluate.status
+            , evaluate.content
             , evaluate.score
             , evaluate.judges
             , evaluate.reviewItem)
@@ -40,6 +41,7 @@ class EvaluateMapper {
                     , evaluate.updateDate
                     , evaluate.scale
                     , evaluate.status
+                    , evaluate.content
                     , evaluate.score
                     , evaluate.judges
                     , evaluate.reviewItem))
@@ -49,7 +51,7 @@ class EvaluateMapper {
         return evaluateDTOList;
     }
 
-    private fun EvaluateDTO(idx: Long?, companyIdx: Long?, product: String, company: String, imgUrl: String, updateDate: String, scale: String, status: String, score: Int, judges: List<Judge>, reviewItem: List<ReviewItem>): EvaluateDTO {
+    private fun EvaluateDTO(idx: Long?, companyIdx: Long?, product: String, company: String, imgUrl: String, updateDate: String, scale: String, status: String, content: String, score: Int, judges: List<Judge>, reviewItem: List<ReviewItem>): EvaluateDTO {
         return EvaluateDTO(idx
                 , companyIdx
                 , product
@@ -58,6 +60,7 @@ class EvaluateMapper {
                 , updateDate
                 , scale
                 , status
+                , content
                 , score
                 , judges.stream().map { item -> JudgeDTO(item.idx, item.userIdx, item.name, item.comment, item.point, item.rank, item.imgUrl, item.status) }.collect(Collectors.toList()) as List<JudgeDTO>
                 , reviewItem.stream().map { item -> ReviewItemDTO(item.idx, item.category, item.title, item.point, item.content, item.updateDate, item.deleted) }.collect(Collectors.toList()) as List<ReviewItemDTO>)
