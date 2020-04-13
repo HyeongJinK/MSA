@@ -1,16 +1,20 @@
-package com.illunex.invest.api.core.invest.dto;
+package com.illunex.invest.investment.persistence.entity;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Builder
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EvaluateDTO {
+@Builder
+@Table(name = "evaluate")
+public class Evaluate {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
     Long companyIdx;
     Long vcCompanyIdx;
@@ -23,5 +27,6 @@ public class EvaluateDTO {
     String content;
     Integer score;
 
-    List<EvaluateJudgeDTO> judgeList;
+    @OneToMany(mappedBy = "evaluate", cascade = CascadeType.ALL)
+    List<EvaluateJudge> judgeList;
 }

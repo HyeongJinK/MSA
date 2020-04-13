@@ -48,6 +48,13 @@ services:
       - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+  investment:
+    build: ./microservices/investment
+    mem_limit: 300m
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
   board:
     build: ./microservices/board
     mem_limit: 300m

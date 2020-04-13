@@ -9,12 +9,10 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReviewItemDTO {
+public class EvaluateReviewItemDTO {
     Long idx;
-    Long vcCompanyIdx;
     String category;
     String content;
-    LocalDateTime updateDate;
     Integer point;
-    Boolean deleted;
+    LocalDateTime updateDate;
 }

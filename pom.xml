@@ -10,7 +10,8 @@
         <module>microservices/company</module>
         <module>microservices/board</module>
         <module>microservices/user</module>
-        <module>microservices/invest</module>
+<!--        <module>microservices/invest</module>-->
+        <module>microservices/investment</module>
         <module>microservices/shop</module>
         <module>microservices/communication</module>
         <module>microservices/startup-composite</module>

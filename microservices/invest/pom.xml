@@ -18,7 +18,7 @@
 		<java.version>1.8</java.version>
 		<kotlin.version>1.2.71</kotlin.version>
 		<spring-cloud.version>Greenwich.SR5</spring-cloud.version>
-		<org.mapstruct.version>1.3.1.1</org.mapstruct.version>
+		<org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
 	</properties>
 
 	<dependencies>
@@ -90,9 +90,14 @@
 			<artifactId>querydsl-jpa</artifactId>
 		</dependency>
 		<!--		Auto Code		-->
+<!--		<dependency>-->
+<!--			<groupId>com.github.pozo</groupId>-->
+<!--			<artifactId>mapstruct-kotlin</artifactId>-->
+<!--			<version>${org.mapstruct.version}</version>-->
+<!--		</dependency>-->
 		<dependency>
-			<groupId>com.github.pozo</groupId>
-			<artifactId>mapstruct-kotlin</artifactId>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
 			<version>${org.mapstruct.version}</version>
 		</dependency>
 
@@ -186,10 +191,15 @@
 									<classifier>jpa</classifier>
 								</annotationProcessorPath>
 								<annotationProcessorPath>
-									<groupId>com.github.pozo</groupId>
-									<artifactId>mapstruct-kotlin-processor</artifactId>
-									<version>1.3.1.1</version>
+									<groupId>org.mapstruct</groupId>
+									<artifactId>mapstruct-processor</artifactId>
+									<version>${org.mapstruct.version}</version>
 								</annotationProcessorPath>
+<!--								<annotationProcessorPath>-->
+<!--									<groupId>com.github.pozo</groupId>-->
+<!--									<artifactId>mapstruct-kotlin-processor</artifactId>-->
+<!--									<version>1.3.1.1</version>-->
+<!--								</annotationProcessorPath>-->
 							</annotationProcessorPaths>
 						</configuration>
 					</execution>

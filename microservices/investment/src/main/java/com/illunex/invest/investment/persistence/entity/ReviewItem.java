@@ -1,15 +1,19 @@
-package com.illunex.invest.api.core.invest.dto;
+package com.illunex.invest.investment.persistence.entity;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Builder
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReviewItemDTO {
+@Builder
+@Table(name = "review_item")
+public class ReviewItem {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
     Long vcCompanyIdx;
     String category;

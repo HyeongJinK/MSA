@@ -9,18 +9,21 @@ data class Evaluate(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var idx: Long? = null,
     var companyIdx: Long? = null,
-    var product: String,
-    var company: String,
-    var imgUrl: String,
-    var updateDate: String,
-    var scale: String,
-    var status: String,
-    var content: String,
-    var score: Int,
+    var vcCompanyIdx: Long? = null,
+    var product: String? = null,
+    var company: String? = null,
+    var imgUrl: String? = null,
+    var updateDate: String? = null,
+    var scale: String? = null,
+    var status: String? = null,
+    var content: String? = null,
+    var score: Int? = 0,
 
     @OneToMany(mappedBy = "evaluate", cascade = [CascadeType.ALL])
-    var judges: List<Judge>,
+    var judgeList: List<EvaluateJudge>?,
 
-    @OneToMany(mappedBy = "evaluate", cascade = [CascadeType.ALL])
-    var reviewItem: List<ReviewItem>
-)
+    @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY) @JoinColumn(name = "category_idx")
+    var category: EvaluateReviewItemCategory?
+) {
+    constructor() : this(null, null, null, null, null, null, null, null, null, null, null, null, null )
+}
