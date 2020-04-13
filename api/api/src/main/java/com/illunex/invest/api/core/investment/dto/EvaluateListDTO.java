@@ -1,4 +1,4 @@
-package com.illunex.invest.api.core.invest.dto;
+package com.illunex.invest.api.core.investment.dto;
 
 import lombok.*;
 

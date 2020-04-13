@@ -35,6 +35,11 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=swam-new-test
 
+  investment:
+    image:  13.209.17.102:5000/investment
+    environment:
+      - SPRING_PROFILES_ACTIVE=swam-new-test
+
   ir:
     image:  13.209.17.102:5000/ir
     environment:

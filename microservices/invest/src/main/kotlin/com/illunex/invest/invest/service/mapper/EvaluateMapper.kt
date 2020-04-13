@@ -1,54 +1,142 @@
 package com.illunex.invest.invest.service.mapper
 
-import com.illunex.invest.api.core.invest.dto.EvaluateDTO
-import com.illunex.invest.api.core.invest.dto.JudgeDTO
-import com.illunex.invest.api.core.invest.dto.ReviewItemDTO
+import com.illunex.invest.api.core.investment.dto.EvaluateDTO
+import com.illunex.invest.api.core.investment.dto.JudgeDTO
+import com.illunex.invest.api.core.investment.dto.ReviewItemDTO
 import com.illunex.invest.invest.persistence.entity.Evaluate
 import com.illunex.invest.invest.persistence.entity.Judge
 import com.illunex.invest.invest.persistence.entity.ReviewItem
-import java.util.stream.Collectors
+import org.mapstruct.Mapper
+import org.mapstruct.factory.Mappers
 
-class EvaluateMapper {
-    fun DtoTOEntity(evaluate: Evaluate): EvaluateDTO {
-        var evaluateDTO: EvaluateDTO = EvaluateDTO();
+@Mapper
+interface EvaluateMapper {
+    var MAPPER: EvaluateMapper
+        get() = Mappers.getMapper(EvaluateMapper::class.java)
+        set(value) = TODO()
 
-        return evaluateDTO;
-    }
+    fun evaluateEntityToDTO(evaluate: Evaluate) : EvaluateDTO
+    fun evaluateDTOToEntity(evaluateDTO: EvaluateDTO) : Evaluate
 
-    fun DtoTOEntity(evaluate: List<Evaluate>): List<EvaluateDTO> {
-        var evaluateDTOList: ArrayList<EvaluateDTO> = ArrayList()
+    fun evaluateListEntityToDTOList(evaluateList: List<Evaluate>) : List<EvaluateDTO>
 
-        evaluate.stream().forEach { evaluate ->
-            run {
-                evaluateDTOList.add(EvaluateDTO(evaluate.idx
-                        , evaluate.companyIdx
-                        , evaluate.product
-                        , evaluate.company
-                        , evaluate.imgUrl
-                        , evaluate.updateDate
-                        , evaluate.scale
-                        , evaluate.status
-                        , evaluate.score
-                        , evaluate.judges
-                        , evaluate.reviewItem))
-            }
-        }
+    fun judgeEntityToDTO(judge: Judge) : JudgeDTO
+    fun judgeDTOToEntity(judgeDTO: JudgeDTO) : Judge
+    fun reviewItemEntityToDTO(reviewItem: ReviewItem) : ReviewItemDTO
+    fun reviewItemDTOToEntity(reviewItemDTO: ReviewItemDTO) : ReviewItem
 
-        return evaluateDTOList;
-    }
+//
+//    private fun EvaluateDTO(idx: Long?, companyIdx: Long?, vcCompanyIdx: Long?, product: String?, company: String?, imgUrl: String?, updateDate: String?, scale: String?, status: String?, content: String?, score: Int?, judgeList: List<EvaluateJudge>, category: EvaluateReviewItemCategory?): EvaluateDTO
+//    {
+//
+//        return EvaluateDTO(idx
+//            , companyIdx
+//            , vcCompanyIdx
+//            , product
+//            , company
+//            , imgUrl
+//            , updateDate
+//            , scale
+//            , status
+//            , content
+//            , score
+//            , judgeList.stream().map { item -> EvaluateJudgeDTO(item.idx, item.userIdx, item.name, item.comment, item.point, item.rank, item.imgUrl, item.status) }.collect(Collectors.toList()) as List<EvaluateJudge>
+//            , category)
+//
+//
+//    }
+//
+//    private fun Evaluate(idx: Long?, companyIdx: Long?, vcCompanyIdx: Long?, product: String, company: String, imgUrl: String, updateDate: String, scale: String, status: String, content: String, score: Int, judgeList: List<EvaluateJudgeDTO>, category: CategoryDTO): Evaluate {
+//        return Evaluate(
+//                idx, companyIdx, vcCompanyIdx, product, company, imgUrl, updateDate, scale, status, content, score, judgeList, category
+//        )
+//    }
+//
+//    fun evaluateEntityToDTO(evaluate: Evaluate): EvaluateDTO {
+//        val evaluateDTO = EvaluateDTO(
+//              evaluate.idx
+//            , evaluate.companyIdx
+//            , evaluate.vcCompanyIdx
+//            , evaluate.product
+//            , evaluate.company
+//            , evaluate.imgUrl
+//            , evaluate.updateDate
+//            , evaluate.scale
+//            , evaluate.status
+//            , evaluate.content
+//            , evaluate.score
+//            , evaluate.judgeList
+//            , evaluate.category)
+//
+//        return evaluateDTO
+//    }
+//
+//    fun evaluateDTOToEntity(evaluateDTO: EvaluateDTO): Evaluate {
+//        val evaluate = Evaluate(
+//            evaluateDTO.idx
+//            , evaluateDTO.companyIdx
+//            , evaluateDTO.vcCompanyIdx
+//            , evaluateDTO.product
+//            , evaluateDTO.company
+//            , evaluateDTO.imgUrl
+//            , evaluateDTO.updateDate
+//            , evaluateDTO.scale
+//            , evaluateDTO.status
+//            , evaluateDTO.content
+//            , evaluateDTO.score
+//            , evaluateDTO.judgeList
+//            , evaluateDTO.category)
+//
+//        return evaluate
+//    }
+//
+//    fun judgeDTOToEntity(judgeDTO: JudgeDTO): Judge {
+//        val judge = Judge(
+//            judgeDTO.idx
+//            , judgeDTO.userIdx
+//            , judgeDTO.name
+//            , judgeDTO.rank
+//            , judgeDTO.imgUrl
+//        )
+//
+//        return judge
+//    }
+//
+//    fun reviewItemDTOToEntity(reviewItemDTO: ReviewItemDTO): ReviewItem {
+//        val reviewItem = ReviewItem(
+//            reviewItemDTO.idx
+//            , reviewItemDTO.title
+//            , reviewItemDTO.point
+//            , reviewItemDTO.updateDate
+//        )
+//        return reviewItem
+//    }
+//
+//
+//    fun entityListToDTOList(evaluate: List<Evaluate>): List<EvaluateDTO> {
+//        val evaluateDTOList: ArrayList<EvaluateDTO> = ArrayList()
+//
+//        evaluate.stream().forEach { evaluate ->
+//            run {
+//                evaluateDTOList.add(EvaluateDTO(
+//                      evaluate.idx
+//                    , evaluate.companyIdx
+//                    , evaluate.vcCompanyIdx
+//                    , evaluate.product
+//                    , evaluate.company
+//                    , evaluate.imgUrl
+//                    , evaluate.updateDate
+//                    , evaluate.scale
+//                    , evaluate.status
+//                    , evaluate.content
+//                    , evaluate.score
+//                    , evaluate.judgeList
+//                    , evaluate.category))
+//            }
+//        }
+//
+//        return evaluateDTOList;
+//    }
 
-    private fun EvaluateDTO(idx: Long?, companyIdx: Long?, product: String, company: String, imgUrl: String, updateDate: String, scale: String, status: String, score: Int, judges: List<Judge>, reviewItem: List<ReviewItem>): EvaluateDTO {
-        return EvaluateDTO(idx
-                , companyIdx
-                , product
-                , company
-                , imgUrl
-                , updateDate
-                , scale
-                , status
-                , score
-                , judges.stream().map { item -> JudgeDTO(item.idx, item.userIdx, item.name, item.comment, item.point, item.rank, item.imgUrl, item.status) }.collect(Collectors.toList()) as List<JudgeDTO>
-                , reviewItem.stream().map { item -> ReviewItemDTO(item.idx, item.category, item.title, item.point, item.content, item.updateDate, item.deleted) }.collect(Collectors.toList()) as List<ReviewItemDTO>)
-    }
 
 }

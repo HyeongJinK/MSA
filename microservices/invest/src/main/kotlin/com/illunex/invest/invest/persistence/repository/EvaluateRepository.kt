@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface EvaluateRepository: JpaRepository<Evaluate, Long> {
     fun findAllByCompanyIdx(companyIdx: Long): List<Evaluate>
+    fun findByCompanyIdxAndVcCompanyIdx(companyIdx: Long, vcCompanyIdx: Long): Evaluate
 }

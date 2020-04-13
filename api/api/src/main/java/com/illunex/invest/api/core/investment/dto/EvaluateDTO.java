@@ -1,7 +1,8 @@
-package com.illunex.invest.api.core.invest.dto;
+package com.illunex.invest.api.core.investment.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
@@ -12,14 +13,16 @@ import java.util.List;
 public class EvaluateDTO {
     Long idx;
     Long companyIdx;
+    Long vcCompanyIdx;
     String product;
     String company;
     String imgUrl;
-    String updateDate;
+    LocalDateTime createDate;
+    LocalDateTime requestDate;
     String scale;
     String status;
+    String content;
     Integer score;
 
-    List<JudgeDTO> judgeList;
-    List<ReviewItemDTO> reviewItemList;
+    List<EvaluateJudgeDTO> judgeList;
 }
