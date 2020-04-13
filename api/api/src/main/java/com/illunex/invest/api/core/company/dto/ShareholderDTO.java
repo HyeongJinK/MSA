@@ -13,7 +13,7 @@ import java.util.List;
 public class ShareholderDTO {
     Long id;
     String title;
-    LocalDateTime regDate;
+    String regDate;
     LocalDateTime updateDate;
     String signature;
     Boolean rock;

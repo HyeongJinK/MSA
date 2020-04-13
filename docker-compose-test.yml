@@ -23,6 +23,8 @@ services:
       - my-network
     environment:
       - SPRING_PROFILES_ACTIVE=test
+    ports:
+      - 8761:8761
 
   config-server:
     build: cloud/config-server
@@ -32,6 +34,8 @@ services:
       - SPRING_PROFILES_ACTIVE=test
     volumes:
       - $PWD/config:/config
+    ports:
+      - 8888:8888
 #  company:
 #    build: ../invest/company
 #    mem_limit: 300m

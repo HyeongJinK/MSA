@@ -11,6 +11,7 @@ import lombok.Setter;
 public class ShareholderPersonDTO {
     Long id;
     String info;
+    String personNumber;
     String address;
     String stock;
     String stockValue;

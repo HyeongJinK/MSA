@@ -16,6 +16,7 @@ public class ShareholderPerson {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String info;
+    String personNumber;
     String address;
     String stock;
     String stockValue;
