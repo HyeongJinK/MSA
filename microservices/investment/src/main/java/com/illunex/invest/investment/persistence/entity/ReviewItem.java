@@ -15,10 +15,9 @@ import java.time.LocalDateTime;
 public class ReviewItem {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
-    Long vcCompanyIdx;
-    String category;
     String content;
-    LocalDateTime updateDate;
     Integer point;
-    Boolean deleted;
+
+    @ManyToOne @JoinColumn(name = "category_idx")
+    ReviewItemCategory reviewItemCategory;
 }

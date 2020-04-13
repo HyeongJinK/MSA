@@ -1,8 +1,6 @@
-package com.illunex.invest.api.core.invest.dto;
+package com.illunex.invest.api.core.investment.dto;
 
 import lombok.*;
-
-import java.time.LocalDateTime;
 
 @Builder
 @Getter
@@ -11,8 +9,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class EvaluateReviewItemDTO {
     Long idx;
-    String category;
     String content;
     Integer point;
-    LocalDateTime updateDate;
 }

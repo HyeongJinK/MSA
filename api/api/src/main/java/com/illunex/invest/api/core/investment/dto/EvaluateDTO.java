@@ -1,4 +1,4 @@
-package com.illunex.invest.api.core.invest.dto;
+package com.illunex.invest.api.core.investment.dto;
 
 import lombok.*;
 
@@ -17,7 +17,8 @@ public class EvaluateDTO {
     String product;
     String company;
     String imgUrl;
-    LocalDateTime updateDate;
+    LocalDateTime createDate;
+    LocalDateTime requestDate;
     String scale;
     String status;
     String content;

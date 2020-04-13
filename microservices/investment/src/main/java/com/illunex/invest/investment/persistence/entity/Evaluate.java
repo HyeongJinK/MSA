@@ -21,11 +21,13 @@ public class Evaluate {
     String product;
     String company;
     String imgUrl;
-    LocalDateTime updateDate;
+    LocalDateTime createDate;
+    LocalDateTime requestDate;
     String scale;
     String status;
     String content;
     Integer score;
+    Boolean deleted;
 
     @OneToMany(mappedBy = "evaluate", cascade = CascadeType.ALL)
     List<EvaluateJudge> judgeList;

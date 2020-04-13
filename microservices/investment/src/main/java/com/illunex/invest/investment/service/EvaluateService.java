@@ -1,14 +1,16 @@
 package com.illunex.invest.investment.service;
 
-import com.illunex.invest.api.core.invest.dto.EvaluateDTO;
-import com.illunex.invest.api.core.invest.dto.EvaluateListDTO;
-import com.illunex.invest.api.core.invest.dto.JudgeDTO;
-import com.illunex.invest.api.core.invest.dto.ReviewItemDTO;
+import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
+import com.illunex.invest.api.core.investment.dto.EvaluateListDTO;
 import com.illunex.invest.investment.persistence.entity.Evaluate;
 import com.illunex.invest.investment.persistence.entity.EvaluateJudge;
 import com.illunex.invest.investment.persistence.entity.EvaluateReviewItem;
-import com.illunex.invest.investment.persistence.repository.*;
-import com.illunex.invest.investment.service.mapper.EvaluateMapper;
+import com.illunex.invest.investment.persistence.entity.EvaluateReviewItemCategory;
+import com.illunex.invest.investment.persistence.repository.EvaluateJudgeRepository;
+import com.illunex.invest.investment.persistence.repository.EvaluateRepository;
+import com.illunex.invest.investment.persistence.repository.EvaluateReviewItemCategoryRepository;
+import com.illunex.invest.investment.persistence.repository.EvaluateReviewItemRepository;
+import com.illunex.invest.investment.service.mapper.InvestMentMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mapstruct.factory.Mappers;
@@ -25,18 +27,17 @@ public class EvaluateService {
 
     @Autowired EvaluateRepository evaluateRepository;
     @Autowired EvaluateJudgeRepository evaluateJudgeRepository;
+    @Autowired EvaluateReviewItemCategoryRepository evaluateReviewItemCategoryRepository;
     @Autowired EvaluateReviewItemRepository evaluateReviewItemRepository;
-    @Autowired JudgeRepository judgeRepository;
-    @Autowired ReviewItemRepository reviewItemRepository;
 
-    private EvaluateMapper mapper = Mappers.getMapper(EvaluateMapper.class);
+    private InvestMentMapper mapper = Mappers.getMapper(InvestMentMapper.class);
 
     public String setEvaluate(Long companyIdx, Long vcCompanyIdx) {
         Evaluate evaluate = evaluateRepository.findByCompanyIdxAndVcCompanyIdx(companyIdx, vcCompanyIdx);
 
         if (evaluate == null) {
             // companyIdx 에 해당하는 기업, 제품 정보 받와와서 저장 해놔야됨
-            evaluateRepository.save(Evaluate.builder().companyIdx(companyIdx).vcCompanyIdx(vcCompanyIdx).score(0).status("waiting").updateDate(LocalDateTime.now()).build());
+            evaluateRepository.save(Evaluate.builder().companyIdx(companyIdx).vcCompanyIdx(vcCompanyIdx).score(0).deleted(false).status("waiting").createDate(LocalDateTime.now()).build());
             return "Evaluate set complete";
         } else {
             return "Already exists Evaluate";
@@ -45,7 +46,7 @@ public class EvaluateService {
     }
 
     public EvaluateListDTO getEvaluateList(Long companyIdx) {
-        List<EvaluateDTO> evaluateDTOList = mapper.evaluateListEntityToDTO(evaluateRepository.findAllByCompanyIdx(companyIdx));
+        List<EvaluateDTO> evaluateDTOList = mapper.evaluateListEntityToDTO(evaluateRepository.findAllByCompanyIdxAndDeleted(companyIdx, false));
 
         return EvaluateListDTO.builder().evaluateList(evaluateDTOList).build();
     }
@@ -62,15 +63,22 @@ public class EvaluateService {
         if (evaluate == null) {
             return "Invalid Evaluate";
         } else {
-
             evaluate.setContent(newEvaluate.getContent());
-            evaluate.setUpdateDate(LocalDateTime.now());
+            evaluate.setStatus(newEvaluate.getStatus());
+            evaluate.setScore(0);
+            evaluate.setRequestDate(LocalDateTime.now());
 
             for (EvaluateJudge e: newEvaluate.getJudgeList()) {
 
-                for (EvaluateReviewItem r: e.getReviewItem()) {
-                    evaluateReviewItemRepository.deleteAllByJudgeIdx(e.getIdx());
-                    r.setJudge(e);
+                for (EvaluateReviewItemCategory c: e.getReviewItemCategory()) {
+
+                    for (EvaluateReviewItem r: c.getReviewItem()) {
+                        evaluateReviewItemRepository.deleteAllByReviewItemCategoryIdx(c.getIdx());
+                        r.setReviewItemCategory(c);
+                    }
+
+                    evaluateReviewItemCategoryRepository.deleteAllByJudgeIdx(e.getIdx());
+                    c.setJudge(e);
                 }
 
                 evaluateJudgeRepository.deleteAllByEvaluateIdx(evaluate.getIdx());
@@ -86,14 +94,22 @@ public class EvaluateService {
 
     }
 
-    public String editJudge(JudgeDTO judgeDTO) {
-        judgeRepository.save(mapper.judgeDTOToEntity(judgeDTO));
-        return "Judge edit complete";
-    }
+    public String deleteEvaluate(EvaluateDTO evaluateDTO) {
+        Evaluate evaluate = evaluateRepository.findById(evaluateDTO.getIdx()).orElse(null);
 
-    public String editReviewItem(ReviewItemDTO reviewItemDTO) {
-        reviewItemRepository.save(mapper.reviewItemDTOToEntity(reviewItemDTO));
-        return "ReviewItem edit complete";
+        if (evaluate == null) {
+            return "Invalid Evaluate";
+        } else {
+
+            if (evaluate.getDeleted()) {
+                return "Evaluate already deleted ";
+            } else {
+                evaluate.setDeleted(true);
+                evaluateRepository.save(evaluate);
+
+                return "Evaluate delete complete";
+            }
+        }
     }
 
 }

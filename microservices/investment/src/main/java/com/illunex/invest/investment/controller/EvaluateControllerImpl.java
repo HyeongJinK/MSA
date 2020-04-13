@@ -1,10 +1,8 @@
 package com.illunex.invest.investment.controller;
 
-import com.illunex.invest.api.core.invest.controller.EvaluateController;
-import com.illunex.invest.api.core.invest.dto.EvaluateDTO;
-import com.illunex.invest.api.core.invest.dto.EvaluateListDTO;
-import com.illunex.invest.api.core.invest.dto.JudgeDTO;
-import com.illunex.invest.api.core.invest.dto.ReviewItemDTO;
+import com.illunex.invest.api.core.investment.controller.EvaluateController;
+import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
+import com.illunex.invest.api.core.investment.dto.EvaluateListDTO;
 import com.illunex.invest.investment.service.EvaluateService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,13 +41,8 @@ public class EvaluateControllerImpl implements EvaluateController {
     }
 
     @Override
-    public ResponseEntity<String> editJudge(JudgeDTO judgeDTO){
-        return new ResponseEntity(evaluateService.editJudge(judgeDTO), HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<String> editReviewItem(ReviewItemDTO reviewItemDTO){
-        return new ResponseEntity(evaluateService.editReviewItem(reviewItemDTO), HttpStatus.OK);
+    public ResponseEntity<String> deleteEvaluate(EvaluateDTO evaluateDTO) {
+        return new ResponseEntity(evaluateService.deleteEvaluate(evaluateDTO), HttpStatus.OK);
     }
 
 }

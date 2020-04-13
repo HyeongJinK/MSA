@@ -1,4 +1,4 @@
-package com.illunex.invest.api.core.invest.dto;
+package com.illunex.invest.api.core.investment.dto;
 
 import lombok.*;
 
@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 public class JudgeDTO {
     Long idx;
+    Long companyIdx;
     Long userIdx;
     String name;
     String rank;

@@ -12,16 +12,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "judge")
-public class Judge {
+@Table(name = "review_item_category")
+public class ReviewItemCategory {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
-    Long companyIdx;
-    Long userIdx;
-    String name;
-    String rank;
-    String imgUrl;
-    String comment;
-    String status;
-    Integer point;
+    String category;
+
+    @ManyToOne @JoinColumn(name = "template_idx")
+    ReviewItemTemplate reviewItemTemplate;
+
+    @OneToMany(mappedBy = "reviewItemCategory", cascade = CascadeType.ALL)
+    List<ReviewItem> reviewItem;
 }

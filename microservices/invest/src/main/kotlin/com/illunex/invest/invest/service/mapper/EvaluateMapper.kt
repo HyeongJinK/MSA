@@ -1,8 +1,8 @@
 package com.illunex.invest.invest.service.mapper
 
-import com.illunex.invest.api.core.invest.dto.EvaluateDTO
-import com.illunex.invest.api.core.invest.dto.JudgeDTO
-import com.illunex.invest.api.core.invest.dto.ReviewItemDTO
+import com.illunex.invest.api.core.investment.dto.EvaluateDTO
+import com.illunex.invest.api.core.investment.dto.JudgeDTO
+import com.illunex.invest.api.core.investment.dto.ReviewItemDTO
 import com.illunex.invest.invest.persistence.entity.Evaluate
 import com.illunex.invest.invest.persistence.entity.Judge
 import com.illunex.invest.invest.persistence.entity.ReviewItem

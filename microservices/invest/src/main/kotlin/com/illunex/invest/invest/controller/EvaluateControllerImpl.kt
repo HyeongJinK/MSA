@@ -1,10 +1,10 @@
 package com.illunex.invest.invest.controller
 
-import com.illunex.invest.api.core.invest.controller.EvaluateController
-import com.illunex.invest.api.core.invest.dto.EvaluateDTO
-import com.illunex.invest.api.core.invest.dto.EvaluateListDTO
-import com.illunex.invest.api.core.invest.dto.JudgeDTO
-import com.illunex.invest.api.core.invest.dto.ReviewItemDTO
+import com.illunex.invest.api.core.investment.controller.EvaluateController
+import com.illunex.invest.api.core.investment.dto.EvaluateDTO
+import com.illunex.invest.api.core.investment.dto.EvaluateListDTO
+import com.illunex.invest.api.core.investment.dto.JudgeDTO
+import com.illunex.invest.api.core.investment.dto.ReviewItemDTO
 import com.illunex.invest.invest.service.EvaluateService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity

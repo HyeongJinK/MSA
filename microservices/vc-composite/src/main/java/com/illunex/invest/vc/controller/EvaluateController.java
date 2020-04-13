@@ -1,10 +1,9 @@
 package com.illunex.invest.vc.controller;
 
-import com.illunex.invest.api.core.invest.dto.EvaluateDTO;
-import com.illunex.invest.api.core.invest.dto.EvaluateListDTO;
-import com.illunex.invest.api.core.invest.dto.JudgeDTO;
-import com.illunex.invest.api.core.invest.dto.ReviewItemDTO;
-import com.illunex.invest.api.core.ir.dto.BasicInfoDTO;
+import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
+import com.illunex.invest.api.core.investment.dto.EvaluateListDTO;
+import com.illunex.invest.api.core.investment.dto.JudgeDTO;
+import com.illunex.invest.api.core.investment.dto.ReviewItemDTO;
 import com.illunex.invest.vc.service.invest.InvestCompositeIntegration;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -47,6 +46,13 @@ public class EvaluateController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return restTemplate.postForEntity(investmentUrl + "/evaluate/edit", new HttpEntity(evaluateDTO, headers), String.class);
+    }
+
+    @PostMapping(value = "evaluate/delete")
+    public ResponseEntity<String> deleteEvaluate(@RequestBody EvaluateDTO evaluateDTO) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return restTemplate.postForEntity(investmentUrl + "/evaluate/delete", new HttpEntity(evaluateDTO, headers), String.class);
     }
 
     @PostMapping(value = "evaluate/judge")

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,12 +16,9 @@ import java.time.LocalDateTime;
 public class EvaluateReviewItem {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
-    String category;
     String content;
     Integer point;
-    LocalDateTime updateDate;
 
-    @ManyToOne @JoinColumn(name = "judge_idx")
-    EvaluateJudge judge;
-       
+    @ManyToOne @JoinColumn(name = "category_idx")
+    EvaluateReviewItemCategory reviewItemCategory;
 }
