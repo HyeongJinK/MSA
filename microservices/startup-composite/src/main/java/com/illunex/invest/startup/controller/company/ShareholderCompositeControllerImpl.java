@@ -25,22 +25,21 @@ public class ShareholderCompositeControllerImpl extends StartupDefaultController
 
     @Override
     public ResponseEntity<ResponseData> getShareholders() {
-        return null;
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .data(shareholderCompositeIntegration.getShareholderDTOs())
+                .build());
     }
 
     @Override
     public ResponseEntity<ResponseData> getShareholder(Long id) {
-        return null;
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .data(shareholderCompositeIntegration.getShareholderDTO(id))
+                .build());
     }
-
-//    @Override
-//    public ResponseEntity<ResponseData> getShareholder() {
-//        return ResponseEntity.ok(ResponseData.builder()
-//                .errorCode(0)
-//                .message("success")
-//                .data(shareholderCompositeIntegration.getShareholderDTO())
-//                .build());
-//    }
 
     @Override
     public ResponseEntity<ResponseData> deleteShareholder(Long id) {

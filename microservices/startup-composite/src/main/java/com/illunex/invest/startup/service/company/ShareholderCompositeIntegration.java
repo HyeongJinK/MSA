@@ -1,9 +1,9 @@
 package com.illunex.invest.startup.service.company;
 
 
-import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.core.company.dto.ShareholderDTO;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
+import lombok.extern.java.Log;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -14,17 +14,26 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
+
+@Log
 @Service
 public class ShareholderCompositeIntegration extends DefaultIntegrationService {
     public ShareholderCompositeIntegration(RestTemplate restTemplate, WebClient.Builder loadBalanceWebClientBuilder) {
         super(restTemplate, loadBalanceWebClientBuilder);
     }
 
-    public ShareholderDTO getShareholderDTO() {
+    public List<ShareholderDTO> getShareholderDTOs() {
         Long companyId = getUser().getCompanyIdx();
-        ResponseEntity<ShareholderDTO> res = restTemplate.getForEntity(companyUrl + "/shareholder/" + companyId.toString()
-                , ShareholderDTO.class);
+        ResponseEntity<List> res = restTemplate.getForEntity(companyUrl + "/shareholder/" + companyId
+                , List.class);
+        return res.getBody();
+    }
 
+    public ShareholderDTO getShareholderDTO(Long id) {
+        ResponseEntity<ShareholderDTO> res = restTemplate.getForEntity(companyUrl + "/shareholder/read/" + id
+                , ShareholderDTO.class);
+        log.info(res.getBody().toString());
         return res.getBody();
     }
 

@@ -33,6 +33,8 @@ public class BasicInfoServiceImpl extends CommonIRService<BasicInfoDTO> {
 
     @Override
     public BasicInfoDTO get(Long irIdx) {
+        log.debug("===========================================");
+        log.debug(basicInfoRepository);
         BasicInfoEntity basicInfo = basicInfoRepository.findByIrIdx(irIdx);
 
         return basicInfoMapper.entityToDto(basicInfo);
