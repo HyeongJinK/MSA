@@ -12,7 +12,9 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
+
 ---
+
 spring.profiles: test
 
 app.config-server: config-server
