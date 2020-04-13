@@ -17,6 +17,21 @@ services:
     ports:
       - 8761:8761
 
+  eureka:
+    build: cloud/eureka-server
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+
+  config-server:
+    build: cloud/config-server
+    networks:
+      - my-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+    volumes:
+      - $PWD/config:/config
 #  company:
 #    build: ../invest/company
 #    mem_limit: 300m

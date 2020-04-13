@@ -1,15 +1,18 @@
 package com.illunex.invest.company.service;
 
 import com.illunex.invest.api.core.company.dto.ShareholderDTO;
+import com.illunex.invest.company.persistence.entity.Shareholder;
 import com.illunex.invest.company.persistence.repository.ShareholderRepository;
 import com.illunex.invest.company.service.mapper.ShareholderMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Log
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -24,7 +27,9 @@ public class ShareholderServiceImpl implements ShareholderService {
 
     @Override
     public ShareholderDTO findById(Long id) {
-        return mapper.entityToDto(shareholderRepository.findById(id).get());
+        Shareholder shareholder = shareholderRepository.findById(id).get();
+        log.info(shareholder.toString());
+        return mapper.entityToDto(shareholder);
     }
 
     @Override

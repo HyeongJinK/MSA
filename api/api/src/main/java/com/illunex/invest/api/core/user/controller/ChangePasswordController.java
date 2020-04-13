@@ -13,4 +13,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface ChangePasswordController {
     @PostMapping({"", "/"})
     ResponseEntity<ResponseData> changePassword(@RequestBody ChangePasswordRequest request);
+
 }
