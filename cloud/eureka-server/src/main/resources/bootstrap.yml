@@ -13,6 +13,6 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
 ---
-spring.profiles: docker2
+spring.profiles: test
 
 app.config-server: config-server
