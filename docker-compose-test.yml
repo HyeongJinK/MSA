@@ -87,6 +87,6 @@ services:
 #      - my-network
 #    environment:
 #      - SPRING_PROFILES_ACTIVE=test
-#networks:
-#  my-network:
-#    name: my-network
+networks:
+  my-network:
+    name: my-network
