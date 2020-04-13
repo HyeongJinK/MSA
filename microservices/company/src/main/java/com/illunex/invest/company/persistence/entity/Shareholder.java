@@ -17,7 +17,7 @@ public class Shareholder {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String title;
-    LocalDateTime regDate;
+    String regDate;
     LocalDateTime updateDate;
     String signature;
     Boolean rock;
