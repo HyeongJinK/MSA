@@ -23,6 +23,8 @@ public class IRControllerImpl implements IRController {
 
     @Override
     public ResponseEntity<IRDTO> getIR(@RequestParam Long companyIdx, @RequestParam String year) {
+        log.debug("================================================");
+        log.debug(IRService);
         IRDTO ir = IRService.getIR(companyIdx, year);
         return new ResponseEntity<>(ir, HttpStatus.OK);
     }

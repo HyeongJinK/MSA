@@ -21,6 +21,8 @@ public class BasicInfoControllerImpl implements BasicInfoController {
 
     @Override
     public ResponseEntity<BasicInfoDTO> getBasicInfo(@RequestParam Long irIdx){
+        log.debug(basicInfoServiceImpl);
+        log.debug("===========================================");
         BasicInfoDTO basicInfo = basicInfoServiceImpl.get(irIdx);
 
         return new ResponseEntity(basicInfo, HttpStatus.OK);
