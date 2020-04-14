@@ -16,7 +16,9 @@ public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long companyMemberIdx;
     String name;
+    String dept;
     String rank;
+    @Column(name = "career", length = 2000)
     String career;
     String imgUrl;
 

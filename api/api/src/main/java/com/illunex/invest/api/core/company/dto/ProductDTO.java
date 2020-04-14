@@ -19,7 +19,6 @@ public class ProductDTO {
     String description;
     String viewMode;
     LocalDateTime regDate;
-
     List<ProductImageDTO> productImages = new ArrayList<>();
     List<KeywordDTO> keywords = new ArrayList<>();
     CompanyDTO company;

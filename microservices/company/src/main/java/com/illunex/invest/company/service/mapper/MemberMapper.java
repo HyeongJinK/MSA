@@ -16,6 +16,6 @@ public interface MemberMapper {
     List<MemberDTO> entityToDto(List<Member> members);
     List<Member> dtoToEntity(List<MemberDTO> memberDTOS);
 
-    CompanyIdDTO entityToDto(Company company);
-    Company dtoToEntity(CompanyIdDTO companyDTO);
+    CompanyIdDTO companyEntityToDto(Company company);
+    Company companyDtoToEntity(CompanyIdDTO companyDTO);
 }

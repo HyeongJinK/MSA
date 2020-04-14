@@ -8,5 +8,6 @@ public interface MemberService {
     List<MemberDTO> getMembers(Long companyIdx);
     MemberDTO getMember(Long id);
     void editMember(MemberDTO memberDTO);
+    void editMembers(List<MemberDTO> memberDTOS);
     void deleteMember(Long id);
 }
