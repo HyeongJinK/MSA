@@ -12,6 +12,8 @@ import java.util.List;
 public interface MemberController {
     @PostMapping
     ResponseEntity<String> editMember(@RequestBody MemberDTO memberDTO);
+    @PostMapping(value = "/list")
+    ResponseEntity<String> editMembers(@RequestBody List<MemberDTO> memberDTOS);
     @GetMapping(value = "/{companyId}")
     ResponseEntity<List<MemberDTO>> getMember(@PathVariable Long companyId);
     @DeleteMapping(value = "/{id}")

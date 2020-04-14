@@ -49,4 +49,19 @@ public class ShareholderCompositeControllerImpl extends StartupDefaultController
                 .message("success")
                 .build());
     }
+
+    @Override
+    public ResponseEntity<ResponseData> lockSetting(Long id, Boolean rock) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<ResponseData> setPassword(Long id, String password) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<ResponseData> passwordCheck(Long id, String password) {
+        return null;
+    }
 }

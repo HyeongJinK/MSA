@@ -15,4 +15,10 @@ public interface ShareholderCompositeController {
     ResponseEntity<ResponseData> getShareholder(@PathVariable Long id);
     @DeleteMapping(value = "/{id}")
     ResponseEntity<ResponseData> deleteShareholder(@PathVariable Long id);
+    @PostMapping(value = "/lock")
+    ResponseEntity<ResponseData> lockSetting(@RequestParam("id") Long id, @RequestParam("rock") Boolean rock);
+    @PostMapping(value = "/setPassword")
+    ResponseEntity<ResponseData> setPassword(@RequestParam("id") Long id, @RequestParam("password") String password);
+    @PostMapping(value = "/passwordCheck")
+    ResponseEntity<ResponseData> passwordCheck(@RequestParam("id") Long id, @RequestParam("password") String password);
 }

@@ -1,8 +1,11 @@
 package com.illunex.invest.company.service;
 
 import com.illunex.invest.api.core.company.dto.MemberDTO;
+import com.illunex.invest.company.persistence.entity.Company;
+import com.illunex.invest.company.persistence.entity.Member;
 import com.illunex.invest.company.persistence.repository.MemberRepository;
 import com.illunex.invest.company.service.mapper.MemberMapper;
+import io.micrometer.core.instrument.util.JsonUtils;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
@@ -31,6 +34,15 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public void editMember(MemberDTO memberDTO) {
         memberRepository.save(mapper.dtoToEntity(memberDTO));
+    }
+
+    @Override
+    public void editMembers(List<MemberDTO> memberDTOS) {
+        List<Member> list = mapper.dtoToEntity(memberDTOS);
+        list.stream().forEach(item -> {
+            item.setCompany(Company.builder().companyIdx(memberDTOS.get(0).getCompanyDTO().getCompanyIdx()).build());
+        });
+        memberRepository.saveAll(list);
     }
 
     @Override
