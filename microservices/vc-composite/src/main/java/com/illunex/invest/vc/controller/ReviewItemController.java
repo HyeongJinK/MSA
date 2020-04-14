@@ -36,6 +36,7 @@ public class ReviewItemController {
 
     @PostMapping(value = "review/edit")
     public ResponseEntity<String> editReviewItem(@RequestBody ReviewItemTemplateDTO reviewItemTemplateDTO) {
+        reviewItemTemplateDTO.setCompanyIdx(investCompositeIntegration.getUser().getCompanyIdx());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return restTemplate.postForEntity(investmentUrl + "/review/edit", new HttpEntity(reviewItemTemplateDTO, headers), String.class);

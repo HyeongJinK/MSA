@@ -80,48 +80,32 @@ public class ReviewItemService {
                 c.setReviewItemTemplate(newTemplate);
             }
 
+            newTemplate.setCompanyIdx(reviewItemTemplateDTO.getCompanyIdx());
+            newTemplate.setUpdateDate(LocalDateTime.now());
+            newTemplate.setDeleted(false);
             reviewItemTemplateRepository.save(newTemplate);
 
             return "ReviewItem Template Create Success";
 
         } else {
 
-            reviewItemTemplateRepository.save(newTemplate);
+            for (ReviewItemCategory c: newTemplate.getReviewItemCategory()) {
+                for (ReviewItem i: c.getReviewItem()) {
+                    reviewItemRepository.deleteAllByReviewItemCategoryIdx(c.getIdx());
+                    i.setReviewItemCategory(c);
+                }
+                reviewItemCategoryRepository.deleteAllByReviewItemTemplateIdx(newTemplate.getIdx());
+                c.setReviewItemTemplate(newTemplate);
+            }
+
+            template.setTitle(newTemplate.getTitle());
+            template.setPoint(newTemplate.getPoint());
+            template.setUpdateDate(LocalDateTime.now());
+            template.setReviewItemCategory(newTemplate.getReviewItemCategory());
+            reviewItemTemplateRepository.save(template);
 
             return "ReviewItem Template Edit Success";
         }
-//
-//
-//        List<ReviewItemTemplate> reviewItemTemplateList = mapper.reviewItemTemplateListDTOToEntity(editDTO.getReviewItemTemplateList());
-//
-//        for (ReviewItemTemplate t: reviewItemTemplateList) {
-//
-//            for (ReviewItemCategory c: t.getReviewItemCategory()) {
-//
-//                for (ReviewItem i: c.getReviewItem()) {
-//                    reviewItemRepository.deleteAllByReviewItemCategoryIdx(c.getIdx());
-//                    i.setReviewItemCategory(c);
-//                }
-//
-//                reviewItemCategoryRepository.deleteAllByReviewItemTemplateIdx(t.getIdx());
-//                c.setReviewItemTemplate(t);
-//
-//            }
-//
-//            reviewItemTemplateRepository.deleteAllByCompanyIdx(editDTO.getCompanyIdx());
-//        }
-//
-//        for (ReviewItemCategory r: reviewItemCategoryList) {
-//
-//            for (ReviewItem i: r.getReviewItem()) {
-//                reviewItemRepository.deleteAllByReviewItemCategoryIdx(r.getIdx());
-//                i.setReviewItemCategory(r);
-//            }
-//
-//        }
-//        reviewItemCategoryRepository.deleteAllByCompanyIdx(editDTO.getCompanyIdx());
-//        reviewItemCategoryRepository.saveAll(reviewItemCategoryList);
-//        return "ReviewItem edit complete";
     }
 
     public String deleteReviewItem(ReviewItemTemplateDTO reviewItemTemplateDTO) {
