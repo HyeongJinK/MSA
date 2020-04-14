@@ -19,9 +19,6 @@ logging.level:
   org.hibernate.SQL: debug
 
 ---
-spring.profiles: docker
-
----
 spring.profiles: test
 
 spring:
@@ -32,27 +29,3 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
-#---
-#spring.profiles: swam
-#
-#spring:
-#  datasource:
-#    url: jdbc:mariadb://13.125.122.99:3306/invest_company
-#    username: root
-#    password: Illunex123!
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#
-#---
-#spring.profiles: swam-test
-#
-#spring:
-#  datasource:
-#    url: jdbc:mariadb://13.125.122.99:3306/invest_company
-#    username: root
-#    password: Illunex123!
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
