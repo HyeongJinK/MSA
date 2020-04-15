@@ -18,10 +18,6 @@ spring:
 logging.level:
   org.hibernate.SQL: debug
 ---
-spring.profiles: docker
-
-
----
 spring.profiles: test
 
 spring:
