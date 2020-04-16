@@ -3,6 +3,7 @@ package com.illunex.invest.company.persistence.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class Product {
     @Column(name = "description", length = 4000)
     String description;     // 제품 설명
     String viewMode;        // 공개 여부
+    LocalDateTime regDate;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "productId")

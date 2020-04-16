@@ -1,5 +1,7 @@
 package com.illunex.invest.startup.service.company;
 
+import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.core.company.dto.CompanyIdDTO;
 import com.illunex.invest.api.core.company.dto.MemberDTO;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
 import lombok.extern.java.Log;
@@ -11,10 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Log
 @Service
@@ -36,9 +40,14 @@ public class MemberCompositeIntegration extends DefaultIntegrationService {
         return null;
     }
 
-    public void editMember(MemberDTO memberDTO) {
-        restTemplate.postForEntity(companyUrl+ "/member"
-                , new HttpEntity<>(memberDTO, getDefaultHeader())
+    public void editMember(List<MemberDTO> memberDTOS) {
+        Long companyId = getUser().getCompanyIdx();
+        if (memberDTOS.size() > 0) {
+            memberDTOS.get(0).setCompanyDTO(CompanyIdDTO.builder().companyIdx(companyId).build());
+        }
+        restTemplate.postForEntity(companyUrl+ "/member/list"
+                , new HttpEntity<>(memberDTOS
+                        , getDefaultHeader())
                 , String.class);
     }
 
@@ -49,5 +58,11 @@ public class MemberCompositeIntegration extends DefaultIntegrationService {
                 , new HttpEntity<>(map
                         , getDefaultHeader(MediaType.APPLICATION_FORM_URLENCODED))
                 , String.class);
+    }
+
+    public String uploadLogo(MultipartFile file) {
+        ResponseEntity<ResponseData> uploadRes = fileUpload(file, bucket, "company/member/");
+
+        return String.valueOf(uploadRes.getBody().getData());
     }
 }

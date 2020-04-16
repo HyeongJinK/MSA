@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +18,12 @@ public class ProductDTO {
     String title;
     String description;
     String viewMode;
-
+    LocalDateTime regDate;
     List<ProductImageDTO> productImages = new ArrayList<>();
     List<KeywordDTO> keywords = new ArrayList<>();
     CompanyDTO company;
+
+    public String getParseRegDate() {
+        return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
 }

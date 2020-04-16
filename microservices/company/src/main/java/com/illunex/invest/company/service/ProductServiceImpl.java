@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -37,6 +38,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public ProductDTO edit(ProductDTO productDTO) {
+        if (productDTO.getId() == null || productDTO.getId().equals(0l)) {
+            productDTO.setRegDate(LocalDateTime.now());
+        }
         return mapper.entityToDto(productRepository.save(mapper.dtoToEntity(productDTO)));
     }
 
