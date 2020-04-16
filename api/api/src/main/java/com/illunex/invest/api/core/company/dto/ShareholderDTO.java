@@ -19,6 +19,22 @@ public class ShareholderDTO {
     Boolean rock;
     String password;
 
+    public int getTotalStock() {
+        return shareholderPeople
+                .stream()
+                .map(ShareholderPersonDTO::getStock)
+                .mapToInt(value -> Integer.parseInt(value))
+                .sum();
+    }
+
+    public int getTotalTotalValue() {
+        return shareholderPeople
+                .stream()
+                .map(ShareholderPersonDTO::getTotalValue)
+                .mapToInt(value -> Integer.parseInt(value))
+                .sum();
+    }
+
     List<ShareholderPersonDTO> shareholderPeople = new ArrayList<>();
     CompanyIdDTO company;
 }
