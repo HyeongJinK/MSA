@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/company/shareholder")
 public interface ShareholderCompositeController {
     @PostMapping(value = {"", "/"})
-    ResponseEntity<ResponseData> editShareholders(ShareholderDTO shareholderDTO);
+    ResponseEntity<ResponseData> editShareholders(@RequestBody ShareholderDTO shareholderDTO);
     @GetMapping(value = {"", "/"})
     ResponseEntity<ResponseData> getShareholders();
     @GetMapping(value = {"/{id}"})
