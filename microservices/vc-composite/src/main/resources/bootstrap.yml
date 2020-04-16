@@ -17,6 +17,6 @@ spring:
       maxAttempts: 20
     uri: http://${app.config-server}:8888
 ---
-spring.profiles: swam-new-test
+spring.profiles: swam-test
 
 app.config-server: 13.125.122.99
