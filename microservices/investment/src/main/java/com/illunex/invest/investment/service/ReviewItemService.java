@@ -57,9 +57,14 @@ public class ReviewItemService {
             defaultItem.setReviewItemCategory(reviewItemCategoryList);
 
             reviewItemTemplateRepository.save(defaultItem);
-        }
 
-        return ListDTO.builder().reviewItemTemplateList(mapper.reviewItemTemplateListEntityToDTO(reviewItemTemplateList)).build();
+            List<ReviewItemTemplate> defaultList = new ArrayList();
+            defaultList.add(defaultItem);
+
+            return ListDTO.builder().reviewItemTemplateList(mapper.reviewItemTemplateListEntityToDTO(defaultList)).build();
+        } else {
+            return ListDTO.builder().reviewItemTemplateList(mapper.reviewItemTemplateListEntityToDTO(reviewItemTemplateList)).build();
+        }
     }
 
     public ReviewItemTemplateDTO getReviewItem(Long templateIdx) {

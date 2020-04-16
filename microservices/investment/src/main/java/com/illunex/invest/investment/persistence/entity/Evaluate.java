@@ -29,6 +29,7 @@ public class Evaluate {
     Integer score;
     Boolean deleted;
 
-    @OneToMany(mappedBy = "evaluate", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "evaluate", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<EvaluateJudge> judgeList;
+
 }

@@ -3,8 +3,6 @@ package com.illunex.invest.investment.persistence.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
@@ -20,6 +18,7 @@ public class Judge {
     Long userIdx;
     String name;
     String rank;
+    String company;
     String imgUrl;
     String comment;
     String status;

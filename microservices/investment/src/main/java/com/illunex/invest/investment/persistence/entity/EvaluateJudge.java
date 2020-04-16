@@ -27,6 +27,6 @@ public class EvaluateJudge {
     @ManyToOne @JoinColumn(name = "evaluate_idx")
     Evaluate evaluate;
 
-    @OneToMany(mappedBy = "judge", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "judge", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<EvaluateReviewItemCategory> reviewItemCategory;
 }
