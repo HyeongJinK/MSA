@@ -19,4 +19,4 @@ spring:
 ---
 spring.profiles: swam-new-test
 
-app.config-server: 13.209.48.160
+app.config-server: 13.125.122.99
