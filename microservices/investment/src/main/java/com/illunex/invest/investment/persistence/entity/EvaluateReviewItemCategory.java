@@ -3,7 +3,6 @@ package com.illunex.invest.investment.persistence.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -21,6 +20,6 @@ public class EvaluateReviewItemCategory {
     @ManyToOne @JoinColumn(name = "judge_idx")
     EvaluateJudge judge;
 
-    @OneToMany(mappedBy = "reviewItemCategory", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "reviewItemCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<EvaluateReviewItem> reviewItem;
 }

@@ -13,6 +13,7 @@ public class JudgeDTO {
     Long userIdx;
     String name;
     String rank;
+    String company;
     String imgUrl;
     String comment;
     String status;
