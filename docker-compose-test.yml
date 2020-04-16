@@ -1,4 +1,4 @@
-version: '2.1'
+version: '2.2'
 
 services:
   jhipster-registry:
@@ -25,6 +25,9 @@ services:
       - SPRING_PROFILES_ACTIVE=test
     ports:
       - 8761:8761
+    mem_limit: 256m
+    mem_reservation: 256m
+    cpu_count: 1
 
   config-server:
     build: cloud/config-server
