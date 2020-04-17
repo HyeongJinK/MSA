@@ -16,6 +16,7 @@ public class EvaluateReviewItemCategory {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
     String category;
+    Integer weight;
 
     @ManyToOne @JoinColumn(name = "judge_idx")
     EvaluateJudge judge;

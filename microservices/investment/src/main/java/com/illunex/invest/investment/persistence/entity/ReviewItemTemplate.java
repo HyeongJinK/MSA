@@ -21,6 +21,7 @@ public class ReviewItemTemplate {
     LocalDateTime updateDate;
     Integer point;
     Boolean deleted;
+    Boolean weight;
 
     @OneToMany(mappedBy = "reviewItemTemplate", cascade = CascadeType.ALL)
     List<ReviewItemCategory> reviewItemCategory;
