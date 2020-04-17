@@ -33,6 +33,7 @@ public class ReviewItemService {
             ReviewItemTemplate defaultItem = ReviewItemTemplate.builder()
                 .title("기본 심사 평가항목 템플릿")
                 .deleted(false)
+                .weight(false)
                 .point(0)
                 .updateDate(LocalDateTime.now())
                 .companyIdx(companyIdx)
@@ -105,6 +106,7 @@ public class ReviewItemService {
 
             template.setTitle(newTemplate.getTitle());
             template.setPoint(newTemplate.getPoint());
+            template.setWeight(newTemplate.getWeight());
             template.setUpdateDate(LocalDateTime.now());
             template.setReviewItemCategory(newTemplate.getReviewItemCategory());
             reviewItemTemplateRepository.save(template);

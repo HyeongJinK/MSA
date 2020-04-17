@@ -17,6 +17,7 @@ public class ReviewItemCategory {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
     String category;
+    Integer weight;
 
     @ManyToOne @JoinColumn(name = "template_idx")
     ReviewItemTemplate reviewItemTemplate;
