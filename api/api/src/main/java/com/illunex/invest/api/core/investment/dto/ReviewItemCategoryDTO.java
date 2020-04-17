@@ -13,6 +13,7 @@ import java.util.List;
 public class ReviewItemCategoryDTO {
     Long idx;
     String category;
+    Integer weight;
 
     List<ReviewItemDTO> reviewItem;
 }
