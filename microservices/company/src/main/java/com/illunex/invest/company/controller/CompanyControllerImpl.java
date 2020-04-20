@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.HashMap;
 
 @Log
@@ -26,7 +27,12 @@ public class CompanyControllerImpl implements CompanyController {
 
     @Override
     public ResponseEntity<ResponseList> getAllList() {
-        return null;
+
+        return ResponseEntity.ok(ResponseList.builder()
+                .errorCode(0)
+                .message("success")
+                .data(Collections.singletonList(companyService.getAllList()))
+                .build());
     }
 
     @Override
