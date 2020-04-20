@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface EvaluateRepository extends JpaRepository<Evaluate, Long> {
-    List<Evaluate> findAllByCompanyIdxAndDeleted(Long companyIdx, Boolean deleted);
+    List<Evaluate> findAllByVcCompanyIdxAndDeleted(Long companyIdx, Boolean deleted);
     Evaluate findByCompanyIdxAndVcCompanyIdx(Long companyIdx, Long vcCompanyIdx);
 }

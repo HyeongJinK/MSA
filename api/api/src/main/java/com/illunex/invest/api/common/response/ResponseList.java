@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ResponseList<T> {
     int errorCode;
     String message;

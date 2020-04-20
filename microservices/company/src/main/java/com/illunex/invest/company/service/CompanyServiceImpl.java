@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Log
 @Service
@@ -20,6 +21,11 @@ import java.time.LocalDateTime;
 public class CompanyServiceImpl implements CompanyService {
     private CompanyMapper mapper = Mappers.getMapper(CompanyMapper.class);
     private final CompanyRepository companyRepository;
+
+    @Override
+    public List<CompanyDTO> getAllList() {
+        return mapper.entityListToDto(companyRepository.findAll());
+    }
 
     public CompanyDTO getCompanyById(final Long id) {
         Company company = companyRepository.findByCompanyIdx(id).orElseGet(() -> {

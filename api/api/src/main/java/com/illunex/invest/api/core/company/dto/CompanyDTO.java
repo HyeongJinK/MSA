@@ -14,7 +14,7 @@ import java.util.List;
 @ToString(of = {"companyIdx", "logo", "name", "businessNumber"
         , "companyType", "establishmentDate", "employeeCount", "business", "nation"
         , "stocksList", "zipCode", "address", "addressDetail"
-        , "description", "homePage"})
+        , "description", "homePage", "location", "sales", "scale"})
 public class CompanyDTO {
     Long companyIdx;
     @ApiModelProperty(value="로고", name="logo", required=true)
@@ -45,6 +45,12 @@ public class CompanyDTO {
     String description;
     @ApiModelProperty(value="홈페이지", name="homePage", required=false)
     String homePage;
+    @ApiModelProperty(value="지역", name="location", required=false)
+    String location;
+    @ApiModelProperty(value="매출액", name="sales", required=false)
+    String sales;
+    @ApiModelProperty(value="투자규모", name="scale", required=false)
+    String scale;
     LocalDateTime updateDate;
 
     @ApiModelProperty(value="주요제품군", name="companyProducts", required=false)
