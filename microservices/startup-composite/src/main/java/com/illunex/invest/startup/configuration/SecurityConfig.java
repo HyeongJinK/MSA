@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // - (3)
+
         configuration.addAllowedOrigin("http://localhost:3000");
         configuration.addAllowedOrigin("http://localhost:3001");
         configuration.addAllowedOrigin("https://startup.effectmall.com");
