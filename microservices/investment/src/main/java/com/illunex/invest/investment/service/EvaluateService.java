@@ -46,7 +46,7 @@ public class EvaluateService {
     }
 
     public EvaluateListDTO getEvaluateList(Long companyIdx) {
-        List<EvaluateDTO> evaluateDTOList = mapper.evaluateListEntityToDTO(evaluateRepository.findAllByCompanyIdxAndDeleted(companyIdx, false));
+        List<EvaluateDTO> evaluateDTOList = mapper.evaluateListEntityToDTO(evaluateRepository.findAllByVcCompanyIdxAndDeleted(companyIdx, false));
 
         return EvaluateListDTO.builder().evaluateList(evaluateDTOList).build();
     }
