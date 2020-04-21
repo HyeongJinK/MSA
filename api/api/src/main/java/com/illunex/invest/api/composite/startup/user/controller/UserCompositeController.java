@@ -15,6 +15,8 @@ public interface UserCompositeController {
     ResponseEntity<ResponseData> signUp(@RequestBody SignUpRequest signUpRequest);
     @PostMapping(value = "/signIn")
     ResponseEntity<ResponseData> signIn(@RequestBody SignInRequest signInRequest);
+    @PostMapping(value = "/invite")
+    ResponseEntity<ResponseData> invite(@RequestBody SignUpRequest signUpRequest);
     @GetMapping(value = "/expire")
     ResponseEntity<ResponseData> expire();
 }
