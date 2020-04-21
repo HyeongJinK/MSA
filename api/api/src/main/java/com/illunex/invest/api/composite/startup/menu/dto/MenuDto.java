@@ -152,23 +152,6 @@ public class MenuDto {
                 .build());
     }
 
-
-    @NotNull
-    private void makeDefaultMyPageMenu(Collection<RoleDTO> roles) {
-        myPage.add(Menu.builder()
-                .title("계정설정")
-                .id("myPage")
-                .icon("myPage")
-                .subMenu(initAccountSubMenu(roles))
-                .build());
-        myPage.add(Menu.builder()
-                .title("알람")
-                .id("alarm")
-                .icon("alarm")
-                .subMenu(initAlarmSubMenu(roles))
-                .build());
-    }
-
     private void initMainMenu(Collection<RoleDTO> roles, List<IRDTO> irList) {
         boolean companyMenu = true;
         makeDefaultMainMenu(roles);
@@ -203,14 +186,15 @@ public class MenuDto {
      * MyPageMenu
      * */
     private void initMyPageMenu(Collection<RoleDTO> roles) {
-        makeDefaultMyPageMenu(roles);
+        makeMyPageMenu("계정설정", "myPage", "myPage", initAccountSubMenu(roles));
+        makeMyPageMenu("알람", "alarm", "alarm", initAlarmSubMenu(roles));
 
         roles.stream()
                 .forEach((role -> {
                     switch (role.getName()) {
                         case "ROLE_COMPANY_ADMIN":
                             makeMyPageMenu("플러그인", "plugin", "plugin", initPluginSubMenu(roles));
-                            makeMyPageMenu("연결관리", "connect", "plugin", initConnectSubMenu(roles));
+                            makeMyPageMenu("연결관리", "connect", "connect", initConnectSubMenu(roles));
                             makeMyPageMenu("라이센스", "license", "license", initLicenseSubMenu(roles));
                             break;
                     }
