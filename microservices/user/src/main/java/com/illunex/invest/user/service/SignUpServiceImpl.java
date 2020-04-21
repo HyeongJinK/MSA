@@ -29,4 +29,20 @@ public class SignUpServiceImpl extends UserService implements SignUpService {
                         , companyIdx
                 )));
     }
+
+    @Override
+    public UserInfoDTO invite(String username, String password, String name, String vender, Long companyIdx) {
+        User user = userRepository.findByUsername(username);
+
+        DuplicateUserCheck(user);
+
+        return mapper.entityToDto(userRepository.save(
+                User.createUser(username
+                        , password
+                        , name
+                        , vender
+                        , GenerateToken.CreateToken()
+                        , companyIdx)
+        ));
+    }
 }
