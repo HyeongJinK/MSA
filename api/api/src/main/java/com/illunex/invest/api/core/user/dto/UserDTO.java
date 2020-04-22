@@ -1,8 +1,10 @@
 package com.illunex.invest.api.core.user.dto;
 
 import com.illunex.invest.api.core.user.model.UserInterface;
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -16,6 +18,7 @@ public class UserDTO implements UserInterface {
     private String username;
     private String password;
     private String name;
+    private String rank;
     private Set<RoleDTO> authorities = new HashSet<>();
     private String profileImg;
     private String vender;

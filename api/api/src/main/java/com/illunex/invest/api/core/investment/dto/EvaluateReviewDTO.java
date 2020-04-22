@@ -7,12 +7,11 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class JudgeDTO {
+public class EvaluateReviewDTO {
     Long idx;
     Long companyIdx;
-    Long userIdx;
-    String name;
-    String rank;
-    String company;
-    String imgUrl;
+    Long vcCompanyIdx;
+    String content;
+
+    EvaluateJudgeDTO judge;
 }

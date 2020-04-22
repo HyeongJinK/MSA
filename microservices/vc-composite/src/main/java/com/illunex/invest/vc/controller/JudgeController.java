@@ -1,7 +1,7 @@
 package com.illunex.invest.vc.controller;
 
 import com.illunex.invest.api.core.investment.dto.*;
-import com.illunex.invest.vc.service.invest.InvestCompositeIntegration;
+import com.illunex.invest.vc.service.investment.InvestCompositeIntegration;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
