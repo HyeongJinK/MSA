@@ -1,6 +1,7 @@
 package com.illunex.invest.startup.service.company;
 
 
+import com.illunex.invest.api.core.company.dto.CompanyIdDTO;
 import com.illunex.invest.api.core.company.dto.ShareholderDTO;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
 import lombok.extern.java.Log;
@@ -38,6 +39,7 @@ public class ShareholderCompositeIntegration extends DefaultIntegrationService {
     }
 
     public void editShareholder(ShareholderDTO shareholderDTO) {
+        shareholderDTO.setCompany(new CompanyIdDTO(getUser().getCompanyIdx()));
         restTemplate.postForEntity(companyUrl+ "/shareholder"
                 , new HttpEntity<>(shareholderDTO, getDefaultHeader())
                 , String.class);
