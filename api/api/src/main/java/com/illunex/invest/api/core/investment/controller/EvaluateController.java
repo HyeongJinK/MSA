@@ -2,6 +2,7 @@ package com.illunex.invest.api.core.investment.controller;
 
 import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateListDTO;
+import com.illunex.invest.api.core.investment.dto.EvaluateReviewDTO;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,4 +29,6 @@ public interface EvaluateController {
     ResponseEntity<String> editEvaluate(@RequestBody EvaluateDTO evaluateDTO);
     @PostMapping(value = "/delete")
     ResponseEntity<String> deleteEvaluate(@RequestBody EvaluateDTO evaluateDTO);
+    @PostMapping(value = "/review")
+    ResponseEntity<String> review(@RequestBody EvaluateReviewDTO evaluateReviewDTO);
 }

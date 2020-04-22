@@ -2,6 +2,7 @@ package com.illunex.invest.investment.service;
 
 import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateListDTO;
+import com.illunex.invest.api.core.investment.dto.EvaluateReviewDTO;
 import com.illunex.invest.investment.persistence.entity.Evaluate;
 import com.illunex.invest.investment.persistence.entity.EvaluateJudge;
 import com.illunex.invest.investment.persistence.entity.EvaluateReviewItem;
@@ -110,6 +111,67 @@ public class EvaluateService {
 
                 return "Evaluate delete complete";
             }
+        }
+    }
+
+    public String review(EvaluateReviewDTO evaluateReviewDTO) {
+        Evaluate evaluate = evaluateRepository.findById(evaluateReviewDTO.getIdx()).orElse(null);
+
+        if (evaluate == null) {
+            return "Invalid Evaluate";
+        } else {
+            EvaluateJudge judge = mapper.evaluateJudgeDTOToEntity(evaluateReviewDTO.getJudge());
+            int completeCount = 0;
+
+            for (EvaluateJudge e: evaluate.getJudgeList()) {
+                if (e.getUserIdx().equals(evaluateReviewDTO.getJudge().getUserIdx())) {
+                    e.setEvaluateDate(LocalDateTime.now());
+                    e.setStatus("complete");
+                    e.setReviewItemCategory(judge.getReviewItemCategory());
+
+                    for(EvaluateReviewItemCategory c: e.getReviewItemCategory()) {
+                        c.setJudge(e);
+                        for(EvaluateReviewItem i: c.getReviewItem()) {
+                            i.setReviewItemCategory(c);
+                        }
+                    }
+                }
+
+                if (e.getStatus().equals("complete")) completeCount++;
+            }
+
+            if (completeCount == evaluate.getJudgeList().size()) {
+                float judgeTotalScore = 0;
+
+                for (EvaluateJudge e: evaluate.getJudgeList()) {
+
+                    float judgeScore = 0;
+
+                    for (EvaluateReviewItemCategory c: e.getReviewItemCategory()) {
+                        int itemTotalScore = 0;
+                        float categoryTotalScore;
+                        for (EvaluateReviewItem i: c.getReviewItem()) {
+                            itemTotalScore += i.getPoint();
+                        }
+
+                        categoryTotalScore = ( (float)itemTotalScore / (c.getReviewItem().size()*10) * (float)c.getWeight() );
+
+                        judgeScore += categoryTotalScore;
+                    }
+
+                    judgeTotalScore += judgeScore;
+
+                    e.setScore((int)judgeScore);
+
+                }
+
+                evaluate.setStatus("complete");
+                evaluate.setScore((int) (judgeTotalScore/3));
+                evaluate.setCompleteDate(LocalDateTime.now());
+            }
+
+            evaluateRepository.save(evaluate);
+            return "Evaluate Review "+ evaluate.getStatus();
         }
     }
 

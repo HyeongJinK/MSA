@@ -20,7 +20,4 @@ public class Judge {
     String rank;
     String company;
     String imgUrl;
-    String comment;
-    String status;
-    Integer point;
 }

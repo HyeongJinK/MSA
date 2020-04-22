@@ -1,17 +1,12 @@
 package com.illunex.invest.vc.controller;
 
-import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
-import com.illunex.invest.api.core.investment.dto.EvaluateListDTO;
-import com.illunex.invest.api.core.investment.dto.JudgeDTO;
-import com.illunex.invest.api.core.investment.dto.ReviewItemDTO;
-import com.illunex.invest.vc.service.invest.InvestCompositeIntegration;
+import com.illunex.invest.api.core.investment.dto.*;
+import com.illunex.invest.api.core.user.dto.UserDTO;
+import com.illunex.invest.vc.service.investment.InvestCompositeIntegration;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -25,6 +20,12 @@ public class EvaluateController {
     private final WebClient.Builder loadBalanceWebClientBuilder;
     private final InvestCompositeIntegration investCompositeIntegration;
     private final String investmentUrl = "http://investment";
+    private final String companyUrl = "http://company";
+
+    @GetMapping(value = "user/")
+    public ResponseEntity<UserDTO> getUser() {
+        return new ResponseEntity(investCompositeIntegration.getUser(), HttpStatus.OK);
+    }
 
     @GetMapping(value = "evaluate/")
     public ResponseEntity<String> setEvaluate(@RequestParam Long companyIdx) {
@@ -37,8 +38,8 @@ public class EvaluateController {
     }
 
     @GetMapping(value = "evaluate/detail")
-    public ResponseEntity<EvaluateDTO> getEvaluate(@RequestParam Long evaluateIdx) {
-        return restTemplate.getForEntity(investmentUrl + "/evaluate/detail?evaluateIdx={evaluateIdx}", EvaluateDTO.class, evaluateIdx);
+    public ResponseEntity<EvaluateDetailDTO> getEvaluateBefore(@RequestParam Long evaluateIdx) {
+        return new ResponseEntity(investCompositeIntegration.getEvaluate(evaluateIdx), HttpStatus.OK);
     }
 
     @PostMapping(value = "evaluate/edit")
@@ -63,10 +64,10 @@ public class EvaluateController {
     }
 
     @PostMapping(value = "evaluate/review")
-    public ResponseEntity<String> editReviewItem(@RequestBody ReviewItemDTO reviewItemDTO) {
+    public ResponseEntity<String> review(@RequestBody EvaluateReviewDTO evaluateReviewDTO) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        return restTemplate.postForEntity(investmentUrl + "/evaluate/review", new HttpEntity(reviewItemDTO, headers), String.class);
+        return restTemplate.postForEntity(investmentUrl + "/evaluate/review", new HttpEntity(evaluateReviewDTO, headers), String.class);
     }
 
 }
