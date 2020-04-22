@@ -2,7 +2,9 @@ package com.illunex.invest.invest.persistence.entity
 
 import javax.persistence.*
 
-
+/**
+ * 심사
+ * */
 @Entity
 @Table(name = "evaluate")
 data class Evaluate(
