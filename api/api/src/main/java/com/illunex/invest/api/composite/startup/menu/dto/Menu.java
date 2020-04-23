@@ -16,4 +16,5 @@ class Menu {
     private String to;
     private List<Menu> subMenu = new ArrayList<>();
     private int order;
+    private boolean disable = true;
 }
