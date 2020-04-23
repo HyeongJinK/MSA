@@ -22,6 +22,7 @@ public class EvaluateJudge {
     String rank;
     String imgUrl;
     String status;
+    Integer score;
     LocalDateTime evaluateDate;
 
     @ManyToOne @JoinColumn(name = "evaluate_idx")

@@ -59,7 +59,7 @@ public class User implements UserInterface {
                 .token(token)
                 .companyIdx(companyIdx)
                 .authorities(Role.initRoles())
-                .rank("직원")
+                .rank("사원")
                 .build();
     }
 

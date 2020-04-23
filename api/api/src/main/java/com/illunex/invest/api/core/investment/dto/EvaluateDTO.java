@@ -19,6 +19,7 @@ public class EvaluateDTO {
     String imgUrl;
     LocalDateTime createDate;
     LocalDateTime requestDate;
+    LocalDateTime completeDate;
     String scale;
     String status;
     String content;

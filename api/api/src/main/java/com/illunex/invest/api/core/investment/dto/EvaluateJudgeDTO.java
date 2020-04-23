@@ -18,6 +18,7 @@ public class EvaluateJudgeDTO {
     String rank;
     String imgUrl;
     String status;
+    Integer score;
     LocalDateTime evaluateDate;
 
     List<EvaluateReviewItemCategoryDTO> reviewItemCategory;

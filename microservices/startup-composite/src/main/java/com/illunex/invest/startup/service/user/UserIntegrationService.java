@@ -10,7 +10,6 @@ import com.illunex.invest.api.core.user.exception.UsernameSearchEmptyException;
 import com.illunex.invest.api.core.user.request.SignInRequest;
 import com.illunex.invest.api.core.user.request.SignUpRequest;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -59,6 +58,24 @@ public class UserIntegrationService extends DefaultIntegrationService {
         restTemplate.postForObject(communicationUrl + "/mail/signUp", new HttpEntity<>(new SignUpMailRequest(user.getUsername(), startUpUrl+"/user/register/confirm?token="+user.getToken()), getDefaultHeader()), String.class);
 
         // 결과 리턴
+        return ResponseEntity.ok(res);
+    }
+
+    public ResponseEntity<ResponseData> invite(String username, String password, String name, String vender) {
+        Long companyIdx = getUser().getCompanyIdx();
+        // 사용자 추가
+        ResponseData res = restTemplate.postForObject(userUrl + "/invite"
+                , new HttpEntity<>(new SignUpRequest(username
+                        , password
+                        , name
+                        , vender
+                        , companyIdx)
+                        , getDefaultHeader())
+                , ResponseData.class);
+        UserInfoDTO user = UserInfoDTOParser(res);
+        //  인증 메일 보내기
+        restTemplate.postForObject(communicationUrl + "/mail/signUp", new HttpEntity<>(new SignUpMailRequest(user.getUsername(), startUpUrl+"/user/register/confirm?token="+user.getToken()), getDefaultHeader()), String.class);
+
         return ResponseEntity.ok(res);
     }
 
