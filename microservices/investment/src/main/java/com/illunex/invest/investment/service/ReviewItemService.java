@@ -47,7 +47,6 @@ public class ReviewItemService {
             List<ReviewItem> reviewItemList = new ArrayList();
             reviewItemList.add(0, ReviewItem.builder()
                     .content("기본 심사내용")
-                    .point(0)
                     .reviewItemCategory(reviewItemCategory)
                     .build());
 

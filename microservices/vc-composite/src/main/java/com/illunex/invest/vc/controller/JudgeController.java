@@ -1,7 +1,7 @@
 package com.illunex.invest.vc.controller;
 
 import com.illunex.invest.api.core.investment.dto.*;
-import com.illunex.invest.vc.service.investment.InvestCompositeIntegration;
+import com.illunex.invest.vc.service.investment.InvestmentCompositeIntegration;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,12 +20,12 @@ public class JudgeController {
 
     private final RestTemplate restTemplate;
     private final WebClient.Builder loadBalanceWebClientBuilder;
-    private final InvestCompositeIntegration investCompositeIntegration;
+    private final InvestmentCompositeIntegration investmentCompositeIntegration;
     private final String investmentUrl = "http://investment";
 
     @GetMapping(value = "judge/list")
     public ResponseEntity<ListDTO> getJudgeList() {
-        return restTemplate.getForEntity(investmentUrl + "/judge/list?companyIdx={companyIdx}", ListDTO.class, investCompositeIntegration.getUser().getCompanyIdx());
+        return restTemplate.getForEntity(investmentUrl + "/judge/list?companyIdx={companyIdx}", ListDTO.class, investmentCompositeIntegration.getUser().getCompanyIdx());
     }
 
     @GetMapping(value = "judge/detail")
@@ -35,7 +35,7 @@ public class JudgeController {
 
     @PostMapping(value = "judge/edit")
     public ResponseEntity<String> editJudge(@RequestBody EditDTO editDTO) {
-        editDTO.setCompanyIdx(investCompositeIntegration.getUser().getCompanyIdx());
+        editDTO.setCompanyIdx(investmentCompositeIntegration.getUser().getCompanyIdx());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return restTemplate.postForEntity(investmentUrl + "/judge/edit", new HttpEntity(editDTO, headers), String.class);

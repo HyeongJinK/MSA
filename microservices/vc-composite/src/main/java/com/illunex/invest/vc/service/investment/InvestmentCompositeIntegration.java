@@ -1,6 +1,8 @@
 package com.illunex.invest.vc.service.investment;
 
+import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
+import com.illunex.invest.api.core.company.dto.ProductDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateDetailDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateJudgeDTO;
@@ -8,7 +10,12 @@ import com.illunex.invest.api.core.investment.dto.JudgeDTO;
 import com.illunex.invest.vc.service.DefaultIntegrationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -16,10 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class InvestCompositeIntegration extends DefaultIntegrationService {
-    Logger logger = LoggerFactory.getLogger(InvestCompositeIntegration.class);
+public class InvestmentCompositeIntegration extends DefaultIntegrationService {
+    Logger logger = LoggerFactory.getLogger(InvestmentCompositeIntegration.class);
 
-    public InvestCompositeIntegration(RestTemplate restTemplate, WebClient.Builder loadBalanceWebClientBuilder) {
+    public InvestmentCompositeIntegration(RestTemplate restTemplate, WebClient.Builder loadBalanceWebClientBuilder) {
         super(restTemplate, loadBalanceWebClientBuilder);
     }
 
@@ -55,4 +62,25 @@ public class InvestCompositeIntegration extends DefaultIntegrationService {
                     .build())
             .build();
     }
+
+    public String setEvaluate(Long companyIdx) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        CompanyDTO companyDTO = restTemplate.getForObject(companyUrl + "/company/read/"+companyIdx, CompanyDTO.class);
+
+        ProductDTO productDTO = restTemplate.getForObject(companyUrl + "/product/mainProduct/"+companyIdx, ProductDTO.class);
+
+        EvaluateDTO evaluateDTO = EvaluateDTO.builder()
+                .company(companyDTO.getName())
+                .companyIdx(companyDTO.getCompanyIdx())
+                .imgUrl(companyDTO.getLogo())
+                .product(productDTO.getTitle())
+                .scale(companyDTO.getScale())
+                .vcCompanyIdx(getUser().getCompanyIdx())
+                .build();
+
+        return restTemplate.postForObject(investmentUrl + "/evaluate/", new HttpEntity(evaluateDTO, headers), String.class);
+    }
+
 }

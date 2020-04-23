@@ -8,6 +8,7 @@ import java.util.List;
 public interface ProductService {
     List<ProductDTO> getProductByCompanyIdx(Long companyId);
     Page<ProductDTO> getProductPageByCompanyIdx(Long companyId);
+    ProductDTO getMainProductByCompanyIdx(Long companyId);
     ProductDTO edit(ProductDTO productDTO);
     ProductDTO read(Long productId);
 }

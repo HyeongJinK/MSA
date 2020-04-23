@@ -27,8 +27,12 @@ public class Evaluate {
     String scale;
     String status;
     String content;
-    Integer score;
+    Integer averageScore;
     Boolean deleted;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="template_idx")
+    EvaluateReviewItemTemplate template;
 
     @OneToMany(mappedBy = "evaluate", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<EvaluateJudge> judgeList;

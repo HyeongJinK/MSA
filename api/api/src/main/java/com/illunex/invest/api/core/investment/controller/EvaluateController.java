@@ -19,8 +19,8 @@ public interface EvaluateController {
 //            @ApiResponse(code = 200, message = "Success"),
 //            @ApiResponse(code = 400, message = "Bad Request")
 //    })
-    @GetMapping(value = "/")
-    ResponseEntity<String> setEvaluate(@RequestParam Long companyIdx, @RequestParam Long vcCompanyIdx);
+    @PostMapping(value = "/")
+    ResponseEntity<String> setEvaluate(@RequestBody EvaluateDTO evaluateDTO);
     @GetMapping(value = "/list")
     ResponseEntity<EvaluateListDTO> getEvaluateList(@RequestParam Long companyIdx);
     @GetMapping(value = "/detail")

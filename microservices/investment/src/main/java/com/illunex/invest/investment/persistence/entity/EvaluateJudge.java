@@ -22,12 +22,13 @@ public class EvaluateJudge {
     String rank;
     String imgUrl;
     String status;
-    Integer score;
+    Integer finalScore;
     LocalDateTime evaluateDate;
 
-    @ManyToOne @JoinColumn(name = "evaluate_idx")
+    @ManyToOne
+    @JoinColumn(name = "evaluate_idx")
     Evaluate evaluate;
 
     @OneToMany(mappedBy = "judge", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<EvaluateReviewItemCategory> reviewItemCategory;
+    List<EvaluateJudgeScore> scoreList;
 }

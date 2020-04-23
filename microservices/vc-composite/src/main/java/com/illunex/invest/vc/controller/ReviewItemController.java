@@ -2,7 +2,7 @@ package com.illunex.invest.vc.controller;
 
 import com.illunex.invest.api.core.investment.dto.ListDTO;
 import com.illunex.invest.api.core.investment.dto.ReviewItemTemplateDTO;
-import com.illunex.invest.vc.service.investment.InvestCompositeIntegration;
+import com.illunex.invest.vc.service.investment.InvestmentCompositeIntegration;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +21,12 @@ public class ReviewItemController {
 
     private final RestTemplate restTemplate;
     private final WebClient.Builder loadBalanceWebClientBuilder;
-    private final InvestCompositeIntegration investCompositeIntegration;
+    private final InvestmentCompositeIntegration investmentCompositeIntegration;
     private final String investmentUrl = "http://investment";
 
     @GetMapping(value = "review/list")
     public ResponseEntity<ListDTO> getReviewItemList() {
-        return restTemplate.getForEntity(investmentUrl + "/review/list?companyIdx={companyIdx}", ListDTO.class, investCompositeIntegration.getUser().getCompanyIdx());
+        return restTemplate.getForEntity(investmentUrl + "/review/list?companyIdx={companyIdx}", ListDTO.class, investmentCompositeIntegration.getUser().getCompanyIdx());
     }
 
     @GetMapping(value = "review/detail")
@@ -36,7 +36,7 @@ public class ReviewItemController {
 
     @PostMapping(value = "review/edit")
     public ResponseEntity<String> editReviewItem(@RequestBody ReviewItemTemplateDTO reviewItemTemplateDTO) {
-        reviewItemTemplateDTO.setCompanyIdx(investCompositeIntegration.getUser().getCompanyIdx());
+        reviewItemTemplateDTO.setCompanyIdx(investmentCompositeIntegration.getUser().getCompanyIdx());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return restTemplate.postForEntity(investmentUrl + "/review/edit", new HttpEntity(reviewItemTemplateDTO, headers), String.class);

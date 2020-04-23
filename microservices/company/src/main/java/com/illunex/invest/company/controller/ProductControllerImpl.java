@@ -1,7 +1,6 @@
 package com.illunex.invest.company.controller;
 
 import com.illunex.invest.api.common.response.ResponseData;
-import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.company.controller.ProductController;
 import com.illunex.invest.api.core.company.dto.ProductDTO;
 import com.illunex.invest.company.service.ProductService;
@@ -23,6 +22,11 @@ public class ProductControllerImpl implements ProductController {
     @Override
     public ResponseEntity<List<ProductDTO>> getProductList(Long companyId) {
         return ResponseEntity.ok(productService.getProductByCompanyIdx(companyId));
+    }
+
+    @Override
+    public ResponseEntity<ProductDTO> getMainProduct(Long companyId) {
+        return ResponseEntity.ok(productService.getMainProductByCompanyIdx(companyId));
     }
 
     @Override

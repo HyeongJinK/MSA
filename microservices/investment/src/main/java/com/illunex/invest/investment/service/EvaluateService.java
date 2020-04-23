@@ -3,14 +3,8 @@ package com.illunex.invest.investment.service;
 import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateListDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateReviewDTO;
-import com.illunex.invest.investment.persistence.entity.Evaluate;
-import com.illunex.invest.investment.persistence.entity.EvaluateJudge;
-import com.illunex.invest.investment.persistence.entity.EvaluateReviewItem;
-import com.illunex.invest.investment.persistence.entity.EvaluateReviewItemCategory;
-import com.illunex.invest.investment.persistence.repository.EvaluateJudgeRepository;
-import com.illunex.invest.investment.persistence.repository.EvaluateRepository;
-import com.illunex.invest.investment.persistence.repository.EvaluateReviewItemCategoryRepository;
-import com.illunex.invest.investment.persistence.repository.EvaluateReviewItemRepository;
+import com.illunex.invest.investment.persistence.entity.*;
+import com.illunex.invest.investment.persistence.repository.*;
 import com.illunex.invest.investment.service.mapper.InvestMentMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,17 +22,30 @@ public class EvaluateService {
 
     @Autowired EvaluateRepository evaluateRepository;
     @Autowired EvaluateJudgeRepository evaluateJudgeRepository;
+    @Autowired EvaluateJudgeScoreRepository evaluateJudgeScoreRepository;
+    @Autowired EvaluateReviewItemTemplateRepository evaluateReviewItemTemplateRepository;
     @Autowired EvaluateReviewItemCategoryRepository evaluateReviewItemCategoryRepository;
     @Autowired EvaluateReviewItemRepository evaluateReviewItemRepository;
 
     private InvestMentMapper mapper = Mappers.getMapper(InvestMentMapper.class);
 
-    public String setEvaluate(Long companyIdx, Long vcCompanyIdx) {
-        Evaluate evaluate = evaluateRepository.findByCompanyIdxAndVcCompanyIdx(companyIdx, vcCompanyIdx);
+    public String setEvaluate(EvaluateDTO evaluateDTO) {
+        Evaluate evaluate = evaluateRepository.findByCompanyIdxAndVcCompanyIdx(evaluateDTO.getCompanyIdx(), evaluateDTO.getVcCompanyIdx());
 
         if (evaluate == null) {
-            // companyIdx 에 해당하는 기업, 제품 정보 받와와서 저장 해놔야됨
-            evaluateRepository.save(Evaluate.builder().companyIdx(companyIdx).vcCompanyIdx(vcCompanyIdx).score(0).deleted(false).status("waiting").createDate(LocalDateTime.now()).build());
+            evaluateRepository.save(Evaluate.builder()
+                .companyIdx(evaluateDTO.getCompanyIdx())
+                .company(evaluateDTO.getCompany())
+                .imgUrl(evaluateDTO.getImgUrl())
+                .product(evaluateDTO.getProduct())
+                .scale(evaluateDTO.getScale())
+                .vcCompanyIdx(evaluateDTO.getVcCompanyIdx())
+                .averageScore(0)
+                .deleted(false)
+                .status("waiting")
+                .createDate(LocalDateTime.now())
+                .build()
+            );
             return "Evaluate set complete";
         } else {
             return "Already exists Evaluate";
@@ -61,35 +68,44 @@ public class EvaluateService {
         Evaluate newEvaluate = mapper.evaluateDTOToEntity(evaluateDTO);
         Evaluate evaluate = evaluateRepository.findById(evaluateDTO.getIdx()).orElse(null);
 
+
         if (evaluate == null) {
             return "Invalid Evaluate";
         } else {
-            evaluate.setContent(newEvaluate.getContent());
-            evaluate.setStatus(newEvaluate.getStatus());
-            evaluate.setScore(0);
-            evaluate.setRequestDate(LocalDateTime.now());
 
-            for (EvaluateJudge e: newEvaluate.getJudgeList()) {
+            for (EvaluateJudge j : newEvaluate.getJudgeList()) {
 
-                for (EvaluateReviewItemCategory c: e.getReviewItemCategory()) {
-
-                    for (EvaluateReviewItem r: c.getReviewItem()) {
-                        evaluateReviewItemRepository.deleteAllByReviewItemCategoryIdx(c.getIdx());
-                        r.setReviewItemCategory(c);
-                    }
-
-                    evaluateReviewItemCategoryRepository.deleteAllByJudgeIdx(e.getIdx());
-                    c.setJudge(e);
+                for (EvaluateJudgeScore s : j.getScoreList()) {
+                    evaluateJudgeScoreRepository.deleteAllByJudgeIdx(j.getIdx());
+                    s.setJudge(j);
                 }
 
-                evaluateJudgeRepository.deleteAllByEvaluateIdx(evaluate.getIdx());
-                e.setEvaluate(evaluate);
+                evaluateJudgeRepository.deleteAllByEvaluateIdx(newEvaluate.getIdx());
+                j.setEvaluate(evaluate);
             }
 
+            for (EvaluateReviewItemCategory c : newEvaluate.getTemplate().getReviewItemCategory()) {
+
+                for (EvaluateReviewItem i : c.getReviewItem()) {
+                    evaluateReviewItemRepository.deleteAllByReviewItemCategoryIdx(c.getIdx());
+                    i.setReviewItemCategory(c);
+                }
+
+                evaluateReviewItemCategoryRepository.deleteAllByReviewItemTemplateIdx(newEvaluate.getTemplate().getIdx());
+                c.setReviewItemTemplate(newEvaluate.getTemplate());
+
+            }
+
+            evaluateReviewItemTemplateRepository.deleteByEvaluateIdx(newEvaluate.getIdx());
+//            evaluateReviewItemTemplateRepository.save(newEvaluate.getTemplate());
+
+            evaluate.setContent(newEvaluate.getContent());
+            evaluate.setStatus(newEvaluate.getStatus());
+            evaluate.setRequestDate(LocalDateTime.now());
             evaluate.setJudgeList(newEvaluate.getJudgeList());
+            evaluate.setTemplate(newEvaluate.getTemplate());
 
             evaluateRepository.save(evaluate);
-
 
             return "Evaluate edit complete";
         }
@@ -117,62 +133,64 @@ public class EvaluateService {
     public String review(EvaluateReviewDTO evaluateReviewDTO) {
         Evaluate evaluate = evaluateRepository.findById(evaluateReviewDTO.getIdx()).orElse(null);
 
-        if (evaluate == null) {
-            return "Invalid Evaluate";
-        } else {
-            EvaluateJudge judge = mapper.evaluateJudgeDTOToEntity(evaluateReviewDTO.getJudge());
-            int completeCount = 0;
+        return "Invalid Evaluate";
 
-            for (EvaluateJudge e: evaluate.getJudgeList()) {
-                if (e.getUserIdx().equals(evaluateReviewDTO.getJudge().getUserIdx())) {
-                    e.setEvaluateDate(LocalDateTime.now());
-                    e.setStatus("complete");
-                    e.setReviewItemCategory(judge.getReviewItemCategory());
-
-                    for(EvaluateReviewItemCategory c: e.getReviewItemCategory()) {
-                        c.setJudge(e);
-                        for(EvaluateReviewItem i: c.getReviewItem()) {
-                            i.setReviewItemCategory(c);
-                        }
-                    }
-                }
-
-                if (e.getStatus().equals("complete")) completeCount++;
-            }
-
-            if (completeCount == evaluate.getJudgeList().size()) {
-                float judgeTotalScore = 0;
-
-                for (EvaluateJudge e: evaluate.getJudgeList()) {
-
-                    float judgeScore = 0;
-
-                    for (EvaluateReviewItemCategory c: e.getReviewItemCategory()) {
-                        int itemTotalScore = 0;
-                        float categoryTotalScore;
-                        for (EvaluateReviewItem i: c.getReviewItem()) {
-                            itemTotalScore += i.getPoint();
-                        }
-
-                        categoryTotalScore = ( (float)itemTotalScore / (c.getReviewItem().size()*10) * (float)c.getWeight() );
-
-                        judgeScore += categoryTotalScore;
-                    }
-
-                    judgeTotalScore += judgeScore;
-
-                    e.setScore((int)judgeScore);
-
-                }
-
-                evaluate.setStatus("complete");
-                evaluate.setScore((int) (judgeTotalScore/3));
-                evaluate.setCompleteDate(LocalDateTime.now());
-            }
-
-            evaluateRepository.save(evaluate);
-            return "Evaluate Review "+ evaluate.getStatus();
-        }
+//        if (evaluate == null) {
+//            return "Invalid Evaluate";
+//        } else {
+//            EvaluateJudge judge = mapper.evaluateJudgeDTOToEntity(evaluateReviewDTO.getJudge());
+//            int completeCount = 0;
+//
+//            for (EvaluateJudge e: evaluate.getJudgeList()) {
+//                if (e.getUserIdx().equals(evaluateReviewDTO.getJudge().getUserIdx())) {
+//                    e.setEvaluateDate(LocalDateTime.now());
+//                    e.setStatus("complete");
+//                    e.setReviewItemCategory(judge.getReviewItemCategory());
+//
+//                    for(EvaluateReviewItemCategory c: e.getReviewItemCategory()) {
+//                        c.setJudge(e);
+//                        for(EvaluateReviewItem i: c.getReviewItem()) {
+//                            i.setReviewItemCategory(c);
+//                        }
+//                    }
+//                }
+//
+//                if (e.getStatus().equals("complete")) completeCount++;
+//            }
+//
+//            if (completeCount == evaluate.getJudgeList().size()) {
+//                float judgeTotalScore = 0;
+//
+//                for (EvaluateJudge e: evaluate.getJudgeList()) {
+//
+//                    float judgeScore = 0;
+//
+//                    for (EvaluateReviewItemCategory c: e.getReviewItemCategory()) {
+//                        int itemTotalScore = 0;
+//                        float categoryTotalScore;
+//                        for (EvaluateReviewItem i: c.getReviewItem()) {
+//                            itemTotalScore += i.getPoint();
+//                        }
+//
+//                        categoryTotalScore = ( (float)itemTotalScore / (c.getReviewItem().size()*10) * (float)c.getWeight() );
+//
+//                        judgeScore += categoryTotalScore;
+//                    }
+//
+//                    judgeTotalScore += judgeScore;
+//
+//                    e.setScore((int)judgeScore);
+//
+//                }
+//
+//                evaluate.setStatus("complete");
+//                evaluate.setScore((int) (judgeTotalScore/3));
+//                evaluate.setCompleteDate(LocalDateTime.now());
+//            }
+//
+//            evaluateRepository.save(evaluate);
+//            return "Evaluate Review "+ evaluate.getStatus();
+//        }
     }
 
 }

@@ -22,8 +22,8 @@ public class EvaluateControllerImpl implements EvaluateController {
     }
 
     @Override
-    public ResponseEntity<String> setEvaluate(Long companyIdx, Long vcCompanyIdx) {
-        return new ResponseEntity(evaluateService.setEvaluate(companyIdx, vcCompanyIdx), HttpStatus.OK);
+    public ResponseEntity<String> setEvaluate(EvaluateDTO evaluateDTO) {
+        return new ResponseEntity(evaluateService.setEvaluate(evaluateDTO), HttpStatus.OK);
     }
 
     @Override

@@ -36,6 +36,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductDTO getMainProductByCompanyIdx(Long companyId) {
+        return mapper.entityToDto(productRepository.findByCompanyCompanyIdx(companyId).get(0));
+    }
+
+    @Override
     @Transactional
     public ProductDTO edit(ProductDTO productDTO) {
         if (productDTO.getId() == null || productDTO.getId().equals(0l)) {
