@@ -30,13 +30,6 @@ class EvaluateService {
 
         evaluateRepository!!.save(evaluate)
         return "success"
-
-//        return if (evaluateRepository!!.findByCompanyIdxAndVcCompanyIdx(companyIdx, vcCompanyIdx).equals(null) ) {
-//            evaluateRepository!!.save(Evaluate(companyIdx = companyIdx, vcCompanyIdx = vcCompanyIdx))
-//            "Evaluate set complete"
-//        } else {
-//            "Already exists Evaluate "
-//        }
     }
 
     fun getEvaluateList(companyIdx:Long):List<EvaluateDTO> {
