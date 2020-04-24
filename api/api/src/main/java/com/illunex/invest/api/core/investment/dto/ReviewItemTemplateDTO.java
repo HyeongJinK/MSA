@@ -17,7 +17,7 @@ public class ReviewItemTemplateDTO {
     LocalDateTime updateDate;
     Integer point;
     Boolean deleted;
-    Boolean weight;
+    Boolean weightApply;
 
     List<ReviewItemCategoryDTO> reviewItemCategory;
 }

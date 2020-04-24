@@ -68,7 +68,6 @@ public class EvaluateService {
         Evaluate newEvaluate = mapper.evaluateDTOToEntity(evaluateDTO);
         Evaluate evaluate = evaluateRepository.findById(evaluateDTO.getIdx()).orElse(null);
 
-
         if (evaluate == null) {
             return "Invalid Evaluate";
         } else {
@@ -174,7 +173,13 @@ public class EvaluateService {
                             if (s.getCategoryIdx().equals(c.getIdx())) {
                                 itemTotalScore += s.getScore();
                             }
-                            judgeScore += ( (float)itemTotalScore / (c.getReviewItem().size()*10) * (float)c.getWeight() );
+
+                            if (evaluate.getTemplate().getWeightApply().equals(true)) {
+                                judgeScore += ( (float)itemTotalScore / (c.getReviewItem().size()*10) * (float)c.getWeight() );
+                            } else {
+                                judgeScore += ( (float)itemTotalScore / (c.getReviewItem().size()*10) * (float)(100/evaluate.getTemplate().getReviewItemCategory().size()) );
+                            }
+
                         }
                     }
 

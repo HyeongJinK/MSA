@@ -46,6 +46,7 @@ public class ReviewItemController {
     public ResponseEntity<String> deleteReviewItem(@RequestBody ReviewItemTemplateDTO reviewItemTemplateDTO) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        reviewItemTemplateDTO.setCompanyIdx(investmentCompositeIntegration.getUser().getCompanyIdx());
         return restTemplate.postForEntity(investmentUrl + "/review/delete", new HttpEntity(reviewItemTemplateDTO, headers), String.class);
     }
 
