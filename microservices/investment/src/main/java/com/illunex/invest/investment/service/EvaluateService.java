@@ -73,17 +73,6 @@ public class EvaluateService {
             return "Invalid Evaluate";
         } else {
 
-            for (EvaluateJudge j : newEvaluate.getJudgeList()) {
-
-                for (EvaluateJudgeScore s : j.getScoreList()) {
-                    evaluateJudgeScoreRepository.deleteAllByJudgeIdx(j.getIdx());
-                    s.setJudge(j);
-                }
-
-                evaluateJudgeRepository.deleteAllByEvaluateIdx(newEvaluate.getIdx());
-                j.setEvaluate(evaluate);
-            }
-
             for (EvaluateReviewItemCategory c : newEvaluate.getTemplate().getReviewItemCategory()) {
 
                 for (EvaluateReviewItem i : c.getReviewItem()) {
@@ -96,16 +85,39 @@ public class EvaluateService {
 
             }
 
+            for (EvaluateJudge j : newEvaluate.getJudgeList()) {
+                for (EvaluateJudgeScore s : j.getScoreList()) {
+                    evaluateJudgeScoreRepository.deleteAllByJudgeIdx(j.getIdx());
+                    s.setJudge(j);
+                }
+                evaluateJudgeRepository.deleteAllByEvaluateIdx(newEvaluate.getIdx());
+                j.setEvaluate(evaluate);
+            }
+
             evaluateReviewItemTemplateRepository.deleteByEvaluateIdx(newEvaluate.getIdx());
-//            evaluateReviewItemTemplateRepository.save(newEvaluate.getTemplate());
 
             evaluate.setContent(newEvaluate.getContent());
             evaluate.setStatus(newEvaluate.getStatus());
             evaluate.setRequestDate(LocalDateTime.now());
-            evaluate.setJudgeList(newEvaluate.getJudgeList());
             evaluate.setTemplate(newEvaluate.getTemplate());
+            evaluate.setJudgeList(newEvaluate.getJudgeList());
 
-            evaluateRepository.save(evaluate);
+            Evaluate editingEvaluate = evaluateRepository.save(evaluate);
+
+            for (EvaluateJudge j : newEvaluate.getJudgeList()) {
+                for (EvaluateReviewItemCategory c : editingEvaluate.getTemplate().getReviewItemCategory()) {
+                    for (EvaluateReviewItem i : c.getReviewItem()) {
+                        j.getScoreList().add(EvaluateJudgeScore.builder()
+                            .categoryIdx(c.getIdx())
+                            .reviewItemIdx(i.getIdx())
+                            .score(0)
+                            .judge(j)
+                            .build());
+                    }
+                }
+            }
+
+            evaluateRepository.save(editingEvaluate);
 
             return "Evaluate edit complete";
         }
