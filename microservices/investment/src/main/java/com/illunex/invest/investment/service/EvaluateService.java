@@ -145,64 +145,60 @@ public class EvaluateService {
     public String review(EvaluateReviewDTO evaluateReviewDTO) {
         Evaluate evaluate = evaluateRepository.findById(evaluateReviewDTO.getIdx()).orElse(null);
 
-        return "Invalid Evaluate";
+        if (evaluate == null) {
+            return "Invalid Evaluate";
+        } else {
+            EvaluateJudge judge = mapper.evaluateJudgeDTOToEntity(evaluateReviewDTO.getJudge());
+            int completeCount = 0;
 
-//        if (evaluate == null) {
-//            return "Invalid Evaluate";
-//        } else {
-//            EvaluateJudge judge = mapper.evaluateJudgeDTOToEntity(evaluateReviewDTO.getJudge());
-//            int completeCount = 0;
-//
-//            for (EvaluateJudge e: evaluate.getJudgeList()) {
-//                if (e.getUserIdx().equals(evaluateReviewDTO.getJudge().getUserIdx())) {
-//                    e.setEvaluateDate(LocalDateTime.now());
-//                    e.setStatus("complete");
-//                    e.setReviewItemCategory(judge.getReviewItemCategory());
-//
-//                    for(EvaluateReviewItemCategory c: e.getReviewItemCategory()) {
-//                        c.setJudge(e);
-//                        for(EvaluateReviewItem i: c.getReviewItem()) {
-//                            i.setReviewItemCategory(c);
-//                        }
-//                    }
-//                }
-//
-//                if (e.getStatus().equals("complete")) completeCount++;
-//            }
-//
-//            if (completeCount == evaluate.getJudgeList().size()) {
-//                float judgeTotalScore = 0;
-//
-//                for (EvaluateJudge e: evaluate.getJudgeList()) {
-//
-//                    float judgeScore = 0;
-//
-//                    for (EvaluateReviewItemCategory c: e.getReviewItemCategory()) {
-//                        int itemTotalScore = 0;
-//                        float categoryTotalScore;
-//                        for (EvaluateReviewItem i: c.getReviewItem()) {
-//                            itemTotalScore += i.getPoint();
-//                        }
-//
-//                        categoryTotalScore = ( (float)itemTotalScore / (c.getReviewItem().size()*10) * (float)c.getWeight() );
-//
-//                        judgeScore += categoryTotalScore;
-//                    }
-//
-//                    judgeTotalScore += judgeScore;
-//
-//                    e.setScore((int)judgeScore);
-//
-//                }
-//
-//                evaluate.setStatus("complete");
-//                evaluate.setScore((int) (judgeTotalScore/3));
-//                evaluate.setCompleteDate(LocalDateTime.now());
-//            }
-//
-//            evaluateRepository.save(evaluate);
-//            return "Evaluate Review "+ evaluate.getStatus();
-//        }
+            for (EvaluateJudge e: evaluate.getJudgeList()) {
+                if (e.getUserIdx().equals(evaluateReviewDTO.getJudge().getUserIdx())) {
+                    e.setEvaluateDate(LocalDateTime.now());
+                    e.setStatus("complete");
+
+                    for (EvaluateJudgeScore j : e.getScoreList()) {
+                        for (EvaluateJudgeScore s : judge.getScoreList()) {
+                            if (j.getIdx().equals(s.getIdx())) {
+                                j.setScore(s.getScore());
+                            }
+                        }
+                    }
+
+                    float judgeScore = 0;
+
+                    for (EvaluateJudgeScore s : judge.getScoreList()) {
+
+                        for (EvaluateReviewItemCategory c :evaluate.getTemplate().getReviewItemCategory()) {
+                            int itemTotalScore = 0;
+
+                            if (s.getCategoryIdx().equals(c.getIdx())) {
+                                itemTotalScore += s.getScore();
+                            }
+                            judgeScore += ( (float)itemTotalScore / (c.getReviewItem().size()*10) * (float)c.getWeight() );
+                        }
+                    }
+
+                    e.setFinalScore((int)judgeScore);
+                }
+
+                if (e.getStatus().equals("complete")) completeCount++;
+            }
+
+
+            if (completeCount == evaluate.getJudgeList().size()) {
+                float judgeTotalScore = 0;
+
+                for (EvaluateJudge e: evaluate.getJudgeList()) {
+                    judgeTotalScore += e.getFinalScore();
+                }
+
+                evaluate.setStatus("complete");
+                evaluate.setAverageScore((int) (judgeTotalScore/3));
+                evaluate.setCompleteDate(LocalDateTime.now());
+            }
+            evaluateRepository.save(evaluate);
+            return "Evaluate Review "+ evaluate.getStatus();
+        }
     }
 
 }
