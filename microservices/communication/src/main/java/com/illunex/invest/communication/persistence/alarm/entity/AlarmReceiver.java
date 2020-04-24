@@ -1,10 +1,7 @@
 package com.illunex.invest.communication.persistence.alarm.entity;
 
 import com.illunex.invest.api.core.communication.enumable.AlarmReadStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,7 +9,7 @@ import java.time.LocalDateTime;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Getter @Setter
 @Builder
 public class AlarmReceiver {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

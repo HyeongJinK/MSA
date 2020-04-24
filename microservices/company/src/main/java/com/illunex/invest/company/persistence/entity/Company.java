@@ -31,11 +31,15 @@ public class Company {
     String zipCode;             // 우편번호
     String address;             // 주소
     String addressDetail;       // 상세주소
+    @Column(length=4000)
     String description;         // 기업개요
     String homePage;            // 홈페이지
     String location;            // 지역
     String sales;               // 매출액
-    String scale;               // 투자규모
+    String ceo;                 //대표
+    @Column(length=1000)
+    String mainProduct;         //주요제품군
+    //String scale;               // 투자규모
     LocalDateTime updateDate;   // 마지막 수정일
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -21,7 +21,7 @@ public class CorporateSealServiceImpl implements CorporateSealService {
 
     @Override
     public List<CorporateSealDTO> corporateSeal(Long companyId) {
-        return mapper.entityToDto(corporateSealRepository.findAllByCompanyCompanyId(companyId));
+        return mapper.entityToDto(corporateSealRepository.findAllByCompanyCompanyIdx(companyId));
     }
 
     @Override

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CorporateSealRepository extends JpaRepository<CorporateSeal, Long> {
-    List<CorporateSeal> findAllByCompanyCompanyId(Long companyId);
+    List<CorporateSeal> findAllByCompanyCompanyIdx(Long companyIdx);
 }

@@ -190,7 +190,7 @@ public class MenuDto {
                             ), 5);
                             break;
                         case "ROLE_SHAREHOLDER" : makeMainMenu("주주", "feed", "feed", List.of(
-                                makeSubMenu("주주명부", "feed", "/feed", 1)
+                                makeSubMenu("주주명부", "shareholder", "/company/shareholder", 1)
                         ), 6);
                         case "ROLE_DOC" : makeMainMenu("문서", "feed", "feed", List.of(
                                 makeSubMenu("All", "feed", "/feed", 1)
@@ -200,6 +200,8 @@ public class MenuDto {
                             makeMainMenu("뉴스", "news", "news", List.of(
                                     makeSubMenu("뉴스", "news", "/news", 1)
                             ), 10);
+                            break;
+                        default:
                             break;
                     }
                 });

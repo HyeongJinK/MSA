@@ -1,11 +1,14 @@
 package com.illunex.invest.communication.service.alalrm;
 
+import com.illunex.invest.api.core.communication.dto.AlarmReceiverDTO;
 import com.illunex.invest.api.core.communication.enumable.AlarmReadStatus;
 import com.illunex.invest.communication.persistence.alarm.entity.AlarmMessage;
 import com.illunex.invest.communication.persistence.alarm.entity.AlarmReceiver;
 import com.illunex.invest.communication.persistence.alarm.repository.AlarmMessageRepository;
 import com.illunex.invest.communication.persistence.alarm.repository.AlarmReceiverRepository;
+import com.illunex.invest.communication.service.alalrm.mapper.AlarmMapper;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,17 +20,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class AlarmServiceImpl implements AlarmService {
+    private AlarmMapper mapper = Mappers.getMapper(AlarmMapper.class);
     private final AlarmMessageRepository alarmMessageRepository;
     private final AlarmReceiverRepository alarmReceiverRepository;
 
     @Override
-    public List<AlarmReceiver> getAllLists() {
-        return alarmReceiverRepository.findAll();
+    public List<AlarmReceiverDTO> getAllLists() {
+        return mapper.entityToDto(alarmReceiverRepository.findAll());
     }
 
     @Override
-    public List<AlarmReceiver> getLists(Long userId) {
-        return alarmReceiverRepository.findAllByUserId(userId);
+    public List<AlarmReceiverDTO> getLists(Long userId) {
+        return mapper.entityToDto(alarmReceiverRepository.findAllByUserId(userId));
     }
 
     @Override
