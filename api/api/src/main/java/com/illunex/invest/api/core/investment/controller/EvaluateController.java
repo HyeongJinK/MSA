@@ -1,5 +1,6 @@
 package com.illunex.invest.api.core.investment.controller;
 
+import com.illunex.invest.api.core.investment.dto.EvaluateCommentDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateListDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateReviewDTO;
@@ -27,6 +28,8 @@ public interface EvaluateController {
     ResponseEntity<EvaluateDTO> getEvaluate(@RequestParam Long evaluateIdx);
     @PostMapping(value = "/edit")
     ResponseEntity<String> editEvaluate(@RequestBody EvaluateDTO evaluateDTO);
+    @PostMapping(value = "/comment")
+    ResponseEntity<String> editComment(@RequestBody EvaluateCommentDTO evaluateCommentDTO);
     @PostMapping(value = "/delete")
     ResponseEntity<String> deleteEvaluate(@RequestBody EvaluateDTO evaluateDTO);
     @PostMapping(value = "/review")

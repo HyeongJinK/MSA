@@ -49,6 +49,14 @@ public class EvaluateController {
         return restTemplate.postForEntity(investmentUrl + "/evaluate/edit", new HttpEntity(evaluateDTO, headers), String.class);
     }
 
+    @PostMapping(value = "evaluate/comment")
+    public ResponseEntity<String> editComment(@RequestBody EvaluateCommentDTO evaluateCommentDTO) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        evaluateCommentDTO.setUserIdx(investmentCompositeIntegration.getUser().getId());
+        return restTemplate.postForEntity(investmentUrl + "/evaluate/comment", new HttpEntity(evaluateCommentDTO, headers), String.class);
+    }
+
     @PostMapping(value = "evaluate/delete")
     public ResponseEntity<String> deleteEvaluate(@RequestBody EvaluateDTO evaluateDTO) {
         HttpHeaders headers = new HttpHeaders();

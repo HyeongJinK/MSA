@@ -1,5 +1,6 @@
 package com.illunex.invest.investment.service;
 
+import com.illunex.invest.api.core.investment.dto.EvaluateCommentDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateListDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateReviewDTO;
@@ -123,6 +124,24 @@ public class EvaluateService {
 
     }
 
+    public String editComment(EvaluateCommentDTO evaluateCommentDTO) {
+        Evaluate evaluate = evaluateRepository.findById(evaluateCommentDTO.getEvaluateIdx()).orElse(null);
+
+        if (evaluate == null) {
+            return "Invalid Evaluate";
+        } else {
+            for (EvaluateJudge j : evaluate.getJudgeList()) {
+                if (j.getUserIdx().equals(evaluateCommentDTO.getUserIdx())) {
+                    j.setComment(evaluateCommentDTO.getComment());
+                    j.setStatus("complete");
+                    j.setEvaluateDate(LocalDateTime.now());
+                }
+            }
+            evaluateRepository.save(evaluate);
+            return "Evaluate complete";
+        }
+    }
+
     public String deleteEvaluate(EvaluateDTO evaluateDTO) {
         Evaluate evaluate = evaluateRepository.findById(evaluateDTO.getIdx()).orElse(null);
 
@@ -152,8 +171,7 @@ public class EvaluateService {
 
             for (EvaluateJudge e: evaluate.getJudgeList()) {
                 if (e.getUserIdx().equals(evaluateReviewDTO.getJudge().getUserIdx())) {
-                    e.setEvaluateDate(LocalDateTime.now());
-                    e.setStatus("complete");
+                    e.setStatus("confirm");
 
                     for (EvaluateJudgeScore j : e.getScoreList()) {
                         for (EvaluateJudgeScore s : judge.getScoreList()) {
