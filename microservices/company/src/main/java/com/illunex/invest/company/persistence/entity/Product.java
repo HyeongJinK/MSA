@@ -21,6 +21,7 @@ public class Product {
     String description;     // 제품 설명
     String viewMode;        // 공개 여부
     LocalDateTime regDate;
+    Boolean representation = false;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "productId")
