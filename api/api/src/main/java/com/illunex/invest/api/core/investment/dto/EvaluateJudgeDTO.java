@@ -14,8 +14,9 @@ public class EvaluateJudgeDTO {
     Long idx;
     Long userIdx;
     String name;
-    String comment;
+    String company;
     String rank;
+    String comment;
     String imgUrl;
     String status;
     Integer finalScore;
