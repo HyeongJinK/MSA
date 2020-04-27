@@ -56,16 +56,25 @@ public class MenuDto {
     }
 
     private Menu makeSubMenu(String title, String id, String to, int order) {
-        return makeSubMenu(title, id, to, null, order);
+        return makeSubMenu(title, id, to, null, order, true);
+    }
+
+    private Menu makeSubMenu(String title, String id, String to, int order, boolean disable) {
+        return makeSubMenu(title, id, to, null, order, disable);
     }
 
     private Menu makeSubMenu(String title, String id, String to, List<Menu> subMenus, int order) {
+        return makeSubMenu(title, id, to, subMenus, order, true);
+    }
+
+    private Menu makeSubMenu(String title, String id, String to, List<Menu> subMenus, int order, boolean disable) {
         return Menu.builder()
                 .title(title)
                 .id(id)
                 .to(to)
                 .subMenu(subMenus)
                 .order(order)
+                .disable(disable)
                 .build();
     }
 
@@ -130,27 +139,14 @@ public class MenuDto {
     }
 
     @NotNull
-    private List<Menu> makeCompanySubMenu(Collection<RoleDTO> roles) {
-        return roles.stream()
-                .filter(role -> (role.getName().equals("ROLE_COMPANY") && role.isRead())
-                        || (role.getName().equals("ROLE_PRODUCT")  && role.isRead())
-                        || (role.getName().equals("ROLE_TEAM")  && role.isRead())
-                        || (role.getName().equals("ROLE_SHAREHOLDER")  && role.isRead()))
-                .map(role -> {
-                    switch (role.getName()) {
-                        case "ROLE_COMPANY":
-                            return makeSubMenu("기업정보", "info", "/company/info", 1);
-                        case "ROLE_PRODUCT":
-                            return makeSubMenu("제품정보", "product", "/company/product", 2);
-                        case "ROLE_TEAM":
-                            return makeSubMenu("팀정보", "member", "/company/member",3);
-                        case "ROLE_SHAREHOLDER":
-                            return makeSubMenu("주주정보", "shareholder", "/company/shareholder", 4);
-                        default:
-                            return null;
-                    }
-                })
-                .sorted(Comparator.comparingInt(Menu::getOrder)).collect(Collectors.toList());
+    private List<Menu> makeCompanySubMenu(RoleDTO role) {
+        return List.of(makeSubMenu("기업정보", "info", "/company/info", 1),
+                makeSubMenu("제품정보", "product", "/company/product", 2),
+                makeSubMenu("팀정보", "member", "/company/member",3))
+                .stream()
+                .sorted(Comparator.comparingInt(Menu::getOrder))
+                .collect(Collectors.toList());
+//        makeSubMenu("주주정보", "shareholder", "/company/shareholder", 4);
     }
 
     private List<Menu> makeIrSubMenu(RoleDTO role, List<IRDTO> irList) {
@@ -175,12 +171,12 @@ public class MenuDto {
 
     private void initMainMenu(Collection<RoleDTO> roles, List<IRDTO> irList) {
         makeDefaultMainMenu(roles);
-
+        //TODO 주주, 문서
         roles.stream()
                 .forEach(role -> {
                     switch (role.getName()) {
                         case "ROLE_COMPANY":
-                            makeMainMenu("기업", "company", "company", makeCompanySubMenu(roles), 2);
+                            makeMainMenu("기업", "company", "company", makeCompanySubMenu(role), 2);
                             break;
                         case "ROLE_IR":
                             makeMainMenu("IR 작성", "ir", "ir", makeIrSubMenu(role, irList), 3);
@@ -193,10 +189,19 @@ public class MenuDto {
                                     makeSubMenu("피드", "feed", "/feed", 1)
                             ), 5);
                             break;
+                        case "ROLE_SHAREHOLDER" : makeMainMenu("주주", "feed", "feed", List.of(
+                                makeSubMenu("주주명부", "shareholder", "/company/shareholder", 1)
+                        ), 6);
+                        case "ROLE_DOC" : makeMainMenu("문서", "feed", "feed", List.of(
+                                makeSubMenu("All", "feed", "/feed", 1)
+                        ), 7);
+                            break;
                         case "ROLE_NEWS" :
-                            makeMainMenu("피드", "feed", "feed", List.of(
+                            makeMainMenu("뉴스", "news", "news", List.of(
                                     makeSubMenu("뉴스", "news", "/news", 1)
-                            ), 6);
+                            ), 10);
+                            break;
+                        default:
                             break;
                     }
                 });
