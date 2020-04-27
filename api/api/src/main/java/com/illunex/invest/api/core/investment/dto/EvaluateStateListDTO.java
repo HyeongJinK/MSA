@@ -9,8 +9,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListDTO {
-    List<JudgeDTO> judgeList;
-    List<ReviewItemTemplateDTO> reviewItemTemplateList;
-    List<FavoriteCompanyDTO> favoriteCompanyList;
+public class EvaluateStateListDTO {
+    List<EvaluateStateDTO> evaluateState;
 }

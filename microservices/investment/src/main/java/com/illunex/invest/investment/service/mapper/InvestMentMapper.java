@@ -17,6 +17,9 @@ public interface InvestMentMapper {
     List<Evaluate> evaluateListDTOToEntity(List<EvaluateDTO> evaluateDTOList);
     List<EvaluateDTO> evaluateListEntityToDTO(List<Evaluate> evaluateList);
 
+    EvaluateStateDTO evaluateStateEntityToDTO(Evaluate evaluate);
+    List<EvaluateStateDTO> evaluateStateListEntityToDTO(List<Evaluate> evaluateList);
+
     // evaluate > judgeList > scoreList
     EvaluateJudge evaluateJudgeDTOToEntity(EvaluateJudgeDTO evaluateJudgeDTO);
     EvaluateJudgeDTO evaluateJudgeEntityToDTO(EvaluateJudge evaluateJudge);
@@ -55,6 +58,14 @@ public interface InvestMentMapper {
 
     List<Judge> judgeListDTOToEntity(List<JudgeDTO> judgeDTOList);
     List<JudgeDTO> judgeListEntityToDTO(List<Judge> judgeList);
+
+    // favoriteCompany
+
+    FavoriteCompany favoriteCompanyDTOToEntity(FavoriteCompanyDTO favoriteCompanyDTO);
+    FavoriteCompanyDTO favoriteCompanyEntityToDTO(FavoriteCompany favoriteCompany);
+
+    List<FavoriteCompany> favoriteCompanyListDTOToEntity(List<FavoriteCompanyDTO> favoriteCompanyDTOList);
+    List<FavoriteCompanyDTO> favoriteCompanyListEntityToDTO(List<FavoriteCompany> favoriteCompanyList);
 
     // template > categoryList > itemList
     ReviewItemTemplate reviewItemTemplateDTOToEntity(ReviewItemTemplateDTO reviewItemTemplateDTO);

@@ -1,6 +1,8 @@
 package com.illunex.invest.company.service;
 
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
+import com.illunex.invest.api.core.investment.dto.FavoriteCompanyDTO;
+import com.illunex.invest.api.core.investment.dto.ListDTO;
 import com.illunex.invest.company.exception.NoneCompanyException;
 import com.illunex.invest.company.persistence.entity.Company;
 import com.illunex.invest.company.persistence.repository.CompanyRepository;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Log
@@ -49,5 +52,17 @@ public class CompanyServiceImpl implements CompanyService {
         companyDTO.setUpdateDate(LocalDateTime.now());
         log.info(companyDTO.toString());
         return mapper.entityToDto(companyRepository.save(mapper.dtoToEntity(companyDTO)));
+    }
+
+    @Override
+    public List<CompanyDTO> getFavoriteCompanyList(ListDTO listDTO) {
+
+        List<Company> list = new ArrayList<>();
+
+        for (FavoriteCompanyDTO f: listDTO.getFavoriteCompanyList()) {
+            list.add(companyRepository.findByCompanyIdx(f.getCompanyIdx()).get());
+        }
+
+        return mapper.entityListToDto(list);
     }
 }
