@@ -18,6 +18,10 @@ public interface ProductController {
     @GetMapping("/list/{companyId}")
     ResponseEntity<List<ProductDTO>> getProductList(@PathVariable Long companyId);
 
+    @ApiOperation(value = "회사 대표 제품 조회")
+    @GetMapping("/mainProduct/{companyId}")
+    ResponseEntity<ProductDTO> getMainProduct(@PathVariable Long companyId);
+
     @ApiOperation(value = "회사번호로 상품 페이지 조회")
     @GetMapping("/page/{companyId}")
     ResponseEntity<Page<ProductDTO>> getProductPage(@PathVariable Long companyId);

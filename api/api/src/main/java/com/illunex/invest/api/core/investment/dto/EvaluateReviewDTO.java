@@ -9,9 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 public class EvaluateReviewDTO {
     Long idx;
-    Long companyIdx;
-    Long vcCompanyIdx;
     String content;
-
     EvaluateJudgeDTO judge;
 }

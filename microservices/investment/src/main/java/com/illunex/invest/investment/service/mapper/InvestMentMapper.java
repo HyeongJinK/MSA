@@ -17,11 +17,25 @@ public interface InvestMentMapper {
     List<Evaluate> evaluateListDTOToEntity(List<EvaluateDTO> evaluateDTOList);
     List<EvaluateDTO> evaluateListEntityToDTO(List<Evaluate> evaluateList);
 
+    // evaluate > judgeList > scoreList
     EvaluateJudge evaluateJudgeDTOToEntity(EvaluateJudgeDTO evaluateJudgeDTO);
     EvaluateJudgeDTO evaluateJudgeEntityToDTO(EvaluateJudge evaluateJudge);
 
     List<EvaluateJudge> evaluateJudgeListDTOToEntity(List<EvaluateJudgeDTO> evaluateJudgeDTOList);
     List<EvaluateJudgeDTO> evaluateJudgeListEntityToDTO(List<EvaluateJudge> evaluateJudgeList);
+
+    EvaluateJudgeScore evaluateJudgeScoreDTOToEntity(EvaluateJudgeScoreDTO evaluateJudgeScoreDTO);
+    EvaluateJudgeScoreDTO evaluateJudgeScoreEntityToDTO(EvaluateJudgeScore evaluateJudgeScore);
+
+    List<EvaluateJudgeScore> evaluateJudgeScoreListDTOToEntity(List<EvaluateJudgeScoreDTO> evaluateJudgeScoreDTOList);
+    List<EvaluateJudgeScoreDTO> evaluateJudgeScoreListEntityToDTO(List<EvaluateJudgeScore> evaluateJudgeScoreList);
+
+    // evaluate > template > categoryList > itemList
+    EvaluateReviewItemTemplate evaluateReviewItemTemplateDTOToEntity(EvaluateReviewItemTemplateDTO reviewItemTemplateDTO);
+    EvaluateReviewItemTemplateDTO evaluateReviewItemTemplateEntityToDTO(EvaluateReviewItemTemplate reviewItemTemplate);
+
+    List<EvaluateReviewItemTemplate> evaluateReviewItemTemplateListDTOToEntity(List<EvaluateReviewItemTemplateDTO> evaluateReviewItemTemplateDTOList);
+    List<EvaluateReviewItemTemplateDTO> evaluateReviewItemTemplateListEntityToDTO(List<EvaluateReviewItemTemplate> evaluateReviewItemTemplateList);
 
     EvaluateReviewItemCategory evaluateReviewItemCategoryDTOToEntity(EvaluateReviewItemCategoryDTO reviewItemCategoryDTO);
     EvaluateReviewItemCategoryDTO evaluateReviewItemCategoryEntityToDTO(EvaluateReviewItemCategory reviewItemCategory);
@@ -35,12 +49,14 @@ public interface InvestMentMapper {
     List<EvaluateReviewItem> evaluateReviewItemListDTOToEntity(List<EvaluateReviewItemDTO> evaluateReviewItemDTOList);
     List<EvaluateReviewItemDTO> evaluateReviewItemListEntityToDTO(List<EvaluateReviewItem> evaluateReviewItemList);
 
+    // judge
     Judge judgeDTOToEntity(JudgeDTO judgeDTO);
     JudgeDTO judgeEntityToDTO(Judge judge);
 
     List<Judge> judgeListDTOToEntity(List<JudgeDTO> judgeDTOList);
     List<JudgeDTO> judgeListEntityToDTO(List<Judge> judgeList);
 
+    // template > categoryList > itemList
     ReviewItemTemplate reviewItemTemplateDTOToEntity(ReviewItemTemplateDTO reviewItemTemplateDTO);
     ReviewItemTemplateDTO reviewItemTemplateEntityToDTO(ReviewItemTemplate reviewItemTemplate);
 

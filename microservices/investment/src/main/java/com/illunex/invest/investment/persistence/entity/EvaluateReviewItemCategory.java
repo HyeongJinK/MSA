@@ -18,8 +18,9 @@ public class EvaluateReviewItemCategory {
     String category;
     Integer weight;
 
-    @ManyToOne @JoinColumn(name = "judge_idx")
-    EvaluateJudge judge;
+    @ManyToOne
+    @JoinColumn(name = "template_idx")
+    EvaluateReviewItemTemplate reviewItemTemplate;
 
     @OneToMany(mappedBy = "reviewItemCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<EvaluateReviewItem> reviewItem;

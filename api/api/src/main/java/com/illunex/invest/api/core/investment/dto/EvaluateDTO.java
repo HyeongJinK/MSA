@@ -23,7 +23,8 @@ public class EvaluateDTO {
     String scale;
     String status;
     String content;
-    Integer score;
+    Integer averageScore;
 
+    EvaluateReviewItemTemplateDTO template;
     List<EvaluateJudgeDTO> judgeList;
 }

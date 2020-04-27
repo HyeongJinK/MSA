@@ -1,7 +1,7 @@
 package com.illunex.invest.vc.controller;
 
 import com.illunex.invest.api.core.ir.dto.*;
-import com.illunex.invest.vc.service.investment.InvestCompositeIntegration;
+import com.illunex.invest.vc.service.investment.InvestmentCompositeIntegration;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ public class IRController {
 
     private final RestTemplate restTemplate;
     private final WebClient.Builder loadBalanceWebClientBuilder;
-    private final InvestCompositeIntegration investCompositeIntegration;
+    private final InvestmentCompositeIntegration investmentCompositeIntegration;
     private final String irUrl = "http://ir";
 
     @GetMapping(value = "ir/")
