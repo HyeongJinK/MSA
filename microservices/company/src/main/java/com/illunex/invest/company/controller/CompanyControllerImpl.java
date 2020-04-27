@@ -5,18 +5,16 @@ import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.company.controller.CompanyController;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
+import com.illunex.invest.api.core.investment.dto.ListDTO;
 import com.illunex.invest.company.exception.NoneCompanyException;
 import com.illunex.invest.company.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
-import java.util.HashMap;
 
 @Log
 @RestController
@@ -49,6 +47,15 @@ public class CompanyControllerImpl implements CompanyController {
                 .errorCode(0)
                 .message("success")
                 .data(companyService.updateCompany(companyDTO))
+                .build());
+    }
+
+    @Override
+    public ResponseEntity<ResponseList> favoriteCompany(ListDTO listDTO) {
+        return ResponseEntity.ok(ResponseList.builder()
+                .errorCode(0)
+                .message("success")
+                .data(Collections.singletonList(companyService.getFavoriteCompanyList(listDTO)))
                 .build());
     }
 

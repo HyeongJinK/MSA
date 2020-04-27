@@ -12,4 +12,5 @@ import java.util.List;
 public class ListDTO {
     List<JudgeDTO> judgeList;
     List<ReviewItemTemplateDTO> reviewItemTemplateList;
+    List<FavoriteCompanyDTO> favoriteCompanyList;
 }
