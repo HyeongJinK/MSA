@@ -16,7 +16,6 @@ public class ReviewItem {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
     String content;
-    Integer point;
 
     @ManyToOne @JoinColumn(name = "category_idx")
     ReviewItemCategory reviewItemCategory;

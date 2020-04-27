@@ -10,5 +10,4 @@ import lombok.*;
 public class ReviewItemDTO {
     Long idx;
     String content;
-    Integer point;
 }

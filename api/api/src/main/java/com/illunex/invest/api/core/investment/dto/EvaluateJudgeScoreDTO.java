@@ -7,7 +7,9 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EvaluateReviewItemDTO {
+public class EvaluateJudgeScoreDTO {
     Long idx;
-    String content;
+    Long categoryIdx;
+    Long reviewItemIdx;
+    Integer score;
 }

@@ -33,7 +33,7 @@ public class ReviewItemService {
             ReviewItemTemplate defaultItem = ReviewItemTemplate.builder()
                 .title("기본 심사 평가항목 템플릿")
                 .deleted(false)
-                .weight(false)
+                .weightApply(false)
                 .point(0)
                 .updateDate(LocalDateTime.now())
                 .companyIdx(companyIdx)
@@ -41,13 +41,13 @@ public class ReviewItemService {
 
             ReviewItemCategory reviewItemCategory = ReviewItemCategory.builder()
                     .category("기본 평가항목 카테고리")
+                    .weight(0)
                     .reviewItemTemplate(defaultItem)
                     .build();
 
             List<ReviewItem> reviewItemList = new ArrayList();
             reviewItemList.add(0, ReviewItem.builder()
                     .content("기본 심사내용")
-                    .point(0)
                     .reviewItemCategory(reviewItemCategory)
                     .build());
 
@@ -75,10 +75,8 @@ public class ReviewItemService {
     @Transactional
     public String editReviewItem(ReviewItemTemplateDTO reviewItemTemplateDTO) {
         ReviewItemTemplate newTemplate = mapper.reviewItemTemplateDTOToEntity(reviewItemTemplateDTO);
-        ReviewItemTemplate template = reviewItemTemplateRepository.findById(reviewItemTemplateDTO.getIdx()).orElse(null);
 
-        if (template == null) {
-
+        if (reviewItemTemplateDTO.getIdx() == null) {
             for (ReviewItemCategory c: newTemplate.getReviewItemCategory()) {
                 for (ReviewItem i: c.getReviewItem()) {
                     i.setReviewItemCategory(c);
@@ -88,30 +86,37 @@ public class ReviewItemService {
 
             newTemplate.setCompanyIdx(reviewItemTemplateDTO.getCompanyIdx());
             newTemplate.setUpdateDate(LocalDateTime.now());
+            newTemplate.setPoint(0);
+            newTemplate.setWeightApply(false);
             newTemplate.setDeleted(false);
             reviewItemTemplateRepository.save(newTemplate);
 
             return "ReviewItem Template Create Success";
-
         } else {
+            ReviewItemTemplate template = reviewItemTemplateRepository.findById(reviewItemTemplateDTO.getIdx()).orElse(null);
 
-            for (ReviewItemCategory c: newTemplate.getReviewItemCategory()) {
-                for (ReviewItem i: c.getReviewItem()) {
-                    reviewItemRepository.deleteAllByReviewItemCategoryIdx(c.getIdx());
-                    i.setReviewItemCategory(c);
+            if (template == null) {
+                return "Invalid ReviewItem Template";
+            } else {
+
+                for (ReviewItemCategory c: newTemplate.getReviewItemCategory()) {
+                    for (ReviewItem i: c.getReviewItem()) {
+                        reviewItemRepository.deleteAllByReviewItemCategoryIdx(c.getIdx());
+                        i.setReviewItemCategory(c);
+                    }
+                    reviewItemCategoryRepository.deleteAllByReviewItemTemplateIdx(newTemplate.getIdx());
+                    c.setReviewItemTemplate(newTemplate);
                 }
-                reviewItemCategoryRepository.deleteAllByReviewItemTemplateIdx(newTemplate.getIdx());
-                c.setReviewItemTemplate(newTemplate);
+
+                template.setTitle(newTemplate.getTitle());
+                template.setPoint(newTemplate.getPoint());
+                template.setWeightApply(newTemplate.getWeightApply());
+                template.setUpdateDate(LocalDateTime.now());
+                template.setReviewItemCategory(newTemplate.getReviewItemCategory());
+                reviewItemTemplateRepository.save(template);
+
+                return "ReviewItem Template Edit Success";
             }
-
-            template.setTitle(newTemplate.getTitle());
-            template.setPoint(newTemplate.getPoint());
-            template.setWeight(newTemplate.getWeight());
-            template.setUpdateDate(LocalDateTime.now());
-            template.setReviewItemCategory(newTemplate.getReviewItemCategory());
-            reviewItemTemplateRepository.save(template);
-
-            return "ReviewItem Template Edit Success";
         }
     }
 

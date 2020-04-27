@@ -12,13 +12,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "evaluate_review_item")
-public class EvaluateReviewItem {
+@Table(name = "evaluate_judge_score")
+public class EvaluateJudgeScore {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
-    String content;
+    Long categoryIdx;
+    Long reviewItemIdx;
+    Integer score;
 
     @ManyToOne
-    @JoinColumn(name = "category_idx")
-    EvaluateReviewItemCategory reviewItemCategory;
+    @JoinColumn(name = "judge_idx")
+    EvaluateJudge judge;
+
 }

@@ -7,7 +7,8 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EvaluateReviewItemDTO {
-    Long idx;
-    String content;
+public class EvaluateCommentDTO {
+    Long evaluateIdx;
+    Long userIdx;
+    String comment;
 }

@@ -10,14 +10,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReviewItemTemplateDTO {
+public class EvaluateReviewItemTemplateDTO {
     Long idx;
-    Long companyIdx;
     String title;
-    LocalDateTime updateDate;
-    Integer point;
-    Boolean deleted;
     Boolean weightApply;
 
-    List<ReviewItemCategoryDTO> reviewItemCategory;
+    List<EvaluateReviewItemCategoryDTO> reviewItemCategory;
 }

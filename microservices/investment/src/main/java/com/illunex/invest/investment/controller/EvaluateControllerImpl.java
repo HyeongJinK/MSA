@@ -1,6 +1,7 @@
 package com.illunex.invest.investment.controller;
 
 import com.illunex.invest.api.core.investment.controller.EvaluateController;
+import com.illunex.invest.api.core.investment.dto.EvaluateCommentDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateListDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateReviewDTO;
@@ -22,8 +23,8 @@ public class EvaluateControllerImpl implements EvaluateController {
     }
 
     @Override
-    public ResponseEntity<String> setEvaluate(Long companyIdx, Long vcCompanyIdx) {
-        return new ResponseEntity(evaluateService.setEvaluate(companyIdx, vcCompanyIdx), HttpStatus.OK);
+    public ResponseEntity<String> setEvaluate(EvaluateDTO evaluateDTO) {
+        return new ResponseEntity(evaluateService.setEvaluate(evaluateDTO), HttpStatus.OK);
     }
 
     @Override
@@ -39,6 +40,11 @@ public class EvaluateControllerImpl implements EvaluateController {
     @Override
     public ResponseEntity<String> editEvaluate(EvaluateDTO evaluateDTO){
         return new ResponseEntity(evaluateService.editEvaluate(evaluateDTO), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<String> editComment(EvaluateCommentDTO evaluateCommentDTO) {
+        return new ResponseEntity(evaluateService.editComment(evaluateCommentDTO), HttpStatus.OK);
     }
 
     @Override
