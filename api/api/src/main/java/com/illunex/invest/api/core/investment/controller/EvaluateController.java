@@ -1,9 +1,6 @@
 package com.illunex.invest.api.core.investment.controller;
 
-import com.illunex.invest.api.core.investment.dto.EvaluateCommentDTO;
-import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
-import com.illunex.invest.api.core.investment.dto.EvaluateListDTO;
-import com.illunex.invest.api.core.investment.dto.EvaluateReviewDTO;
+import com.illunex.invest.api.core.investment.dto.*;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +19,8 @@ public interface EvaluateController {
 //    })
     @PostMapping(value = "/")
     ResponseEntity<String> setEvaluate(@RequestBody EvaluateDTO evaluateDTO);
+    @GetMapping(value = "/list/state")
+    ResponseEntity<EvaluateStateListDTO> getEvaluateStateList(@RequestParam Long companyIdx);
     @GetMapping(value = "/list")
     ResponseEntity<EvaluateListDTO> getEvaluateList(@RequestParam Long companyIdx);
     @GetMapping(value = "/detail")

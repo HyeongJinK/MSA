@@ -17,6 +17,9 @@ public interface InvestMentMapper {
     List<Evaluate> evaluateListDTOToEntity(List<EvaluateDTO> evaluateDTOList);
     List<EvaluateDTO> evaluateListEntityToDTO(List<Evaluate> evaluateList);
 
+    EvaluateStateDTO evaluateStateEntityToDTO(Evaluate evaluate);
+    List<EvaluateStateDTO> evaluateStateListEntityToDTO(List<Evaluate> evaluateList);
+
     // evaluate > judgeList > scoreList
     EvaluateJudge evaluateJudgeDTOToEntity(EvaluateJudgeDTO evaluateJudgeDTO);
     EvaluateJudgeDTO evaluateJudgeEntityToDTO(EvaluateJudge evaluateJudge);

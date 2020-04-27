@@ -1,9 +1,6 @@
 package com.illunex.invest.investment.service;
 
-import com.illunex.invest.api.core.investment.dto.EvaluateCommentDTO;
-import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
-import com.illunex.invest.api.core.investment.dto.EvaluateListDTO;
-import com.illunex.invest.api.core.investment.dto.EvaluateReviewDTO;
+import com.illunex.invest.api.core.investment.dto.*;
 import com.illunex.invest.investment.persistence.entity.*;
 import com.illunex.invest.investment.persistence.repository.*;
 import com.illunex.invest.investment.service.mapper.InvestMentMapper;
@@ -58,6 +55,11 @@ public class EvaluateService {
         List<EvaluateDTO> evaluateDTOList = mapper.evaluateListEntityToDTO(evaluateRepository.findAllByVcCompanyIdxAndDeleted(companyIdx, false));
 
         return EvaluateListDTO.builder().evaluateList(evaluateDTOList).build();
+    }
+
+    public EvaluateStateListDTO getEvaluateStateList(Long companyIdx) {
+        List<EvaluateStateDTO> evaluateStateDTOList = mapper.evaluateStateListEntityToDTO(evaluateRepository.findAllByVcCompanyIdxAndDeleted(companyIdx, false));
+        return EvaluateStateListDTO.builder().evaluateState(evaluateStateDTOList).build();
     }
 
     public EvaluateDTO getEvaluate(Long evaluateIdx) {

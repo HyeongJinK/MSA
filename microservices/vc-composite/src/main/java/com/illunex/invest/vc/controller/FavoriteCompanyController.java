@@ -1,6 +1,6 @@
 package com.illunex.invest.vc.controller;
 
-import com.illunex.invest.api.common.response.ResponseList;
+import com.illunex.invest.api.core.investment.dto.DealSourcingDTO;
 import com.illunex.invest.api.core.investment.dto.FavoriteCompanyDTO;
 import com.illunex.invest.vc.service.investment.FavoriteCompanyCompositeIntegration;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class FavoriteCompanyController {
     private final String investmentUrl = "http://investment";
 
     @GetMapping(value = "favorite/list")
-    public ResponseEntity<ResponseList> getFavoriteCompanyList() {
+    public ResponseEntity<DealSourcingDTO> getFavoriteCompanyList() {
         return new ResponseEntity(favoriteCompanyCompositeIntegration.getFavoriteCompanyList(), HttpStatus.OK);
     }
 
