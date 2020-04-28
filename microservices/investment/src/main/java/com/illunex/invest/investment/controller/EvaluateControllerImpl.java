@@ -35,6 +35,11 @@ public class EvaluateControllerImpl implements EvaluateController {
     }
 
     @Override
+    public ResponseEntity<EvaluateListDTO> getEvaluateHistory(Long companyIdx) {
+        return new ResponseEntity(evaluateService.getEvaluateHistory(companyIdx), HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<EvaluateDTO> getEvaluate(Long evaluateIdx) {
         return new ResponseEntity(evaluateService.getEvaluate(evaluateIdx), HttpStatus.OK);
     }

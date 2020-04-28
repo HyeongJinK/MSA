@@ -121,7 +121,7 @@ public class ReviewItemService {
     }
 
     public String deleteReviewItem(ReviewItemTemplateDTO reviewItemTemplateDTO) {
-        reviewItemCategoryRepository.deleteById(reviewItemTemplateDTO.getIdx());
+        reviewItemTemplateRepository.deleteById(reviewItemTemplateDTO.getIdx());
         return "ReviewItem delete complete";
     }
 

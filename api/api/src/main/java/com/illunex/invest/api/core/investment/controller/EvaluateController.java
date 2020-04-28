@@ -23,6 +23,8 @@ public interface EvaluateController {
     ResponseEntity<EvaluateStateListDTO> getEvaluateStateList(@RequestParam Long companyIdx);
     @GetMapping(value = "/list")
     ResponseEntity<EvaluateListDTO> getEvaluateList(@RequestParam Long companyIdx);
+    @GetMapping(value = "/list/history")
+    ResponseEntity<EvaluateListDTO> getEvaluateHistory(@RequestParam Long companyIdx);
     @GetMapping(value = "/detail")
     ResponseEntity<EvaluateDTO> getEvaluate(@RequestParam Long evaluateIdx);
     @PostMapping(value = "/edit")
