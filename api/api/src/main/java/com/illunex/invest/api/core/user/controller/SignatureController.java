@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 public interface SignatureController {
     @GetMapping("/list")
     ResponseEntity<ResponseList> signatureList(@RequestParam("userId") Long userId);
+    @GetMapping("/list/active")
+    ResponseEntity<ResponseList> signatureListActive(@RequestParam("userId") Long userId);
     @PostMapping("/add")
     ResponseEntity<ResponseData> addSignature(@RequestBody SignatureRequest request);
     @PutMapping("/toggle")

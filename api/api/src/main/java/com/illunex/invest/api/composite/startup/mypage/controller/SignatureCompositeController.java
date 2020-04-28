@@ -14,6 +14,9 @@ public interface SignatureCompositeController {
     @ApiOperation(value = "리스트 조회")
     @GetMapping
     ResponseEntity<ResponseList> signature();
+    @ApiOperation(value = "활성화된 리스트 조회")
+    @GetMapping(value = "/open")
+    ResponseEntity<ResponseList> signatureActive();
     @ApiOperation(value = "파일 올리기")
     @PostMapping
     ResponseEntity<ResponseData> signature(@RequestParam("file") MultipartFile file);

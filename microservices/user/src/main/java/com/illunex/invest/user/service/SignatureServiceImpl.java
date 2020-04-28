@@ -29,6 +29,11 @@ public class SignatureServiceImpl implements SignatureService {
     }
 
     @Override
+    public List<SignatureDTO> signatureList(Long userId, SignatureStatus status) {
+        return mapper.entityToDto(signatureRepository.findByUserIdAndStatus(userId, status));
+    }
+
+    @Override
     @Transactional
     public SignatureDTO addSignature(SignatureRequest request) {
         return mapper.entityToDto(signatureRepository.save(Signature.builder()

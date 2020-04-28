@@ -21,6 +21,11 @@ public class SignatureCompositeControllerImpl extends StartupDefaultController i
     }
 
     @Override
+    public ResponseEntity<ResponseList> signatureActive() {
+        return null;
+    }
+
+    @Override
     public ResponseEntity<ResponseData> signature(MultipartFile file) {
         return signatureIntegrationService.signature(file);
     }

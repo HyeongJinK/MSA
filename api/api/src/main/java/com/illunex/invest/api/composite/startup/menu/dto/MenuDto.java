@@ -112,7 +112,19 @@ public class MenuDto {
                 .filter(role -> role.getName().equals("ROLE_COMPANY_ADMIN"))
                 .forEach(role -> {
                     accountSubMenu.add(makeSubMenu("권한설정", "permission", "/myPage/account/permission/list", 4));
-                    accountSubMenu.add(makeSubMenu("사업자등록 인증", "business", "/myPage/account/business", 5));
+                });
+
+        return accountSubMenu.stream().sorted(Comparator.comparingInt(Menu::getOrder)).collect(Collectors.toList());
+    }
+
+    private List<Menu> initCompanySubMenu(Collection<RoleDTO> roles) {
+        List<Menu> accountSubMenu = new ArrayList<>();
+        roles.stream()
+                .filter(role -> role.getName().equals("ROLE_COMPANY_ADMIN"))
+                .forEach(role -> {
+                    accountSubMenu.add(makeSubMenu("로고등록", "logo", "/myPage/companySetting/logo", 1));
+                    accountSubMenu.add(makeSubMenu("서명관리", "corporateSeal", "/myPage/companySetting/corporateSeal", 2));
+                    accountSubMenu.add(makeSubMenu("사업자등록인증", "business", "/myPage/companySetting/business", 3));
                 });
 
         return accountSubMenu.stream().sorted(Comparator.comparingInt(Menu::getOrder)).collect(Collectors.toList());
@@ -193,7 +205,7 @@ public class MenuDto {
                                 makeSubMenu("주주명부", "shareholder", "/shareholder/shareholder", 1)
                         ), 6);
                             break;
-                        case "ROLE_DOC" : makeMainMenu("문서", "doc", "feed", List.of(
+                        case "ROLE_DOC" : makeMainMenu("문서", "doc", "doc", List.of(
                                 makeSubMenu("All", "doc", "/feed", 1)
                         ), 7);
                             break;
@@ -213,15 +225,16 @@ public class MenuDto {
      * */
     private void initMyPageMenu(Collection<RoleDTO> roles) {
         makeMyPageMenu("계정설정", "myPage", "myPage", initAccountSubMenu(roles), 1);
-        makeMyPageMenu("알람", "alarm", "alarm", initAlarmSubMenu(roles), 2);
+        makeMyPageMenu("알람", "alarm", "alarm", initAlarmSubMenu(roles), 20);
 
         roles.stream()
                 .forEach((role -> {
                     switch (role.getName()) {
                         case "ROLE_COMPANY_ADMIN":
-                            makeMyPageMenu("플러그인", "plugin", "plugin", initPluginSubMenu(roles), 3);
-                            makeMyPageMenu("연결관리", "connect", "connect", initConnectSubMenu(roles), 4);
-                            makeMyPageMenu("라이센스", "license", "license", initLicenseSubMenu(roles), 5);
+                            makeMyPageMenu("기업설정", "companySetting", "companySetting", initCompanySubMenu(roles), 10);
+                            makeMyPageMenu("플러그인", "plugin", "plugin", initPluginSubMenu(roles), 30);
+                            makeMyPageMenu("연결관리", "connect", "connect", initConnectSubMenu(roles), 40);
+                            makeMyPageMenu("라이센스", "license", "license", initLicenseSubMenu(roles), 50);
                             break;
                     }
                 }));
