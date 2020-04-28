@@ -53,13 +53,17 @@ public class EvaluateService {
 
     public EvaluateListDTO getEvaluateList(Long companyIdx) {
         List<EvaluateDTO> evaluateDTOList = mapper.evaluateListEntityToDTO(evaluateRepository.findAllByVcCompanyIdxAndDeleted(companyIdx, false));
-
         return EvaluateListDTO.builder().evaluateList(evaluateDTOList).build();
     }
 
     public EvaluateStateListDTO getEvaluateStateList(Long companyIdx) {
         List<EvaluateStateDTO> evaluateStateDTOList = mapper.evaluateStateListEntityToDTO(evaluateRepository.findAllByVcCompanyIdxAndDeleted(companyIdx, false));
         return EvaluateStateListDTO.builder().evaluateState(evaluateStateDTOList).build();
+    }
+
+    public EvaluateListDTO getEvaluateHistory(Long companyIdx) {
+        List<EvaluateDTO> evaluateDTOList = mapper.evaluateListEntityToDTO(evaluateRepository.findAllByVcCompanyIdxAndDeletedAndStatus(companyIdx, false, "complete"));
+        return EvaluateListDTO.builder().evaluateList(evaluateDTOList).build();
     }
 
     public EvaluateDTO getEvaluate(Long evaluateIdx) {
@@ -123,7 +127,6 @@ public class EvaluateService {
 
             return "Evaluate edit complete";
         }
-
     }
 
     public String editComment(EvaluateCommentDTO evaluateCommentDTO) {
@@ -225,5 +228,4 @@ public class EvaluateService {
             return "Evaluate Review "+ evaluate.getStatus();
         }
     }
-
 }
