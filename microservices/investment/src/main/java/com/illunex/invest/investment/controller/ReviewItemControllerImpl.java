@@ -1,9 +1,7 @@
 package com.illunex.invest.investment.controller;
 
 import com.illunex.invest.api.core.investment.controller.ReviewItemController;
-import com.illunex.invest.api.core.investment.dto.EditDTO;
 import com.illunex.invest.api.core.investment.dto.ListDTO;
-import com.illunex.invest.api.core.investment.dto.ReviewItemCategoryDTO;
 import com.illunex.invest.api.core.investment.dto.ReviewItemTemplateDTO;
 import com.illunex.invest.investment.service.ReviewItemService;
 import org.apache.commons.logging.Log;
