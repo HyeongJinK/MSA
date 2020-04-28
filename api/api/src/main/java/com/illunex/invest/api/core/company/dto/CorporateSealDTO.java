@@ -1,10 +1,7 @@
 package com.illunex.invest.api.core.company.dto;
 
 import com.illunex.invest.api.core.user.enumable.SignatureStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class CorporateSealDTO {
     Long id;
     String imgUrl;
