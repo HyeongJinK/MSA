@@ -35,6 +35,10 @@ public class SignatureIntegrationService extends DefaultIntegrationService {
         return restTemplate.getForEntity(userUrl + "/signature/list?userId="+getUser().getId(), ResponseList.class);
     }
 
+    public ResponseEntity<ResponseList> signatureListActive() {
+        return restTemplate.getForEntity(userUrl + "/signature/list/active?userId="+getUser().getId(), ResponseList.class);
+    }
+
     public ResponseEntity<ResponseData> signatureStatusToggle(Long id) {
         MultiValueMap<String, Object> map= new LinkedMultiValueMap<>();
         map.add("id", id);
