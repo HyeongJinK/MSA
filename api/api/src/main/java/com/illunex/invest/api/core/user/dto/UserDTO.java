@@ -24,13 +24,19 @@ public class UserDTO implements UserInterface {
     private String vender;
     private Long companyIdx;
     private Boolean certification;
+    private String dept;
     private String token;
+    private SnsDTO sns;
+    private boolean marketing;
 
     @Override
     public Collection<RoleDTO> getAuthorities() {
         return authorities;
     }
 
+    public boolean isAdmin() {
+        return authorities.stream().filter(auth -> auth.getName().equals("ROLE_COMPANY_ADMIN")).count() == 1l;
+    }
     @Override
     public boolean isAccountNonExpired() {
         return true;

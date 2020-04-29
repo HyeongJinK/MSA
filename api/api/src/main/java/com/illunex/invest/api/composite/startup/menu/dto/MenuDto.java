@@ -42,6 +42,7 @@ public class MenuDto {
                 .icon(icon)
                 .subMenu(subMenus)
                 .order(order)
+                .disable(true)
                 .build());
     }
 
@@ -52,6 +53,7 @@ public class MenuDto {
                 .icon(icon)
                 .subMenu(subMenus)
                 .order(order)
+                .disable(true)
                 .build());
     }
 
@@ -178,6 +180,7 @@ public class MenuDto {
                 .icon("dashboard")
                 .subMenu(initDashBoardSubMenu(roles))
                 .order(1)
+                .disable(true)
                 .build());
     }
 
@@ -202,11 +205,15 @@ public class MenuDto {
                             ), 5);
                             break;
                         case "ROLE_SHAREHOLDER" : makeMainMenu("주주", "shareholder", "feed", List.of(
-                                makeSubMenu("주주명부", "shareholder", "/shareholder/shareholder", 1)
+                                makeSubMenu("주주명부", "shareholder", "/shareholder/shareholder", 1),
+                                makeSubMenu("주주총회", "shareholder", "/shareholder/shareholder", 2, false),
+                                makeSubMenu("이사회", "shareholder", "/shareholder/shareholder", 3, false)
                         ), 6);
                             break;
                         case "ROLE_DOC" : makeMainMenu("문서", "doc", "doc", List.of(
-                                makeSubMenu("All", "doc", "/feed", 1)
+                                makeSubMenu("All", "doc", "/feed", 1),
+                                makeSubMenu("기업 운영 문서", "doc_company", "/feed", 2, false),
+                                makeSubMenu("직원 관리 문서", "doc_user", "/feed", 3, false)
                         ), 7);
                             break;
                         case "ROLE_NEWS" :
