@@ -16,6 +16,10 @@ public interface CompanyController {
     @GetMapping({"/", ""})
     ResponseEntity<ResponseList> getAllList();
 
+    @ApiOperation(value = "VC 회사 리스트 조회")
+    @GetMapping("/vc")
+    ResponseEntity<ResponseList> getVcCompanyList();
+
     @ApiOperation(value = "회사 신규 등록")
     @PostMapping("/register")
     ResponseEntity<ResponseData> registerCompany(@RequestBody CompanyRegisterRequest request);

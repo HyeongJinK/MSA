@@ -8,8 +8,8 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface InvestMentMapper {
-    InvestMentMapper MAPPER = Mappers.getMapper( InvestMentMapper.class );
+public interface InvestmentMapper {
+    InvestmentMapper MAPPER = Mappers.getMapper( InvestmentMapper.class );
 
     Evaluate evaluateDTOToEntity(EvaluateDTO evaluateDTO);
     EvaluateDTO evaluateEntityToDTO(Evaluate evaluate);
