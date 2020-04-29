@@ -30,6 +30,11 @@ public class EvaluateControllerImpl implements EvaluateController {
     }
 
     @Override
+    public ResponseEntity<EvaluateCardListDTO> getEvaluateCardList(Long companyIdx) {
+        return new ResponseEntity(evaluateService.getEvaluateCardList(companyIdx), HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<EvaluateListDTO> getEvaluateList(Long companyIdx) {
         return new ResponseEntity(evaluateService.getEvaluateList(companyIdx), HttpStatus.OK);
     }

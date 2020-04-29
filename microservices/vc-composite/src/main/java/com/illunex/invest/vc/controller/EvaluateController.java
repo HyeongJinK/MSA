@@ -37,6 +37,11 @@ public class EvaluateController {
         return restTemplate.getForEntity(investmentUrl + "/evaluate/list?companyIdx={companyIdx}", EvaluateListDTO.class, investmentCompositeIntegration.getUser().getCompanyIdx());
     }
 
+    @GetMapping(value = "evaluate/list/card")
+    public ResponseEntity<EvaluateCardListDTO> getEvaluateCardList() {
+        return restTemplate.getForEntity(investmentUrl + "/evaluate/list/card?companyIdx={companyIdx}", EvaluateCardListDTO.class, investmentCompositeIntegration.getUser().getCompanyIdx());
+    }
+
     @GetMapping(value = "evaluate/list/history")
     public ResponseEntity<EvaluateListDTO> getEvaluateHistory() {
         return restTemplate.getForEntity(investmentUrl + "/evaluate/list/history?companyIdx={companyIdx}", EvaluateListDTO.class, investmentCompositeIntegration.getUser().getCompanyIdx());

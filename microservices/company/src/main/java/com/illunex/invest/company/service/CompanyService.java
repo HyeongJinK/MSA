@@ -1,6 +1,7 @@
 package com.illunex.invest.company.service;
 
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
+import com.illunex.invest.api.core.company.dto.VcCompanyDTO;
 import com.illunex.invest.api.core.investment.dto.ListDTO;
 
 import java.util.List;
@@ -10,5 +11,6 @@ public interface CompanyService {
     CompanyDTO getCompanyById(final Long id);
     Long registerCompany(String businessNumber);
     CompanyDTO updateCompany(CompanyDTO companyDTO);
-    List<CompanyDTO> getFavoriteCompanyList(ListDTO listDTO);
+    List<VcCompanyDTO> getFavoriteCompanyList(ListDTO listDTO);
+    List<VcCompanyDTO> getVcCompanyList();
 }

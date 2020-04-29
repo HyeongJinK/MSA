@@ -4,7 +4,7 @@ import com.illunex.invest.api.core.investment.dto.FavoriteCompanyDTO;
 import com.illunex.invest.api.core.investment.dto.ListDTO;
 import com.illunex.invest.investment.persistence.entity.FavoriteCompany;
 import com.illunex.invest.investment.persistence.repository.FavoriteCompanyRepository;
-import com.illunex.invest.investment.service.mapper.InvestMentMapper;
+import com.illunex.invest.investment.service.mapper.InvestmentMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mapstruct.factory.Mappers;
@@ -19,7 +19,7 @@ public class FavoriteCompanyService {
 
     @Autowired FavoriteCompanyRepository favoriteCompanyRepository;
 
-    private InvestMentMapper mapper = Mappers.getMapper(InvestMentMapper.class);
+    private InvestmentMapper mapper = Mappers.getMapper(InvestmentMapper.class);
 
     public ListDTO getFavoriteCompanyList(Long userIdx) {
         return ListDTO.builder().favoriteCompanyList(mapper.favoriteCompanyListEntityToDTO(favoriteCompanyRepository.findAllByUserIdx(userIdx))).build();

@@ -19,10 +19,12 @@ public interface EvaluateController {
 //    })
     @PostMapping(value = "/")
     ResponseEntity<String> setEvaluate(@RequestBody EvaluateDTO evaluateDTO);
-    @GetMapping(value = "/list/state")
-    ResponseEntity<EvaluateStateListDTO> getEvaluateStateList(@RequestParam Long companyIdx);
     @GetMapping(value = "/list")
     ResponseEntity<EvaluateListDTO> getEvaluateList(@RequestParam Long companyIdx);
+    @GetMapping(value = "/list/state")
+    ResponseEntity<EvaluateStateListDTO> getEvaluateStateList(@RequestParam Long companyIdx);
+    @GetMapping(value = "/list/card")
+    ResponseEntity<EvaluateCardListDTO> getEvaluateCardList(@RequestParam Long companyIdx);
     @GetMapping(value = "/list/history")
     ResponseEntity<EvaluateListDTO> getEvaluateHistory(@RequestParam Long companyIdx);
     @GetMapping(value = "/detail")

@@ -22,5 +22,6 @@ public interface CompanyMapper {
 
     List<MemberDTO> memberEntityListToDtoList(List<Member> memberEntities);
     List<Member> memberDtoListToEntityList(List<MemberDTO> companyMembers);
+
 }
 
