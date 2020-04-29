@@ -61,6 +61,11 @@ public class EvaluateService {
         return EvaluateStateListDTO.builder().evaluateState(evaluateStateDTOList).build();
     }
 
+    public EvaluateCardListDTO getEvaluateCardList(Long companyIdx) {
+        List<EvaluateCardDTO> evaluateCardDTOList = mapper.evaluateCardListEntityToDTO(evaluateRepository.findAllByVcCompanyIdxAndDeleted(companyIdx, false));
+        return EvaluateCardListDTO.builder().evaluateList(evaluateCardDTOList).build();
+    }
+
     public EvaluateListDTO getEvaluateHistory(Long companyIdx) {
         List<EvaluateDTO> evaluateDTOList = mapper.evaluateListEntityToDTO(evaluateRepository.findAllByVcCompanyIdxAndDeletedAndStatus(companyIdx, false, "complete"));
         return EvaluateListDTO.builder().evaluateList(evaluateDTOList).build();
