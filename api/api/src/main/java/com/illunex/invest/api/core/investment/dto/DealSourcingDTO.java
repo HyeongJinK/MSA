@@ -1,6 +1,6 @@
 package com.illunex.invest.api.core.investment.dto;
 
-import com.illunex.invest.api.core.company.dto.CompanyDTO;
+import com.illunex.invest.api.core.company.dto.VcCompanyDTO;
 import lombok.*;
 
 import java.util.List;
@@ -11,6 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DealSourcingDTO {
-    List<CompanyDTO> companyList;
+    List<VcCompanyDTO> companyList;
     List<EvaluateStateDTO> evaluateStateList;
 }

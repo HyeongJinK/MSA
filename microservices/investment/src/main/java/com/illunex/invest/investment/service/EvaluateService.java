@@ -3,7 +3,7 @@ package com.illunex.invest.investment.service;
 import com.illunex.invest.api.core.investment.dto.*;
 import com.illunex.invest.investment.persistence.entity.*;
 import com.illunex.invest.investment.persistence.repository.*;
-import com.illunex.invest.investment.service.mapper.InvestMentMapper;
+import com.illunex.invest.investment.service.mapper.InvestmentMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mapstruct.factory.Mappers;
@@ -25,7 +25,7 @@ public class EvaluateService {
     @Autowired EvaluateReviewItemCategoryRepository evaluateReviewItemCategoryRepository;
     @Autowired EvaluateReviewItemRepository evaluateReviewItemRepository;
 
-    private InvestMentMapper mapper = Mappers.getMapper(InvestMentMapper.class);
+    private InvestmentMapper mapper = Mappers.getMapper(InvestmentMapper.class);
 
     public String setEvaluate(EvaluateDTO evaluateDTO) {
         Evaluate evaluate = evaluateRepository.findByCompanyIdxAndVcCompanyIdx(evaluateDTO.getCompanyIdx(), evaluateDTO.getVcCompanyIdx());
@@ -59,6 +59,11 @@ public class EvaluateService {
     public EvaluateStateListDTO getEvaluateStateList(Long companyIdx) {
         List<EvaluateStateDTO> evaluateStateDTOList = mapper.evaluateStateListEntityToDTO(evaluateRepository.findAllByVcCompanyIdxAndDeleted(companyIdx, false));
         return EvaluateStateListDTO.builder().evaluateState(evaluateStateDTOList).build();
+    }
+
+    public EvaluateCardListDTO getEvaluateCardList(Long companyIdx) {
+        List<EvaluateCardDTO> evaluateCardDTOList = mapper.evaluateCardListEntityToDTO(evaluateRepository.findAllByVcCompanyIdxAndDeleted(companyIdx, false));
+        return EvaluateCardListDTO.builder().evaluateList(evaluateCardDTOList).build();
     }
 
     public EvaluateListDTO getEvaluateHistory(Long companyIdx) {

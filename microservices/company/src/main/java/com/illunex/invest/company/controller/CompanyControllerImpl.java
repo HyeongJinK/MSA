@@ -34,6 +34,15 @@ public class CompanyControllerImpl implements CompanyController {
     }
 
     @Override
+    public ResponseEntity<ResponseList> getVcCompanyList() {
+        return ResponseEntity.ok(ResponseList.builder()
+                .errorCode(0)
+                .message("success")
+                .data(Collections.singletonList(companyService.getVcCompanyList()))
+                .build());
+    }
+
+    @Override
     public ResponseEntity<CompanyDTO> getCompany(Long id) {
         log.info(id.toString());
         CompanyDTO companyDTO = companyService.getCompanyById(id);

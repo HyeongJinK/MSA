@@ -8,8 +8,8 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface InvestMentMapper {
-    InvestMentMapper MAPPER = Mappers.getMapper( InvestMentMapper.class );
+public interface InvestmentMapper {
+    InvestmentMapper MAPPER = Mappers.getMapper( InvestmentMapper.class );
 
     Evaluate evaluateDTOToEntity(EvaluateDTO evaluateDTO);
     EvaluateDTO evaluateEntityToDTO(Evaluate evaluate);
@@ -17,8 +17,14 @@ public interface InvestMentMapper {
     List<Evaluate> evaluateListDTOToEntity(List<EvaluateDTO> evaluateDTOList);
     List<EvaluateDTO> evaluateListEntityToDTO(List<Evaluate> evaluateList);
 
+    EvaluateCardDTO evaluateCardEntityToDTO(Evaluate evaluate);
+    List<EvaluateCardDTO> evaluateCardListEntityToDTO(List<Evaluate> evaluateList);
+
     EvaluateStateDTO evaluateStateEntityToDTO(Evaluate evaluate);
     List<EvaluateStateDTO> evaluateStateListEntityToDTO(List<Evaluate> evaluateList);
+
+    EvaluateCardJudgeDTO evaluateCardJudgeEntityToDTO(EvaluateJudge evaluateJudge);
+    List<EvaluateCardJudgeDTO> evaluateCardJudgeListEntityToDTO(List<EvaluateJudge> evaluateJudgeList);
 
     // evaluate > judgeList > scoreList
     EvaluateJudge evaluateJudgeDTOToEntity(EvaluateJudgeDTO evaluateJudgeDTO);

@@ -1,7 +1,7 @@
 package com.illunex.invest.vc.service.investment;
 
 import com.illunex.invest.api.common.response.ResponseList;
-import com.illunex.invest.api.core.company.dto.CompanyDTO;
+import com.illunex.invest.api.core.company.dto.VcCompanyDTO;
 import com.illunex.invest.api.core.investment.dto.DealSourcingDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateStateDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateStateListDTO;
@@ -35,7 +35,7 @@ public class FavoriteCompanyCompositeIntegration extends DefaultIntegrationServi
 
         ListDTO favoriteList = restTemplate.getForObject(investmentUrl + "/favorite/list?userIdx={userIdx}", ListDTO.class, getUser().getId());
         ResponseList companyList = restTemplate.postForObject(companyUrl + "/company/favorite/", new HttpEntity(favoriteList, headers), ResponseList.class);
-        List<CompanyDTO> companyDTOList = companyList.getData();
+        List<VcCompanyDTO> companyDTOList = companyList.getData();
         EvaluateStateListDTO evaluateStateListDTO = restTemplate.getForEntity(investmentUrl + "/evaluate/list/state?companyIdx={companyIdx}", EvaluateStateListDTO.class, getUser().getCompanyIdx()).getBody();
         List<EvaluateStateDTO> evaluateList = evaluateStateListDTO.getEvaluateState();
 

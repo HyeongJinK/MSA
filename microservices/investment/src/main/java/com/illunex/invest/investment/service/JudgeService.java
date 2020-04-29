@@ -3,7 +3,7 @@ package com.illunex.invest.investment.service;
 import com.illunex.invest.api.core.investment.dto.*;
 import com.illunex.invest.investment.persistence.entity.Judge;
 import com.illunex.invest.investment.persistence.repository.*;
-import com.illunex.invest.investment.service.mapper.InvestMentMapper;
+import com.illunex.invest.investment.service.mapper.InvestmentMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mapstruct.factory.Mappers;
@@ -19,7 +19,7 @@ public class JudgeService {
 
     @Autowired JudgeRepository judgeRepository;
 
-    private InvestMentMapper mapper = Mappers.getMapper(InvestMentMapper.class);
+    private InvestmentMapper mapper = Mappers.getMapper(InvestmentMapper.class);
 
     public ListDTO getJudgeList(Long companyIdx) {
         return ListDTO.builder().judgeList(mapper.judgeListEntityToDTO(judgeRepository.findAllByCompanyIdx(companyIdx))).build();
