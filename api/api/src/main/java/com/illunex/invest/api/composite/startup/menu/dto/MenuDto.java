@@ -85,7 +85,7 @@ public class MenuDto {
     }
 
     private List<Menu> makeInvestSubMenu(RoleDTO role) {
-        return List.of(makeSubMenu("심사", "evaluate", "/invest/evaluate", 1),
+        return List.of(makeSubMenu("온라인 심사", "evaluate", "/invest/evaluate", 1),
                 makeSubMenu("라운드공지", "round", "/invest/round/list"
                         , List.of(makeSubMenu("전체", "list", "/invest/round/list", 1),
                                 makeSubMenu("진행중", "proceeding", "/invest/round/proceeding", 2),
@@ -211,7 +211,7 @@ public class MenuDto {
                         ), 6);
                             break;
                         case "ROLE_DOC" : makeMainMenu("문서", "doc", "doc", List.of(
-                                makeSubMenu("All", "doc", "/feed", 1),
+                                makeSubMenu("All", "doc", "/feed", 1, false),
                                 makeSubMenu("기업 운영 문서", "doc_company", "/feed", 2, false),
                                 makeSubMenu("직원 관리 문서", "doc_user", "/feed", 3, false)
                         ), 7);
