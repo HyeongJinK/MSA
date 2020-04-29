@@ -1,6 +1,7 @@
 package com.illunex.invest.api.core.user.controller;
 
 import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.api.core.user.request.SignInRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -32,5 +33,5 @@ public interface SingInController {
             )
     })
     @PostMapping({"", "/"})
-    ResponseEntity<ResponseData> findUser(@RequestBody SignInRequest signInRequest);
+    ResponseEntity<UserDTO> findUser(@RequestBody SignInRequest signInRequest);
 }

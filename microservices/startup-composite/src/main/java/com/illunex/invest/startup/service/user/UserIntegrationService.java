@@ -28,9 +28,8 @@ public class UserIntegrationService extends DefaultIntegrationService {
 
     //@HystrixCommand(fallbackMethod = "signInError")
     public UserDTO signIn(String username) {
-        ResponseData res = restTemplate.postForObject(userUrl + "/signIn", new HttpEntity<>(new SignInRequest(username, ""), getDefaultHeader()), ResponseData.class);
-
-        UserDTO user = userDTOParser(res);
+        UserDTO user = restTemplate.postForObject(userUrl + "/signIn", new HttpEntity<>(new SignInRequest(username, ""), getDefaultHeader()), UserDTO.class);
+        //UserDTO user = userDTOParser(res);
 
         if (user != null) {
             return user;

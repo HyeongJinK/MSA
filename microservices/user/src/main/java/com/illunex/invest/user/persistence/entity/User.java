@@ -3,7 +3,6 @@ package com.illunex.invest.user.persistence.entity;
 import com.illunex.invest.api.core.user.model.UserInterface;
 import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -34,19 +33,20 @@ public class User implements UserInterface {
     private Set<Role> authorities = new HashSet<>();
 
     private String profileImg;
-
     private String vender;
-
     private Long companyIdx;
-
     private Boolean certification = false;
-
+    private String dept;
+    private String rank;
     private String token;
+    private boolean marketing;
+    @Embedded
+    private Sns sns;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "user")
     private List<Signature> signatures = new ArrayList<>();
 
-    private String rank;
+
 
     public static User createUser(String username, String password, String name, String vender, String token, Long companyIdx) {
         return User.builder()
