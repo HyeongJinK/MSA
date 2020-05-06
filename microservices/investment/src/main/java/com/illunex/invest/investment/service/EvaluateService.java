@@ -143,14 +143,32 @@ public class EvaluateService {
         if (evaluate == null) {
             return "Invalid Evaluate";
         } else {
+            int attendCount = 0;
+            int completeCount = 0;
+
             for (EvaluateJudge j : evaluate.getJudgeList()) {
-                if (j.getUserIdx().equals(evaluateCommentDTO.getUserIdx())) {
+                if (j.getDivision().equals("attend")) attendCount++;
+                if ( (j.getUserIdx().equals(evaluateCommentDTO.getUserIdx())) && (j.getDivision().equals("attend")) )  {
                     j.setComment(evaluateCommentDTO.getComment());
                     j.setStatus("complete");
                     j.setEvaluateDate(LocalDateTime.now());
+                    completeCount++;
                 }
+                if (j.getStatus().equals("complete")) completeCount++;
             }
-            evaluateRepository.save(evaluate);
+            Evaluate editingEvaluate = evaluateRepository.save(evaluate);
+
+            if (completeCount == attendCount) {
+                float judgeTotalScore = 0;
+                for (EvaluateJudge e: editingEvaluate.getJudgeList()) {
+                    judgeTotalScore += e.getFinalScore();
+                }
+                editingEvaluate.setStatus("complete");
+                editingEvaluate.setAverageScore((int) (judgeTotalScore/completeCount));
+                editingEvaluate.setCompleteDate(LocalDateTime.now());
+                evaluateRepository.save(editingEvaluate);
+            }
+
             return "Evaluate complete";
         }
     }
@@ -180,13 +198,10 @@ public class EvaluateService {
             return "Invalid Evaluate";
         } else {
             EvaluateJudge judge = mapper.evaluateJudgeDTOToEntity(evaluateReviewDTO.getJudge());
-            int attendCount = 0;
-            int completeCount = 0;
 
             for (EvaluateJudge e: evaluate.getJudgeList()) {
                 if ( (e.getUserIdx().equals(evaluateReviewDTO.getJudge().getUserIdx())) && (e.getDivision().equals("attend")) )  {
-                    attendCount++;
-                    e.setStatus("confirm");
+                    e.setStatus("evaluated");
 
                     for (EvaluateJudgeScore j : e.getScoreList()) {
                         for (EvaluateJudgeScore s : judge.getScoreList()) {
@@ -218,22 +233,8 @@ public class EvaluateService {
 
                     e.setFinalScore((int)judgeScore);
                 }
-
-                if (e.getStatus().equals("complete")) completeCount++;
             }
 
-
-            if (completeCount == attendCount) {
-                float judgeTotalScore = 0;
-
-                for (EvaluateJudge e: evaluate.getJudgeList()) {
-                    judgeTotalScore += e.getFinalScore();
-                }
-
-                evaluate.setStatus("complete");
-                evaluate.setAverageScore((int) (judgeTotalScore/completeCount));
-                evaluate.setCompleteDate(LocalDateTime.now());
-            }
             evaluateRepository.save(evaluate);
             return "Evaluate Review "+ evaluate.getStatus();
         }
