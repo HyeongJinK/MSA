@@ -16,7 +16,9 @@ public class VcCompanyDetailDTO {
     String business;
     String nation;
     String stocksList;
-    String description;
+    String introduction;
+    String address;
+    String addressDetail;
     String sales;
     String scale;
     VcProductDTO product;

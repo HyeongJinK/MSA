@@ -69,7 +69,9 @@ public class CompanyServiceImpl implements CompanyService {
             .business(company.getBusiness())
             .nation(company.getNation())
             .stocksList(company.getStocksList())
-            .description(company.getDescription())
+            .introduction(company.getIntroduction())
+            .address(company.getAddress())
+            .addressDetail(company.getAddressDetail())
             .sales(company.getSales())
             .product(product)
             .build();
