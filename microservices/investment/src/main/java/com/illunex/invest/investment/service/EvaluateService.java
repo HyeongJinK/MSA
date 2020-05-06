@@ -156,6 +156,7 @@ public class EvaluateService {
                 }
                 if (j.getStatus().equals("complete")) completeCount++;
             }
+            evaluate.setStatus("proceeding");
             Evaluate editingEvaluate = evaluateRepository.save(evaluate);
 
             if (completeCount == attendCount) {
