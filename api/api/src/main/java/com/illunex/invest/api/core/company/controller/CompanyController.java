@@ -3,6 +3,7 @@ package com.illunex.invest.api.core.company.controller;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
+import com.illunex.invest.api.core.company.dto.VcCompanyDetailDTO;
 import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
 import com.illunex.invest.api.core.investment.dto.ListDTO;
 import io.swagger.annotations.*;
@@ -19,6 +20,10 @@ public interface CompanyController {
     @ApiOperation(value = "VC 회사 리스트 조회")
     @GetMapping("/vc")
     ResponseEntity<ResponseList> getVcCompanyList();
+
+    @ApiOperation(value = "VC 회사 조회")
+    @GetMapping("/vc/company")
+    VcCompanyDetailDTO getVcCompanyDetail(@RequestParam Long companyIdx);
 
     @ApiOperation(value = "회사 신규 등록")
     @PostMapping("/register")

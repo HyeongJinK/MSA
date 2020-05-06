@@ -2,10 +2,13 @@ package com.illunex.invest.company.service;
 
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import com.illunex.invest.api.core.company.dto.VcCompanyDTO;
+import com.illunex.invest.api.core.company.dto.VcCompanyDetailDTO;
+import com.illunex.invest.api.core.company.dto.VcProductDTO;
 import com.illunex.invest.api.core.investment.dto.FavoriteCompanyDTO;
 import com.illunex.invest.api.core.investment.dto.ListDTO;
 import com.illunex.invest.company.exception.NoneCompanyException;
 import com.illunex.invest.company.persistence.entity.Company;
+import com.illunex.invest.company.persistence.entity.Product;
 import com.illunex.invest.company.persistence.repository.CompanyRepository;
 import com.illunex.invest.company.service.mapper.CompanyMapper;
 import com.illunex.invest.company.service.mapper.VcCompanyMapper;
@@ -35,6 +38,41 @@ public class CompanyServiceImpl implements CompanyService {
 
     public List<VcCompanyDTO> getVcCompanyList() {
         return vcMapper.vcCompanyEntityListToDTO(companyRepository.findAll());
+    }
+
+    @Override
+    public VcCompanyDetailDTO getVcCompanyDetail(Long companyIdx) {
+        Company company = companyRepository.findById(companyIdx).get();
+        VcProductDTO product = VcProductDTO.builder().build();
+        int index=0;
+
+        for (Product p : company.getProducts()) {
+            index++;
+            if (p.getRepresentation()) {
+                product.setTitle(p.getTitle());
+                product.setProductImages(vcMapper.productImageEntityListToDTO(p.getProductImages()));
+            } else {
+                if (index == 0) {
+                    product.setTitle(p.getTitle());
+                    product.setProductImages(vcMapper.productImageEntityListToDTO(p.getProductImages()));
+                }
+            }
+        }
+
+        return VcCompanyDetailDTO.builder()
+            .companyIdx(company.getCompanyIdx())
+            .logo(company.getLogo())
+            .name(company.getName())
+            .companyType(company.getCompanyType())
+            .establishmentDate(company.getEstablishmentDate())
+            .employeeCount(company.getEmployeeCount())
+            .business(company.getBusiness())
+            .nation(company.getNation())
+            .stocksList(company.getStocksList())
+            .description(company.getDescription())
+            .sales(company.getSales())
+            .product(product)
+            .build();
     }
 
     public CompanyDTO getCompanyById(final Long id) {
