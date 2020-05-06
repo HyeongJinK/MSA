@@ -27,6 +27,9 @@ public class BusinessCompositeControllerImpl implements BusinessCompositeControl
     @Override
     public ResponseEntity<ResponseData> uploadFile(MultipartFile file) {
         return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .data(businessIntegrationService.uploadImage(file))
                 .build());
     }
 }

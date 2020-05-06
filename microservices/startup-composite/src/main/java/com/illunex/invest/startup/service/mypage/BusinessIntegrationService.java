@@ -2,6 +2,7 @@ package com.illunex.invest.startup.service.mypage;
 
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.core.company.dto.BusinessDTO;
+import com.illunex.invest.api.core.company.dto.CompanyIdDTO;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,11 @@ public class BusinessIntegrationService extends DefaultIntegrationService {
     }
 
     public ResponseEntity<ResponseData> editBusiness(BusinessDTO businessDTO) {
+        businessDTO.setCompany(CompanyIdDTO.builder()
+                .companyIdx(getUser().getCompanyIdx())
+                .build());
         BusinessDTO result = restTemplate.postForObject(companyUrl + "/business"
-                , new HttpEntity<>(businessDTO)
+                , new HttpEntity<>(businessDTO, getDefaultHeader())
                 , BusinessDTO.class);
         return ResponseEntity.ok(ResponseData.builder()
                 .errorCode(0)

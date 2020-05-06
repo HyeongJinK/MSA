@@ -108,7 +108,7 @@ public class MenuDto {
         List<Menu> accountSubMenu = new ArrayList<>();
         accountSubMenu.add(makeSubMenu("프로필 수정", "myPage", "/myPage/account/profile", 1));
         accountSubMenu.add(makeSubMenu("비밀번호 변경", "password", "/myPage/account/password", 2));
-        accountSubMenu.add(makeSubMenu("서명관리", "signature", "/myPage/account/signature", 3));
+        accountSubMenu.add(makeSubMenu("개인서명관리", "signature", "/myPage/account/signature", 3));
 
         roles.stream()
                 .filter(role -> role.getName().equals("ROLE_COMPANY_ADMIN"))
@@ -124,9 +124,9 @@ public class MenuDto {
         roles.stream()
                 .filter(role -> role.getName().equals("ROLE_COMPANY_ADMIN"))
                 .forEach(role -> {
-                    accountSubMenu.add(makeSubMenu("로고등록", "logo", "/myPage/companySetting/logo", 1));
-                    accountSubMenu.add(makeSubMenu("서명관리", "corporateSeal", "/myPage/companySetting/corporateSeal", 2));
-                    accountSubMenu.add(makeSubMenu("사업자등록인증", "business", "/myPage/companySetting/business", 3));
+                    accountSubMenu.add(makeSubMenu("사업자등록인증", "business", "/myPage/companySetting/business", 1));
+                    accountSubMenu.add(makeSubMenu("법인인감 관리", "corporateSeal", "/myPage/companySetting/corporateSeal", 2));
+                    accountSubMenu.add(makeSubMenu("로고등록", "logo", "/myPage/companySetting/logo", 3));
                 });
 
         return accountSubMenu.stream().sorted(Comparator.comparingInt(Menu::getOrder)).collect(Collectors.toList());
