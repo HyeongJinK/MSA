@@ -23,6 +23,7 @@ public class EvaluateJudge {
     String comment;
     String imgUrl;
     String status;
+    String division;
     Integer finalScore;
     LocalDateTime evaluateDate;
 

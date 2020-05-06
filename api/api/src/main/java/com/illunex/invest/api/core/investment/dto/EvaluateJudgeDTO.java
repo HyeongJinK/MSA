@@ -19,6 +19,7 @@ public class EvaluateJudgeDTO {
     String comment;
     String imgUrl;
     String status;
+    String division;
     Integer finalScore;
     LocalDateTime evaluateDate;
 

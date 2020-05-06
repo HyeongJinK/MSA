@@ -1,5 +1,6 @@
 package com.illunex.invest.vc.controller;
 
+import com.illunex.invest.api.core.company.dto.VcCompanyDetailDTO;
 import com.illunex.invest.api.core.investment.dto.*;
 import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.vc.service.investment.InvestmentCompositeIntegration;
@@ -30,6 +31,11 @@ public class EvaluateController {
     @GetMapping(value = "evaluate/")
     public ResponseEntity<String> setEvaluate(@RequestParam Long companyIdx) {
         return new ResponseEntity(investmentCompositeIntegration.setEvaluate(companyIdx), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "evaluate/company")
+    public ResponseEntity<VcCompanyDetailDTO> getCompanyDetail(@RequestParam Long companyIdx) {
+        return restTemplate.getForEntity(companyUrl + "/company/vc/company?companyIdx={companyIdx}", VcCompanyDetailDTO.class, companyIdx);
     }
 
     @GetMapping(value = "evaluate/list")
