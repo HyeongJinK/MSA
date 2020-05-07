@@ -35,6 +35,7 @@ public class FavoriteCompanyCompositeIntegration extends DefaultIntegrationServi
 
         ListDTO favoriteList = restTemplate.getForObject(investmentUrl + "/favorite/list?userIdx={userIdx}", ListDTO.class, getUser().getId());
         ResponseList companyList = restTemplate.postForObject(companyUrl + "/company/favorite/", new HttpEntity(favoriteList, headers), ResponseList.class);
+
         List<VcCompanyDTO> companyDTOList = companyList.getData();
         EvaluateStateListDTO evaluateStateListDTO = restTemplate.getForEntity(investmentUrl + "/evaluate/list/state?companyIdx={companyIdx}", EvaluateStateListDTO.class, getUser().getCompanyIdx()).getBody();
         List<EvaluateStateDTO> evaluateList = evaluateStateListDTO.getEvaluateState();
@@ -42,6 +43,7 @@ public class FavoriteCompanyCompositeIntegration extends DefaultIntegrationServi
         return DealSourcingDTO.builder()
                 .companyList(companyDTOList)
                 .evaluateStateList(evaluateList)
+                .favoriteCompanyList(favoriteList.getFavoriteCompanyList())
                 .build();
     }
 
