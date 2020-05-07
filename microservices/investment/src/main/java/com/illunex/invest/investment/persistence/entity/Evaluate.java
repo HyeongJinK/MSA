@@ -24,6 +24,7 @@ public class Evaluate {
     LocalDateTime createDate;
     LocalDateTime requestDate;
     LocalDateTime completeDate;
+    LocalDateTime startupConfirmDate;
     String scale;
     String status;
     String content;

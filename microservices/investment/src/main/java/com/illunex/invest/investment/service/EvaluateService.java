@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -62,7 +64,19 @@ public class EvaluateService {
     }
 
     public EvaluateCardListDTO getEvaluateCardList(Long companyIdx) {
-        List<EvaluateCardDTO> evaluateCardDTOList = mapper.evaluateCardListEntityToDTO(evaluateRepository.findAllByVcCompanyIdxAndDeleted(companyIdx, false));
+        List<Evaluate> evaluateList = evaluateRepository.findAllByVcCompanyIdxAndDeleted(companyIdx, false);
+        List<EvaluateCardDTO> evaluateCardDTOList = mapper.evaluateCardListEntityToDTO(evaluateList);
+        for (Evaluate e : evaluateList) {
+            if (e.getStatus().equals("confirm")) {
+                long dDay = ChronoUnit.DAYS.between(LocalDate.from(e.getRequestDate()),LocalDate.from(LocalDateTime.now()));
+                if (dDay > 15) e.setStatus("reject");
+                evaluateRepository.save(e);
+            } else if (e.getStatus().equals("startupConfirm") || e.getStatus().equals("proceeding")) {
+                long dDay = ChronoUnit.DAYS.between(LocalDate.from(e.getStartupConfirmDate()),LocalDate.from(LocalDateTime.now()));
+                if (dDay > 30) e.setStatus("reject");
+                evaluateRepository.save(e);
+            }
+        }
         return EvaluateCardListDTO.builder().evaluateList(evaluateCardDTOList).build();
     }
 
@@ -239,5 +253,35 @@ public class EvaluateService {
             evaluateRepository.save(evaluate);
             return "Evaluate Review "+ evaluate.getStatus();
         }
+    }
+
+    public String confirmEvaluate (EvaluateDTO evaluateDTO) {
+        Evaluate evaluate = evaluateRepository.findById(evaluateDTO.getIdx()).orElse(null);
+
+        if (evaluate == null) {
+            return "Invalid Evaluate";
+        } else {
+            evaluate.setStatus("startupConfirm");
+            evaluate.setStartupConfirmDate(LocalDateTime.now());
+
+            evaluateRepository.save(evaluate);
+        }
+
+        return "Evaluated by startup";
+    }
+
+    public String rejectEvaluate (EvaluateDTO evaluateDTO) {
+        Evaluate evaluate = evaluateRepository.findById(evaluateDTO.getIdx()).orElse(null);
+
+        if (evaluate == null) {
+            return "Invalid Evaluate";
+        } else {
+            evaluate.setStatus("reject");
+            evaluate.setStartupConfirmDate(LocalDateTime.now());
+            evaluate.setCompleteDate(LocalDateTime.now());
+            evaluateRepository.save(evaluate);
+        }
+
+        return "Evaluate has rejected by startup";
     }
 }
