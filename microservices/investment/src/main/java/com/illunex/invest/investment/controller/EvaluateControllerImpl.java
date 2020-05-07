@@ -69,4 +69,14 @@ public class EvaluateControllerImpl implements EvaluateController {
         return new ResponseEntity(evaluateService.review(evaluateReviewDTO), HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<String> confirmEvaluate(EvaluateDTO evaluateDTO) {
+        return new ResponseEntity(evaluateService.confirmEvaluate(evaluateDTO), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<String> rejectEvaluate(EvaluateDTO evaluateDTO) {
+        return new ResponseEntity(evaluateService.rejectEvaluate(evaluateDTO), HttpStatus.OK);
+    }
+
 }

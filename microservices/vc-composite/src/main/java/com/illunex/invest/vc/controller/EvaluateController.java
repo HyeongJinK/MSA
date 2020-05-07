@@ -94,4 +94,17 @@ public class EvaluateController {
         return restTemplate.postForEntity(investmentUrl + "/evaluate/review", new HttpEntity(evaluateReviewDTO, headers), String.class);
     }
 
+    @PostMapping(value = "evaluate/confirm")
+    public ResponseEntity<String> confirmEvaluate(@RequestBody EvaluateDTO evaluateDTO) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return restTemplate.postForEntity(investmentUrl + "/evaluate/confirm", new HttpEntity(evaluateDTO, headers), String.class);
+    }
+
+    @PostMapping(value = "evaluate/reject")
+    public ResponseEntity<String> rejectEvaluate(@RequestBody EvaluateDTO evaluateDTO) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return restTemplate.postForEntity(investmentUrl + "/evaluate/reject", new HttpEntity(evaluateDTO, headers), String.class);
+    }
 }

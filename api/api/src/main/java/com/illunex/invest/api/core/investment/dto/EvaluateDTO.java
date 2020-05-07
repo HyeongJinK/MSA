@@ -20,6 +20,7 @@ public class EvaluateDTO {
     LocalDateTime createDate;
     LocalDateTime requestDate;
     LocalDateTime completeDate;
+    LocalDateTime startupConfirmDate;
     String scale;
     String status;
     String content;

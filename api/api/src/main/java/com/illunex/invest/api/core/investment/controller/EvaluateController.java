@@ -37,4 +37,8 @@ public interface EvaluateController {
     ResponseEntity<String> deleteEvaluate(@RequestBody EvaluateDTO evaluateDTO);
     @PostMapping(value = "/review")
     ResponseEntity<String> review(@RequestBody EvaluateReviewDTO evaluateReviewDTO);
+    @PostMapping(value = "/confirm")
+    ResponseEntity<String> confirmEvaluate(@RequestBody EvaluateDTO evaluateDTO);
+    @PostMapping(value = "/reject")
+    ResponseEntity<String> rejectEvaluate(@RequestBody EvaluateDTO evaluateDTO);
 }
