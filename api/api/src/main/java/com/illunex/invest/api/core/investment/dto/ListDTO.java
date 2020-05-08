@@ -1,5 +1,6 @@
 package com.illunex.invest.api.core.investment.dto;
 
+import com.illunex.invest.api.core.company.dto.VcFavoriteCompanyDTO;
 import lombok.*;
 
 import java.util.List;
@@ -12,5 +13,5 @@ import java.util.List;
 public class ListDTO {
     List<JudgeDTO> judgeList;
     List<ReviewItemTemplateDTO> reviewItemTemplateList;
-    List<FavoriteCompanyDTO> favoriteCompanyList;
+    List<VcFavoriteCompanyDTO> favoriteCompanyList;
 }

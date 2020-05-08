@@ -4,9 +4,7 @@ import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.company.controller.CompanyController;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
-import com.illunex.invest.api.core.company.dto.VcCompanyDetailDTO;
 import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
-import com.illunex.invest.api.core.investment.dto.ListDTO;
 import com.illunex.invest.company.exception.NoneCompanyException;
 import com.illunex.invest.company.service.CompanyService;
 import lombok.RequiredArgsConstructor;
@@ -35,20 +33,6 @@ public class CompanyControllerImpl implements CompanyController {
     }
 
     @Override
-    public ResponseEntity<ResponseList> getVcCompanyList() {
-        return ResponseEntity.ok(ResponseList.builder()
-                .errorCode(0)
-                .message("success")
-                .data(Collections.singletonList(companyService.getVcCompanyList()))
-                .build());
-    }
-
-    @Override
-    public VcCompanyDetailDTO getVcCompanyDetail(Long companyIdx) {
-        return companyService.getVcCompanyDetail(companyIdx);
-    }
-
-    @Override
     public ResponseEntity<CompanyDTO> getCompany(Long id) {
         log.info(id.toString());
         CompanyDTO companyDTO = companyService.getCompanyById(id);
@@ -62,15 +46,6 @@ public class CompanyControllerImpl implements CompanyController {
                 .errorCode(0)
                 .message("success")
                 .data(companyService.updateCompany(companyDTO))
-                .build());
-    }
-
-    @Override
-    public ResponseEntity<ResponseList> favoriteCompany(ListDTO listDTO) {
-        return ResponseEntity.ok(ResponseList.builder()
-                .errorCode(0)
-                .message("success")
-                .data(Collections.singletonList(companyService.getFavoriteCompanyList(listDTO)))
                 .build());
     }
 
