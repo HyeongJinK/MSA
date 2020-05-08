@@ -65,14 +65,6 @@ public interface InvestmentMapper {
     List<Judge> judgeListDTOToEntity(List<JudgeDTO> judgeDTOList);
     List<JudgeDTO> judgeListEntityToDTO(List<Judge> judgeList);
 
-    // favoriteCompany
-
-    FavoriteCompany favoriteCompanyDTOToEntity(FavoriteCompanyDTO favoriteCompanyDTO);
-    FavoriteCompanyDTO favoriteCompanyEntityToDTO(FavoriteCompany favoriteCompany);
-
-    List<FavoriteCompany> favoriteCompanyListDTOToEntity(List<FavoriteCompanyDTO> favoriteCompanyDTOList);
-    List<FavoriteCompanyDTO> favoriteCompanyListEntityToDTO(List<FavoriteCompany> favoriteCompanyList);
-
     // template > categoryList > itemList
     ReviewItemTemplate reviewItemTemplateDTOToEntity(ReviewItemTemplateDTO reviewItemTemplateDTO);
     ReviewItemTemplateDTO reviewItemTemplateEntityToDTO(ReviewItemTemplate reviewItemTemplate);

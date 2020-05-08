@@ -1,4 +1,4 @@
-package com.illunex.invest.api.core.investment.dto;
+package com.illunex.invest.api.core.company.dto;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FavoriteCompanyDTO {
+public class VcFavoriteCompanyDTO {
     Long idx;
     Long companyIdx;
     Long userIdx;

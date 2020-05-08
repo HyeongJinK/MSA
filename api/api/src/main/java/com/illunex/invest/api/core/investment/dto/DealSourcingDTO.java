@@ -13,5 +13,4 @@ import java.util.List;
 public class DealSourcingDTO {
     List<VcCompanyDTO> companyList;
     List<EvaluateStateDTO> evaluateStateList;
-    List<FavoriteCompanyDTO> favoriteCompanyList;
 }

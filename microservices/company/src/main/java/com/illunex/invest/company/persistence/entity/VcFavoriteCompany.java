@@ -1,4 +1,4 @@
-package com.illunex.invest.investment.persistence.entity;
+package com.illunex.invest.company.persistence.entity;
 
 import lombok.*;
 
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Table(name = "favorite_company")
-public class FavoriteCompany {
+public class VcFavoriteCompany {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
     Long companyIdx;
