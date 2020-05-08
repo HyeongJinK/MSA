@@ -41,59 +41,9 @@ public class DealSourcingCompositeIntegration extends DefaultIntegrationService 
                 .retrieve()
                 .bodyToMono(EvaluateStateListDTO.class);
 
-//        companyList.subscribe(s -> {
-//
-//            evaluateList.subscribe(e -> {
-//
-//                return DealSourcingDTO.builder()
-//                        .companyList(s.getVcCompanyList())
-//                        .evaluateStateList(e.getEvaluateState())
-//                        .build();
-//            });
-//
-//        });
-
-//        DealSourcingDTO dealSourcingDTO = DealSourcingDTO.builder().build();
-
         return Mono.zip(companyList, evaluateList).map(t -> DealSourcingDTO.builder()
                 .companyList(t.getT1().getVcCompanyList())
                 .evaluateStateList(t.getT2().getEvaluateState())
                 .build()).block();
-
-//        return (DealSourcingDTO) Mono.zip(companyList, evaluateList).subscribe(t -> {
-//                    DealSourcingDTO.builder()
-//                    .companyList(t.getT1().getVcCompanyList())
-//                    .evaluateStateList(t.getT2().getEvaluateState())
-//                    .build();
-//        }).block();
-
-//
-//            dealSourcingDTO.setCompanyList(t.getT1().getVcCompanyList());
-//            dealSourcingDTO.setEvaluateStateList(t.getT2().getEvaluateState());
-//            System.out.println("================" + t.getT1().getVcCompanyList().toString());
-//            System.out.println("================" + t.getT2().getEvaluateState().toString());
-
-//        });
-
-
-//        System.out.println("-------------" + dealSourcingDTO.getCompanyList().toString());
-//        System.out.println("-------------" + dealSourcingDTO.getCompanyList().size());
-//        System.out.println("-------------" + dealSourcingDTO.getEvaluateStateList().toString());
-//        System.out.println("-------------" + dealSourcingDTO.getEvaluateStateList().size());
-//
-//        return dealSourcingDTO;
-//
-//    public DealSourcingDTO getDealSourcingList() {
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//
-//        VcCompanyListDTO companyList =  restTemplate.getForEntity(companyUrl + "/vc/company/list", VcCompanyListDTO.class).getBody();
-//        List<EvaluateStateDTO> evaluateList = restTemplate.getForEntity(investmentUrl + "/evaluate/list/state?companyIdx={companyIdx}", EvaluateStateListDTO.class, getUser().getCompanyIdx()).getBody().getEvaluateState();
-//        return DealSourcingDTO.builder()
-//                .companyList(companyList.getVcCompanyList())
-//                .evaluateStateList(evaluateList)
-//                .build();
-//    }
-
     }
 }
