@@ -5,6 +5,7 @@ import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.composite.startup.mypage.dto.AuthorityExDTO;
 import com.illunex.invest.api.core.company.dto.PluginDTO;
 import com.illunex.invest.api.core.company.dto.enumable.PluginState;
+import com.illunex.invest.api.core.user.dto.AuthorityDTO;
 import com.illunex.invest.api.core.user.dto.RoleDTO;
 import com.illunex.invest.api.core.user.request.AuthorityRequest;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
@@ -42,7 +43,9 @@ public class AuthorityIntegrationService extends DefaultIntegrationService {
         // 회사 멤버의 권한 목록 가져오기
         ResponseEntity<ResponseList> memberAuthorityRes = restTemplate.getForEntity(userUrl + "/authority/"+ getUser().getCompanyIdx()
                 , ResponseList.class);
-        List<AuthorityExDTO> memberAuthority = ListDTOParser(memberAuthorityRes.getBody(), AuthorityExDTO.class);
+
+        List<AuthorityExDTO> memberAuthority = memberAuthorityRes.getBody().getData();
+
         // 두개 목록을 조합
 
         return memberAuthority.stream().map(m -> {
@@ -59,5 +62,12 @@ public class AuthorityIntegrationService extends DefaultIntegrationService {
         return restTemplate.postForEntity(userUrl + "/authority/"
                 , new HttpEntity<>(request, getDefaultHeader())
                 , ResponseData.class);
+    }
+
+    public void userList() {
+        //유저 리스트
+    }
+    public void newList() {
+        //유저에 대한 권한
     }
 }

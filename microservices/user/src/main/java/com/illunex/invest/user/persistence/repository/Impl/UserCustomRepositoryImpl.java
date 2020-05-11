@@ -20,14 +20,14 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
                 .fetch();
     }
 
-//    @Override
-//    public User updateAuthority(Long id, Set<Role> authorities) {
-//        QUser user = QUser.user;
-//
-//        queryFactory.update(user).where(user.id.eq(id))
-//                .set(user.authorities, authorities)
-//                .execute();
-//
-//        return null;
-//    }
+    @Override
+    public void updateCertification(Long userIdx) {
+        QUser user = QUser.user;
+
+        queryFactory.update(user)
+                .set(user.certification, true)
+                .where(user.id.eq(userIdx));
+    }
+
+
 }

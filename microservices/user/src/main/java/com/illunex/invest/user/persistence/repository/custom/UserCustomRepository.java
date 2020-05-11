@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface UserCustomRepository {
     List<User> findByCompanyIdx(Long companyIdx);
+    void updateCertification(Long userIdx);
 }
