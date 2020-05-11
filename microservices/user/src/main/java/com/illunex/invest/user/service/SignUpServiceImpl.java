@@ -25,7 +25,7 @@ public class SignUpServiceImpl extends UserService implements SignUpService {
                         , password
                         , name
                         , vender
-                        , GenerateToken.CreateToken()
+                        , "token"//GenerateToken.CreateToken()
                         , companyIdx
                 )));
     }
@@ -41,7 +41,7 @@ public class SignUpServiceImpl extends UserService implements SignUpService {
                         , password
                         , name
                         , vender
-                        , GenerateToken.CreateToken()
+                        , "token" //GenerateToken.CreateToken()
                         , companyIdx)
         ));
     }
