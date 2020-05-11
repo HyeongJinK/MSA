@@ -27,4 +27,15 @@ public class AuthorityCompositeControllerImpl extends StartupDefaultController i
     public ResponseEntity<ResponseData> editMemberAuthority(AuthorityRequest request) {
         return authorityIntegrationService.edit(request);
     }
+
+    @Override
+    public ResponseEntity<ResponseData> getAuthority() {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<ResponseData> updateAuthority() {
+        return null;
+    }
 }
+
