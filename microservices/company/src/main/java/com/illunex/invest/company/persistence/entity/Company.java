@@ -37,8 +37,9 @@ public class Company {
     String location;            // 지역
     String sales;               // 매출액
     String ceo;                 // 대표
+    String mainProductName;     // 주요제품 - 제품명
     @Column(length=1000)
-    String introduction;        // 기업, 제품 한줄 소개
+    String introduction;        // 주요제품 - 제품 한줄 소개
     String scale;               // 투자규모
     LocalDateTime updateDate;   // 마지막 수정일
 

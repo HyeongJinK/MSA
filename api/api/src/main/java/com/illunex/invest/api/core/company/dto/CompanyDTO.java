@@ -49,6 +49,9 @@ public class CompanyDTO {
     String location;
     @ApiModelProperty(value="매출액", name="sales", required=false)
     String sales;
+    String ceo;                 // 대표
+    String mainProductName;     // 주요제품 - 제품명
+    String introduction;        // 주요제품 - 제품 한줄 소개
     @ApiModelProperty(value="투자규모", name="scale", required=false)
     String scale;
     LocalDateTime updateDate;
