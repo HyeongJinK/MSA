@@ -1,5 +1,6 @@
 package com.illunex.invest.vc.controller;
 
+import com.illunex.invest.api.core.company.dto.VcCompanyDetailDTO;
 import com.illunex.invest.api.core.investment.dto.*;
 import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.vc.service.investment.InvestmentCompositeIntegration;
@@ -30,6 +31,11 @@ public class EvaluateController {
     @GetMapping(value = "evaluate/")
     public ResponseEntity<String> setEvaluate(@RequestParam Long companyIdx) {
         return new ResponseEntity(investmentCompositeIntegration.setEvaluate(companyIdx), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "evaluate/company")
+    public ResponseEntity<VcCompanyDetailDTO> getCompanyDetail(@RequestParam Long companyIdx) {
+        return restTemplate.getForEntity(companyUrl + "/company/vc/company?companyIdx={companyIdx}", VcCompanyDetailDTO.class, companyIdx);
     }
 
     @GetMapping(value = "evaluate/list")
@@ -88,4 +94,17 @@ public class EvaluateController {
         return restTemplate.postForEntity(investmentUrl + "/evaluate/review", new HttpEntity(evaluateReviewDTO, headers), String.class);
     }
 
+    @PostMapping(value = "evaluate/confirm")
+    public ResponseEntity<String> confirmEvaluate(@RequestBody EvaluateDTO evaluateDTO) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return restTemplate.postForEntity(investmentUrl + "/evaluate/confirm", new HttpEntity(evaluateDTO, headers), String.class);
+    }
+
+    @PostMapping(value = "evaluate/reject")
+    public ResponseEntity<String> rejectEvaluate(@RequestBody EvaluateDTO evaluateDTO) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return restTemplate.postForEntity(investmentUrl + "/evaluate/reject", new HttpEntity(evaluateDTO, headers), String.class);
+    }
 }

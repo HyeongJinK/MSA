@@ -4,7 +4,6 @@ import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
-import com.illunex.invest.api.core.investment.dto.ListDTO;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +14,6 @@ public interface CompanyController {
     @ApiOperation(value = "회사 전체 리스트 조회")
     @GetMapping({"/", ""})
     ResponseEntity<ResponseList> getAllList();
-
-    @ApiOperation(value = "VC 회사 리스트 조회")
-    @GetMapping("/vc")
-    ResponseEntity<ResponseList> getVcCompanyList();
 
     @ApiOperation(value = "회사 신규 등록")
     @PostMapping("/register")
@@ -44,9 +39,5 @@ public interface CompanyController {
     @ApiOperation(value = "회사번호에 일치하는 회사 업데이트")
     @PostMapping("/form")
     ResponseEntity<ResponseData> updateCompany(@RequestBody CompanyDTO companyDTO);
-
-    @ApiOperation(value = "VC 관심기업 리스트 조회")
-    @PostMapping("/favorite")
-    ResponseEntity<ResponseList> favoriteCompany(@RequestBody ListDTO listDTO);
 
 }

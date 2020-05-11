@@ -1,6 +1,7 @@
 package com.illunex.invest.company.service.mapper;
 
 import com.illunex.invest.api.core.company.dto.*;
+import com.illunex.invest.api.core.company.dto.VcFavoriteCompanyDTO;
 import com.illunex.invest.company.persistence.entity.*;
 import org.mapstruct.Mapper;
 
@@ -23,6 +24,14 @@ public interface VcCompanyMapper {
 
     KeywordDTO keywordEntityToDTO(Keyword keyword);
     List<KeywordDTO> keywordListEntityToDTO(List<Keyword> keywordList);
+
+    // favoriteCompany
+
+    VcFavoriteCompany vcFavoriteCompanyDTOToEntity(VcFavoriteCompanyDTO vcFavoriteCompanyDTO);
+    VcFavoriteCompanyDTO vcFavoriteCompanyEntityToDTO(VcFavoriteCompany favoriteCompany);
+
+    List<VcFavoriteCompany> vcFavoriteCompanyListDTOToEntity(List<VcFavoriteCompanyDTO> vcFavoriteCompanyDTOList);
+    List<VcFavoriteCompanyDTO> vcFavoriteCompanyListEntityToDTO(List<VcFavoriteCompany> favoriteCompanyList);
 
 }
 

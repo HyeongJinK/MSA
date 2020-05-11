@@ -1,7 +1,7 @@
 package com.illunex.invest.vc.controller;
 
-import com.illunex.invest.api.core.investment.dto.DealSourcingDTO;
-import com.illunex.invest.api.core.investment.dto.FavoriteCompanyDTO;
+import com.illunex.invest.api.core.company.dto.VcFavoriteCompanyDTO;
+import com.illunex.invest.api.core.investment.FavoriteCompanyDTO;
 import com.illunex.invest.vc.service.investment.FavoriteCompanyCompositeIntegration;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -19,24 +19,24 @@ public class FavoriteCompanyController {
     private final RestTemplate restTemplate;
     private final WebClient.Builder loadBalanceWebClientBuilder;
     private final FavoriteCompanyCompositeIntegration favoriteCompanyCompositeIntegration;
-    private final String investmentUrl = "http://investment";
+    private final String companyUrl = "http://company";
 
     @GetMapping(value = "favorite/list")
-    public ResponseEntity<DealSourcingDTO> getFavoriteCompanyList() {
+    public ResponseEntity<FavoriteCompanyDTO> getFavoriteCompanyList() {
         return new ResponseEntity(favoriteCompanyCompositeIntegration.getFavoriteCompanyList(), HttpStatus.OK);
     }
 
     @GetMapping(value = "favorite/get")
-    public ResponseEntity<FavoriteCompanyDTO> getFavoriteCompany(@RequestParam Long companyIdx) {
-        return restTemplate.getForEntity(investmentUrl + "/favorite/?companyIdx={companyIdx}", FavoriteCompanyDTO.class, companyIdx);
+    public ResponseEntity<VcFavoriteCompanyDTO> getFavoriteCompany(@RequestParam Long companyIdx) {
+        return restTemplate.getForEntity(companyUrl + "/vc/favorite/?companyIdx={companyIdx}", VcFavoriteCompanyDTO.class, companyIdx);
     }
 
     @PostMapping(value = "favorite/set")
-    public ResponseEntity<String> setFavoriteCompanyList(@RequestBody FavoriteCompanyDTO favoriteCompanyDTO) {
+    public ResponseEntity<String> setFavoriteCompanyList(@RequestBody VcFavoriteCompanyDTO vcFavoriteCompanyDTO) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        favoriteCompanyDTO.setUserIdx(favoriteCompanyCompositeIntegration.getUser().getId());
-        return restTemplate.postForEntity(investmentUrl + "/favorite/set", new HttpEntity(favoriteCompanyDTO, headers), String.class);
+        vcFavoriteCompanyDTO.setUserIdx(favoriteCompanyCompositeIntegration.getUser().getId());
+        return restTemplate.postForEntity(companyUrl + "/vc/favorite/set", new HttpEntity(vcFavoriteCompanyDTO, headers), String.class);
     }
 
 }
