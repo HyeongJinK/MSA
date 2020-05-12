@@ -52,7 +52,7 @@ public class VcCompanyServiceImpl implements VcCompanyService {
 
         return VcCompanyDetailDTO.builder()
             .companyIdx(company.getCompanyIdx())
-            .logo(company.getLogo())
+            .logo(vcMapper.entityToDto(company.getLogo()))
             .name(company.getName())
             .companyType(company.getCompanyType())
             .establishmentDate(company.getEstablishmentDate())
@@ -60,10 +60,8 @@ public class VcCompanyServiceImpl implements VcCompanyService {
             .business(company.getBusiness())
             .nation(company.getNation())
             .stocksList(company.getStocksList())
-            .introduction(company.getIntroduction())
-            .address(company.getAddress())
-            .addressDetail(company.getAddressDetail())
-            .sales(company.getSales())
+            .address(vcMapper.entityToDto(company.getAddress()))
+            .sales(vcMapper.entitySalesListToDto(company.getSales()))
             .product(product)
             .build();
     }

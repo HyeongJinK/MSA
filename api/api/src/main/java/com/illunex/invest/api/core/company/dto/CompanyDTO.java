@@ -11,18 +11,18 @@ import java.util.List;
 @AllArgsConstructor
 @Getter @Setter
 @Builder
-@ToString(of = {"companyIdx", "logo", "name", "businessNumber"
-        , "companyType", "establishmentDate", "employeeCount", "business", "nation"
-        , "stocksList", "zipCode", "address", "addressDetail"
-        , "description", "homePage", "location", "sales", "scale"})
+@ToString(of = {"companyIdx"})
 public class CompanyDTO {
     Long companyIdx;
+    LocalDateTime updateDate;
     @ApiModelProperty(value="로고", name="logo", required=true)
-    String logo;
+    LogoDTO logo;
     @ApiModelProperty(value="회사 이름", name="name", required=true)
     String name;
     @ApiModelProperty(value="사업자 등록번호", name="businessNumber", required=true)
     String businessNumber;
+    @ApiModelProperty(value="대표", name="ceo", required=true)
+    String ceo;
     @ApiModelProperty(value="산업분야", name="companyType", required=false)
     String companyType;
     @ApiModelProperty(value="설립일", name="establishmentDate", required=false)
@@ -35,27 +35,14 @@ public class CompanyDTO {
     String nation;
     @ApiModelProperty(value="상장구분", name="stocksList", required=false)
     String stocksList;
-    @ApiModelProperty(value="우편번호", name="zipCode", required=false)
-    String zipCode;
-    @ApiModelProperty(value="주소", name="address", required=false)
-    String address;
-    @ApiModelProperty(value="상세주소", name="addressDetail", required=false)
-    String addressDetail;
-    @ApiModelProperty(value="기업개요", name="description", required=false)
-    String description;
+    @ApiModelProperty(value="죽", name="address", required=false)
+    AddressDTO address;
     @ApiModelProperty(value="홈페이지", name="homePage", required=false)
     String homePage;
-    @ApiModelProperty(value="지역", name="location", required=false)
-    String location;
-    @ApiModelProperty(value="매출액", name="sales", required=false)
-    String sales;
-    String ceo;                 // 대표
-    String mainProductName;     // 주요제품 - 제품명
-    String introduction;        // 주요제품 - 제품 한줄 소개
-    @ApiModelProperty(value="투자규모", name="scale", required=false)
-    String scale;
-    LocalDateTime updateDate;
-
-    @ApiModelProperty(value="주요제품군", name="companyProducts", required=false)
-    List<MainProductLineDTO> mainProductLines = new ArrayList<>();
+    @ApiModelProperty(value="기업개요", name="description", required=false)
+    String description;
+    @ApiModelProperty(value="매출", name="sales", required=false)
+    List<SalesDTO> sales = new ArrayList<>();
+    @ApiModelProperty(value="주요상품", name="mainProduct", required=false)
+    MainProductDTO mainProduct;
 }

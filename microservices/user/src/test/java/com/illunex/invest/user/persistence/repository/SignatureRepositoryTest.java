@@ -1,16 +1,12 @@
 package com.illunex.invest.user.persistence.repository;
 
-import com.illunex.invest.user.persistence.entity.Signature;
 import com.illunex.invest.user.persistence.entity.User;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -21,7 +17,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
         "spring.datasource.url=jdbc:h2:mem:user"})
 @Transactional
 public class SignatureRepositoryTest {
-    @Autowired UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
     @Autowired SignatureRepository signatureRepository;
 
     @Test

@@ -22,7 +22,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
         "spring.cloud.config.enabled=false",
         "spring.datasource.url=jdbc:h2:mem:user"})
 @Transactional
-public class UserCustomRepositoryImplTest {
+public class UserRepositoryImplTest {
     @Autowired
     UserRepository repository;
 

@@ -21,11 +21,18 @@ public class CompanyRepositoryImpl implements CompanyCustomRepository {
     @Override
     public Optional<Company> findByCompanyIdx(Long idx) {
         QCompany company = QCompany.company;
-        log.info("==================================");
-        log.info(idx.toString());
         return Optional.of(queryFactory.selectFrom(company)
-                .leftJoin(company.mainProductLines, QMainProductLine.mainProductLine).fetchJoin()
+                .leftJoin(company.mainProduct.mainProductLines, QMainProductLine.mainProductLine).fetchJoin()
                 .where(company.companyIdx.eq(idx))
                 .fetchOne());
+    }
+
+    @Override
+    public void updateLogo(Long idx, String squareLogo, String rectangleLogo) {
+        QCompany company = QCompany.company;
+        queryFactory.update(company)
+                .set(company.logo.squareLogo, squareLogo)
+                .set(company.logo.rectangleLogo, rectangleLogo)
+                .where(company.companyIdx.eq(idx));
     }
 }

@@ -52,4 +52,9 @@ public class CompanyServiceImpl implements CompanyService {
         return mapper.entityToDto(companyRepository.save(mapper.dtoToEntity(companyDTO)));
     }
 
+    @Override
+    public void updateLogo(Long id, String squareLogo, String rectangleLogo) {
+        companyRepository.updateLogo(id, squareLogo, rectangleLogo);
+    }
+
 }

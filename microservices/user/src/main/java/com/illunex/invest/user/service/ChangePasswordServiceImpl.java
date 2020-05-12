@@ -5,9 +5,11 @@ import com.illunex.invest.user.persistence.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ChangePasswordServiceImpl extends UserService implements ChangePasswordService {
     private final UserRepository userRepository;
 

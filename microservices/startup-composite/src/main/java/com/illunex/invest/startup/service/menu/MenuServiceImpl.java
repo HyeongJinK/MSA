@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.ArrayList;
+
 @Service
 public class MenuServiceImpl extends DefaultIntegrationService {
     public MenuServiceImpl(RestTemplate restTemplate, WebClient.Builder loadBalanceWebClientBuilder) {
@@ -17,7 +19,7 @@ public class MenuServiceImpl extends DefaultIntegrationService {
 
     public MenuDto getMenus() {
         UserDTO userDTO = getUser();
-        ResponseEntity<ListDTO> irList = restTemplate.getForEntity(irUrl + "/ir/list?companyIdx={companyIdx}", ListDTO.class, userDTO.getCompanyIdx());
-        return new MenuDto(userDTO.getAuthorities(), irList.getBody().getIrList());
+        //ResponseEntity<ListDTO> irList = restTemplate.getForEntity(irUrl + "/ir/list?companyIdx={companyIdx}", ListDTO.class, userDTO.getCompanyIdx());
+        return new MenuDto(userDTO.getAuthorities(), new ArrayList<>()/*irList.getBody().getIrList()*/);
     }
 }

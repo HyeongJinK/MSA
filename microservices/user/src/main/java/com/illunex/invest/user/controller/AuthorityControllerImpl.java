@@ -8,8 +8,11 @@ import com.illunex.invest.api.core.user.request.AuthorityRequest;
 import com.illunex.invest.user.service.AuthorityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,6 +21,7 @@ public class AuthorityControllerImpl extends UserDefaultController  implements A
 
     @Override
     public ResponseEntity<ResponseList> getMemberAuthorityList(Long companyIdx) {
+        //ResponseEntity<List<AuthorityDTO>> result = ResponseEntity.ok(authorityService.getMemberAuthorityList(companyIdx));
         ResponseList<AuthorityDTO> data = new ResponseList(0
                 , "success"
                 , authorityService.getMemberAuthorityList(companyIdx));

@@ -2,14 +2,14 @@ package com.illunex.invest.user.persistence.repository.Impl;
 
 import com.illunex.invest.user.persistence.entity.QUser;
 import com.illunex.invest.user.persistence.entity.User;
-import com.illunex.invest.user.persistence.repository.custom.UserCustomRepository;
+import com.illunex.invest.user.persistence.repository.custom.UserRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-public class UserCustomRepositoryImpl implements UserCustomRepository {
+public class UserRepositoryImpl implements UserRepositoryCustom {
     private final JPAQueryFactory queryFactory;
     @Override
     public List<User> findByCompanyIdx(Long companyIdx) {
@@ -20,14 +20,15 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
                 .fetch();
     }
 
-//    @Override
-//    public User updateAuthority(Long id, Set<Role> authorities) {
-//        QUser user = QUser.user;
-//
-//        queryFactory.update(user).where(user.id.eq(id))
-//                .set(user.authorities, authorities)
-//                .execute();
-//
-//        return null;
-//    }
+    @Override
+    public Long updateCertification(Long userIdx) {
+        QUser user = QUser.user;
+
+        return queryFactory.update(user)
+                .set(user.certification, true)
+                .where(user.id.eq(userIdx))
+                .execute();
+    }
+
+
 }

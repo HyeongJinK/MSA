@@ -80,10 +80,7 @@ public class DefaultIntegrationService {
             map.add("path", path);
             map.add("file", new MultipartInputStreamFileResource(file.getInputStream(), file.getOriginalFilename(), file.getSize()));
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-            HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<>(map, headers);
+            HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<>(map, getDefaultHeader(MediaType.MULTIPART_FORM_DATA));
 
             return restTemplate.postForEntity(communicationUrl + "/file/upload", requestEntity, ResponseData.class);
         } catch (IOException e) {
@@ -94,10 +91,7 @@ public class DefaultIntegrationService {
 
     @NotNull
     protected ResponseEntity<String> multiFileDelete(MultiFileDeleteDTO multiFileDeleteDTO) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        return restTemplate.postForEntity(communicationUrl + "/file/multiFileDelete", new HttpEntity(multiFileDeleteDTO, headers), String.class);
+        return restTemplate.postForEntity(communicationUrl + "/file/multiFileDelete", new HttpEntity(multiFileDeleteDTO, getDefaultHeader()), String.class);
     }
 
     protected List ListDTOParser(ResponseList res, Class c) {
@@ -107,7 +101,6 @@ public class DefaultIntegrationService {
             List lists = res.getData();
 
             lists.stream().forEach(m -> {
-                System.out.println(m.toString());
                 result.add(gson.fromJson(m.toString(), c));
             });
             return result;

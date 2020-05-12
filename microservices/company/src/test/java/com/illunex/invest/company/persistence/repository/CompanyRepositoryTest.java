@@ -2,6 +2,7 @@ package com.illunex.invest.company.persistence.repository;
 
 import com.illunex.invest.company.builder.CompanyBuilder;
 import com.illunex.invest.company.persistence.entity.Company;
+import com.illunex.invest.company.persistence.entity.MainProduct;
 import com.illunex.invest.company.persistence.entity.MainProductLine;
 import org.junit.Assert;
 import org.junit.Before;
@@ -32,9 +33,10 @@ public class CompanyRepositoryTest {
         List<MainProductLine> mainProductLines = new ArrayList<>();
         mainProductLines.add(new MainProductLine("SI"));
         mainProductLines.add(new MainProductLine("보안"));
+        MainProduct mainProduct = MainProduct.builder().mainProductLines(mainProductLines).build();
         company = repository.save(Company.builder()
                 .name("Test")
-                .mainProductLines(mainProductLines)
+                .mainProduct(mainProduct)
                 .build());
     }
 

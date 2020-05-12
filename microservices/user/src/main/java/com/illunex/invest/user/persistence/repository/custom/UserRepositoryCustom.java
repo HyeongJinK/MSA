@@ -4,6 +4,7 @@ import com.illunex.invest.user.persistence.entity.User;
 
 import java.util.List;
 
-public interface UserCustomRepository {
+public interface UserRepositoryCustom {
     List<User> findByCompanyIdx(Long companyIdx);
+    Long updateCertification(Long userIdx);
 }
