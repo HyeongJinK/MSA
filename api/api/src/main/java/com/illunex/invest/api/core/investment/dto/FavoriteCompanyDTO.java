@@ -1,7 +1,6 @@
-package com.illunex.invest.api.core.investment;
+package com.illunex.invest.api.core.investment.dto;
 
 import com.illunex.invest.api.core.company.dto.VcFavoriteCompanyListDTO;
-import com.illunex.invest.api.core.investment.dto.EvaluateStateDTO;
 import lombok.*;
 
 import java.util.List;
