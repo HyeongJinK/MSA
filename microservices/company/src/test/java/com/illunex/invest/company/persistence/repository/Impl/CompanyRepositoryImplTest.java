@@ -1,6 +1,7 @@
 package com.illunex.invest.company.persistence.repository.Impl;
 
 import com.illunex.invest.company.persistence.entity.Company;
+import com.illunex.invest.company.persistence.entity.MainProduct;
 import com.illunex.invest.company.persistence.entity.MainProductLine;
 import com.illunex.invest.company.persistence.repository.CompanyRepository;
 import org.junit.Assert;
@@ -34,9 +35,10 @@ public class CompanyRepositoryImplTest {
         List<MainProductLine> mainProductLines = new ArrayList<>();
         mainProductLines.add(new MainProductLine("SI"));
         mainProductLines.add(new MainProductLine("보안"));
+        MainProduct mainProduct = MainProduct.builder().mainProductLines(mainProductLines).build();
         company = repository.save(Company.builder()
                 .name("Test")
-                .mainProductLines(mainProductLines)
+                .mainProduct(mainProduct)
                 .build());
     }
 
@@ -44,6 +46,6 @@ public class CompanyRepositoryImplTest {
     public void findByCompanyIdx() {
         Company result = repository.findByCompanyIdx(company.getCompanyIdx()).get();
         Assert.assertEquals(result.getName(), "Test");
-        Assert.assertEquals(result.getMainProductLines().size(), 2);
+        Assert.assertEquals(result.getMainProduct().getMainProductLines().size(), 2);
     }
 }
