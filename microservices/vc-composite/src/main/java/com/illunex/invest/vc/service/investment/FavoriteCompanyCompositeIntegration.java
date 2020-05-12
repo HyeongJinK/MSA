@@ -1,7 +1,7 @@
 package com.illunex.invest.vc.service.investment;
 
 import com.illunex.invest.api.core.company.dto.VcFavoriteCompanyListDTO;
-import com.illunex.invest.api.core.investment.FavoriteCompanyDTO;
+import com.illunex.invest.api.core.investment.dto.FavoriteCompanyDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateStateListDTO;
 import com.illunex.invest.vc.service.DefaultIntegrationService;
 import org.slf4j.Logger;
