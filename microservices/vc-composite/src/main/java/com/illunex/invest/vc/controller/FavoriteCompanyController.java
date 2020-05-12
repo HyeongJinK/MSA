@@ -1,7 +1,7 @@
 package com.illunex.invest.vc.controller;
 
 import com.illunex.invest.api.core.company.dto.VcFavoriteCompanyDTO;
-import com.illunex.invest.api.core.investment.FavoriteCompanyDTO;
+import com.illunex.invest.api.core.investment.dto.FavoriteCompanyDTO;
 import com.illunex.invest.vc.service.investment.FavoriteCompanyCompositeIntegration;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
