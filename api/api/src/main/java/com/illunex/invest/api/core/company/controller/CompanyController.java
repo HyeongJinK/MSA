@@ -40,4 +40,7 @@ public interface CompanyController {
     @PostMapping("/form")
     ResponseEntity<ResponseData> updateCompany(@RequestBody CompanyDTO companyDTO);
 
+    @ApiOperation(value = "로고 수정")
+    @PostMapping("/logo")
+    ResponseEntity<ResponseData> updateLogo();
 }

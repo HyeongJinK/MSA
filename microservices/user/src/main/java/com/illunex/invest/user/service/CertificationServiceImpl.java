@@ -18,8 +18,7 @@ public class CertificationServiceImpl implements CertificationService {
         if (user == null) {
             throw new UsernameNotFoundException("잘못된 유저입니다.");
         } else {
-            user.setCertification(true);
-            userRepository.save(user);
+            userRepository.updateCertification(user.getId());
         }
 
         return "success";

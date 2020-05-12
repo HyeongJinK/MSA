@@ -104,4 +104,8 @@ public class UserIntegrationService extends DefaultIntegrationService {
     public ResponseEntity<ResponseData> signUpError(String username, String password, String name, String businessNumber, String vender) {
         throw new UsernameSearchEmptyException("통신에 장애가 있습니다.");
     }
+
+    public ResponseEntity<ResponseData> certification(String token) {
+        return null;
+    }
 }

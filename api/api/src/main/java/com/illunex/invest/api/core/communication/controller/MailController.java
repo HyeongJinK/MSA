@@ -10,4 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface MailController {
     @PostMapping("/signUp")
     ResponseEntity<String> signUpCertification(@RequestBody SignUpMailRequest request);
+    @PostMapping("/invite")
+    ResponseEntity<String> invite(@RequestBody SignUpMailRequest request);
 }

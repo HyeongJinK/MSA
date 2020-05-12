@@ -1,6 +1,6 @@
 package com.illunex.invest.communication.model.mail;
 
-public class SignUpMail {
+public class InviteMail {
     public static String from = "manager@illunex.com";
     public static String mail = "<!doctype html>\n" +
             "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n" +
@@ -17,7 +17,7 @@ public class SignUpMail {
             "\t<meta charset=\"UTF-8\">\n" +
             "\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
             "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
-            "\t<link href=\"https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700&display=swap&subset=korean\" rel=\"stylesheet\">\n" +
+            "\t<link href=\"https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400, 600, 700&display=swap&subset=korean\" rel=\"stylesheet\">\n" +
             "\t<title>Effectmall for startup</title>\n" +
             "\n" +
             "\t<style type=\"text/css\">\n" +
@@ -684,7 +684,7 @@ public class SignUpMail {
             "\t\t\t\t\t<!-- BEGIN TEMPLATE // -->\n" +
             "\t\t\t\t\t<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600px\" height=\"auto\" style=\"background: #fff; margin: 30px;\">\n" +
             "\t\t\t\t\t\t<tr>\n" +
-            "\t\t\t\t\t\t\t<td align=\"center\" valign=\"top\" id=\"templateHeader\" style=\"padding-top: 40px; padding-bottom: 80px; padding-left: 30px; padding-right: 30px;\">\n" +
+            "\t\t\t\t\t\t\t<td align=\"center\" valign=\"top\" id=\"templateHeader\" style=\"padding-top: 50px; padding-left: 50px; padding-right: 50px;\">\n" +
             "\t\t\t\t\t\t\t\t<!--[if (gte mso 9)|(IE)]>\n" +
             "                                    <table align=\"center\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"600\" style=\"width:600px;\">\n" +
             "                                    <tr>\n" +
@@ -703,7 +703,7 @@ public class SignUpMail {
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"mcnImageContent\" valign=\"top\" style=\"padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0;\">\n" +
             "\n" +
             "\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img align=\"left\" alt=\"\" src=\"https://mcusercontent.com/cba1c17f923f44954b0c7248a/images/44f97dd9-d359-4c5b-ac6d-fe28d60cdd9b.png\" width=\"218px\" style=\"max-width:744px; padding-bottom: 0; display: inline !important; vertical-align: bottom;\" class=\"mcnImage\">\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img align=\"left\" alt=\"\" src=\"https://invest-startup.s3.ap-northeast-2.amazonaws.com/email-logo.png\" width=\"222px\" style=\"max-width:744px; padding-bottom: 0; display: inline !important; vertical-align: bottom;\" class=\"mcnImage\">\n" +
             "\n" +
             "\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
@@ -748,13 +748,19 @@ public class SignUpMail {
             "\t\t\t\t<![endif]-->\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:100%; min-width:100%;\" width=\"100%\" class=\"mcnTextContentContainer\">\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<tbody>\n" +
+            "                                                                    <tr>\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<td valign=\"top\" class=\"mcnTextContent\" style=\"padding: 33px 134px 12px 116px;\">\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img align=\"left\" alt=\"\" src=\"https://invest-startup.s3.ap-northeast-2.amazonaws.com/email-team.jpg\" width=\"350px\" style=\"text-align: center\" class=\"mcnImage\">\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</tr>\n" +
+            "\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<tr>\n" +
-            "\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<td valign=\"top\" class=\"mcnTextContent\" style=\"padding:0 102px 50px; \">\n" +
-            "\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<h1 style=\"font-family: 'Noto Sans KR', sans-serif; padding-bottom: 30px; font-size: 30px; font-weight: 500; color: #000000;letter-spacing: -0.05em;\">이메일 주소를 인증해주세요.</h1>\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<p style=\"font-family: 'Noto Sans KR', sans-serif; font-size:18px; font-weight: 300;color: #333;letter-spacing: -0.025em;margin:0;\">\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<b style=\"font-size:18px; font-weight: 300;color: #00a4ff;\"><a style=\"color: #00a4ff; text-decoration: none;\">{{userId}}</a></b>님!<br> 인증하기를 클릭하시면 회원가입이 완료됩니다.\n" +
+            "                                                                        <td valign=\"top\" class=\"mcnTextContent\" style=\"padding:0 102px 26px; text-align: center\">\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<h1 style=\"font-family: 'Noto Sans KR', sans-serif; padding-bottom: 8px; font-size: 30px; font-weight: 600; color: #000000;letter-spacing: -0.05em;line-height: 1.33;\">일루넥스 팀원으로 초대합니다.</h1>\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<p style=\"font-family: 'Noto Sans KR', sans-serif; font-size:16px; font-weight: 300;color: #333;letter-spacing: -0.025em;margin:0; text-align: center; line-height: 1.5\">\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    안녕하세요.\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<b style=\"font-size:16px; font-weight: 300;color: #00a4ff;\"><a style=\"color: #00a4ff; text-decoration: none;\">{{userId}}</a></b>님!<br> \n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t초대에 승낙하시면 아래의 버튼을 클릭해주세요.\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</p>\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</tr>\n" +
@@ -799,8 +805,8 @@ public class SignUpMail {
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"mcnButtonContentContainer\" style=\"border-collapse: separate !important;border-radius: 5px;background-color: #00A4FF;\">\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<tbody>\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<tr>\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<td align=\"center\" valign=\"middle\" class=\"mcnButtonContent\" style=\"font-family: 'Noto Sans KR', sans-serif; font-size: 20px; padding: 16px 50px;\">\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a class=\"mcnButton \" title=\"인증하기\" href=\"{{url}}\" target=\"_blank\" style=\"font-family: 'Noto Sans KR', sans-serif; font-size: 20px; font-weight: bold;letter-spacing: -0.025em;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;\">인증하기</a>\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<td align=\"center\" valign=\"middle\" class=\"mcnButtonContent\" style=\"font-family: 'Noto Sans KR', sans-serif; font-size: 20px; padding: 11px 34px;\">\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a class=\"mcnButton \" title=\"승낙하기\" href=\"{{url}}\" target=\"_blank\" style=\"font-family: 'Noto Sans KR', sans-serif; font-size: 18px; font-weight: 500;letter-spacing: -0.45px;line-height: 1.5;text-align: center;text-decoration: none;color: #FFFFFF;\">승낙하기</a>\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</tr>\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</tbody>\n" +
@@ -812,7 +818,7 @@ public class SignUpMail {
             "\t\t\t\t\t\t\t\t\t\t\t<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" class=\"mcnDividerBlock\" style=\"min-width:100%;\">\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t<tbody class=\"mcnDividerBlockOuter\">\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t<tr>\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"mcnDividerBlockInner\" style=\"min-width: 100%; padding: 90px 30px 30px;\">\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"mcnDividerBlockInner\" style=\"min-width: 100%; padding: 40px 50px 0;\">\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<table class=\"mcnDividerContent\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"min-width: 100%;border-top: 2px solid #EEEEEE;\">\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<tbody>\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<tr>\n" +
@@ -846,12 +852,11 @@ public class SignUpMail {
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<tbody>\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<tr>\n" +
             "\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<td valign=\"top\" class=\"mcnTextContent\" style=\"padding: 0 30px;\">\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div style=\"text-align: left;font-family: 'Noto Sans KR', sans-serif; font-size: 14px;font-weight: 300;letter-spacing: -0.025em; line-height: 1.7; color:#999999;padding-bottom: 20px\">\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t본 메일은 이메일 인증을 위해 발송한 발신 전용 메일입니다.<br>\n" +
-            "                                                                                문의사항이 있으신경우 <a style=\"color: #999; text-decoration: none;\">manager@illunex.com</a>으로 문의해주세요.\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<td valign=\"top\" class=\"mcnTextContent\" style=\"padding: 42px 50px 50px;\">\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div style=\"text-align: left;font-family: 'Noto Sans KR', sans-serif; font-size: 14px;font-weight: 300;letter-spacing: -0.025em; line-height: 1.42; color:#999999;padding-bottom: 8px\">\n" +
+            "                                                                                본 메일은 이펙트몰 StartUp에서 발송한 발신 전용 메일입니다.                                                                    \n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n" +
-            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div style=\"text-align: left;font-family: 'Noto Sans KR', sans-serif; font-size: 14px; font-weight: 300; letter-spacing: -0.025em; color:#cccccc;padding-bottom: 40px;\">\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div style=\"text-align: left;font-family: 'Noto Sans KR', sans-serif; font-size: 14px; font-weight: 300; letter-spacing: -0.025em; color:#cccccc;\">\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t@ 2020 illunex Inc. All Rights Reserved\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n" +
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +

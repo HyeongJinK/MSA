@@ -62,6 +62,11 @@ public class UserCompositeControllerImpl extends StartupDefaultController implem
         throw new ExpireUserException("계정이 만료되었습니다.");
     }
 
+    @Override
+    public ResponseEntity<ResponseData> certification(String token) {
+        return userIntegrationService.certification(token);
+    }
+
     private void authenticate(String username, String password) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
