@@ -2,7 +2,6 @@ package com.illunex.invest.user.persistence.repository;
 
 
 import com.illunex.invest.user.persistence.entity.User;
-import lombok.RequiredArgsConstructor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
         "spring.cloud.config.enabled=false",
         "spring.datasource.url=jdbc:h2:mem:user"})
 public class UserRepositoryTest {
-    @Autowired UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Test(expected = DataIntegrityViolationException.class)
     public void saveTestNotPassword() {

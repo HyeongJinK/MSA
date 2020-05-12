@@ -14,6 +14,13 @@ public interface CompanyMapper {
     List<CompanyDTO> entityListToDto(List<Company> company);
     List<Company> dtoListToEntity(List<CompanyDTO> companyDTO);
 
+
+    SalesDTO entityToDto(Sales sales);
+    Sales dtoToEntity(SalesDTO salesDTO);
+
+    List<SalesDTO> entitySalesListToDto(List<Sales> sales);
+    List<Sales> dtoSalesListToEntity(List<SalesDTO> salesDTOS);
+
     List<MainProductLineDTO> mainProductLineEntityListToDtoList(List<MainProductLine> mainProductLines);
     List<MainProductLine> producmainProductLineDtoListToEntityList(List<MainProductLineDTO> mainProductLines);
 
@@ -22,6 +29,15 @@ public interface CompanyMapper {
 
     List<MemberDTO> memberEntityListToDtoList(List<Member> memberEntities);
     List<Member> memberDtoListToEntityList(List<MemberDTO> companyMembers);
+
+    LogoDTO entityToDto(Logo logo);
+    Logo dtoToEntity(LogoDTO logoDTO);
+
+    AddressDTO entityToDto(Address address);
+    Address dtoToEntity(AddressDTO addressDTO);
+
+    MainProductDTO entityToDto(MainProduct mainProduct);
+    MainProduct dtoToEntity(MainProductDTO mainProductDTO);
 
 }
 

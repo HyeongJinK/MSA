@@ -33,5 +33,20 @@ public interface VcCompanyMapper {
     List<VcFavoriteCompany> vcFavoriteCompanyListDTOToEntity(List<VcFavoriteCompanyDTO> vcFavoriteCompanyDTOList);
     List<VcFavoriteCompanyDTO> vcFavoriteCompanyListEntityToDTO(List<VcFavoriteCompany> favoriteCompanyList);
 
+    LogoDTO entityToDto(Logo logo);
+    Logo dtoToEntity(LogoDTO logoDTO);
+
+    AddressDTO entityToDto(Address address);
+    Address dtoToEntity(AddressDTO addressDTO);
+
+    MainProductDTO entityToDto(MainProduct mainProduct);
+    MainProduct dtoToEntity(MainProductDTO mainProductDTO);
+
+    SalesDTO entityToDto(Sales sales);
+    Sales dtoToEntity(SalesDTO salesDTO);
+
+    List<SalesDTO> entitySalesListToDto(List<Sales> sales);
+    List<Sales> dtoSalesListToEntity(List<SalesDTO> salesDTOS);
+
 }
 

@@ -22,17 +22,17 @@ public class CompanyRepositoryImpl implements CompanyCustomRepository {
     public Optional<Company> findByCompanyIdx(Long idx) {
         QCompany company = QCompany.company;
         return Optional.of(queryFactory.selectFrom(company)
-                .leftJoin(company.mainProductLines, QMainProductLine.mainProductLine).fetchJoin()
+                .leftJoin(company.mainProduct.mainProductLines, QMainProductLine.mainProductLine).fetchJoin()
                 .where(company.companyIdx.eq(idx))
                 .fetchOne());
     }
 
     @Override
-    public void updateLogo(Long idx, String logo, String rectangleLogo) {
+    public void updateLogo(Long idx, String squareLogo, String rectangleLogo) {
         QCompany company = QCompany.company;
         queryFactory.update(company)
-                .set(company.logo, logo)
-                .set(company.rectangleLogo, rectangleLogo)
+                .set(company.logo.squareLogo, squareLogo)
+                .set(company.logo.rectangleLogo, rectangleLogo)
                 .where(company.companyIdx.eq(idx));
     }
 }

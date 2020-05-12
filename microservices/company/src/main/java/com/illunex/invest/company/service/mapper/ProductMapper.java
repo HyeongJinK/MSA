@@ -1,13 +1,7 @@
 package com.illunex.invest.company.service.mapper;
 
-import com.illunex.invest.api.core.company.dto.CompanyDTO;
-import com.illunex.invest.api.core.company.dto.KeywordDTO;
-import com.illunex.invest.api.core.company.dto.ProductDTO;
-import com.illunex.invest.api.core.company.dto.ProductImageDTO;
-import com.illunex.invest.company.persistence.entity.Company;
-import com.illunex.invest.company.persistence.entity.Keyword;
-import com.illunex.invest.company.persistence.entity.Product;
-import com.illunex.invest.company.persistence.entity.ProductImage;
+import com.illunex.invest.api.core.company.dto.*;
+import com.illunex.invest.company.persistence.entity.*;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 
@@ -24,6 +18,15 @@ public interface ProductMapper {
     List<ProductImage> imageToEntity(List<ProductImageDTO> productImages);
     List<Keyword> keywordToEntity(List<KeywordDTO> keywords);
     Company companyToEntity(CompanyDTO company);
+
+    SalesDTO entityToDto(Sales sales);
+    Sales dtoToEntity(SalesDTO salesDTO);
+
+    List<SalesDTO> entitySalesListToDto(List<Sales> sales);
+    List<Sales> dtoSalesListToEntity(List<SalesDTO> salesDTOS);
+
+    MainProductDTO entityToDto(MainProduct mainProduct);
+    MainProduct dtoToEntity(MainProductDTO mainProductDTO);
 
     List<ProductImageDTO> imageToDto(List<ProductImage> productImages);
     List<KeywordDTO> keywordToDto(List<Keyword> keywords);
