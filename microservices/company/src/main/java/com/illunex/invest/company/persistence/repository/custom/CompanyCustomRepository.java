@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface CompanyCustomRepository {
     Optional<Company> findByCompanyIdx(Long idx);
+    void updateLogo(Long idx, String logo, String rectangleLogo);
 }

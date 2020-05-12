@@ -20,6 +20,7 @@ public class Company {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long companyIdx;
     String logo;                // 로고
+    String rectangleLogo;       // 직사각형 로고
     String name;                // 이름
     String businessNumber;      // 사업자 등록번호
     String companyType;         // 산업분야
