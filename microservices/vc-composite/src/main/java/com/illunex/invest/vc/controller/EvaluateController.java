@@ -35,7 +35,7 @@ public class EvaluateController {
 
     @GetMapping(value = "evaluate/company")
     public ResponseEntity<VcCompanyDetailDTO> getCompanyDetail(@RequestParam Long companyIdx) {
-        return restTemplate.getForEntity(companyUrl + "/company/vc/company?companyIdx={companyIdx}", VcCompanyDetailDTO.class, companyIdx);
+        return restTemplate.getForEntity(companyUrl + "/vc/company?companyIdx={companyIdx}", VcCompanyDetailDTO.class, companyIdx);
     }
 
     @GetMapping(value = "evaluate/list")
