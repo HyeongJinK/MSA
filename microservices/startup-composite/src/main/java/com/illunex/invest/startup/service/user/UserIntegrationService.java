@@ -13,8 +13,10 @@ import com.illunex.invest.startup.service.DefaultIntegrationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -106,6 +108,8 @@ public class UserIntegrationService extends DefaultIntegrationService {
     }
 
     public ResponseEntity<ResponseData> certification(String token) {
-        return null;
+        LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+        map.add("token", token);
+        return restTemplate.postForEntity(userUrl + "/certification", new HttpEntity<>(map, getDefaultHeader(MediaType.MULTIPART_FORM_DATA)), ResponseData.class);
     }
 }

@@ -50,6 +50,15 @@ public class CompanyControllerImpl implements CompanyController {
     }
 
     @Override
+    public ResponseEntity<ResponseData> updateLogo(Long id, String squareLogo, String rectangleLogo) {
+        companyService.updateLogo(id, squareLogo, rectangleLogo);
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .build());
+    }
+
+    @Override
     public ResponseEntity<ResponseData> registerCompany(CompanyRegisterRequest request) {
         return ResponseEntity.ok(ResponseData.builder()
                 .errorCode(0)
