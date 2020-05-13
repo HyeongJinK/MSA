@@ -5,9 +5,11 @@ import com.illunex.invest.user.persistence.entity.User;
 import com.illunex.invest.user.persistence.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CertificationServiceImpl implements CertificationService {
     private final UserRepository userRepository;
 

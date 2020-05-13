@@ -7,9 +7,11 @@ import com.illunex.invest.user.service.mapper.UserInfoMapper;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class SignUpServiceImpl extends UserService implements SignUpService {
     private final UserRepository userRepository;
     private UserInfoMapper mapper = Mappers.getMapper(UserInfoMapper.class);

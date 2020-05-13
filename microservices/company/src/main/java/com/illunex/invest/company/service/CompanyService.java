@@ -9,4 +9,5 @@ public interface CompanyService {
     CompanyDTO getCompanyById(final Long id);
     Long registerCompany(String businessNumber);
     CompanyDTO updateCompany(CompanyDTO companyDTO);
+    void updateLogo(Long id, String squareLogo, String rectangleLogo);
 }
