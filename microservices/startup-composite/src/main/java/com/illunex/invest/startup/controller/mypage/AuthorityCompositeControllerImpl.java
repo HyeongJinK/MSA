@@ -17,8 +17,8 @@ public class AuthorityCompositeControllerImpl extends StartupDefaultController i
     private final AuthorityIntegrationService authorityIntegrationService;
 
     @Override
-    public ResponseEntity<ResponseList<AuthorityExDTO>> getMemberAuthorityList() {
-        return ResponseEntity.ok(new ResponseList<AuthorityExDTO>(0
+    public ResponseEntity<ResponseList> getMemberAuthorityList() {
+        return ResponseEntity.ok(new ResponseList<>(0
                 , "success"
                 , authorityIntegrationService.list()));
     }

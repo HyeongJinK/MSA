@@ -138,7 +138,7 @@ public class MenuDto {
 
     private List<Menu> initLicenseSubMenu(Collection<RoleDTO> roles) {
         return List.of(makeSubMenu("요금안내", "license", "/myPage/license/payment", 1),
-                makeSubMenu("고객센터", "support", "/myPage/license/support", 2))
+                makeSubMenu("고객센터", "support", "/myPage/license/support", 2, false))
                 .stream()
                 .sorted(Comparator.comparingInt(Menu::getOrder))
                 .collect(Collectors.toList());
@@ -185,8 +185,7 @@ public class MenuDto {
     }
 
     private void initMainMenu(Collection<RoleDTO> roles, List<IRDTO> irList) {
-        makeDefaultMainMenu(roles);
-        //TODO 주주, 문서
+        //makeDefaultMainMenu(roles);
         roles.stream()
                 .forEach(role -> {
                     switch (role.getName()) {
@@ -204,7 +203,7 @@ public class MenuDto {
                                     makeSubMenu("피드", "feed", "/feed", 1)
                             ), 5);
                             break;
-                        case "ROLE_SHAREHOLDER" : makeMainMenu("주주", "shareholder", "feed", List.of(
+                        case "ROLE_SHAREHOLDER" : makeMainMenu("주주", "shareholder", "shareholder", List.of(
                                 makeSubMenu("주주명부", "shareholder", "/shareholder/shareholder", 1),
                                 makeSubMenu("주주총회", "shareholder", "/shareholder/shareholder", 2, false),
                                 makeSubMenu("이사회", "shareholder", "/shareholder/shareholder", 3, false)

@@ -1,6 +1,7 @@
 package com.illunex.invest.api.core.user.controller;
 
 import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.user.request.SignUpRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -31,6 +32,9 @@ public interface SignUpController {
     })
     @PostMapping({"", "/"})
     ResponseEntity<ResponseData> signUp(@RequestBody SignUpRequest signUpRequest);
+
+    @GetMapping("/list/{companyIdx}")
+    ResponseEntity<ResponseList> list(@PathVariable("companyIdx") Long companyIdx);
 
     @PostMapping({"/invite"})
     ResponseEntity<ResponseData> invite(@RequestBody SignUpRequest signUpRequest);

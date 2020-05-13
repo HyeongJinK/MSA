@@ -1,9 +1,11 @@
 package com.illunex.invest.company.persistence.repository.Impl;
 
+import com.illunex.invest.api.core.company.dto.LogoDTO;
 import com.illunex.invest.company.persistence.entity.Company;
 import com.illunex.invest.company.persistence.entity.QCompany;
 import com.illunex.invest.company.persistence.entity.QMainProductLine;
 import com.illunex.invest.company.persistence.repository.custom.CompanyCustomRepository;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -34,5 +36,19 @@ public class CompanyRepositoryImpl implements CompanyCustomRepository {
                 .set(company.logo.squareLogo, squareLogo)
                 .set(company.logo.rectangleLogo, rectangleLogo)
                 .where(company.companyIdx.eq(idx));
+    }
+
+    @Override
+    public LogoDTO findLogoByCompanyIdx(Long companyIdx) {
+        QCompany company = QCompany.company;
+
+        return queryFactory
+                .select(Projections.bean(LogoDTO.class,
+                        company.companyIdx,
+                        company.logo.squareLogo,
+                        company.logo.rectangleLogo))
+                .from(company)
+                .where(company.companyIdx.eq(companyIdx))
+                .fetchOne();
     }
 }

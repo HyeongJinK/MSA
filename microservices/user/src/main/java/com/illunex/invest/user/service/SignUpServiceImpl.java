@@ -1,5 +1,6 @@
 package com.illunex.invest.user.service;
 
+import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.api.core.user.dto.UserInfoDTO;
 import com.illunex.invest.user.persistence.entity.User;
 import com.illunex.invest.user.persistence.repository.UserRepository;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +33,11 @@ public class SignUpServiceImpl extends UserService implements SignUpService {
                         , GenerateToken.CreateToken()
                         , companyIdx
                 )));
+    }
+
+    @Override
+    public List<UserInfoDTO> findByCompanyIdx(Long companyIdx) {
+        return mapper.entityToDto(userRepository.findByCompanyIdx(companyIdx));
     }
 
     @Override
