@@ -36,12 +36,26 @@ public class Role implements RoleInterface {
     public static Set<Role> initRoles() {
         Set<Role> roles = new HashSet<>();
         roles.add(new Role("ROLE_USER"));
+        roles.add(new Role("ROLE_IR"));
+        roles.add(new Role("ROLE_COMPANY"));
+        roles.add(new Role("ROLE_PRODUCT"));
+        roles.add(new Role("ROLE_TEAM"));
+        roles.add(new Role("ROLE_SHAREHOLDER"));
+        roles.add(new Role("ROLE_INVEST"));
+        roles.add(new Role("ROLE_DOC"));
         return roles;
     }
 
     public static Set<Role> companyAdminRoles() {
         Set<Role> roles = new HashSet<>();
         roles.add(new Role("ROLE_USER"));
+        roles.add(new Role("ROLE_IR", 15));
+        roles.add(new Role("ROLE_COMPANY", 15));
+        roles.add(new Role("ROLE_PRODUCT", 15));
+        roles.add(new Role("ROLE_TEAM", 15));
+        roles.add(new Role("ROLE_SHAREHOLDER", 15));
+        roles.add(new Role("ROLE_INVEST", 15));
+        roles.add(new Role("ROLE_DOC", 15));
         roles.add(new Role("ROLE_COMPANY_ADMIN", 15));
         return roles;
     }

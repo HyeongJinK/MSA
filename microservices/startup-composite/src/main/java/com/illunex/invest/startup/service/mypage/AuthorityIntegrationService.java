@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,16 +45,20 @@ public class AuthorityIntegrationService extends DefaultIntegrationService {
         ResponseEntity<ResponseList> memberAuthorityRes = restTemplate.getForEntity(userUrl + "/authority/"+ getUser().getCompanyIdx()
                 , ResponseList.class);
 
-        List<AuthorityExDTO> memberAuthority = memberAuthorityRes.getBody().getData();
+//        ResponseEntity<List> memberAuthorityRes2 = restTemplate.getForEntity(userUrl + "/authority/list/"+ getUser().getCompanyIdx()
+//                , List.class);
 
+
+        List<AuthorityExDTO> memberAuthority = ListDTOParser(memberAuthorityRes.getBody(), AuthorityExDTO.class);
+        System.out.println(memberAuthority);
+        System.out.println(memberAuthority.size());
         // 두개 목록을 조합
-        List<AuthorityExDTO> test = memberAuthority.stream().map(m -> {
+        return memberAuthority.stream().map(m -> {
             roleNames.stream().forEach(role -> {
                 m.getAuthorities().add(new RoleDTO(role));
             });
             return m;
         }).collect(Collectors.toList());
-        return null;
     }
 
     // 권한 수정

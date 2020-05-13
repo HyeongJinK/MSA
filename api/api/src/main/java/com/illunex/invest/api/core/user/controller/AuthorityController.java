@@ -8,6 +8,8 @@ import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(value = "권한설정")
 @RequestMapping("/authority")
 public interface AuthorityController {
@@ -15,6 +17,8 @@ public interface AuthorityController {
     ResponseEntity<ResponseData> setMemberAuthority(@RequestBody AuthorityRequest request);
     @GetMapping("/{companyIdx}")
     ResponseEntity<ResponseList> getMemberAuthorityList(@PathVariable("companyIdx") Long companyIdx);
+    @GetMapping("list/{companyIdx}")
+    ResponseEntity<List<AuthorityDTO>> getAuthorityList(@PathVariable("companyIdx") Long companyIdx);
     @GetMapping("/ir")
     ResponseEntity<AuthorityDTO> getIRAuthority(@RequestParam Long userIdx);
 }
