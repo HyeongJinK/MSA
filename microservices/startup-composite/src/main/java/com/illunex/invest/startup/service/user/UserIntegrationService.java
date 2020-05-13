@@ -80,10 +80,6 @@ public class UserIntegrationService extends DefaultIntegrationService {
         return ResponseEntity.ok(res);
     }
 
-
-
-
-
     private UserInfoDTO UserInfoDTOParser(ResponseData res) {
         Gson gson = new Gson();
         if (res.getErrorCode() == 0) {

@@ -5,6 +5,7 @@ import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.composite.startup.user.controller.UserCompositeController;
 import com.illunex.invest.api.composite.startup.user.request.SignUpRequest;
+import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.api.core.user.model.JwtResponse;
 import com.illunex.invest.api.core.user.request.SignInRequest;
 import com.illunex.invest.startup.controller.StartupDefaultController;
@@ -41,12 +42,11 @@ public class UserCompositeControllerImpl extends StartupDefaultController implem
     @Override
     public ResponseEntity<ResponseData> signIn(SignInRequest request) {
         authenticate(request.getUsername(), request.getPassword());
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
+        final UserDTO userDetails = (UserDTO) userDetailsService.loadUserByUsername(request.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-
         return ResponseEntity.ok(ResponseData.builder()
                 .errorCode(0)
-                .data(new JwtResponse(token))
+                .data(new JwtResponse(userDetails.getName(), userDetails.getProfileImg(), token))
                 .build());
     }
 

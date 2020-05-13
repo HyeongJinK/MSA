@@ -43,7 +43,7 @@ public interface CompanyController {
 
     @ApiOperation(value = "로고 정보 가져오기")
     @GetMapping("/logo")
-    ResponseEntity<LogoDTO> getLogo(@RequestParam Long companyIdx);
+    ResponseEntity<LogoDTO> getLogo(@RequestParam("companyIdx") Long companyIdx);
 
     @ApiOperation(value = "로고 수정")
     @PostMapping("/logo")
