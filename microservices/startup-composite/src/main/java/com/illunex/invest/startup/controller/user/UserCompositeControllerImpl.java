@@ -2,6 +2,7 @@ package com.illunex.invest.startup.controller.user;
 
 import com.illunex.invest.api.common.exception.ExpireUserException;
 import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.composite.startup.user.controller.UserCompositeController;
 import com.illunex.invest.api.composite.startup.user.request.SignUpRequest;
 import com.illunex.invest.api.core.user.model.JwtResponse;
@@ -47,6 +48,11 @@ public class UserCompositeControllerImpl extends StartupDefaultController implem
                 .errorCode(0)
                 .data(new JwtResponse(token))
                 .build());
+    }
+
+    @Override
+    public ResponseEntity<ResponseList> list() {
+        return null;
     }
 
     @Override
