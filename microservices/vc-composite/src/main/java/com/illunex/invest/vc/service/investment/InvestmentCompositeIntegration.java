@@ -1,6 +1,5 @@
 package com.illunex.invest.vc.service.investment;
 
-import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
 import com.illunex.invest.api.core.company.dto.ProductDTO;
 import com.illunex.invest.api.core.investment.dto.EvaluateDTO;
@@ -13,9 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -74,9 +71,9 @@ public class InvestmentCompositeIntegration extends DefaultIntegrationService {
         EvaluateDTO evaluateDTO = EvaluateDTO.builder()
                 .company(companyDTO.getName())
                 .companyIdx(companyDTO.getCompanyIdx())
-                .imgUrl(companyDTO.getLogo())
+                .imgUrl(companyDTO.getLogo().getSquareLogo())
                 .product(productDTO.getTitle())
-                .scale(companyDTO.getScale())
+//                .scale(companyDTO.getScale())
                 .vcCompanyIdx(getUser().getCompanyIdx())
                 .build();
 
