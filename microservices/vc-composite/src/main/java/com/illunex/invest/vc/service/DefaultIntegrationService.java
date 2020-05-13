@@ -37,7 +37,7 @@ public class DefaultIntegrationService {
     protected final String investUrl = "http://invest";
     protected final String startUpUrl = "https://startup.effectmall.com";
 
-    @Cacheable(value="user")
+//    @Cacheable(value="user")
     public UserDTO getUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal != null) {

@@ -17,10 +17,7 @@ public class IREntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
-
-    @Column(name="year" , unique=true)
     String year;            // 년도
-
     Long companyIdx;        // 회사 기본키
     Boolean isPassword;     // 패스워드 사용유/무
     String password;        // 패스워드

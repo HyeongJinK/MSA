@@ -71,6 +71,6 @@ public class IRController {
 
     @GetMapping(value = "ir/auth")
     public ResponseEntity<AuthorityDTO> getMemberAuth() {
-        return restTemplate.getForEntity(userUrl+"/authority/ir?userIdx={userIdx}", AuthorityDTO.class, irCompositeIntegration.getUser().getCompanyIdx());
+        return restTemplate.getForEntity(userUrl+"/authority/ir?userIdx={userIdx}", AuthorityDTO.class, irCompositeIntegration.getUser().getId());
     }
 }
