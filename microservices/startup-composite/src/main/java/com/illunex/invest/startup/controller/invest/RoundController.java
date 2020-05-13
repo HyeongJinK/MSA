@@ -23,6 +23,7 @@ public class RoundController {
     public ResponseEntity<String> VQRoundAnswer(
         @RequestParam("businessRegistrationFile")MultipartFile businessRegistrationFile,
         @RequestParam("companyProfileFile")MultipartFile companyProfileFile,
+        @RequestParam("roundName")String roundName,
         @RequestParam("infoUseAgreement")String infoUseAgreement,
         @RequestParam("newsAgreement")String newsAgreement,
         @RequestParam("company")String company,
@@ -34,11 +35,11 @@ public class RoundController {
         @RequestParam("features")String features,
         @RequestParam("supportBusiness")String supportBusiness,
         @RequestParam("supportAgency")String supportAgency,
-        @RequestParam("businessRegistration")String businessRegistration,
-        @RequestParam("companyProfile")String companyProfile,
         @RequestParam("companyProfileLink")String companyProfileLink
     ) {
         VQRoundDTO vqRoundDTO = VQRoundDTO.builder()
+            .companyIdx(roundCompositeIntegration.getUser().getCompanyIdx())
+            .roundName(roundName)
             .infoUseAgreement(infoUseAgreement)
             .newsAgreement(newsAgreement)
             .company(company)
@@ -50,8 +51,6 @@ public class RoundController {
             .features(features)
             .supportBusiness(supportBusiness)
             .supportAgency(supportAgency)
-            .businessRegistration(businessRegistration)
-            .companyProfile(companyProfile)
             .companyProfileLink(companyProfileLink)
             .build();
 

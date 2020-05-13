@@ -84,4 +84,11 @@ public interface InvestmentMapper {
     List<ReviewItem> reviewItemListDTOToEntity(List<ReviewItemDTO> reviewItemDTOList);
     List<ReviewItemDTO> reviewItemListEntityToDTO(List<ReviewItem> reviewItemList);
 
+    // round
+    VQRound vqRoundDTOToEntity(VQRoundDTO vqRoundDTO);
+    VQRoundDTO vqRoundEntityToDTO(VQRound vqRound);
+
+    List<VQRound> vqRoundListDTOToEntity(List<VQRoundDTO> vqRoundDTOList);
+    List<VQRoundDTO> vqRoundListEntityToDTO(List<VQRound> vqRoundList);
+
 }

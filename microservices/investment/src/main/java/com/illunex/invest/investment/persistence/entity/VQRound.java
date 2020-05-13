@@ -1,13 +1,19 @@
-package com.illunex.invest.api.core.investment.dto;
+package com.illunex.invest.investment.persistence.entity;
 
 import lombok.*;
 
-@Builder
+import javax.persistence.*;
+
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VQRoundDTO {
+@Builder
+@Table(name = "vq_round")
+public class VQRound {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long idx;
     Long companyIdx;
     String roundName;
     String infoUseAgreement;
