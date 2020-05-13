@@ -96,13 +96,26 @@ public class DefaultIntegrationService {
         ArrayList result = new ArrayList<>();
         if (res.getErrorCode() == 0) {
             List lists = res.getData();
-
             lists.stream().forEach(m -> {
+                System.out.println(m.toString());
                 result.add(gson.fromJson(m.toString(), c));
             });
             return result;
         } else {
             return new ArrayList();
         }
+    }
+
+    protected List ListDTOParser(List res, Class c) {
+        Gson gson = new Gson();
+        ArrayList result = new ArrayList<>();
+
+        res.stream().forEach(m -> {
+            JsonReader reader = new JsonReader(new StringReader(m.toString()));
+            reader.setLenient(true);
+            result.add(gson.fromJson(reader, c));
+        });
+        return result;
+
     }
 }
