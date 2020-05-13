@@ -47,13 +47,13 @@ public class AuthorityIntegrationService extends DefaultIntegrationService {
         List<AuthorityExDTO> memberAuthority = memberAuthorityRes.getBody().getData();
 
         // 두개 목록을 조합
-
-        return memberAuthority.stream().map(m -> {
+        List<AuthorityExDTO> test = memberAuthority.stream().map(m -> {
             roleNames.stream().forEach(role -> {
                 m.getAuthorities().add(new RoleDTO(role));
             });
             return m;
         }).collect(Collectors.toList());
+        return null;
     }
 
     // 권한 수정
