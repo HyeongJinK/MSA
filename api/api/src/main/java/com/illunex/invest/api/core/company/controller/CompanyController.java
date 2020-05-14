@@ -47,5 +47,5 @@ public interface CompanyController {
 
     @ApiOperation(value = "로고 수정")
     @PostMapping("/logo")
-    ResponseEntity<ResponseData> updateLogo(@RequestParam Long id, @RequestParam String squareLogo, @RequestParam String rectangleLogo);
+    ResponseEntity<ResponseData> updateLogo(@RequestBody LogoDTO logoDTO);
 }

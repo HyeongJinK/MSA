@@ -35,7 +35,8 @@ public class CompanyRepositoryImpl implements CompanyCustomRepository {
         queryFactory.update(company)
                 .set(company.logo.squareLogo, squareLogo)
                 .set(company.logo.rectangleLogo, rectangleLogo)
-                .where(company.companyIdx.eq(idx));
+                .where(company.companyIdx.eq(idx))
+                .execute();
     }
 
     @Override

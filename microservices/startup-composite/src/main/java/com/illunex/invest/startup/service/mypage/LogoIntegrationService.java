@@ -15,8 +15,9 @@ public class LogoIntegrationService extends DefaultIntegrationService {
         super(restTemplate, loadBalanceWebClientBuilder);
     }
 
-    public ResponseEntity<ResponseData> getLogo() {
-        return restTemplate.getForEntity(companyUrl + "/company/logo?companyIdx="+getUser().getCompanyIdx(), ResponseData.class);
+    public ResponseEntity<LogoDTO> getLogo() {
+
+        return restTemplate.getForEntity(companyUrl + "/company/logo?companyIdx="+getUser().getCompanyIdx(), LogoDTO.class);
     }
 
     public ResponseEntity<ResponseData> updateLogo(LogoDTO logoDTO) {

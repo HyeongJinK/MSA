@@ -59,6 +59,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    @Transactional
     public void updateLogo(Long id, String squareLogo, String rectangleLogo) {
         companyRepository.updateLogo(id, squareLogo, rectangleLogo);
     }
