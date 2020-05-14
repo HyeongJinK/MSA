@@ -1,16 +1,17 @@
 package com.illunex.invest.startup.service;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import com.illunex.invest.api.common.exception.ExpireUserException;
 import com.illunex.invest.api.common.exception.FileUploadException;
 import com.illunex.invest.api.common.request.MultipartInputStreamFileResource;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
+import com.illunex.invest.api.core.communication.dto.AlarmMessageDTO;
 import com.illunex.invest.api.core.communication.dto.MultiFileDeleteDTO;
 import com.illunex.invest.api.core.user.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -39,7 +40,7 @@ public class DefaultIntegrationService {
     protected final String startUpUrl = "https://startup.effectmall.com";
     protected final String bucket = "invest-startup";
 
-    //@Cacheable(value="user")
+    @Cacheable(value="user")
     public UserDTO getUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal != null) {
@@ -88,6 +89,15 @@ public class DefaultIntegrationService {
         }
     }
 
+    protected void senderAlarm(String kind, String title, String contents, List<Long> ids) {
+        // TODO
+        AlarmMessageDTO.builder()
+                .kind(kind)
+                .title(title)
+                .content(contents)
+                .build();
+    }
+
     @NotNull
     protected ResponseEntity<String> multiFileDelete(MultiFileDeleteDTO multiFileDeleteDTO) {
         return restTemplate.postForEntity(communicationUrl + "/file/multiFileDelete", new HttpEntity(multiFileDeleteDTO, getDefaultHeader()), String.class);
@@ -108,16 +118,4 @@ public class DefaultIntegrationService {
         }
     }
 
-    protected List ListDTOParser(List res, Class c) {
-        Gson gson = new Gson();
-        ArrayList result = new ArrayList<>();
-
-        res.stream().forEach(m -> {
-            JsonReader reader = new JsonReader(new StringReader(m.toString()));
-            reader.setLenient(true);
-            result.add(gson.fromJson(reader, c));
-        });
-        return result;
-
-    }
 }

@@ -1,5 +1,6 @@
 package com.illunex.invest.communication.service.alalrm;
 
+import com.illunex.invest.api.core.communication.dto.AlarmMessageDTO;
 import com.illunex.invest.api.core.communication.dto.AlarmReceiverDTO;
 import com.illunex.invest.api.core.communication.enumable.AlarmReadStatus;
 import com.illunex.invest.communication.persistence.alarm.entity.AlarmMessage;
@@ -41,8 +42,8 @@ public class AlarmServiceImpl implements AlarmService {
 
     @Override
     @Transactional
-    public void sender(AlarmMessage message, List<Long> users) {
-        AlarmMessage alarmMessage = alarmMessageRepository.save(message);
+    public void sender(AlarmMessageDTO message, List<Long> users) {
+        AlarmMessage alarmMessage = alarmMessageRepository.save(mapper.dtoToEntity(message));
 
         alarmReceiverRepository.saveAll(
             users.stream()
@@ -60,7 +61,7 @@ public class AlarmServiceImpl implements AlarmService {
     @Override
     @Transactional
     public void del(List<Long> ids) {
-
+        // TODO
     }
 
     @Override
