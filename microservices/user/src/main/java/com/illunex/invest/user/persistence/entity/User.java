@@ -60,7 +60,12 @@ public class User implements UserInterface {
                 .companyIdx(companyIdx)
                 .authorities(Role.initRoles())
                 .rank("사원")
+                .sns(createSns())
                 .build();
+    }
+
+    private static Sns createSns() {
+        return Sns.builder().faceBook("").instagram("").linkdin("").twitter("").youtube("").build();
     }
 
     public static User createCompanyAdminUser(String username, String password, String name, String vender, String token, Long companyIdx) {
@@ -75,6 +80,7 @@ public class User implements UserInterface {
                 .companyIdx(companyIdx)
                 .authorities(Role.companyAdminRoles())
                 .rank("대표")
+                .sns(createSns())
                 .build();
     }
 

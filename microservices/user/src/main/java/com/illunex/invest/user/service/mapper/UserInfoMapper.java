@@ -6,12 +6,15 @@ import com.illunex.invest.user.persistence.entity.Role;
 import com.illunex.invest.user.persistence.entity.User;
 import org.mapstruct.Mapper;
 
+import java.util.List;
 import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface UserInfoMapper {
     UserInfoDTO entityToDto(User user);
     User dtoToEntity(UserInfoDTO userDTO);
+
+    List<UserInfoDTO> entityToDto(List<User> user);
 
     Set<RoleDTO> UserEntitySetToDtoSet(Set<Role> roles);
     Set<Role> UserDtoSetToEntitySet(Set<RoleDTO> roles);

@@ -1,6 +1,7 @@
 package com.illunex.invest.startup.service;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import com.illunex.invest.api.common.exception.ExpireUserException;
 import com.illunex.invest.api.common.exception.FileUploadException;
 import com.illunex.invest.api.common.request.MultipartInputStreamFileResource;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,13 +98,26 @@ public class DefaultIntegrationService {
         ArrayList result = new ArrayList<>();
         if (res.getErrorCode() == 0) {
             List lists = res.getData();
-
             lists.stream().forEach(m -> {
+                System.out.println(m.toString());
                 result.add(gson.fromJson(m.toString(), c));
             });
             return result;
         } else {
             return new ArrayList();
         }
+    }
+
+    protected List ListDTOParser(List res, Class c) {
+        Gson gson = new Gson();
+        ArrayList result = new ArrayList<>();
+
+        res.stream().forEach(m -> {
+            JsonReader reader = new JsonReader(new StringReader(m.toString()));
+            reader.setLenient(true);
+            result.add(gson.fromJson(reader, c));
+        });
+        return result;
+
     }
 }

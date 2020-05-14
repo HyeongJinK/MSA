@@ -7,9 +7,9 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Getter @Setter
 public class LogoDTO {
+    Long companyIdx;
     String squareLogo;                // 로고
     String rectangleLogo;       // 직사각형 로고
 }

@@ -3,6 +3,7 @@ package com.illunex.invest.api.core.company.controller;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
+import com.illunex.invest.api.core.company.dto.LogoDTO;
 import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,10 @@ public interface CompanyController {
     @ApiOperation(value = "회사번호에 일치하는 회사 업데이트")
     @PostMapping("/form")
     ResponseEntity<ResponseData> updateCompany(@RequestBody CompanyDTO companyDTO);
+
+    @ApiOperation(value = "로고 정보 가져오기")
+    @GetMapping("/logo")
+    ResponseEntity<LogoDTO> getLogo(@RequestParam("companyIdx") Long companyIdx);
 
     @ApiOperation(value = "로고 수정")
     @PostMapping("/logo")

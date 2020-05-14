@@ -1,7 +1,9 @@
 package com.illunex.invest.user.controller;
 
 import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.user.controller.SignUpController;
+import com.illunex.invest.api.core.user.dto.AuthorityDTO;
 import com.illunex.invest.api.core.user.request.SignUpRequest;
 import com.illunex.invest.user.service.SignUpService;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +28,23 @@ public class SignUpControllerImpl extends UserDefaultController implements SignU
     }
 
     @Override
+    public ResponseEntity<ResponseList> list(Long companyIdx) {
+        ResponseList<AuthorityDTO> data = new ResponseList(0
+                , "success"
+                , signUpService.findByCompanyIdx(companyIdx));
+
+        return ResponseEntity.ok(data);
+    }
+
+    @Override
     public ResponseEntity<ResponseData> invite(SignUpRequest signUpRequest) {
-        // TODO 관리자가 초대한 팀원 계정 설정
-        return null;
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .data(signUpService.invite(signUpRequest.getUsername()
+                        , signUpRequest.getPassword()
+                        , signUpRequest.getName()
+                        , signUpRequest.getVender()
+                        , signUpRequest.getCompanyIdx()))
+                .build());
     }
 }

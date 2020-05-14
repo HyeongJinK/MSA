@@ -1,7 +1,9 @@
 package com.illunex.invest.company.persistence.repository;
 
+import com.illunex.invest.api.core.company.dto.LogoDTO;
 import com.illunex.invest.company.builder.CompanyBuilder;
 import com.illunex.invest.company.persistence.entity.Company;
+import com.illunex.invest.company.persistence.entity.Logo;
 import com.illunex.invest.company.persistence.entity.MainProduct;
 import com.illunex.invest.company.persistence.entity.MainProductLine;
 import org.junit.Assert;
@@ -34,9 +36,11 @@ public class CompanyRepositoryTest {
         mainProductLines.add(new MainProductLine("SI"));
         mainProductLines.add(new MainProductLine("보안"));
         MainProduct mainProduct = MainProduct.builder().mainProductLines(mainProductLines).build();
+        Logo.builder().rectangleLogo("test").squareLogo("square").build();
         company = repository.save(Company.builder()
                 .name("Test")
                 .mainProduct(mainProduct)
+                .logo(Logo.builder().rectangleLogo("test").squareLogo("square").build())
                 .build());
     }
 
@@ -44,5 +48,13 @@ public class CompanyRepositoryTest {
     public void findByUserIdx() {
         Company result = repository.findById(company.getCompanyIdx()).get();
         Assert.assertEquals(result.getName(), "Test");
+    }
+
+    @Test
+    public void findLogoByCompanyIdx() {
+        LogoDTO logoDTO = repository.findLogoByCompanyIdx(company.getCompanyIdx());
+
+        Assert.assertEquals(logoDTO.getRectangleLogo(), "test");
+        Assert.assertEquals(logoDTO.getSquareLogo(), "square");
     }
 }

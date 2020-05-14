@@ -1,6 +1,7 @@
 package com.illunex.invest.company.service;
 
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
+import com.illunex.invest.api.core.company.dto.LogoDTO;
 import com.illunex.invest.company.exception.NoneCompanyException;
 import com.illunex.invest.company.persistence.entity.Company;
 import com.illunex.invest.company.persistence.repository.CompanyRepository;
@@ -50,6 +51,11 @@ public class CompanyServiceImpl implements CompanyService {
         companyDTO.setUpdateDate(LocalDateTime.now());
         log.info(companyDTO.toString());
         return mapper.entityToDto(companyRepository.save(mapper.dtoToEntity(companyDTO)));
+    }
+
+    @Override
+    public LogoDTO getLogo(Long companyIdx) {
+        return companyRepository.findLogoByCompanyIdx(companyIdx);
     }
 
     @Override

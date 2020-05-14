@@ -6,5 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class JwtResponse {
+    private String name;
+    private String profileImg;
     private String jwtToken;
 }
