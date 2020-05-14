@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/myPage/company/logo")
 public interface LogoCompositeController {
     @GetMapping
-    ResponseEntity<ResponseData> getLogo();
+    ResponseEntity<LogoDTO> getLogo();
     @PostMapping
     ResponseEntity<ResponseData> updateLogo(@RequestBody LogoDTO logoDTO);
 }

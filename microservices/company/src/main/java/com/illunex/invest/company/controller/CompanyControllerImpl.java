@@ -56,8 +56,8 @@ public class CompanyControllerImpl implements CompanyController {
     }
 
     @Override
-    public ResponseEntity<ResponseData> updateLogo(Long id, String squareLogo, String rectangleLogo) {
-        companyService.updateLogo(id, squareLogo, rectangleLogo);
+    public ResponseEntity<ResponseData> updateLogo(LogoDTO logoDTO) {
+        companyService.updateLogo(logoDTO.getCompanyIdx(), logoDTO.getSquareLogo(), logoDTO.getRectangleLogo());
         return ResponseEntity.ok(ResponseData.builder()
                 .errorCode(0)
                 .message("success")

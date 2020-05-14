@@ -14,7 +14,7 @@ public class LogoCompositeControllerImpl implements LogoCompositeController {
     private final LogoIntegrationService logoIntegrationService;
 
     @Override
-    public ResponseEntity<ResponseData> getLogo() {
+    public ResponseEntity<LogoDTO> getLogo() {
         return logoIntegrationService.getLogo();
     }
 
