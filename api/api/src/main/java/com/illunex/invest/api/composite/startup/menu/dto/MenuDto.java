@@ -98,7 +98,7 @@ public class MenuDto {
     }
 
     private List<Menu> initAlarmSubMenu(Collection<RoleDTO> roles) {
-        return List.of(makeSubMenu("전체알람", "alarm", "/myPage/alarm/list", 1),
+        return List.of(makeSubMenu("전체알람", "list", "/myPage/alarm/list", 1),
                 makeSubMenu("온라인심사", "evaluate", "/myPage/alarm/evaluate", 2),
                 makeSubMenu("포트폴리오 연결", "portfolio", "/myPage/alarm/portfolio", 3))
                 .stream().sorted(Comparator.comparingInt(Menu::getOrder)).collect(Collectors.toList());
@@ -106,7 +106,7 @@ public class MenuDto {
 
     private List<Menu> initAccountSubMenu(Collection<RoleDTO> roles) {
         List<Menu> accountSubMenu = new ArrayList<>();
-        accountSubMenu.add(makeSubMenu("프로필 수정", "myPage", "/myPage/account/profile", 1));
+        accountSubMenu.add(makeSubMenu("프로필 수정", "profile", "/myPage/account/profile", 1));
         accountSubMenu.add(makeSubMenu("비밀번호 변경", "password", "/myPage/account/password", 2));
         accountSubMenu.add(makeSubMenu("개인서명관리", "signature", "/myPage/account/signature", 3));
 
@@ -133,11 +133,11 @@ public class MenuDto {
     }
 
     private List<Menu> initPluginSubMenu(Collection<RoleDTO> roles) {
-        return List.of(makeSubMenu("전체 플러그인", "plugin", "/myPage/plugin/list", 1));
+        return List.of(makeSubMenu("전체 플러그인", "list", "/myPage/plugin/list", 1));
     }
 
     private List<Menu> initLicenseSubMenu(Collection<RoleDTO> roles) {
-        return List.of(makeSubMenu("요금안내", "license", "/myPage/license/payment", 1),
+        return List.of(makeSubMenu("요금안내", "payment", "/myPage/license/payment", 1),
                 makeSubMenu("고객센터", "support", "/myPage/license/support", 2, false))
                 .stream()
                 .sorted(Comparator.comparingInt(Menu::getOrder))
@@ -145,7 +145,7 @@ public class MenuDto {
     }
 
     private List<Menu> initConnectSubMenu(Collection<RoleDTO> roles) {
-        return List.of(makeSubMenu("투자사연결", "connect", "/myPage/connect/vc", 1),
+        return List.of(makeSubMenu("투자사연결", "vc", "/myPage/connect/vc", 1),
                 makeSubMenu("팀원연결", "member", "/myPage/connect/member", 2))
                 .stream()
                 .sorted(Comparator.comparingInt(Menu::getOrder))
@@ -200,24 +200,24 @@ public class MenuDto {
                             break;
                         case "ROLE_FEED":
                             makeMainMenu("피드", "feed", "feed", List.of(
-                                    makeSubMenu("피드", "feed", "/feed", 1)
+                                    makeSubMenu("피드", "list", "/feed/list", 1)
                             ), 5);
                             break;
                         case "ROLE_SHAREHOLDER" : makeMainMenu("주주", "shareholder", "shareholder", List.of(
-                                makeSubMenu("주주명부", "shareholder", "/shareholder/shareholder", 1),
-                                makeSubMenu("주주총회", "shareholder", "/shareholder/shareholder", 2, false),
-                                makeSubMenu("이사회", "shareholder", "/shareholder/shareholder", 3, false)
+                                makeSubMenu("주주명부", "list", "/shareholder/list", 1),
+                                makeSubMenu("주주총회", "meeting", "/shareholder/meeting", 2, false),
+                                makeSubMenu("이사회", "board", "/shareholder/board", 3, false)
                         ), 6);
                             break;
                         case "ROLE_DOC" : makeMainMenu("문서", "doc", "doc", List.of(
-                                makeSubMenu("All", "doc", "/feed", 1, false),
-                                makeSubMenu("기업 운영 문서", "doc_company", "/feed", 2, false),
-                                makeSubMenu("직원 관리 문서", "doc_user", "/feed", 3, false)
+                                makeSubMenu("All", "all", "/doc/all", 1, false),
+                                makeSubMenu("기업 운영 문서", "company", "/doc/company", 2, false),
+                                makeSubMenu("직원 관리 문서", "employee", "/doc/employee", 3, false)
                         ), 7);
                             break;
                         case "ROLE_NEWS" :
                             makeMainMenu("뉴스", "news", "news", List.of(
-                                    makeSubMenu("뉴스", "news", "/news", 1)
+                                    makeSubMenu("뉴스", "list", "/news/list", 1)
                             ), 10);
                             break;
                         default:
@@ -230,7 +230,7 @@ public class MenuDto {
      * MyPageMenu
      * */
     private void initMyPageMenu(Collection<RoleDTO> roles) {
-        makeMyPageMenu("계정설정", "myPage", "myPage", initAccountSubMenu(roles), 1);
+        makeMyPageMenu("계정설정", "account", "account", initAccountSubMenu(roles), 1);
         makeMyPageMenu("알람", "alarm", "alarm", initAlarmSubMenu(roles), 20);
 
         roles.stream()
