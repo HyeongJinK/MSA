@@ -23,12 +23,12 @@ public class ProfileIntegrationService extends DefaultIntegrationService {
                 .build());
     }
 
-    public ResponseEntity<ResponseData> editProfiwle(UserDTO userDTO) {
+    public ResponseEntity<ResponseData> editProfile(UserDTO userDTO) {
         return ResponseEntity.ok(ResponseData.builder()
                 .errorCode(0)
                 .message("success")
-                .data(restTemplate.postForObject("/profile"
-                        , new HttpEntity<>(userDTO)
+                .data(restTemplate.postForObject(userUrl + "/profile"
+                        , new HttpEntity<>(userDTO, getDefaultHeader())
                         , UserDTO.class))
                 .build());
     }
