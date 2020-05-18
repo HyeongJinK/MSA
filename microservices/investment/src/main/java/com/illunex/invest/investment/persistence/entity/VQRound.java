@@ -18,6 +18,7 @@ public class VQRound {
     String roundName;
     String infoUseAgreement;
     String newsAgreement;
+    String applicant;
     String company;
     String name;
     String contact;

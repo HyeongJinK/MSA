@@ -26,6 +26,7 @@ public class RoundController {
         @RequestParam("roundName")String roundName,
         @RequestParam("infoUseAgreement")String infoUseAgreement,
         @RequestParam("newsAgreement")String newsAgreement,
+        @RequestParam("applicant")String applicant,
         @RequestParam("company")String company,
         @RequestParam("name")String name,
         @RequestParam("contact")String contact,
@@ -42,6 +43,7 @@ public class RoundController {
             .roundName(roundName)
             .infoUseAgreement(infoUseAgreement)
             .newsAgreement(newsAgreement)
+            .applicant(applicant)
             .company(company)
             .name(name)
             .contact(contact)
