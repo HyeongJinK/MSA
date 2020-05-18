@@ -14,4 +14,6 @@ public interface CompanyCompositeController {
     ResponseEntity<ResponseData> editCompanyInfo(@RequestBody CompanyDTO companyDTO);
     @PostMapping("/logo")
     ResponseEntity<ResponseData> uploadLogo(@RequestParam("file") MultipartFile file);
+    @GetMapping("/niceCompanyInfo")
+    ResponseEntity<ResponseData> getNiceCompanyInfo(@RequestParam("businessNumber") String businessNumber);
 }

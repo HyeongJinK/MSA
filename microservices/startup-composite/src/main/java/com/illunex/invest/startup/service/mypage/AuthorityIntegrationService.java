@@ -69,12 +69,12 @@ public class AuthorityIntegrationService extends DefaultIntegrationService {
                 , ResponseData.class);
     }
 
-    public void getUserList() {
+    public List<AuthorityExDTO> getUserList() {
         ResponseEntity<ResponseList> memberAuthorityRes = restTemplate.getForEntity(userUrl + "/authority/"+ getUser().getCompanyIdx()
                 , ResponseList.class);
 
-        List<AuthorityExDTO> memberAuthority = memberAuthorityRes.getBody().getData();
-        //유저 리스트
+        return memberAuthorityRes.getBody().getData();
+
     }
     public void getAuthorityList() {
         //유저에 대한 권한

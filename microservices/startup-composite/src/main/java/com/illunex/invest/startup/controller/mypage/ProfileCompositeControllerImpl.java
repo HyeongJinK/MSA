@@ -20,6 +20,6 @@ public class ProfileCompositeControllerImpl implements ProfileCompositeControlle
 
     @Override
     public ResponseEntity<ResponseData> editProfile(UserDTO userDTO) {
-        return profileIntegrationService.editProfiwle(userDTO);
+        return profileIntegrationService.editProfile(userDTO);
     }
 }

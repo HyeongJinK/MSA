@@ -2,11 +2,14 @@ package com.illunex.invest.api.composite.startup.mypage.controller;
 
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
+import com.illunex.invest.api.composite.startup.mypage.dto.AuthorityExDTO;
 import com.illunex.invest.api.core.user.request.AuthorityRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Api(value = "마이페이지 권한설정")
 @RequestMapping(value = "/myPage/authority")
@@ -23,4 +26,8 @@ public interface AuthorityCompositeController {
     // TODO 사용자 별로 수정하기
     @PostMapping(value = "/updateAuthority")
     ResponseEntity<ResponseData> updateAuthority();
+
+
+    @GetMapping(value = "/getUserList")
+    ResponseEntity<List<AuthorityExDTO>> getAuthorityUserList();
 }

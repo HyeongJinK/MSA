@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class AuthorityCompositeControllerImpl extends StartupDefaultController implements AuthorityCompositeController {
@@ -36,6 +38,11 @@ public class AuthorityCompositeControllerImpl extends StartupDefaultController i
     @Override
     public ResponseEntity<ResponseData> updateAuthority() {
         return null;
+    }
+
+    @Override
+    public ResponseEntity<List<AuthorityExDTO>> getAuthorityUserList() {
+        return ResponseEntity.ok(authorityIntegrationService.getUserList());
     }
 }
 
