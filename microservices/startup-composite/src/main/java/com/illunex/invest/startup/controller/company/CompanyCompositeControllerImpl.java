@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class CompanyCompositeControllerImpl extends StartupDefaultController implements CompanyCompositeController {
     private final CompanyCompositeIntegration companyCompositeIntegration;
 
-
     @Override
     public ResponseEntity<ResponseData> getCompanyInfo() {
         return ResponseEntity.ok(ResponseData.builder()
@@ -43,6 +42,15 @@ public class CompanyCompositeControllerImpl extends StartupDefaultController imp
                 .errorCode(0)
                 .message("success")
                 .data(companyCompositeIntegration.uploadLogo(file))
+                .build());
+    }
+
+    @Override
+    public ResponseEntity<ResponseData> getNiceCompanyInfo(String businessNumber) {
+        return ResponseEntity.ok(ResponseData.builder()
+                .data(companyCompositeIntegration.getNiceCompanyInfo(businessNumber))
+                .errorCode(0)
+                .message("success")
                 .build());
     }
 }
