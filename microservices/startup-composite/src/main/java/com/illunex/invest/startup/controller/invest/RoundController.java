@@ -21,7 +21,7 @@ public class RoundController {
 
     @PostMapping(value = "invest/round")
     public ResponseEntity<String> VQRoundAnswer(
-        @RequestParam("businessRegistrationFile")MultipartFile businessRegistrationFile,
+        @RequestParam(value = "businessRegistrationFile", required = false)MultipartFile businessRegistrationFile,
         @RequestParam("companyProfileFile")MultipartFile companyProfileFile,
         @RequestParam("roundName")String roundName,
         @RequestParam("infoUseAgreement")String infoUseAgreement,

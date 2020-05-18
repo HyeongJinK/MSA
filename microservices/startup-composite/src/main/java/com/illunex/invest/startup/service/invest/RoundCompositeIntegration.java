@@ -25,10 +25,14 @@ public class RoundCompositeIntegration extends DefaultIntegrationService {
 
     public String VQRoundAnswer(VQRoundDTO vqRoundDTO, MultipartFile businessRegistrationFile, MultipartFile companyProfileFile) {
 
-        ResponseEntity<ResponseData> businessRegistration = fileUpload(businessRegistrationFile, "invest-startup", "invest/round/"+vqRoundDTO.getRoundName()+"/"+vqRoundDTO.getCompany());
-        ResponseEntity<ResponseData> companyProfile = fileUpload(companyProfileFile, "invest-startup", "invest/round/"+vqRoundDTO.getRoundName()+"/"+vqRoundDTO.getCompany());
+        if (businessRegistrationFile != null) {
+            ResponseEntity<ResponseData> businessRegistration = fileUpload(businessRegistrationFile, "invest-startup", "invest/round/"+vqRoundDTO.getRoundName()+"/"+vqRoundDTO.getCompany());
+            vqRoundDTO.setBusinessRegistrationFile(String.valueOf(businessRegistration.getBody().getData()));
+        } else {
+            vqRoundDTO.setBusinessRegistrationFile("");
+        }
 
-        vqRoundDTO.setBusinessRegistrationFile(String.valueOf(businessRegistration.getBody().getData()));
+        ResponseEntity<ResponseData> companyProfile = fileUpload(companyProfileFile, "invest-startup", "invest/round/"+vqRoundDTO.getRoundName()+"/"+vqRoundDTO.getCompany());
         vqRoundDTO.setCompanyProfileFile(String.valueOf(companyProfile.getBody().getData()));
 
         HttpHeaders headers = new HttpHeaders();
