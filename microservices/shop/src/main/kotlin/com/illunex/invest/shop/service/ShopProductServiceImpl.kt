@@ -46,7 +46,7 @@ class ShopProductServiceImpl : ShopProductService {
                         var product:Product = shopProductRepository!!.findById(pd.products.id!!).get()
                         println(product.plugins.size)
                         product.plugins.stream()
-                                .map { plugin -> plugin.getId() }
+                                .map { plugin -> plugin.id }
                                 .forEach { plugin ->
                                     run {
                                         println(plugin)

@@ -77,8 +77,20 @@ public class AuthorityIntegrationService extends DefaultIntegrationService {
 
     }
     public void getAuthorityList() {
-        //유저에 대한 권한
-        // 플러그인  권한  읽기 쓰기 수정 삭제
+        // 회사에서 적용한 플러그인 리스트
+        ResponseEntity<ResponseList> pluginsRes = restTemplate.getForEntity(companyUrl + "/plugin/"+ getUser().getCompanyIdx()
+                , ResponseList.class);
+        List<PluginDTO> plugins =ListDTOParser(pluginsRes.getBody(), PluginDTO.class);
+        List<String> ids = plugins.stream()
+                .filter(pluginDTO -> pluginDTO.getState().equals(PluginState.OPEN))
+                .map(PluginDTO::getPluginId)
+                .map(String::valueOf)
+                .collect(Collectors.toList());
+        // 플러그인 아이디 목록으로 권한 정보 가져오기
+        ResponseEntity<ResponseList> roleNamesRes = restTemplate.getForEntity(shopUrl + "/plugin/plugins?ids="+ String.join(",", ids)
+                , ResponseList.class);
+
+        System.out.println(roleNamesRes.getBody().getData());
 
     }
 }
