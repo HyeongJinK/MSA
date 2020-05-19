@@ -13,8 +13,9 @@ public interface CorporateSealMapper {
     CorporateSealDTO entityToDto(CorporateSeal signature);
     CorporateSeal dtoToEntity(CorporateSealDTO signatureDTO);
 
-    List<CorporateSealDTO> entityToDto(List<CorporateSeal> signature);
-    List<CorporateSeal> dtoToEntity(List<CorporateSealDTO> signatureDTO);
     CompanyIdDTO entityToDto(Company company);
     Company dtoToEntity(CompanyIdDTO companyIdDTO);
+
+    List<CorporateSealDTO> entityToDto(List<CorporateSeal> signature);
+    List<CorporateSeal> dtoToEntity(List<CorporateSealDTO> signatureDTO);
 }
