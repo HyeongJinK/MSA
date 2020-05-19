@@ -3,6 +3,7 @@ package com.illunex.invest.api.core.ir.controller;
 import com.illunex.invest.api.core.ir.dto.IRDTO;
 import com.illunex.invest.api.core.ir.dto.ListDTO;
 import com.illunex.invest.api.core.ir.dto.PasswordDTO;
+import com.illunex.invest.api.core.ir.dto.SignatureDTO;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,8 @@ public interface IRController {
     ResponseEntity<ListDTO> getIRList(@RequestParam Long companyIdx);
     @PostMapping(value = "/color")
     ResponseEntity<String> changeCardColor(@RequestBody IRDTO irdto);
+    @PostMapping(value = "/signature")
+    ResponseEntity<String> changeSignature(@RequestBody SignatureDTO signatureDTO);
     @PostMapping(value = "/pw/set")
     ResponseEntity<String> setPassword(@RequestBody PasswordDTO passwordDTO);
     @PostMapping(value = "/pw/reset")

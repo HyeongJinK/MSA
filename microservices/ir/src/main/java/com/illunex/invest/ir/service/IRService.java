@@ -44,6 +44,7 @@ public class IRService {
                     .product(productEntity)
                     .outcome(outcomeEntity)
                     .isPassword(false)
+                    .signature("")
                     .progress("0")
                     .readCount(0)
                     .updateDate(LocalDateTime.now())
@@ -74,6 +75,18 @@ public class IRService {
             return "CardColor set complete";
         } catch (Exception ex) {
             return "Cannot change card color. Invalid IR Index.";
+        }
+    }
+
+    public String changeSignature(Long irIdx, String imgUrl) {
+        try {
+            IREntity irEntity = irRepository.findById(irIdx).get();
+
+            irEntity.setSignature(imgUrl);
+            irRepository.save(irEntity);
+            return "Signature change complete";
+        } catch (Exception ex) {
+            return "Cannot change Signature. Invalid IR Index.";
         }
     }
 

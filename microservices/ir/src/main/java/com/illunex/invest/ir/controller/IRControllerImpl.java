@@ -1,5 +1,6 @@
 package com.illunex.invest.ir.controller;
 
+import com.illunex.invest.api.core.ir.dto.SignatureDTO;
 import com.illunex.invest.ir.service.IRService;
 import com.illunex.invest.api.core.ir.controller.IRController;
 import com.illunex.invest.api.core.ir.dto.IRDTO;
@@ -38,6 +39,12 @@ public class IRControllerImpl implements IRController {
     @Override
     public ResponseEntity<String> changeCardColor(@RequestBody IRDTO irdto) {
         String result = IRService.changeCardColor(irdto.getIdx(), irdto.getCardColor());
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<String> changeSignature(SignatureDTO signatureDTO) {
+        String result = IRService.changeSignature(signatureDTO.getIrIdx(), signatureDTO.getImgUrl());
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
