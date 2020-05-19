@@ -1,5 +1,6 @@
 package com.illunex.invest.user.service.mapper;
 
+import com.illunex.invest.api.core.user.dto.AuthRoleDTO;
 import com.illunex.invest.api.core.user.dto.AuthorityDTO;
 import com.illunex.invest.api.core.user.dto.RoleDTO;
 import com.illunex.invest.user.persistence.entity.Role;
@@ -13,6 +14,9 @@ import java.util.Set;
 public interface AuthorityMapper {
     AuthorityDTO entityToDto(User user);
     User dtoToEntity(AuthorityDTO userDTO);
+
+    AuthRoleDTO entityAuthRoleToDto(User user);
+    User dtoAuthRoleToEntity(AuthRoleDTO userDTO);
 
     List<AuthorityDTO> entityToDto(List<User> user);
     List<User> dtoToEntity(List<AuthorityDTO> userDTO);

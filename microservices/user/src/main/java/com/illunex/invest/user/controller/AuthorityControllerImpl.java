@@ -3,6 +3,7 @@ package com.illunex.invest.user.controller;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.user.controller.AuthorityController;
+import com.illunex.invest.api.core.user.dto.AuthRoleDTO;
 import com.illunex.invest.api.core.user.dto.AuthorityDTO;
 import com.illunex.invest.api.core.user.request.AuthorityRequest;
 import com.illunex.invest.user.service.AuthorityService;
@@ -34,7 +35,7 @@ public class AuthorityControllerImpl extends UserDefaultController  implements A
     }
 
     @Override
-    public ResponseEntity<AuthorityDTO> getIRAuthority(Long userIdx) {
+    public ResponseEntity<AuthRoleDTO> getIRAuthority(Long userIdx) {
         return new ResponseEntity(authorityService.getIRAuthority(userIdx), HttpStatus.OK);
     }
 

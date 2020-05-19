@@ -1,5 +1,6 @@
 package com.illunex.invest.user.service;
 
+import com.illunex.invest.api.core.user.dto.AuthRoleDTO;
 import com.illunex.invest.api.core.user.dto.AuthorityDTO;
 import com.illunex.invest.api.core.user.request.AuthorityRequest;
 import com.illunex.invest.user.persistence.entity.User;
@@ -41,7 +42,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
-    public AuthorityDTO getIRAuthority(Long userIdx) {
-        return mapper.entityToDto(userRepository.findById(userIdx).get());
+    public AuthRoleDTO getIRAuthority(Long userIdx) {
+        return mapper.entityAuthRoleToDto(userRepository.findById(userIdx).get());
     }
 }
