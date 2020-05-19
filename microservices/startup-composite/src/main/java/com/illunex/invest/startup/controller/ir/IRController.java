@@ -3,6 +3,7 @@ package com.illunex.invest.startup.controller.ir;
 import com.illunex.invest.api.core.ir.dto.IRDTO;
 import com.illunex.invest.api.core.ir.dto.ListDTO;
 import com.illunex.invest.api.core.ir.dto.PasswordDTO;
+import com.illunex.invest.api.core.ir.dto.SignatureDTO;
 import com.illunex.invest.api.core.user.dto.AuthorityDTO;
 import com.illunex.invest.startup.service.ir.IRCompositeIntegration;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,13 @@ public class IRController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return restTemplate.postForEntity(irUrl + "/ir/color", new HttpEntity(irdto, headers), String.class);
+    }
+
+    @PostMapping(value = "ir/signature")
+    public ResponseEntity<String> changeSignature(@RequestBody SignatureDTO signatureDTO) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return restTemplate.postForEntity(irUrl + "/ir/signature", new HttpEntity(signatureDTO, headers), String.class);
     }
 
     @PostMapping(value = "ir/pw/set")

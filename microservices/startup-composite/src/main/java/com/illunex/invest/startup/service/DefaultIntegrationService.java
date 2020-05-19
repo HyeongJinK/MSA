@@ -11,7 +11,6 @@ import com.illunex.invest.api.core.communication.dto.MultiFileDeleteDTO;
 import com.illunex.invest.api.core.user.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -23,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +38,7 @@ public class DefaultIntegrationService {
     protected final String startUpUrl = "https://startup.effectmall.com";
     protected final String bucket = "invest-startup";
 
-    @Cacheable(value="user")
+//    @Cacheable(value="user")
     public UserDTO getUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal != null) {

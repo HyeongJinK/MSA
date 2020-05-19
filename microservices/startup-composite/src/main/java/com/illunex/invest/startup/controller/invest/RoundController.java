@@ -21,11 +21,12 @@ public class RoundController {
 
     @PostMapping(value = "invest/round")
     public ResponseEntity<String> VQRoundAnswer(
-        @RequestParam("businessRegistrationFile")MultipartFile businessRegistrationFile,
+        @RequestParam(value = "businessRegistrationFile", required = false)MultipartFile businessRegistrationFile,
         @RequestParam("companyProfileFile")MultipartFile companyProfileFile,
         @RequestParam("roundName")String roundName,
         @RequestParam("infoUseAgreement")String infoUseAgreement,
         @RequestParam("newsAgreement")String newsAgreement,
+        @RequestParam("applicant")String applicant,
         @RequestParam("company")String company,
         @RequestParam("name")String name,
         @RequestParam("contact")String contact,
@@ -42,6 +43,7 @@ public class RoundController {
             .roundName(roundName)
             .infoUseAgreement(infoUseAgreement)
             .newsAgreement(newsAgreement)
+            .applicant(applicant)
             .company(company)
             .name(name)
             .contact(contact)
