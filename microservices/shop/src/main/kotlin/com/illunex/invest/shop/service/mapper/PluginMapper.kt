@@ -32,7 +32,7 @@ class PluginMapper {
     }
 
     private fun roleDtoToEntity(pluginRole: PluginRole): PluginRoleDTO {
-        return PluginRoleDTO(pluginRole.id, pluginRole.roleTitle, pluginRole.menuTitle)
+        return PluginRoleDTO(pluginRole.id, pluginRole.roleTitle, pluginRole.menuTitle, 0)
     }
 }
 

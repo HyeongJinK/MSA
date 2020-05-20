@@ -78,7 +78,7 @@ public class AuthorityIntegrationService extends DefaultIntegrationService {
         return memberAuthorityRes.getBody().getData();
 
     }
-    public void getAuthorityList() {
+    public List<com.illunex.invest.api.core.shop.dto.PluginDTO> getAuthorityList() {
         // 회사에서 적용한 플러그인 리스트
         UserDTO user = getUser();
         ResponseEntity<ResponseList> pluginsRes = restTemplate.getForEntity(companyUrl + "/plugin/"+ user.getCompanyIdx()
@@ -90,15 +90,16 @@ public class AuthorityIntegrationService extends DefaultIntegrationService {
                 .map(String::valueOf)
                 .collect(Collectors.toList());
         // 플러그인 아이디 목록으로 권한 정보 가져오기
-        ResponseEntity<ResponseList> roleNamesRes = restTemplate.getForEntity(shopUrl + "/plugin/plugins?ids="+ String.join(",", ids)
+        ResponseEntity<ResponseList> companyPlugins = restTemplate.getForEntity(shopUrl + "/plugin/plugins?ids="+ String.join(",", ids)
                 , ResponseList.class);
 
-        List<com.illunex.invest.api.core.shop.dto.PluginDTO> auth = ListDTOParser(pluginsRes.getBody(), com.illunex.invest.api.core.shop.dto.PluginDTO.class);
+        List<com.illunex.invest.api.core.shop.dto.PluginDTO> auth = ListDTOParser(companyPlugins.getBody(), com.illunex.invest.api.core.shop.dto.PluginDTO.class);
 
         AuthRoleDTO autoRoleDTO = restTemplate.getForObject(userUrl + "/authority/ir?userIdx=" + user.getId(), AuthRoleDTO.class);
 
 
-        System.out.println(roleNamesRes.getBody().getData());
+        System.out.println(companyPlugins.getBody().getData());
 
+        return auth;
     }
 }

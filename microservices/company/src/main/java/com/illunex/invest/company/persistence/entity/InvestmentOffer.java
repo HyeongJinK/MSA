@@ -4,6 +4,6 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class InvestmentOffer {
-    boolean vc;
+    boolean offerVc;
     boolean individual;
 }

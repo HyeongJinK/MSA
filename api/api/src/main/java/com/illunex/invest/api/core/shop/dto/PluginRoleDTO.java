@@ -11,4 +11,5 @@ public class PluginRoleDTO {
     Long id;
     String roleTitle;
     String menuTitle;
+    private int detailedRights;
 }
