@@ -27,7 +27,7 @@ public class CorporateSealIntegrationService extends DefaultIntegrationService {
 
         return restTemplate.postForEntity(companyUrl + "/corporateSeal", new HttpEntity<>(CorporateSealDTO.builder()
                 .imgUrl(String.valueOf(uploadRes.getBody().getData()))
-                .companyIdDTO(CompanyIdDTO.builder().companyIdx(getUser().getCompanyIdx()).build())
+                .company(CompanyIdDTO.builder().companyIdx(getUser().getCompanyIdx()).build())
                 .build()), ResponseData.class);
     }
 

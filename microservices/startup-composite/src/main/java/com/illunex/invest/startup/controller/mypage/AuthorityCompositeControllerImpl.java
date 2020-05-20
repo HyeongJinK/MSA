@@ -4,6 +4,7 @@ import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.composite.startup.mypage.controller.AuthorityCompositeController;
 import com.illunex.invest.api.composite.startup.mypage.dto.AuthorityExDTO;
+import com.illunex.invest.api.core.shop.dto.PluginDTO;
 import com.illunex.invest.api.core.user.request.AuthorityRequest;
 import com.illunex.invest.startup.controller.StartupDefaultController;
 import com.illunex.invest.startup.service.mypage.AuthorityIntegrationService;
@@ -19,10 +20,12 @@ public class AuthorityCompositeControllerImpl extends StartupDefaultController i
     private final AuthorityIntegrationService authorityIntegrationService;
 
     @Override
-    public ResponseEntity<ResponseList> getMemberAuthorityList() {
-        return ResponseEntity.ok(new ResponseList<>(0
-                , "success"
-                , authorityIntegrationService.list()));
+    public ResponseEntity<ResponseData> getMemberAuthorityList() {
+        return ResponseEntity.ok(ResponseData.builder()
+                        .errorCode(0)
+                        .message("success")
+                        .data(authorityIntegrationService.getAuthorityList())
+                        .build());
     }
 
     @Override

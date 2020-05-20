@@ -5,8 +5,10 @@ import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.composite.startup.mypage.dto.AuthorityExDTO;
 import com.illunex.invest.api.core.company.dto.PluginDTO;
 import com.illunex.invest.api.core.company.dto.enumable.PluginState;
+import com.illunex.invest.api.core.user.dto.AuthRoleDTO;
 import com.illunex.invest.api.core.user.dto.AuthorityDTO;
 import com.illunex.invest.api.core.user.dto.RoleDTO;
+import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.api.core.user.request.AuthorityRequest;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
 import org.springframework.http.HttpEntity;
@@ -76,9 +78,28 @@ public class AuthorityIntegrationService extends DefaultIntegrationService {
         return memberAuthorityRes.getBody().getData();
 
     }
-    public void getAuthorityList() {
-        //유저에 대한 권한
-        // 플러그인  권한  읽기 쓰기 수정 삭제
+    public List<com.illunex.invest.api.core.shop.dto.PluginDTO> getAuthorityList() {
+        // 회사에서 적용한 플러그인 리스트
+        UserDTO user = getUser();
+        ResponseEntity<ResponseList> pluginsRes = restTemplate.getForEntity(companyUrl + "/plugin/"+ user.getCompanyIdx()
+                , ResponseList.class);
+        List<PluginDTO> plugins =ListDTOParser(pluginsRes.getBody(), PluginDTO.class);
+        List<String> ids = plugins.stream()
+                .filter(pluginDTO -> pluginDTO.getState().equals(PluginState.OPEN))
+                .map(PluginDTO::getPluginId)
+                .map(String::valueOf)
+                .collect(Collectors.toList());
+        // 플러그인 아이디 목록으로 권한 정보 가져오기
+        ResponseEntity<ResponseList> companyPlugins = restTemplate.getForEntity(shopUrl + "/plugin/plugins?ids="+ String.join(",", ids)
+                , ResponseList.class);
 
+        List<com.illunex.invest.api.core.shop.dto.PluginDTO> auth = ListDTOParser(companyPlugins.getBody(), com.illunex.invest.api.core.shop.dto.PluginDTO.class);
+
+        AuthRoleDTO autoRoleDTO = restTemplate.getForObject(userUrl + "/authority/ir?userIdx=" + user.getId(), AuthRoleDTO.class);
+
+
+        System.out.println(companyPlugins.getBody().getData());
+
+        return auth;
     }
 }

@@ -1,17 +1,18 @@
-package com.illunex.invest.shop.persistence.repository;
+package com.illunex.invest.shop.persistence.repository.impl;
 
 import com.illunex.invest.shop.persistence.entity.QPlugin
 import com.illunex.invest.shop.persistence.entity.QPluginRole
+import com.illunex.invest.shop.persistence.repository.custom.ShopPluginCustomRepository
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
 @Repository
-class ShopPluginCustomRepository {
+class ShopPluginRepositoryImpl: ShopPluginCustomRepository {
     @Autowired
     var queryFactory: JPAQueryFactory? = null
 
-    fun findRoleByIds(ids:List<Long>) : List<String> {
+    override fun findRoleByIds(ids:List<Long>) : List<String> {
         var plugin: QPlugin = QPlugin.plugin;
         var pluginRole: QPluginRole = QPluginRole.pluginRole;
 

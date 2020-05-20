@@ -15,5 +15,5 @@ public class CorporateSealDTO {
     String imgUrl;
     SignatureStatus status;
     LocalDateTime updateDate;
-    CompanyIdDTO companyIdDTO;
+    CompanyIdDTO company;
 }
