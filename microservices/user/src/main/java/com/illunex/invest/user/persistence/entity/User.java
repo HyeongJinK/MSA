@@ -58,7 +58,7 @@ public class User implements UserInterface {
                 .token(token)
                 .companyIdx(companyIdx)
                 .authorities(Role.initRoles())
-                .rank("사원")
+                .rank("")
                 .sns(createSns())
                 .build();
     }
@@ -77,7 +77,7 @@ public class User implements UserInterface {
                 .token(token)
                 .companyIdx(companyIdx)
                 .authorities(Role.companyAdminRoles())
-                .rank("대표")
+                .rank("")
                 .sns(createSns())
                 .build();
     }
