@@ -13,5 +13,5 @@ import java.util.Set;
 @AllArgsConstructor
 public class AuthorityItem {
     private Long id;
-    private Set<RoleDTO> authorities = new HashSet<>();
+    private Set<RoleDTO> pluginRole = new HashSet<>();
 }
