@@ -2,6 +2,8 @@ package com.illunex.invest.api.core.investment.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Builder
 @Getter
 @Setter
@@ -25,4 +27,5 @@ public class VQRoundDTO {
     String companyProfileLink;
     String businessRegistrationFile;
     String companyProfileFile;
+    LocalDateTime regDate;
 }
