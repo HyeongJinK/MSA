@@ -1,6 +1,8 @@
 package com.illunex.invest.company.service;
 
 import com.illunex.invest.api.core.company.dto.CorporateSealDTO;
+import com.illunex.invest.api.core.user.enumable.SignatureStatus;
+import com.illunex.invest.company.persistence.entity.Company;
 import com.illunex.invest.company.persistence.entity.CorporateSeal;
 import com.illunex.invest.company.persistence.repository.CorporateSealRepository;
 import com.illunex.invest.company.service.mapper.CorporateSealMapper;
@@ -9,6 +11,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,14 +30,28 @@ public class CorporateSealServiceImpl implements CorporateSealService {
     @Override
     @Transactional
     public CorporateSealDTO addCorporateSeal(CorporateSealDTO corporateSealDTO) {
-        return mapper.entityToDto(corporateSealRepository.save(mapper.dtoToEntity(corporateSealDTO)));
+        return mapper.entityToDto(corporateSealRepository.save(CorporateSeal.builder()
+                .imgUrl(corporateSealDTO.getImgUrl())
+                .status(SignatureStatus.Inactive)
+                .updateDate(LocalDateTime.now())
+                .company(Company.builder()
+                        .companyIdx(corporateSealDTO.getCompany().getCompanyIdx())
+                        .build())
+                .build()));
     }
 
     @Override
     @Transactional
-    public void toggleCorporateSeal(Long id) {
+    public String toggleCorporateSeal(Long id) {
+
+        System.out.println("==== 전"+corporateSealRepository.findById(id).get().getStatus());
+
+
         CorporateSeal corporateSeal = corporateSealRepository.findById(id).get().toggleStatus();
+
+        System.out.println("==== 후"+corporateSeal.getStatus());
         corporateSealRepository.save(corporateSeal);
+        return corporateSeal.getStatus().toString();
     }
 
     @Override

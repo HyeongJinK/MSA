@@ -10,6 +10,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class RoundService {
     private Log log = LogFactory.getLog(RoundService.class);
@@ -21,6 +23,7 @@ public class RoundService {
     public String vqRoundAnswer(VQRoundDTO vqRoundDTO) {
         VQRound round = vqRoundRepository.findByCompanyIdx(vqRoundDTO.getCompanyIdx());
         if (round == null) {
+            round.setRegDate(LocalDateTime.now());
             vqRoundRepository.save(mapper.vqRoundDTOToEntity(vqRoundDTO));
             return "Round answer is complete";
         } else {

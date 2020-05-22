@@ -3,6 +3,7 @@ package com.illunex.invest.investment.persistence.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -31,4 +32,5 @@ public class VQRound {
     String companyProfileLink;
     String businessRegistrationFile;
     String companyProfileFile;
+    LocalDateTime regDate;
 }
