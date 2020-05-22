@@ -34,9 +34,9 @@ public class CorporateSealControllerImpl implements CorporateSealController {
 
     @Override
     public ResponseEntity<ResponseData> toggleCorporateSeal(Long id) {
-        corporateSealService.toggleCorporateSeal(id);
         return ResponseEntity.ok(ResponseData.builder()
                 .errorCode(0)
+                .data(corporateSealService.toggleCorporateSeal(id))
                 .message("Success")
                 .build());
     }

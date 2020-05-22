@@ -7,7 +7,7 @@ import java.util.List;
 public interface CorporateSealService {
     List<CorporateSealDTO> corporateSeal(Long companyId);
     CorporateSealDTO addCorporateSeal(CorporateSealDTO corporateSealDTO);
-    void toggleCorporateSeal(Long id);
+    String toggleCorporateSeal(Long id);
     void delCorporateSeal(Long id);
 
 }
