@@ -20,11 +20,11 @@ public class AuthorityCompositeControllerImpl extends StartupDefaultController i
     private final AuthorityIntegrationService authorityIntegrationService;
 
     @Override
-    public ResponseEntity<ResponseData> getMemberAuthorityList() {
+    public ResponseEntity<ResponseData> getMemberAuthorityList(Long userId) {
         return ResponseEntity.ok(ResponseData.builder()
                         .errorCode(0)
                         .message("success")
-                        .data(authorityIntegrationService.getAuthorityList())
+                        .data(authorityIntegrationService.getAuthorityList(userId))
                         .build());
     }
 

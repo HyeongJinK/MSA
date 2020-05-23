@@ -39,6 +39,7 @@ public class ShareholderServiceImpl implements ShareholderService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         shareholderRepository.deleteById(id);
     }

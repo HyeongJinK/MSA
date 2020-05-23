@@ -17,14 +17,14 @@ import java.util.List;
 public interface AuthorityCompositeController {
     @ApiOperation(value = "회사 유저 권한 조회")
     @GetMapping
-    ResponseEntity<ResponseData> getMemberAuthorityList();
+    ResponseEntity<ResponseData> getMemberAuthorityList(@RequestParam Long userId);
     @ApiOperation(value = "권한 수정")
     @PostMapping
     ResponseEntity<ResponseData> editMemberAuthority(@RequestBody AuthorityRequest request);
-    // TODO 사용자 별로 권한 불러오기
+    // 사용자 별로 권한 불러오기
     @GetMapping(value = "/getAuthority")
     ResponseEntity<ResponseData> getAuthority();
-    // TODO 사용자 별로 수정하기
+    // 사용자 별로 수정하기
     @PostMapping(value = "/updateAuthority")
     ResponseEntity<ResponseData> updateAuthority();
 

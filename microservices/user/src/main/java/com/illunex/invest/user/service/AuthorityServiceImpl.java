@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,14 +40,18 @@ public class AuthorityServiceImpl implements AuthorityService {
     @Override
     @Transactional
     public String setMemberAuthorityList(AuthorityRequest request) {
-        User user = userRepository.findById(request.getData().get(0).getId()).get();
+        User user = userRepository.findById(request.getUserId()).get();
         Set<Role> authorities = new HashSet<>();
+
         request.getData()
                 .stream()
                 .forEach((authorityItem -> {
                     authorities.addAll(mapper.UserDtoSetToEntitySet(authorityItem.getPluginRole()));
                 }));
-
+        authorities.addAll(user.getAuthorities()
+                .stream()
+                .filter(auth -> auth.getName().equals("ROLE_COMPANY_ADMIN"))
+                .collect(Collectors.toList()));
         user.setAuthorities(authorities);
         userRepository.save(user);
         return "success";
