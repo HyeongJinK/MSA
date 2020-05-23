@@ -40,6 +40,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public void editMembers(List<MemberDTO> memberDTOS) {
         List<Member> list = mapper.dtoToEntity(memberDTOS);
+        memberRepository.deleteByCompanyCompanyIdx(list.get(0).getCompany().getCompanyIdx());
         memberRepository.saveAll(list);
     }
 
