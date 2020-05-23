@@ -1,6 +1,7 @@
 package com.illunex.invest.startup.service.company;
 
 import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.composite.startup.menu.dto.MenuDto;
 import com.illunex.invest.api.core.company.dto.CompanyIdDTO;
 import com.illunex.invest.api.core.company.dto.MemberDTO;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
@@ -43,7 +44,11 @@ public class MemberCompositeIntegration extends DefaultIntegrationService {
     public void editMember(List<MemberDTO> memberDTOS) {
         Long companyId = getUser().getCompanyIdx();
         if (memberDTOS.size() > 0) {
-            memberDTOS.get(0).setCompanyDTO(CompanyIdDTO.builder().companyIdx(companyId).build());
+            CompanyIdDTO companyIdDTO = CompanyIdDTO.builder().companyIdx(companyId).build();
+
+            for(MemberDTO menu: memberDTOS) {
+                menu.setCompany(companyIdDTO);
+            }
         }
         restTemplate.postForEntity(companyUrl+ "/member/list"
                 , new HttpEntity<>(memberDTOS
