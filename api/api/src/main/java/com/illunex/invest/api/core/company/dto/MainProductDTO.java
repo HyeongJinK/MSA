@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MainProductDTO {
     String mainProductName;     // 주요제품 - 제품명
+    String differentiation;
     String introduction;        // 주요제품 - 제품 한줄 소개출
     List<MainProductLineDTO> mainProductLines = new ArrayList<>();     // 주요제품군
 }

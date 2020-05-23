@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class AuthorityServiceImpl implements AuthorityService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -27,12 +27,17 @@ public class AuthorityServiceImpl implements AuthorityService {
     private AuthorityMapper mapper = Mappers.getMapper(AuthorityMapper.class);
 
     @Override
-    @Transactional(readOnly = true)
     public List<AuthorityDTO> getMemberAuthorityList(Long companyIdx) {
         return mapper.entityToDto(userRepository.findByCompanyIdx(companyIdx));
     }
 
     @Override
+    public AuthRoleDTO getIRAuthority(Long userIdx) {
+        return mapper.entityAuthRoleToDto(userRepository.findById(userIdx).get());
+    }
+
+    @Override
+    @Transactional
     public String setMemberAuthorityList(AuthorityRequest request) {
         User user = userRepository.findById(request.getData().get(0).getId()).get();
         Set<Role> authorities = new HashSet<>();
@@ -45,10 +50,5 @@ public class AuthorityServiceImpl implements AuthorityService {
         user.setAuthorities(authorities);
         userRepository.save(user);
         return "success";
-    }
-
-    @Override
-    public AuthRoleDTO getIRAuthority(Long userIdx) {
-        return mapper.entityAuthRoleToDto(userRepository.findById(userIdx).get());
     }
 }
