@@ -18,6 +18,7 @@ public class PurchaseDTO {
 
     List<PurchaseDetailDTO> purchaseDetails = new ArrayList<>();
     List<Long> ids = new ArrayList<>();
+    List<String> roles = new ArrayList();
 
     public PurchaseDTO(Long id) {
         this.id = id;
@@ -33,4 +34,6 @@ public class PurchaseDTO {
     public void setIds(List<Long> ids) {
         this.ids = ids;
     }
+
+    public void setRoles(List<String> roles) {this.roles = roles;}
 }

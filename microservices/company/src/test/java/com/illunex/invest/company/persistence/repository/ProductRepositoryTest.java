@@ -1,6 +1,5 @@
 package com.illunex.invest.company.persistence.repository;
 
-import com.illunex.invest.company.builder.CompanyBuilder;
 import com.illunex.invest.company.persistence.entity.Company;
 import com.illunex.invest.company.persistence.entity.Product;
 import org.junit.Assert;

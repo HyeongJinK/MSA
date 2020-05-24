@@ -67,7 +67,7 @@ public class AuthorityServiceImplTest {
         List<AuthorityItem> data = new ArrayList<>();
         data.add(new AuthorityItem(user2.getId(), mapper.UserEntitySetToDtoSet(authorities)));
 
-        authorityService.setMemberAuthorityList(new AuthorityRequest(data));
+        authorityService.setMemberAuthorityList(new AuthorityRequest(user2.getId(), data));
 
         User user = userRepository.findById(user2.getId()).get();
 

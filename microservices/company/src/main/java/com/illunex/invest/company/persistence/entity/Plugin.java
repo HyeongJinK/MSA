@@ -16,7 +16,8 @@ import java.time.LocalDateTime;
 public class Plugin {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    Long pluginId;
+    Long productId;
+    //Long pluginId;
     LocalDateTime regDate;
     LocalDateTime expiryDate;
     @Enumerated(value = EnumType.STRING)
@@ -28,7 +29,7 @@ public class Plugin {
 
     public static Plugin createPlugin(PluginRequest request, Long id) {
         return Plugin.builder()
-                .pluginId(id)
+                .productId(id)
                 .company(new Company(request.getCompanyId()))
                 .state(PluginState.OPEN)
                 .expiryDate(request.getExpiryDate())
