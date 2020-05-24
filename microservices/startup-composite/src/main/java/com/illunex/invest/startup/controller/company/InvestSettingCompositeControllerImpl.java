@@ -15,11 +15,19 @@ public class InvestSettingCompositeControllerImpl implements InvestSettingCompos
 
     @Override
     public ResponseEntity<ResponseData> getInvestSetting() {
-        return null;
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .data(investSettingCompositeIntegration.getInvestSetting())
+                .build());
     }
 
     @Override
     public ResponseEntity<ResponseData> editInvestSetting(InvestSettingDTO investSettingDTO) {
-        return null;
+        investSettingCompositeIntegration.editInvestSetting(investSettingDTO);
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .build());
     }
 }

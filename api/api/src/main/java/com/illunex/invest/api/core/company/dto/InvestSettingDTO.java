@@ -1,13 +1,12 @@
 package com.illunex.invest.api.core.company.dto;
 
 import com.illunex.invest.api.core.company.enumable.InvestRoundType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(of = {"investmentOffer", "investEvent", "currentRound", "progressRound", "targetInvestment"})
 public class InvestSettingDTO {
     Long id;
     CompanyIdDTO company;

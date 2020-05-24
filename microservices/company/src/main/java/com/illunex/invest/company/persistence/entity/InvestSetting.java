@@ -4,11 +4,12 @@ import com.illunex.invest.api.core.company.enumable.InvestRoundType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class InvestSetting {
@@ -21,7 +22,9 @@ public class InvestSetting {
     @Embedded
     InvestEvent investEvent;
 
+    @Enumerated(value = EnumType.STRING)
     InvestRoundType currentRound;
+    @Enumerated(value = EnumType.STRING)
     InvestRoundType progressRound;
     String targetInvestment;
 }
