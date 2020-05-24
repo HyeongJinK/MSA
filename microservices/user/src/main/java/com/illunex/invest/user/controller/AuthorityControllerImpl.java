@@ -6,6 +6,7 @@ import com.illunex.invest.api.core.user.controller.AuthorityController;
 import com.illunex.invest.api.core.user.dto.AuthRoleDTO;
 import com.illunex.invest.api.core.user.dto.AuthorityDTO;
 import com.illunex.invest.api.core.user.request.AuthorityRequest;
+import com.illunex.invest.api.core.user.request.PurchaseRoleRequest;
 import com.illunex.invest.user.service.AuthorityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,16 @@ public class AuthorityControllerImpl extends UserDefaultController  implements A
     @Override
     public ResponseEntity<AuthRoleDTO> getIRAuthority(Long userIdx) {
         return new ResponseEntity(authorityService.getIRAuthority(userIdx), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<ResponseData> setRole(PurchaseRoleRequest request) {
+        authorityService.setRole(request);
+
+        return ResponseEntity.ok(ResponseData.builder()
+                .errorCode(0)
+                .message("success")
+                .build());
     }
 
     @Override

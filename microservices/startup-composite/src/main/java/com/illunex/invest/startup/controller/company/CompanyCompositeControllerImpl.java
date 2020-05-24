@@ -28,7 +28,7 @@ public class CompanyCompositeControllerImpl extends StartupDefaultController imp
 
     @Override
     public ResponseEntity<ResponseData> editCompanyInfo(CompanyDTO companyDTO) {
-        log.info(companyDTO.toString());
+        //log.info(companyDTO.toString());
         companyCompositeIntegration.editCompany(companyDTO);
         return ResponseEntity.ok(ResponseData.builder()
                 .errorCode(0)

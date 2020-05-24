@@ -10,6 +10,7 @@ import com.illunex.invest.shop.persistence.entity.Product
 import com.illunex.invest.shop.persistence.entity.Purchase
 import com.illunex.invest.shop.persistence.entity.PurchaseDetail
 import com.illunex.invest.shop.persistence.repository.PurchaseRepository
+import com.illunex.invest.shop.persistence.repository.ShopPluginRepository
 import com.illunex.invest.shop.persistence.repository.ShopProductRepository
 import com.illunex.invest.shop.service.mapper.PluginMapper
 import com.illunex.invest.shop.service.mapper.ProductMapper
@@ -17,6 +18,7 @@ import com.illunex.invest.shop.service.mapper.PurchaseMapper
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
+import java.util.stream.Collectors
 
 @Service
 @Transactional(readOnly = true)
@@ -26,6 +28,7 @@ class ShopProductServiceImpl : ShopProductService {
     private var pluginMapper: PluginMapper = PluginMapper()
     private var shopProductRepository: ShopProductRepository? = null
     private var purchaseRepository: PurchaseRepository? = null
+    private var shopPluginRepository: ShopPluginRepository? = null
 
     constructor(shopProductRepository: ShopProductRepository?, purchaseRepository: PurchaseRepository?) {
         this.shopProductRepository = shopProductRepository
@@ -38,6 +41,7 @@ class ShopProductServiceImpl : ShopProductService {
     @Transactional
     override fun purchase(userId: Long, buyProducts: List<BuyProductRequest>): PurchaseDTO? {
         var ids:ArrayList<Long> = ArrayList()
+        var pluginIds:ArrayList<Long> = ArrayList()
         var roleName:ArrayList<String> = ArrayList()
         var saveResult:Purchase = purchaseRepository!!.save(Purchase(userId
                 , LocalDateTime.now()
@@ -47,11 +51,10 @@ class ShopProductServiceImpl : ShopProductService {
         saveResult.purchaseDetails.stream()
                 .forEach {pd ->
                     run {
-                        //println(pd.products.id)
                         var product:Product = shopProductRepository!!.findById(pd.products.id!!).get()
-                        //println(product.plugins.size)
 
                         ids.add(pd.products.id!!)
+
                         product.plugins
                                 .stream()
                                 .map {
@@ -64,11 +67,11 @@ class ShopProductServiceImpl : ShopProductService {
                                                 roleName.add(name)
                                             }
                                         }
-                                }
+                                }.collect(Collectors.toList())
                     }
                 }
         var purchaseDto:PurchaseDTO = purchaseMapper.DtoTOEntity(saveResult)
-        //println(ids)
+
         purchaseDto.ids = ids
         purchaseDto.roles = roleName
         return purchaseDto

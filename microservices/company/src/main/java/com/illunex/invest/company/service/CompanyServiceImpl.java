@@ -33,7 +33,7 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = companyRepository.findByCompanyIdx(id).orElseGet(() -> {
             throw new NoneCompanyException(id.toString());
         });
-        log.info(company.toString());
+        //log.info(company.toString());
         return mapper.entityToDto(company);
     }
 
@@ -49,7 +49,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional
     public CompanyDTO updateCompany(CompanyDTO companyDTO) {
         companyDTO.setUpdateDate(LocalDateTime.now());
-        log.info(companyDTO.toString());
+        //log.info(companyDTO.toString());
         return mapper.entityToDto(companyRepository.save(mapper.dtoToEntity(companyDTO)));
     }
 

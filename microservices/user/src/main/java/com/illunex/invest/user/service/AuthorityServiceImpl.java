@@ -3,9 +3,9 @@ package com.illunex.invest.user.service;
 import com.illunex.invest.api.core.user.dto.AuthRoleDTO;
 import com.illunex.invest.api.core.user.dto.AuthorityDTO;
 import com.illunex.invest.api.core.user.request.AuthorityRequest;
+import com.illunex.invest.api.core.user.request.PurchaseRoleRequest;
 import com.illunex.invest.user.persistence.entity.Role;
 import com.illunex.invest.user.persistence.entity.User;
-import com.illunex.invest.user.persistence.repository.RoleRepository;
 import com.illunex.invest.user.persistence.repository.UserRepository;
 import com.illunex.invest.user.service.mapper.AuthorityMapper;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +13,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +24,6 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class AuthorityServiceImpl implements AuthorityService {
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
 
     private AuthorityMapper mapper = Mappers.getMapper(AuthorityMapper.class);
 
@@ -35,6 +35,22 @@ public class AuthorityServiceImpl implements AuthorityService {
     @Override
     public AuthRoleDTO getIRAuthority(Long userIdx) {
         return mapper.entityAuthRoleToDto(userRepository.findById(userIdx).get());
+    }
+
+    @Override
+    @Transactional
+    public void setRole(PurchaseRoleRequest request) {
+        User user = userRepository.findById(request.getUserId()).get();
+
+        List<Role> roles = new ArrayList<>();
+
+        for (String roleName: request.getRoles()) {
+            roles.add(new Role(roleName, 15));
+        }
+
+        user.getAuthorities().addAll(roles);
+
+        userRepository.save(user);
     }
 
     @Override

@@ -49,6 +49,9 @@ public class User implements UserInterface {
 
     private LocalDateTime regDate;
 
+    public User(Long userId) {
+        this.id = userId;
+    }
 
 
     public static User createUser(String username, String password, String name, String vender, String token, Long companyIdx) {

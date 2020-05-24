@@ -1,10 +1,7 @@
 package com.illunex.invest.user.persistence.entity;
 
 import com.illunex.invest.api.core.user.model.RoleInterface;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -32,6 +29,12 @@ public class Role implements RoleInterface {
         this.name = name;
         this.detailedRights = detailedRights;
     }
+    public Role(String name, int detailedRights, Set<User> users) {
+        this.name = name;
+        this.detailedRights = detailedRights;
+        this.users = users;
+    }
+
 
     public static Set<Role> initRoles() {
         Set<Role> roles = new HashSet<>();
