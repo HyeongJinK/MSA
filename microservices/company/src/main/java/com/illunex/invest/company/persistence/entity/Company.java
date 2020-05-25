@@ -27,15 +27,16 @@ public class Company {
     String establishmentDate;   // 설립일
     String employeeCount;       // 직원수
     String business;            // 기업구분
+    String sales;               // 매출
+    String year;                // 매출 기준년도
     String nation;              // 국가
     String stocksList;          // 상장구분
+    String status;              // 기본정보 작성 상태
     @Embedded
     Address address;
     String homePage;            // 홈페이지
     @Column(length=4000)
     String description;         // 기업개요
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)       // 매출
-    List<Sales> sales = new ArrayList<>();
     @Embedded
     MainProduct mainProduct;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "company")

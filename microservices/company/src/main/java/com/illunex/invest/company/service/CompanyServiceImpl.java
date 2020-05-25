@@ -49,6 +49,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional
     public CompanyDTO updateCompany(CompanyDTO companyDTO) {
         companyDTO.setUpdateDate(LocalDateTime.now());
+        companyDTO.setStatus("complete");
         //log.info(companyDTO.toString());
         return mapper.entityToDto(companyRepository.save(mapper.dtoToEntity(companyDTO)));
     }
