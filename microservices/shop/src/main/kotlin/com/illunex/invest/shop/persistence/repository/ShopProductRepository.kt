@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ShopProductRepository: JpaRepository<Product, Long>, ShopProductCustomRepository {
     fun findAllByViewMode(viewMode: ViewMode): List<Product>
+    fun findAllByViewModeNot(viewMode: ViewMode): List<Product>
 }

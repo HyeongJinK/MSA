@@ -1,7 +1,6 @@
 package com.illunex.invest.company.persistence.repository;
 
 import com.illunex.invest.api.core.company.dto.LogoDTO;
-import com.illunex.invest.company.builder.CompanyBuilder;
 import com.illunex.invest.company.persistence.entity.Company;
 import com.illunex.invest.company.persistence.entity.Logo;
 import com.illunex.invest.company.persistence.entity.MainProduct;

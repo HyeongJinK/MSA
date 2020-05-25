@@ -1,6 +1,7 @@
 package com.illunex.invest.company.service;
 
 import com.illunex.invest.api.core.company.dto.InvestSettingDTO;
+import com.illunex.invest.company.persistence.entity.InvestSetting;
 import com.illunex.invest.company.persistence.repository.InvestSettingRepository;
 import com.illunex.invest.company.service.mapper.InvestSettingMapper;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class InvestSettingServiceImpl implements InvestSettingService {
 
     @Override
     public void save(InvestSettingDTO investSetting) {
+        InvestSetting investSetting1 = mapper.dtoToEntity(investSetting);
         investSettingRepository.save(mapper.dtoToEntity(investSetting));
     }
 }

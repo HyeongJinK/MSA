@@ -5,6 +5,7 @@ import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.user.dto.AuthRoleDTO;
 import com.illunex.invest.api.core.user.dto.AuthorityDTO;
 import com.illunex.invest.api.core.user.request.AuthorityRequest;
+import com.illunex.invest.api.core.user.request.PurchaseRoleRequest;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,4 +23,6 @@ public interface AuthorityController {
     ResponseEntity<List<AuthorityDTO>> getAuthorityList(@PathVariable("companyIdx") Long companyIdx);
     @GetMapping("/ir")
     ResponseEntity<AuthRoleDTO> getIRAuthority(@RequestParam Long userIdx);
+    @PostMapping("/setRole")
+    ResponseEntity<ResponseData> setRole(@RequestBody PurchaseRoleRequest request);
 }

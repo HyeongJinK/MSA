@@ -1,7 +1,6 @@
 package com.illunex.invest.company.service;
 
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
-import com.illunex.invest.company.builder.CompanyBuilder;
 import com.illunex.invest.company.exception.NoneCompanyException;
 import com.illunex.invest.company.persistence.entity.Company;
 import com.illunex.invest.company.persistence.repository.CompanyRepository;

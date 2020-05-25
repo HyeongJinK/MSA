@@ -47,7 +47,7 @@ public class ShareholderCompositeIntegration extends DefaultIntegrationService {
 
     public void deleteShareholder(Long id) {
         MultiValueMap<String, Object> map= new LinkedMultiValueMap<>();
-        restTemplate.exchange(userUrl + "/shareholder/"+ id
+        restTemplate.exchange(companyUrl + "/shareholder/"+ id
                 , HttpMethod.DELETE
                 , new HttpEntity<>(map
                         , getDefaultHeader(MediaType.APPLICATION_FORM_URLENCODED))

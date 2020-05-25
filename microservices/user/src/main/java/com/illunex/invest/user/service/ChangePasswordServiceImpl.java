@@ -20,7 +20,7 @@ public class ChangePasswordServiceImpl extends UserService implements ChangePass
 
         passwordCheck(prePassword, user);
 
-        user.setPassword(password);
+        user.setPassword(User.encodePassword(password));
 
         return "success";
     }

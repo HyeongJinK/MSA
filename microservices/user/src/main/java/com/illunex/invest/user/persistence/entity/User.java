@@ -4,6 +4,7 @@ import com.illunex.invest.api.core.user.model.UserInterface;
 import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -46,6 +47,11 @@ public class User implements UserInterface {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "user")
     private List<Signature> signatures = new ArrayList<>();
 
+    private LocalDateTime regDate;
+
+    public User(Long userId) {
+        this.id = userId;
+    }
 
 
     public static User createUser(String username, String password, String name, String vender, String token, Long companyIdx) {
@@ -60,6 +66,7 @@ public class User implements UserInterface {
                 .authorities(Role.initRoles())
                 .rank("")
                 .sns(createSns())
+                .regDate(LocalDateTime.now())
                 .build();
     }
 
@@ -79,20 +86,9 @@ public class User implements UserInterface {
                 .authorities(Role.companyAdminRoles())
                 .rank("")
                 .sns(createSns())
+                .regDate(LocalDateTime.now())
                 .build();
     }
-
-//    private static UserBuilder getUserBuilder(String username, String password, String name, String vender, String token, Long companyIdx) {
-//        return User.builder()
-//                .username(username)
-//                .profileImg("")
-//                .password(encodePassword(password))
-//                .name(name)
-//                .vender(vender)
-//                .certification(false)
-//                .token(token)
-//                .companyIdx(companyIdx);
-//    }
 
     public static String encodePassword(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

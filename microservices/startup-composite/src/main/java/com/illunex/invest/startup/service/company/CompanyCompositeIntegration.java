@@ -25,13 +25,13 @@ public class CompanyCompositeIntegration extends DefaultIntegrationService {
     public CompanyDTO getCompanyInfo() {
         ResponseEntity<CompanyDTO> data = restTemplate.getForEntity(companyUrl + "/company/read/"+ getUser().getCompanyIdx()
                 , CompanyDTO.class);
-        log.info(data.getBody().toString());
+        //log.info(data.getBody().toString());
         return data.getBody();
     }
 
     public void editCompany(CompanyDTO companyDTO) {
         companyDTO.setCompanyIdx(getUser().getCompanyIdx());
-        log.info(companyDTO.toString());
+        //log.info(companyDTO.toString());
         restTemplate.postForEntity(companyUrl + "/company/form/"
                 , new HttpEntity<>(companyDTO, getDefaultHeader())
                 , ResponseData.class);

@@ -28,7 +28,7 @@ public class ShareholderServiceImpl implements ShareholderService {
     @Override
     public ShareholderDTO findById(Long id) {
         Shareholder shareholder = shareholderRepository.findById(id).get();
-        log.info(shareholder.toString());
+        //log.info(shareholder.toString());
         return mapper.entityToDto(shareholder);
     }
 
@@ -39,6 +39,7 @@ public class ShareholderServiceImpl implements ShareholderService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         shareholderRepository.deleteById(id);
     }

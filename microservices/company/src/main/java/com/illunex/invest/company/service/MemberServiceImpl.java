@@ -37,11 +37,10 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public void editMembers(List<MemberDTO> memberDTOS) {
         List<Member> list = mapper.dtoToEntity(memberDTOS);
-        list.stream().forEach(item -> {
-            item.setCompany(Company.builder().companyIdx(memberDTOS.get(0).getCompanyDTO().getCompanyIdx()).build());
-        });
+        memberRepository.deleteByCompanyCompanyIdx(list.get(0).getCompany().getCompanyIdx());
         memberRepository.saveAll(list);
     }
 

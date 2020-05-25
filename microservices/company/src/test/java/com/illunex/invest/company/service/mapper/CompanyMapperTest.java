@@ -1,7 +1,6 @@
 package com.illunex.invest.company.service.mapper;
 
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
-import com.illunex.invest.company.builder.CompanyBuilder;
 import com.illunex.invest.company.persistence.entity.Company;
 import org.junit.Test;
 import org.mapstruct.factory.Mappers;

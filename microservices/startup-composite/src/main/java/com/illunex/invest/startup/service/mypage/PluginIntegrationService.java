@@ -11,6 +11,8 @@ import com.illunex.invest.api.core.company.request.PluginRequest;
 import com.illunex.invest.api.core.shop.dto.PurchaseDTO;
 import com.illunex.invest.api.core.shop.request.BuyProductRequest;
 import com.illunex.invest.api.core.shop.request.PurchaseRequest;
+import com.illunex.invest.api.core.user.dto.UserDTO;
+import com.illunex.invest.api.core.user.request.PurchaseRoleRequest;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +38,10 @@ public class PluginIntegrationService extends DefaultIntegrationService {
         ResponseEntity<ResponseList> pluginsRes = restTemplate.getForEntity(companyUrl + "/plugin/"+ getUser().getCompanyIdx()
                 , ResponseList.class);
         List<PluginDTO> plugins =ListDTOParser(pluginsRes.getBody(), PluginDTO.class);
+
         List<Long> ids = plugins.stream()
                 .filter(pluginDTO -> pluginDTO.getState().equals(PluginState.OPEN))
-                .map(PluginDTO::getPluginId)
+                .map(PluginDTO::getProductId)
                 .collect(Collectors.toList());
         // 판매중인 플러그인 목록
         ResponseEntity<ResponseList> pluginRes = restTemplate.getForEntity(shopUrl + "/product/plugin/"+getUser().getCompanyIdx()
@@ -59,24 +62,27 @@ public class PluginIntegrationService extends DefaultIntegrationService {
     }
 
     public ResponseEntity<ResponseData> purchase(BuyProductRequest request) {
+        UserDTO user = getUser();
         List<BuyProductRequest> list = new ArrayList<>();
         list.add(request);
 
         ResponseEntity<ResponseData> purchaseRes = restTemplate.postForEntity(shopUrl + "/product/purchase"
-                , new HttpEntity<>(new PurchaseRequest(getUser().getId(), list), getDefaultHeader())
+                , new HttpEntity<>(new PurchaseRequest(user.getId(), list), getDefaultHeader())
                 , ResponseData.class);
-
-
 
         if (purchaseRes.getBody().getErrorCode() == 0) {    // 구매에 성공했을 경우
             // 회사쪽에 플러그인 상태 추가
             PurchaseDTO purchaseDTO = purchaseDTOParser(purchaseRes.getBody());
 
-            ResponseEntity<ResponseData> pluginsRes = restTemplate.postForEntity(companyUrl + "/plugin"
-                    , new HttpEntity<>(new PluginRequest(purchaseDTO.getIds(), LocalDateTime.now(),  getUser().getCompanyIdx()), getDefaultHeader())
+            restTemplate.postForEntity(companyUrl + "/plugin"
+                    , new HttpEntity<>(new PluginRequest(purchaseDTO.getIds(), LocalDateTime.now(),  user.getCompanyIdx()), getDefaultHeader())
                     , ResponseData.class);
 
-                // TODO 플러그인 추가 실패시 구매 취소 처리
+            // 권한추가
+            System.out.println(purchaseDTO.getRoles().size());
+            restTemplate.postForEntity(userUrl + "/authority/setRole"
+                    , new HttpEntity<>(new PurchaseRoleRequest(user.getId(), purchaseDTO.getRoles()), getDefaultHeader())
+                    , ResponseData.class);
         }
 
        return purchaseRes;

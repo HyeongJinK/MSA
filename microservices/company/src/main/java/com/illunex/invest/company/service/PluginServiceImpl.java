@@ -47,6 +47,6 @@ public class PluginServiceImpl implements PluginService {
 
     @Override
     public List<PluginDTO> getPlugins(Long companyIdx) {
-        return mapper.entityToDto(pluginRepository.findByCompanyCompanyIdxOrderByPluginIdAsc(companyIdx));
+        return mapper.entityToDto(pluginRepository.findByCompanyCompanyIdxOrderByProductIdAsc(companyIdx));
     }
 }

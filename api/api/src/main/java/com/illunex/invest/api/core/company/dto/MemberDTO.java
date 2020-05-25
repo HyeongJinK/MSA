@@ -16,5 +16,5 @@ public class MemberDTO {
     String career;
     String imgUrl;
 
-    CompanyIdDTO companyDTO;
+    CompanyIdDTO company;
 }

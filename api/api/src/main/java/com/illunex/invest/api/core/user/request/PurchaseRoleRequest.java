@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthorityRequest {
+@Getter
+public class PurchaseRoleRequest {
     Long userId;
-    List<AuthorityItem> data = new ArrayList<>();
+    List<String> roles = new ArrayList();
 }

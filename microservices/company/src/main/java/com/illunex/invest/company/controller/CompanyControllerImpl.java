@@ -35,9 +35,9 @@ public class CompanyControllerImpl implements CompanyController {
 
     @Override
     public ResponseEntity<CompanyDTO> getCompany(Long id) {
-        log.info(id.toString());
+        //log.info(id.toString());
         CompanyDTO companyDTO = companyService.getCompanyById(id);
-        log.info(companyDTO.toString());
+        //log.info(companyDTO.toString());
         return ResponseEntity.ok(companyDTO);
     }
 

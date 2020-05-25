@@ -36,17 +36,17 @@ public class PluginRepositoryTest {
                 .build());
 
         pluginRepository.save(Plugin.builder()
-                .pluginId(1L)
+                .productId(1L)
                 .state(PluginState.OPEN)
                 .company(company)
                 .build());
         pluginRepository.save(Plugin.builder()
-                .pluginId(2L)
+                .productId(2L)
                 .state(PluginState.CLOSE)
                 .company(company)
                 .build());
         pluginRepository.save(Plugin.builder()
-                .pluginId(3L)
+                .productId(3L)
                 .state(PluginState.OPEN)
                 .company(company)
                 .build());
@@ -55,15 +55,15 @@ public class PluginRepositoryTest {
 
     @Test
     public void findByCompanyCompanyIdx() {
-        List<Plugin> plugins = pluginRepository.findByCompanyCompanyIdxOrderByPluginIdAsc(company.getCompanyIdx());
+        List<Plugin> plugins = pluginRepository.findByCompanyCompanyIdxOrderByProductIdAsc(company.getCompanyIdx());
 
         Assert.assertEquals("갯수 체크", plugins.size(), 3);
 
-        Assert.assertEquals(plugins.get(0).getPluginId(), java.util.Optional.of(1L).get());
+        Assert.assertEquals(plugins.get(0).getProductId(), java.util.Optional.of(1L).get());
         Assert.assertEquals(plugins.get(0).getState(), PluginState.OPEN);
-        Assert.assertEquals(plugins.get(1).getPluginId(), java.util.Optional.of(2L).get());
+        Assert.assertEquals(plugins.get(1).getProductId(), java.util.Optional.of(2L).get());
         Assert.assertEquals(plugins.get(1).getState(), PluginState.CLOSE);
-        Assert.assertEquals(plugins.get(2).getPluginId(), java.util.Optional.of(3L).get());
+        Assert.assertEquals(plugins.get(2).getProductId(), java.util.Optional.of(3L).get());
         Assert.assertEquals(plugins.get(2).getState(), PluginState.OPEN);
     }
 }

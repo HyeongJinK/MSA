@@ -13,6 +13,7 @@ import java.util.List;
 @Builder
 public class MainProduct {
     String mainProductName;     // 주요제품 - 제품명
+    String differentiation;
     @Column(length=1000)
     String introduction;        // 주요제품 - 제품 한줄 소개출
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
