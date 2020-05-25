@@ -2,6 +2,7 @@ package com.illunex.invest.startup.service.user;
 
 import com.google.gson.Gson;
 import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.composite.startup.user.request.InviteRequest;
 import com.illunex.invest.api.core.communication.model.SignUpMailRequest;
 import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
 import com.illunex.invest.api.core.user.dto.UserDTO;
@@ -111,5 +112,32 @@ public class UserIntegrationService extends DefaultIntegrationService {
         LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
         map.add("token", token);
         return restTemplate.postForEntity(userUrl + "/certification", new HttpEntity<>(map, getDefaultHeader(MediaType.MULTIPART_FORM_DATA)), ResponseData.class);
+    }
+
+    public ResponseEntity<ResponseData> invite(InviteRequest inviteRequest) {
+        Long companyIdx = getUser().getCompanyIdx();
+        // 사용자 추가
+        inviteRequest
+                .getList()
+                .stream()
+                 .forEach(user -> {
+                     ResponseData res = restTemplate.postForObject(userUrl + "/signUp/invite"
+                             , new HttpEntity<>(new SignUpRequest(user.getUsername()
+                                     , user.getPassword()
+                                     , user.getName()
+                                     , "illunex"
+                                     , companyIdx)
+                                     , getDefaultHeader())
+                             , ResponseData.class);
+                     UserInfoDTO userDto = UserInfoDTOParser(res);
+                     //  인증 메일 보내기
+                     restTemplate.postForObject(communicationUrl + "/mail/signUp", new HttpEntity<>(new SignUpMailRequest(user.getUsername(), startUpUrl+"/user/register/confirm?token="+userDto.getToken()), getDefaultHeader()), String.class);
+                 }
+        );
+
+        return ResponseEntity.ok(ResponseData.builder()
+                .message("success")
+                .errorCode(0)
+                .build());
     }
 }

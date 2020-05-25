@@ -4,6 +4,7 @@ import com.illunex.invest.api.common.exception.ExpireUserException;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.composite.startup.user.controller.UserCompositeController;
+import com.illunex.invest.api.composite.startup.user.request.InviteRequest;
 import com.illunex.invest.api.composite.startup.user.request.SignUpRequest;
 import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.api.core.user.model.JwtResponse;
@@ -56,11 +57,8 @@ public class UserCompositeControllerImpl extends StartupDefaultController implem
     }
 
     @Override
-    public ResponseEntity<ResponseData> invite(SignUpRequest signUpRequest) {
-        return userIntegrationService.invite(signUpRequest.getUsername()
-                , signUpRequest.getPassword()
-                , signUpRequest.getName()
-                , "illunex");
+    public ResponseEntity<ResponseData> invite(InviteRequest inviteRequest) {
+        return userIntegrationService.invite(inviteRequest);
     }
 
     @Override
