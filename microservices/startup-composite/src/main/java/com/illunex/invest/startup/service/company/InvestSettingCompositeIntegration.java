@@ -1,6 +1,7 @@
 package com.illunex.invest.startup.service.company;
 
 import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.core.company.dto.CompanyIdDTO;
 import com.illunex.invest.api.core.company.dto.InvestSettingDTO;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
 import org.springframework.http.HttpEntity;
@@ -19,6 +20,7 @@ public class InvestSettingCompositeIntegration extends DefaultIntegrationService
     }
 
     public void editInvestSetting(InvestSettingDTO investSettingDTO) {
+        investSettingDTO.setCompany(CompanyIdDTO.builder().companyIdx(getUser().getCompanyIdx()).build());
         restTemplate.postForEntity(companyUrl + "/investSetting"
                 , new HttpEntity<>(investSettingDTO, getDefaultHeader())
                 , ResponseData.class);
