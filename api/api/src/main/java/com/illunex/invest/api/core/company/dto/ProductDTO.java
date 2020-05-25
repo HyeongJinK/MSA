@@ -24,6 +24,10 @@ public class ProductDTO {
     CompanyDTO company;
 
     public String getParseRegDate() {
-        return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        if (regDate != null) {
+            return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } else {
+            return "";
+        }
     }
 }
