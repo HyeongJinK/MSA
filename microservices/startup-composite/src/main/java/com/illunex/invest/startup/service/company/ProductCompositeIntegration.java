@@ -40,10 +40,9 @@ public class ProductCompositeIntegration extends DefaultIntegrationService {
     }
 
     public ProductDTO editProduct(ProductDTO productDTO) {
-        System.out.println(productDTO.toString());
         Long companyId = getUser().getCompanyIdx();
         productDTO.setCompany(CompanyDTO.builder().companyIdx(companyId).build());
-        System.out.println("============================");
+
         restTemplate.postForEntity(companyUrl + "/product/"
                 , new HttpEntity<>(productDTO, getDefaultHeader())
                 , ResponseData.class);

@@ -47,7 +47,5 @@ public class SignInCallTest {
         HttpEntity<SignInRequest> request = new HttpEntity<SignInRequest>(param, headers);
 
         String response = new RestTemplate().postForObject(url, request , String.class );
-
-        System.out.println(response);
     }
 }

@@ -7,6 +7,7 @@ import com.illunex.invest.api.composite.startup.user.controller.UserCompositeCon
 import com.illunex.invest.api.composite.startup.user.request.InviteRequest;
 import com.illunex.invest.api.composite.startup.user.request.SignUpRequest;
 import com.illunex.invest.api.core.user.dto.UserDTO;
+import com.illunex.invest.api.core.user.exception.CertificationException;
 import com.illunex.invest.api.core.user.model.JwtResponse;
 import com.illunex.invest.api.core.user.request.SignInRequest;
 import com.illunex.invest.startup.controller.StartupDefaultController;
@@ -44,6 +45,11 @@ public class UserCompositeControllerImpl extends StartupDefaultController implem
     public ResponseEntity<ResponseData> signIn(SignInRequest request) {
         authenticate(request.getUsername(), request.getPassword());
         final UserDTO userDetails = (UserDTO) userDetailsService.loadUserByUsername(request.getUsername());
+        System.out.println("=============================");
+        System.out.println(userDetails.getCertification());
+        if (!userDetails.getCertification()) {
+            throw new CertificationException("메일 인증이 안된 계정입니다.");
+        }
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(ResponseData.builder()
                 .errorCode(0)

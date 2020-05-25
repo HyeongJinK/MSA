@@ -36,10 +36,10 @@ public class OkHttpRoutingFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
 
-        System.out.println("==========================31");
+        //System.out.println("==========================31");
         String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-        System.out.println(authorizationHeader);
-        System.out.println("==========================24");
+        //System.out.println(authorizationHeader);
+        //System.out.println("==========================24");
         ctx.addZuulRequestHeader("Authorization", authorizationHeader);
 
         return null;

@@ -48,7 +48,6 @@ public class KoscomOpenApiService {
             }
 
             conn.disconnect();
-            //System.out.println(sb.toString());
             JsonElement rootObject = JsonParser.parseString(sb.toString()).getAsJsonObject().get("items").getAsJsonObject().get("item");
             NiceCompanyInfo[] array = gson.fromJson(rootObject, NiceCompanyInfo[].class);
             list = Arrays.asList(array);
