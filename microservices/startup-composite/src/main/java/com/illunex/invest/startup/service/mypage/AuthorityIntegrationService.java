@@ -52,8 +52,6 @@ public class AuthorityIntegrationService extends DefaultIntegrationService {
 //
 //
 //        List<AuthorityExDTO> memberAuthority = ListDTOParser(memberAuthorityRes.getBody(), AuthorityExDTO.class);
-//        System.out.println(memberAuthority);
-//        System.out.println(memberAuthority.size());
 //        // 두개 목록을 조합
 //        return memberAuthority.stream().map(m -> {
 //            roleNames.stream().forEach(role -> {

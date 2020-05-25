@@ -29,7 +29,5 @@ public class SignUpCallTest {
         HttpEntity<SignUpRequest> request = new HttpEntity<>(param, headers);
 
         UserDTO response = new RestTemplate().postForObject(url, request , UserDTO.class );
-
-        System.out.println(response);
     }
 }
