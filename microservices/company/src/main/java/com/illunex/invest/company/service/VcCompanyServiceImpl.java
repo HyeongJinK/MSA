@@ -61,7 +61,8 @@ public class VcCompanyServiceImpl implements VcCompanyService {
             .nation(company.getNation())
             .stocksList(company.getStocksList())
             .address(vcMapper.entityToDto(company.getAddress()))
-            .sales(vcMapper.entitySalesListToDto(company.getSales()))
+            .sales(company.getSales())
+            .year(company.getYear())
             .product(product)
             .build();
     }
