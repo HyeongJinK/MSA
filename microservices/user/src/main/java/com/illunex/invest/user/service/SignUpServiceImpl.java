@@ -51,7 +51,7 @@ public class SignUpServiceImpl extends UserService implements SignUpService {
                         , password
                         , name
                         , vender
-                        , "token" //GenerateToken.CreateToken()
+                        , GenerateToken.CreateToken()
                         , companyIdx)
         ));
     }
