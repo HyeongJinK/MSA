@@ -10,4 +10,5 @@ import java.util.List;
 public interface IRRepository extends JpaRepository<IREntity, Long> {
     IREntity findByCompanyIdxAndYear(Long companyIdx, String year);
     List<IREntity> findAllByCompanyIdx(Long companyIdx);
+    IREntity findByCompanyIdx(Long companyIdx);
 }

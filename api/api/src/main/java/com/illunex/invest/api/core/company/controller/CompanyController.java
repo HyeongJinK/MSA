@@ -3,6 +3,7 @@ package com.illunex.invest.api.core.company.controller;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
+import com.illunex.invest.api.core.company.dto.CompanyWriteCheckDTO;
 import com.illunex.invest.api.core.company.dto.LogoDTO;
 import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
 import io.swagger.annotations.*;
@@ -48,4 +49,8 @@ public interface CompanyController {
     @ApiOperation(value = "로고 수정")
     @PostMapping("/logo")
     ResponseEntity<ResponseData> updateLogo(@RequestBody LogoDTO logoDTO);
+
+    @ApiOperation(value = "사업자등록증, 기업정보 작성여부 체크")
+    @GetMapping("/check")
+    ResponseEntity<CompanyWriteCheckDTO> getCompanyWriteCheck(@RequestParam("companyIdx") Long companyIdx);
 }

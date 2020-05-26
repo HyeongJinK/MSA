@@ -155,4 +155,8 @@ public class IRService {
         }
     }
 
+    public String getIRWriteCheck(Long companyIdx) {
+        return irRepository.findByCompanyIdx(companyIdx).getProgress();
+    }
+
 }
