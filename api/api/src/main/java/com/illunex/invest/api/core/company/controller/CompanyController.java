@@ -52,5 +52,5 @@ public interface CompanyController {
 
     @ApiOperation(value = "사업자등록증, 기업정보 작성여부 체크")
     @GetMapping("/check")
-    ResponseEntity<CompanyWriteCheckDTO> getCompanyWriteCheck(@RequestParam("companyIdx") Long companyIdx);
+    ResponseEntity<CompanyWriteCheckDTO> getCompanyWriteCheck(@RequestParam Long companyIdx);
 }

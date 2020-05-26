@@ -26,17 +26,18 @@ public class MainCompositeIntegration extends DefaultIntegrationService {
     private final String irUrl = "http://ir";
 
     public WriteCheckDTO getWriteCheck() {
+
         WebClient webClient = webClientBuilder.build();
 
         Mono<CompanyWriteCheckDTO> companyWriteCheck = webClient
                 .get()
-                .uri(companyUrl + "/check?companyIdx={companyIdx}", getUser().getCompanyIdx())
+                .uri(companyUrl + "/company/check?companyIdx={companyIdx}", getUser().getCompanyIdx())
                 .retrieve()
                 .bodyToMono(CompanyWriteCheckDTO.class);
 
         Mono<String> irWriteCheck = webClient
                 .get()
-                .uri(irUrl + "/check?companyIdx={companyIdx}", getUser().getCompanyIdx())
+                .uri(irUrl + "/ir/check?companyIdx={companyIdx}", getUser().getCompanyIdx())
                 .retrieve()
                 .bodyToMono(String.class);
 
@@ -45,6 +46,5 @@ public class MainCompositeIntegration extends DefaultIntegrationService {
                 .CorporateInformationStatus(t.getT1().getCorporateInformationStatus())
                 .IRStatus(t.getT2())
                 .build()).block();
-
     }
 }
