@@ -36,5 +36,7 @@ public interface IRController {
     ResponseEntity<String> confirmPassword(@RequestBody PasswordDTO passwordDTO);
     @PostMapping(value = "/pw/change")
     ResponseEntity<String> changePassword(@RequestBody PasswordDTO passwordDTO);
+    @GetMapping(value = "/check")
+    ResponseEntity<String> getIRWriteCheck(@RequestParam Long companyIdx);
 
 }

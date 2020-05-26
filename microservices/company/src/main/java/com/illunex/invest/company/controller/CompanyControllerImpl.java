@@ -4,6 +4,7 @@ import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.core.company.controller.CompanyController;
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
+import com.illunex.invest.api.core.company.dto.CompanyWriteCheckDTO;
 import com.illunex.invest.api.core.company.dto.LogoDTO;
 import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
 import com.illunex.invest.company.exception.NoneCompanyException;
@@ -62,6 +63,11 @@ public class CompanyControllerImpl implements CompanyController {
                 .errorCode(0)
                 .message("success")
                 .build());
+    }
+
+    @Override
+    public ResponseEntity<CompanyWriteCheckDTO> getCompanyWriteCheck(Long companyIdx) {
+        return ResponseEntity.ok(companyService.getCompanyWriteCheck(companyIdx));
     }
 
     @Override
