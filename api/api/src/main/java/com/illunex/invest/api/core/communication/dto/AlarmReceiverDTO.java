@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,4 +19,12 @@ public class AlarmReceiverDTO {
     AlarmMessageDTO receiver;
     LocalDateTime readDate;
     AlarmReadStatus readStatus;
+
+    public String getParseRegDate() {
+        if (regDate != null) {
+            return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        } else {
+            return "";
+        }
+    }
 }

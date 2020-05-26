@@ -17,4 +17,6 @@ public class AlarmCompositeIntegration extends DefaultIntegrationService {
         return restTemplate.getForEntity(communicationUrl + "/alarm?userId="+getUser().getId(), ResponseList.class);
     }
 
+
+
 }

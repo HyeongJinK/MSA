@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class AlarmMessageCustomRepositoryImpl implements AlarmMessageCustomRepository {
+public class AlarmMessageRepositoryImpl implements AlarmMessageCustomRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override

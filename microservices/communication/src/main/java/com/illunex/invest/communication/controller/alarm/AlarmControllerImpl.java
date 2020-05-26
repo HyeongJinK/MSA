@@ -32,4 +32,9 @@ public class AlarmControllerImpl implements AlarmController {
                 .message("success")
                 .build());
     }
+
+    @Override
+    public ResponseEntity<ResponseData> reads(Long userId) {
+        return null;
+    }
 }

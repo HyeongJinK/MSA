@@ -3,6 +3,8 @@ package com.illunex.invest.startup.service.user;
 import com.google.gson.Gson;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.composite.startup.user.request.InviteRequest;
+import com.illunex.invest.api.core.communication.dto.AlarmMessageDTO;
+import com.illunex.invest.api.core.communication.model.AddAlarmRequest;
 import com.illunex.invest.api.core.communication.model.SignUpMailRequest;
 import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
 import com.illunex.invest.api.core.shop.request.BuyProductRequest;
@@ -24,6 +26,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,16 +70,31 @@ public class UserIntegrationService extends DefaultIntegrationService {
         }
 
         UserInfoDTO user = UserInfoDTOParser(res);
-        //  인증 메일 보내기
+        // 인증 메일 보내기
         restTemplate.postForObject(communicationUrl + "/mail/signUp", new HttpEntity<>(new SignUpMailRequest(user.getUsername(), startUpUrl+"/user/register/confirm?token="+user.getToken()), getDefaultHeader()), String.class);
-
+        // 기본 플러그인 적용하기
         List<BuyProductRequest> list = new ArrayList<>();
         list.add(new BuyProductRequest(1L, 1));
         list.add(new BuyProductRequest(2L, 1));
         list.add(new BuyProductRequest(6L, 1));
-
-
         pluginIntegrationService.getResponseDataResponseEntity(user, list);
+        // 가입 알람 보내기
+        List<Long> users = new ArrayList<>();
+        users.add(user.getId());
+
+        restTemplate.postForObject(communicationUrl + "/alarm", new HttpEntity<>(
+                AddAlarmRequest.builder()
+                    .alarmMessageDTO(AlarmMessageDTO.builder()
+                            .kind("인증")
+                            .title("환영합니다. 회원가입이 정상 처리되었습니다.")
+                            .id(0L)
+                            .regDate(LocalDateTime.now())
+                            .content("")
+                            .build())
+                    .users(users)
+                    .build()
+                , getDefaultHeader())
+                , ResponseData.class);
 
         // 결과 리턴
         return ResponseEntity.ok(res);
@@ -132,14 +150,12 @@ public class UserIntegrationService extends DefaultIntegrationService {
         map.add("token", token);
         return restTemplate.postForEntity(userUrl + "/certification", new HttpEntity<>(map, getDefaultHeader(MediaType.MULTIPART_FORM_DATA)), ResponseData.class);
     }
-
     public ResponseEntity<ResponseData> invite(InviteRequest inviteRequest) {
         UserDTO userDTO = getUser();
+        List<Long> users = new ArrayList<>();
         // 사용자 추가
-        inviteRequest
-                .getList()
-                .stream()
-                 .forEach(user -> {
+        inviteRequest.getList().stream()
+                .forEach(user -> {
                      ResponseData res = restTemplate.postForObject(userUrl + "/signUp/invite"
                              , new HttpEntity<>(new SignUpRequest(user.getUsername()
                                      , user.getPassword()
@@ -149,10 +165,26 @@ public class UserIntegrationService extends DefaultIntegrationService {
                                      , getDefaultHeader())
                              , ResponseData.class);
                      UserInfoDTO userDto = UserInfoDTOParser(res);
+                     users.add(userDTO.getId());
                      //  인증 메일 보내기
                      restTemplate.postForObject(communicationUrl + "/mail/signUp", new HttpEntity<>(new SignUpMailRequest(user.getUsername(), startUpUrl+"/user/register/confirm?token="+userDto.getToken()), getDefaultHeader()), String.class);
                  }
         );
+
+        // 가입 알람 보내기
+        restTemplate.postForObject(communicationUrl + "/alarm", new HttpEntity<>(
+                        AddAlarmRequest.builder()
+                                .alarmMessageDTO(AlarmMessageDTO.builder()
+                                        .kind("인증")
+                                        .title("환영합니다. 회원가입이 정상 처리되었습니다.")
+                                        .id(0L)
+                                        .regDate(LocalDateTime.now())
+                                        .content("")
+                                        .build())
+                                .users(users)
+                                .build()
+                        , getDefaultHeader())
+                , ResponseData.class);
 
         return ResponseEntity.ok(ResponseData.builder()
                 .message("success")

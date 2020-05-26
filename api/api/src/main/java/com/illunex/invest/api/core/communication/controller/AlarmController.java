@@ -12,4 +12,6 @@ public interface AlarmController {
     ResponseEntity<ResponseList> getList(@RequestParam("userId") Long userId);
     @PostMapping(value = {"", "/"})
     ResponseEntity<ResponseData> sender(@RequestBody AddAlarmRequest request);
+    @PostMapping(value = "/reads")
+    ResponseEntity<ResponseData> reads(@RequestParam("userId") Long userId);
 }

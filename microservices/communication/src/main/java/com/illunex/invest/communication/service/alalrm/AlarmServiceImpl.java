@@ -41,6 +41,11 @@ public class AlarmServiceImpl implements AlarmService {
     }
 
     @Override
+    public AlarmReceiver reads(Long userId) {
+        return null;
+    }
+
+    @Override
     @Transactional
     public void sender(AlarmMessageDTO message, List<Long> users) {
         AlarmMessage alarmMessage = alarmMessageRepository.save(mapper.dtoToEntity(message));

@@ -13,6 +13,8 @@ public interface AlarmService {
     List<AlarmReceiverDTO> getLists(Long userId);
     // 알람읽기
     AlarmReceiver get(Long id);
+    // 전체 읽기
+    AlarmReceiver reads(Long userId);
     // 알람보내기
     void sender(AlarmMessageDTO message, List<Long> users);
     // 알람삭제
