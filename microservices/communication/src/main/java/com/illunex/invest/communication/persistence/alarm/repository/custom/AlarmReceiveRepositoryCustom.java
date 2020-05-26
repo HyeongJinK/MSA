@@ -1,5 +1,5 @@
 package com.illunex.invest.communication.persistence.alarm.repository.custom;
 
-public interface AlarmReceiveCustomRepository {
+public interface AlarmReceiveRepositoryCustom {
      void readAll(Long userId);
 }

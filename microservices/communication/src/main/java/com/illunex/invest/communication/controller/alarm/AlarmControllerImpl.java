@@ -35,6 +35,6 @@ public class AlarmControllerImpl implements AlarmController {
 
     @Override
     public ResponseEntity<ResponseData> reads(Long userId) {
-        return null;
+        return ResponseEntity.ok(null);
     }
 }

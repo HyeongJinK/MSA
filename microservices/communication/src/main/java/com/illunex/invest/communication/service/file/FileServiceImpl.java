@@ -44,7 +44,7 @@ public class FileServiceImpl implements FileService {
         metadata.setContentType(MediaType.IMAGE_PNG_VALUE);
         metadata.setContentLength(file.getSize());
 
-        String fileName = path + file.getOriginalFilename() + "_" +  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yMdHmsn"));
+        String fileName = path + "_" +  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yMdHmsn")) + file.getOriginalFilename();
 
         FileStore fileStore = fileStoreRepository.findByBucketAndPath(bucket, path);
 
