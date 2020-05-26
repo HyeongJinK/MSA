@@ -16,11 +16,17 @@ public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idx;
+    @Column(length=2000)
     String productInformation;           // 제품 설명
+    @Column(length=2000)
     String productDifference;            // 제품 차별성
+    @Column(length=2000)
     String mainTechnology;               // 주요 기술
+    @Column(length=2000)
     String technologyDifference;         // 기술 차별성
+    @Column(length=2000)
     String marketResearch;               // 시장 리서치
+    @Column(length=2000)
     String positioning;                  // 포지셔닝
 
     @OneToOne(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
