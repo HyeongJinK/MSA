@@ -3,7 +3,6 @@ package com.illunex.invest.api.core.company.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -25,7 +24,8 @@ public class VcCompanyDTO {
     String description;
     String homePage;
     String location;
-    List<SalesDTO> sales = new ArrayList<>();
+    String sales;
+    String year;
     String scale;
     String introduction;
     LocalDateTime updateDate;

@@ -42,11 +42,5 @@ public interface VcCompanyMapper {
     MainProductDTO entityToDto(MainProduct mainProduct);
     MainProduct dtoToEntity(MainProductDTO mainProductDTO);
 
-    SalesDTO entityToDto(Sales sales);
-    Sales dtoToEntity(SalesDTO salesDTO);
-
-    List<SalesDTO> entitySalesListToDto(List<Sales> sales);
-    List<Sales> dtoSalesListToEntity(List<SalesDTO> salesDTOS);
-
 }
 

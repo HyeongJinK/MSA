@@ -1,9 +1,11 @@
 package com.illunex.invest.company.service;
 
 import com.illunex.invest.api.core.company.dto.CompanyDTO;
+import com.illunex.invest.api.core.company.dto.CompanyWriteCheckDTO;
 import com.illunex.invest.api.core.company.dto.LogoDTO;
 import com.illunex.invest.company.exception.NoneCompanyException;
 import com.illunex.invest.company.persistence.entity.Company;
+import com.illunex.invest.company.persistence.repository.BusinessRepository;
 import com.illunex.invest.company.persistence.repository.CompanyRepository;
 import com.illunex.invest.company.service.mapper.CompanyMapper;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import java.util.List;
 public class CompanyServiceImpl implements CompanyService {
     private CompanyMapper mapper = Mappers.getMapper(CompanyMapper.class);
     private final CompanyRepository companyRepository;
+    private final BusinessRepository businessRepository;
 
     @Override
     public List<CompanyDTO> getAllList() {
@@ -49,6 +52,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional
     public CompanyDTO updateCompany(CompanyDTO companyDTO) {
         companyDTO.setUpdateDate(LocalDateTime.now());
+        companyDTO.setStatus("complete");
         //log.info(companyDTO.toString());
         return mapper.entityToDto(companyRepository.save(mapper.dtoToEntity(companyDTO)));
     }
@@ -62,6 +66,14 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional
     public void updateLogo(Long id, String squareLogo, String rectangleLogo) {
         companyRepository.updateLogo(id, squareLogo, rectangleLogo);
+    }
+
+    @Override
+    public CompanyWriteCheckDTO getCompanyWriteCheck(Long companyIdx) {
+        return CompanyWriteCheckDTO.builder()
+                .businessRegistrationStatus(businessRepository.findByCompanyCompanyIdx(companyIdx).getStatus().toString())
+                .CorporateInformationStatus(companyRepository.findByCompanyIdx(companyIdx).get().getStatus())
+                .build();
     }
 
 }

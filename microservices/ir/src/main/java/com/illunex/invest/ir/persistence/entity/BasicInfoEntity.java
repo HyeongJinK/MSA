@@ -32,7 +32,9 @@ public class BasicInfoEntity {
     String totalStocks;                  // 총발행주식수
     String settlement;                   // 결산기
     String valuation;                    // Valuation
+    @Column(length=2000)
     String useInvestment;                // 투자금 사용용도
+    @Column(length=2000)
     String exitPlan;                     // EXIT 계획
 
     @OneToOne(mappedBy = "basicInfo", fetch = FetchType.LAZY, cascade = CascadeType.DETACH)

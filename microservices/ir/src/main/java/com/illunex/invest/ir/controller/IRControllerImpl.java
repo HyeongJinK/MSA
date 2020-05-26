@@ -21,7 +21,6 @@ public class IRControllerImpl implements IRController {
         this.IRService = IRService;
     }
 
-
     @Override
     public ResponseEntity<IRDTO> getIR(@RequestParam Long companyIdx, @RequestParam String year) {
         log.debug("================================================");
@@ -70,6 +69,11 @@ public class IRControllerImpl implements IRController {
     public ResponseEntity<String> changePassword(@RequestBody PasswordDTO passwordDTO) {
         String result = IRService.changePassword(passwordDTO.getIrIdx(), passwordDTO.getPassword(), passwordDTO.getNewPassword());
         return new ResponseEntity(result, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<String> getIRWriteCheck(@RequestParam Long companyIdx) {
+        return new ResponseEntity(IRService.getIRWriteCheck(companyIdx), HttpStatus.OK);
     }
 
 }

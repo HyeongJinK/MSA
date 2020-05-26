@@ -2,8 +2,6 @@ package com.illunex.invest.api.core.company.dto;
 
 import lombok.*;
 
-import java.util.List;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
@@ -20,7 +18,8 @@ public class VcCompanyDetailDTO {
     String stocksList;
     String introduction;
     AddressDTO address;
-    List<SalesDTO> sales;
+    String sales;
+    String year;
     String scale;
     VcProductDTO product;
 }
