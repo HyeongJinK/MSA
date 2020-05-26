@@ -43,13 +43,8 @@ public class CorporateSealServiceImpl implements CorporateSealService {
     @Override
     @Transactional
     public String toggleCorporateSeal(Long id) {
-
-        System.out.println("==== 전"+corporateSealRepository.findById(id).get().getStatus());
-
-
         CorporateSeal corporateSeal = corporateSealRepository.findById(id).get().toggleStatus();
 
-        System.out.println("==== 후"+corporateSeal.getStatus());
         corporateSealRepository.save(corporateSeal);
         return corporateSeal.getStatus().toString();
     }

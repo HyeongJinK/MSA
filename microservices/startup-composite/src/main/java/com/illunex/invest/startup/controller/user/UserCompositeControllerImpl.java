@@ -4,8 +4,10 @@ import com.illunex.invest.api.common.exception.ExpireUserException;
 import com.illunex.invest.api.common.response.ResponseData;
 import com.illunex.invest.api.common.response.ResponseList;
 import com.illunex.invest.api.composite.startup.user.controller.UserCompositeController;
+import com.illunex.invest.api.composite.startup.user.request.InviteRequest;
 import com.illunex.invest.api.composite.startup.user.request.SignUpRequest;
 import com.illunex.invest.api.core.user.dto.UserDTO;
+import com.illunex.invest.api.core.user.exception.CertificationException;
 import com.illunex.invest.api.core.user.model.JwtResponse;
 import com.illunex.invest.api.core.user.request.SignInRequest;
 import com.illunex.invest.startup.controller.StartupDefaultController;
@@ -43,6 +45,11 @@ public class UserCompositeControllerImpl extends StartupDefaultController implem
     public ResponseEntity<ResponseData> signIn(SignInRequest request) {
         authenticate(request.getUsername(), request.getPassword());
         final UserDTO userDetails = (UserDTO) userDetailsService.loadUserByUsername(request.getUsername());
+        System.out.println("=============================");
+        System.out.println(userDetails.getCertification());
+        if (!userDetails.getCertification()) {
+            throw new CertificationException("메일 인증이 안된 계정입니다.");
+        }
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(ResponseData.builder()
                 .errorCode(0)
@@ -56,11 +63,8 @@ public class UserCompositeControllerImpl extends StartupDefaultController implem
     }
 
     @Override
-    public ResponseEntity<ResponseData> invite(SignUpRequest signUpRequest) {
-        return userIntegrationService.invite(signUpRequest.getUsername()
-                , signUpRequest.getPassword()
-                , signUpRequest.getName()
-                , "illunex");
+    public ResponseEntity<ResponseData> invite(InviteRequest inviteRequest) {
+        return userIntegrationService.invite(inviteRequest);
     }
 
     @Override

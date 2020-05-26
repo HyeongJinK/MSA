@@ -104,7 +104,6 @@ public class DefaultIntegrationService {
             List lists = res.getData();
 
             lists.stream().forEach(m -> {
-                System.out.println(m.toString());
                 result.add(gson.fromJson(m.toString(), c));
             });
             return result;

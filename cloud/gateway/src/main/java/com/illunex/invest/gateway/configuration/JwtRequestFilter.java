@@ -19,10 +19,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         final String requestTokenHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-        System.out.println("==========================");
-        System.out.println(response.getHeader(HttpHeaders.AUTHORIZATION));
-        System.out.println(requestTokenHeader);
-        System.out.println("==========================");
+//        System.out.println("==========================");
+//        System.out.println(response.getHeader(HttpHeaders.AUTHORIZATION));
+//        System.out.println(requestTokenHeader);
+//        System.out.println("==========================");
         // 토큰 가져오기
         chain.doFilter(request, response);
     }

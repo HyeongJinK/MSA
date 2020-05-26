@@ -2,36 +2,44 @@ package com.illunex.invest.startup.service.user;
 
 import com.google.gson.Gson;
 import com.illunex.invest.api.common.response.ResponseData;
+import com.illunex.invest.api.composite.startup.user.request.InviteRequest;
 import com.illunex.invest.api.core.communication.model.SignUpMailRequest;
 import com.illunex.invest.api.core.company.request.CompanyRegisterRequest;
+import com.illunex.invest.api.core.shop.request.BuyProductRequest;
 import com.illunex.invest.api.core.user.dto.UserDTO;
 import com.illunex.invest.api.core.user.dto.UserInfoDTO;
 import com.illunex.invest.api.core.user.exception.UsernameSearchEmptyException;
 import com.illunex.invest.api.core.user.request.SignInRequest;
 import com.illunex.invest.api.core.user.request.SignUpRequest;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
+import com.illunex.invest.startup.service.mypage.PluginIntegrationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserIntegrationService extends DefaultIntegrationService {
     Logger logger = LoggerFactory.getLogger(UserIntegrationService.class);
+    private final PluginIntegrationService pluginIntegrationService;
 
-    public UserIntegrationService(RestTemplate restTemplate, WebClient.Builder loadBalanceWebClientBuilder) {
+    public UserIntegrationService(RestTemplate restTemplate, WebClient.Builder loadBalanceWebClientBuilder, PluginIntegrationService pluginIntegrationService) {
         super(restTemplate, loadBalanceWebClientBuilder);
+        this.pluginIntegrationService = pluginIntegrationService;
     }
 
     //@HystrixCommand(fallbackMethod = "signInError")
     public UserDTO signIn(String username) {
         UserDTO user = restTemplate.postForObject(userUrl + "/signIn", new HttpEntity<>(new SignInRequest(username, ""), getDefaultHeader()), UserDTO.class);
-        //UserDTO user = userDTOParser(res);
 
         if (user != null) {
             return user;
@@ -54,9 +62,21 @@ public class UserIntegrationService extends DefaultIntegrationService {
                         , companyIdx)
                         , getDefaultHeader())
                 , ResponseData.class);
+        if (res.getErrorCode() != 0) {
+            throw new UsernameNotFoundException(res.getMessage());
+        }
+
         UserInfoDTO user = UserInfoDTOParser(res);
         //  인증 메일 보내기
         restTemplate.postForObject(communicationUrl + "/mail/signUp", new HttpEntity<>(new SignUpMailRequest(user.getUsername(), startUpUrl+"/user/register/confirm?token="+user.getToken()), getDefaultHeader()), String.class);
+
+        List<BuyProductRequest> list = new ArrayList<>();
+        list.add(new BuyProductRequest(1L, 1));
+        list.add(new BuyProductRequest(2L, 1));
+        list.add(new BuyProductRequest(6L, 1));
+
+
+        pluginIntegrationService.getResponseDataResponseEntity(user, list);
 
         // 결과 리턴
         return ResponseEntity.ok(res);
@@ -111,5 +131,32 @@ public class UserIntegrationService extends DefaultIntegrationService {
         LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
         map.add("token", token);
         return restTemplate.postForEntity(userUrl + "/certification", new HttpEntity<>(map, getDefaultHeader(MediaType.MULTIPART_FORM_DATA)), ResponseData.class);
+    }
+
+    public ResponseEntity<ResponseData> invite(InviteRequest inviteRequest) {
+        UserDTO userDTO = getUser();
+        // 사용자 추가
+        inviteRequest
+                .getList()
+                .stream()
+                 .forEach(user -> {
+                     ResponseData res = restTemplate.postForObject(userUrl + "/signUp/invite"
+                             , new HttpEntity<>(new SignUpRequest(user.getUsername()
+                                     , user.getPassword()
+                                     , user.getName()
+                                     , "illunex"
+                                     , userDTO.getCompanyIdx())
+                                     , getDefaultHeader())
+                             , ResponseData.class);
+                     UserInfoDTO userDto = UserInfoDTOParser(res);
+                     //  인증 메일 보내기
+                     restTemplate.postForObject(communicationUrl + "/mail/signUp", new HttpEntity<>(new SignUpMailRequest(user.getUsername(), startUpUrl+"/user/register/confirm?token="+userDto.getToken()), getDefaultHeader()), String.class);
+                 }
+        );
+
+        return ResponseEntity.ok(ResponseData.builder()
+                .message("success")
+                .errorCode(0)
+                .build());
     }
 }

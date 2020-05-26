@@ -12,8 +12,10 @@ import com.illunex.invest.api.core.shop.dto.PurchaseDTO;
 import com.illunex.invest.api.core.shop.request.BuyProductRequest;
 import com.illunex.invest.api.core.shop.request.PurchaseRequest;
 import com.illunex.invest.api.core.user.dto.UserDTO;
+import com.illunex.invest.api.core.user.dto.UserInfoDTO;
 import com.illunex.invest.api.core.user.request.PurchaseRoleRequest;
 import com.illunex.invest.startup.service.DefaultIntegrationService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -66,6 +68,13 @@ public class PluginIntegrationService extends DefaultIntegrationService {
         List<BuyProductRequest> list = new ArrayList<>();
         list.add(request);
 
+        ResponseEntity<ResponseData> purchaseRes = getResponseDataResponseEntity(user, list);
+
+        return purchaseRes;
+    }
+
+    @NotNull
+    private ResponseEntity<ResponseData> getResponseDataResponseEntity(UserDTO user, List<BuyProductRequest> list) {
         ResponseEntity<ResponseData> purchaseRes = restTemplate.postForEntity(shopUrl + "/product/purchase"
                 , new HttpEntity<>(new PurchaseRequest(user.getId(), list), getDefaultHeader())
                 , ResponseData.class);
@@ -79,13 +88,33 @@ public class PluginIntegrationService extends DefaultIntegrationService {
                     , ResponseData.class);
 
             // 권한추가
-            System.out.println(purchaseDTO.getRoles().size());
             restTemplate.postForEntity(userUrl + "/authority/setRole"
                     , new HttpEntity<>(new PurchaseRoleRequest(user.getId(), purchaseDTO.getRoles()), getDefaultHeader())
                     , ResponseData.class);
         }
+        return purchaseRes;
+    }
 
-       return purchaseRes;
+    @NotNull
+    public ResponseEntity<ResponseData> getResponseDataResponseEntity(UserInfoDTO user, List<BuyProductRequest> list) {
+        ResponseEntity<ResponseData> purchaseRes = restTemplate.postForEntity(shopUrl + "/product/purchase"
+                , new HttpEntity<>(new PurchaseRequest(user.getId(), list), getDefaultHeader())
+                , ResponseData.class);
+
+        if (purchaseRes.getBody().getErrorCode() == 0) {    // 구매에 성공했을 경우
+            // 회사쪽에 플러그인 상태 추가
+            PurchaseDTO purchaseDTO = purchaseDTOParser(purchaseRes.getBody());
+
+            restTemplate.postForEntity(companyUrl + "/plugin"
+                    , new HttpEntity<>(new PluginRequest(purchaseDTO.getIds(), LocalDateTime.now(),  user.getCompanyIdx()), getDefaultHeader())
+                    , ResponseData.class);
+
+            // 권한추가
+            restTemplate.postForEntity(userUrl + "/authority/setRole"
+                    , new HttpEntity<>(new PurchaseRoleRequest(user.getId(), purchaseDTO.getRoles()), getDefaultHeader())
+                    , ResponseData.class);
+        }
+        return purchaseRes;
     }
 
     private PurchaseDTO purchaseDTOParser(ResponseData res) {
